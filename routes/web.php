@@ -20,10 +20,15 @@ use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialControll
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about-us', [HomeController::class, 'about'])->name('about');
+Route::get('/academics', [HomeController::class, 'academics'])->name('academics');
+Route::get('/admissions', [HomeController::class, 'admissions'])->name('admissions');
+Route::get('/infrastructure', [HomeController::class, 'infrastructure'])->name('infrastructure');
+Route::get('/results', [HomeController::class, 'results'])->name('results');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-Route::get('/events', [EventController::class, 'index'])->name('events');
-Route::get('/awards', [AwardController::class, 'index'])->name('awards');
-Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials');
+Route::get('/news-circulars', [HomeController::class, 'news'])->name('news');
+Route::get('/mandatory-disclosure', [HomeController::class, 'disclosure'])->name('disclosure');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 /*
 |--------------------------------------------------------------------------

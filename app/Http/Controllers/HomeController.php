@@ -23,4 +23,13 @@ class HomeController extends Controller
             'principal', 'correspondent', 'events', 'awards', 'testimonials', 'galleries'
         ));
     }
+
+    public function about() { return view('frontend.about'); }
+    public function academics() { return view('frontend.academics'); }
+    public function admissions() { return view('frontend.admissions'); }
+    public function infrastructure() { return view('frontend.infrastructure'); }
+    public function results() { return view('frontend.results'); }
+    public function news() { return view('frontend.news'); }
+    public function disclosure() { return view('frontend.disclosure'); }
+    public function contact() { return view('frontend.contact'); }
 }
