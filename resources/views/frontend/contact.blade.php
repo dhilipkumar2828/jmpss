@@ -1,111 +1,85 @@
 @extends('layouts.app')
-@section('title', 'Institutional Interaction – JMPSS')
+@section('title', 'Contact Us | JMPSSS | Jaypee Model Senior Secondary School')
 
 @section('content')
-    <!-- Page Header -->
-    <section class="page-header reveal reveal-scale" data-reveal-once>
-        <div class="container">
-            <h1>Scholarly Interaction</h1>
-            <ul class="breadcrumb">
-                <li><a href="{{ route('home') }}">Home</a></li>
-                <li>Contact Us</li>
-            </ul>
+<!-- Hero Section -->
+    <section class="hero contact-hero">
+        <div class="hero-overlay"></div>
+        <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Contact Us" class="hero-bg">
+        <div class="hero-content">
+            <h1>CONTACT US</h1>
+            <div class="breadcrumbs">
+                <a href="{{ route('home') }}">Home</a> <span>›</span> <a href="{{ route('contact') }}" class="active">Contact Us</a>
+            </div>
         </div>
     </section>
 
-    <!-- Contact Content -->
-    <section class="content-section">
+    <!-- Contact Info Cards -->
+    <section class="contact-cards-section section-padding">
         <div class="container">
-            <div class="about-grid">
-                <!-- Contact Info -->
-                <div class="about-content reveal reveal-left" data-reveal-once>
-                    <small
-                        style="text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 2px;">Reach
-                        Out</small>
-                    <h2 style="margin-top: 10px;">Connect with Our <br>Academic Community</h2>
-                    <p>We invite you to reach out for scholarly enquiries, admission guidance, or general administrative
-                        support. Our dedicated team is committed to providing efficient and professional institutional
-                        assistance.</p>
-
-                    <div style="margin-top: 50px;">
-                        <div style="display: flex; gap: 20px; margin-bottom: 30px;">
-                            <div
-                                style="width: 50px; height: 50px; background: rgba(20, 90, 50, 0.05); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px;">
-                                <i class="fas fa-map-marker-alt"></i></div>
-                            <div>
-                                <h4 style="margin-bottom: 5px; color: var(--primary); font-size: 18px;">Institutional
-                                    Address</h4>
-                                <p style="font-size: 15px; margin-bottom: 0;">123, School Road, Academic
-                                    District,<br>Chennai, Tamil Nadu - 600001</p>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 20px; margin-bottom: 30px;">
-                            <div
-                                style="width: 50px; height: 50px; background: rgba(20, 90, 50, 0.05); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px;">
-                                <i class="fas fa-phone"></i></div>
-                            <div>
-                                <h4 style="margin-bottom: 5px; color: var(--primary); font-size: 18px;">Admission Enquiries
-                                </h4>
-                                <p style="font-size: 15px; margin-bottom: 0;">+91 44 2345 6789 | +91 44 2345 6790</p>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 20px;">
-                            <div
-                                style="width: 50px; height: 50px; background: rgba(20, 90, 50, 0.05); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px;">
-                                <i class="fas fa-envelope"></i></div>
-                            <div>
-                                <h4 style="margin-bottom: 5px; color: var(--primary); font-size: 18px;">General Support</h4>
-                                <p style="font-size: 15px; margin-bottom: 0;">info@jmpss.edu.in | admissions@jmpss.edu.in
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="text-center mb-50">
+                <span class="section-subtitle">Get In Touch</span>
+                <h2 class="section-title">We're Here to Help You</h2>
+            </div>
+            <div class="contact-cards-grid">
+                <div class="contact-card">
+                    <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
+                    <h3>Our Address</h3>
+                    <p>No.210, Palla Egai Village, Puliur Post,<br>Thirukazhukundram T.K.,<br>Kancheepuram Dist. Pin-603
+                        109</p>
                 </div>
-
-                <!-- Contact Form -->
-                <div class="reveal reveal-right" data-reveal-once>
-                    <div class="info-card" style="padding: 50px;">
-                        <h3 style="margin-top: 0; font-size: 24px; color: var(--primary); margin-bottom: 30px;">Scholarly
-                            Enquiry Form</h3>
-                        <form action="#">
-                            <div style="margin-bottom: 25px;">
-                                <label
-                                    style="display: block; font-size: 13px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 0.5px;">Parent/Guardian
-                                    Name</label>
-                                <input type="text" placeholder="Dr./Mr./Ms. John Doe"
-                                    style="width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: var(--radius); font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.3s ease;">
-                            </div>
-                            <div style="margin-bottom: 25px;">
-                                <label
-                                    style="display: block; font-size: 13px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 0.5px;">Institutional
-                                    Email</label>
-                                <input type="email" placeholder="example@scholarly.edu"
-                                    style="width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: var(--radius); font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.3s ease;">
-                            </div>
-                            <div style="margin-bottom: 25px;">
-                                <label
-                                    style="display: block; font-size: 13px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 0.5px;">Message/Enquiry</label>
-                                <textarea rows="4" placeholder="Briefly describe your scholarly enquiry..."
-                                    style="width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: var(--radius); font-family: 'Inter', sans-serif; outline: none; resize: none; transition: border-color 0.3s ease;"></textarea>
-                            </div>
-                            <button type="submit" class="btn-outline-accent"
-                                style="width: 100%; text-align: center; cursor: pointer;">Submit Scholarly Enquiry</button>
-                        </form>
-                    </div>
+                <div class="contact-card">
+                    <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
+                    <h3>Phone Number</h3>
+                    <p><a href="tel:+917373418852">+91-7373418852</a><br><a href="tel:+918939222122">+91-8939222122</a>
+                    </p>
+                </div>
+                <div class="contact-card">
+                    <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
+                    <h3>Email Address</h3>
+                    <p><a href="mailto:jeevamemorialschool@gmail.com">jeevamemorialschool@gmail.com</a><br><a
+                            href="mailto:info@jmpsss.com">info@jmpsss.com</a></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Map Section -->
-    <section class="section section-light reveal reveal-scale" data-reveal-once>
+    <!-- Contact Form and Map -->
+    <section class="contact-main-section section-padding bg-light">
         <div class="container">
-            <div class="info-card"
-                style="height: 450px; background: #eee; padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                <p style="font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;">
-                    Integrated Scholarly Map Placeholder</p>
-                <!-- In production, replace with Google Maps iFrame -->
+            <div class="contact-grid">
+                <!-- Form -->
+                <div class="contact-form-wrapper">
+                    <h3 class="form-title">Send Us a Message</h3>
+                    <form action="#" class="contact-form">
+                        <div class="input-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" placeholder="Subject" required>
+                        </div>
+                        <div class="input-group">
+                            <textarea placeholder="Write your message here..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Submit
+                            Feedback <i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+                <!-- Map -->
+                <div class="contact-map-wrapper">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.7062054290996!2d80.08578117454118!3d12.601604222883248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a530208f47b37fb%3A0x646b6c0a409a1f14!2sJeeva%20Memorial%20Public%20School!5e0!3m2!1sen!2sin!4v1772795521641!5m2!1sen!2sin"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
 @endsection
+
+

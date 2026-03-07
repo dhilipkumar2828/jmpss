@@ -6,6 +6,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\PortalAuthController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeSectionController;
@@ -20,15 +21,23 @@ use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialControll
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about-us', [HomeController::class, 'about'])->name('about');
-Route::get('/academics', [HomeController::class, 'academics'])->name('academics');
-Route::get('/admissions', [HomeController::class, 'admissions'])->name('admissions');
-Route::get('/infrastructure', [HomeController::class, 'infrastructure'])->name('infrastructure');
-Route::get('/results', [HomeController::class, 'results'])->name('results');
+Route::get('/login', [PortalAuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [PortalAuthController::class, 'login'])->name('login.post');
+Route::post('/register', [PortalAuthController::class, 'register'])->name('register.post');
+Route::view('/about', 'frontend.about')->name('about');
+Route::view('/academics', 'frontend.academics')->name('academics');
+Route::view('/admissions', 'frontend.admissions')->name('admissions');
+Route::view('/facilities', 'frontend.facilities')->name('facilities');
+Route::view('/mandatory-disclosure', 'frontend.mandatory-disclosure')->name('mandatory-disclosure');
+Route::view('/contact', 'frontend.contact')->name('contact');
+Route::view('/careers', 'frontend.careers')->name('careers');
+Route::view('/principal-desk', 'frontend.principal-desk')->name('principal-desk');
+Route::view('/correspondent-desk', 'frontend.correspondent-desk')->name('correspondent-desk');
+Route::view('/videos', 'frontend.videos')->name('videos');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-Route::get('/news-circulars', [HomeController::class, 'news'])->name('news');
-Route::get('/mandatory-disclosure', [HomeController::class, 'disclosure'])->name('disclosure');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/awards', [AwardController::class, 'index'])->name('awards');
+Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials');
 
 /*
 |--------------------------------------------------------------------------
