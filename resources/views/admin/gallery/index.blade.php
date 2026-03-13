@@ -11,28 +11,37 @@
     <div class="card-body" style="padding:0">
         <div class="table-wrap">
             <table>
-                <thead><tr><th>#</th><th>Preview</th><th>Title</th><th>Type</th><th>Category</th><th>Status</th><th>Actions</th></tr></thead>
+                <thead><tr><th>#</th><th>Preview</th><th>Title</th><th>Media Count</th><th>Category</th><th>Status</th><th>Actions</th></tr></thead>
                 <tbody>
                     @forelse($galleries as $g)
                     <tr>
                         <td style="color:var(--text-muted);font-size:13px;">{{ $loop->iteration }}</td>
                         <td>
-                            @if($g->type == 'photo' && $g->file_path)
-                                <img src="{{ asset('storage/'.$g->file_path) }}" style="width:56px;height:40px;object-fit:cover;border-radius:6px;" alt="">
-                            @elseif($g->type == 'video')
-                                <div style="width:56px;height:40px;background:var(--primary);border-radius:6px;display:grid;place-items:center;color:white;font-size:18px;">▶</div>
+                            @php $firstPhoto = $g->items()->where('item_type', 'photo')->first(); @endphp
+                            @if($firstPhoto && $firstPhoto->file_path)
+                                <img src="{{ asset('storage/'.$firstPhoto->file_path) }}" style="width:56px;height:40px;object-fit:cover;border-radius:6px;" alt="">
                             @else
-                                <div style="width:56px;height:40px;background:#f1f5f9;border-radius:6px;display:grid;place-items:center;font-size:20px;">🖼️</div>
+                                <div style="width:56px;height:40px;background:var(--primary);border-radius:6px;display:grid;place-items:center;color:white;font-size:18px;">
+                                    <i class="fas fa-images"></i>
+                                </div>
                             @endif
                         </td>
-                        <td><div style="font-weight:700;font-size:14px;">{{ $g->title }}</div><div style="font-size:12px;color:var(--text-muted);">{{ Str::limit($g->description, 60) }}</div></td>
-                        <td><span class="badge {{ $g->type == 'photo' ? 'badge-info' : 'badge-warning' }}">{{ ucfirst($g->type) }}</span></td>
+                        <td>
+                            <div style="font-weight:700;font-size:14px;">{{ $g->title }}</div>
+                            <div style="font-size:12px;color:var(--text-muted);">{{ Str::limit($g->description, 60) }}</div>
+                        </td>
+                        <td>
+                            <div style="display:flex; gap: 8px;">
+                                <span class="badge badge-info"><i class="fas fa-camera"></i> {{ $g->items()->where('item_type', 'photo')->count() }}</span>
+                                <span class="badge badge-warning"><i class="fas fa-video"></i> {{ $g->items()->where('item_type', 'video')->count() }}</span>
+                            </div>
+                        </td>
                         <td style="font-size:13px;color:var(--text-muted);">{{ $g->category ?? '—' }}</td>
                         <td><span class="badge {{ $g->is_active ? 'badge-success' : 'badge-gray' }}">{{ $g->is_active ? 'Active' : 'Draft' }}</span></td>
                         <td>
                             <div style="display:flex;gap:6px;">
                                 <a href="{{ route('admin.gallery.edit', $g) }}" class="btn btn-outline btn-sm"><i class="fas fa-edit"></i></a>
-                                <form method="POST" action="{{ route('admin.gallery.destroy', $g) }}" onsubmit="return confirm('Delete this item?')">@csrf @method('DELETE')
+                                <form method="POST" action="{{ route('admin.gallery.destroy', $g) }}" onsubmit="return confirmDelete('this gallery and all its media')">@csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>

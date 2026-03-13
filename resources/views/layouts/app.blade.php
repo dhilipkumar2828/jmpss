@@ -19,6 +19,26 @@
 
     @stack('styles')
     <link rel="stylesheet" href="{{ asset('assets/jmpsss/responsive.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    @php
+        $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $recentEvents = \App\Models\Event::where('is_active', true)->latest('event_date')->take(3)->get();
+    @endphp
+    <style>
+        :root {
+            @if(isset($siteSettings['logo_green_900'])) --logo-green-900: {{ $siteSettings['logo_green_900'] }} !important; @endif
+            @if(isset($siteSettings['logo_green_700'])) --logo-green-700: {{ $siteSettings['logo_green_700'] }} !important; @endif
+            @if(isset($siteSettings['logo_green_500'])) --logo-green-500: {{ $siteSettings['logo_green_500'] }} !important; @endif
+            @if(isset($siteSettings['logo_orange'])) --logo-orange: {{ $siteSettings['logo_orange'] }} !important; @endif
+            @if(isset($siteSettings['logo_gold'])) --logo-gold: {{ $siteSettings['logo_gold'] }} !important; @endif
+            @if(isset($siteSettings['logo_gold_light'])) --logo-gold-light: {{ $siteSettings['logo_gold_light'] }} !important; @endif
+            
+            @if(isset($siteSettings['primary_color'])) --primary-color: {{ $siteSettings['primary_color'] }} !important; @endif
+            @if(isset($siteSettings['secondary_color'])) --secondary-color: {{ $siteSettings['secondary_color'] }} !important; @endif
+            @if(isset($siteSettings['bg_dark'])) --bg-dark: {{ $siteSettings['bg_dark'] }} !important; @endif
+        }
+    </style>
 </head>
 @php
     $hideChrome = trim($__env->yieldContent('hide_chrome')) === '1';
@@ -26,7 +46,7 @@
 
 <body class="@yield('body_class')">
     @unless ($hideChrome)
-        <x-ui.navbar />
+        <x-ui.navbar :settings="$siteSettings" />
     @endunless
 
     @if (!$hideChrome && (session('success') || session('error')))
@@ -45,8 +65,25 @@
     </div>
 
     @unless ($hideChrome)
-        <x-ui.footer />
+        <x-ui.footer :settings="$siteSettings" :recentEvents="$recentEvents" />
     @endunless
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "5000"
+        }
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+        @if(session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+    </script>
 
     <script src="{{ asset('assets/jmpsss/nav-active.js') }}"></script>
     <script>

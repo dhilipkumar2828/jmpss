@@ -51,18 +51,22 @@
                 <!-- Form -->
                 <div class="contact-form-wrapper">
                     <h3 class="form-title">Send Us a Message</h3>
-                    <form action="#" class="contact-form">
+                    <form action="{{ route('contact.submit') }}" method="POST" class="contact-form">
+                        @csrf
                         <div class="input-group">
-                            <input type="text" placeholder="Your Name" required>
+                            <input type="text" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="input-group">
-                            <input type="email" placeholder="Email Address" required>
+                            <input type="email" name="email" placeholder="Email Address" required>
                         </div>
                         <div class="input-group">
-                            <input type="text" placeholder="Subject" required>
+                            <input type="tel" name="mobile" placeholder="Mobile Number" required>
                         </div>
                         <div class="input-group">
-                            <textarea placeholder="Write your message here..." rows="5" required></textarea>
+                            <input type="text" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="input-group">
+                            <textarea name="message" placeholder="Write your message here..." rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Submit
                             Feedback <i class="fa-solid fa-paper-plane"></i></button>

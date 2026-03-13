@@ -3,7 +3,7 @@
 @section('page-title', isset($section) ? 'Edit Home Section' : 'Add Home Section')
 @section('breadcrumb', 'Admin / Home Sections / ' . (isset($section) ? 'Edit' : 'Add'))
 @section('content')
-<div style="max-width:750px;">
+<div>
     <a href="{{ route('admin.home-sections.index') }}" class="btn btn-outline btn-sm" style="margin-bottom:20px;"><i class="fas fa-arrow-left"></i> Back</a>
     <div class="card">
         <div class="card-header"><h3>🏠 {{ isset($section) ? 'Edit' : 'Add' }} Home Section</h3></div>

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AwardController extends Controller
 {
-    public function index()   { return view('admin.awards.index', ['awards' => Award::latest()->paginate(15)]); }
+    public function index()   { return view('admin.awards.index', ['awards' => Award::latest()->paginate(10)]); }
     public function create()  { return view('admin.awards.form'); }
 
     public function store(Request $request)

@@ -3,7 +3,7 @@
 @section('page-title', isset($testimonial) ? 'Edit Testimonial' : 'Add Testimonial')
 @section('breadcrumb', 'Admin / Testimonials / ' . (isset($testimonial) ? 'Edit' : 'Add'))
 @section('content')
-<div style="max-width:700px;">
+<div>
     <a href="{{ route('admin.testimonials.index') }}" class="btn btn-outline btn-sm" style="margin-bottom:20px;"><i class="fas fa-arrow-left"></i> Back</a>
     <div class="card">
         <div class="card-header"><h3>💬 {{ isset($testimonial) ? 'Edit Testimonial' : 'Add New Testimonial' }}</h3></div>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace Database\Seeders;
 
@@ -77,6 +77,11 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Ms. Priyadharshini M', 'designation' => 'Alumni - Batch 2022', 'content' => 'The teachers at JMPSS gave me the right foundation for higher studies. The academic guidance and lab exposure helped me perform well in board exams.', 'rating' => 5, 'type' => 'alumni', 'passing_year' => 2022, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Mrs. Lalitha Kumar', 'designation' => 'Parent of Grade IV student', 'content' => 'The school balances studies and co-curricular activities very well. My daughter enjoys learning and has improved in communication skills.', 'rating' => 5, 'type' => 'parent', 'passing_year' => null, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Mr. Senthil Prabhu', 'designation' => 'Parent of Grade X student', 'content' => 'Board exam preparation support at JMPSS is excellent. Teachers provide close mentoring, practice schedules, and timely feedback to students.', 'rating' => 5, 'type' => 'parent', 'passing_year' => null, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
+        ]);
+
+        $this->call([
+            GallerySeeder::class,
+            EventSeeder::class,
         ]);
     }
 }

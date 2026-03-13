@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class HomeSectionController extends Controller
 {
-    public function index()  { return view('admin.home-sections.index', ['sections' => HomeSection::orderBy('sort_order')->get()]); }
+    public function index()  { return view('admin.home-sections.index', ['sections' => HomeSection::orderBy('sort_order')->paginate(10)]); }
     public function create() { return view('admin.home-sections.form'); }
 
     public function store(Request $request)

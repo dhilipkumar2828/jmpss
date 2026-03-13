@@ -24,7 +24,7 @@
                         <td>
                             <div style="display:flex;gap:6px;">
                                 <a href="{{ route('admin.home-sections.edit', $s) }}" class="btn btn-outline btn-sm"><i class="fas fa-edit"></i></a>
-                                <form method="POST" action="{{ route('admin.home-sections.destroy', $s) }}" onsubmit="return confirm('Delete?')">@csrf @method('DELETE')
+                                <form method="POST" action="{{ route('admin.home-sections.destroy', $s) }}" onsubmit="return confirmDelete('this section')">@csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>
@@ -38,4 +38,5 @@
         </div>
     </div>
 </div>
+<div style="margin-top:20px;">{{ $sections->links() }}</div>
 @endsection

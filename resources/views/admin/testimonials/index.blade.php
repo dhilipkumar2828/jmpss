@@ -24,7 +24,7 @@
                         <td>
                             <div style="display:flex;gap:6px;">
                                 <a href="{{ route('admin.testimonials.edit', $t) }}" class="btn btn-outline btn-sm"><i class="fas fa-edit"></i></a>
-                                <form method="POST" action="{{ route('admin.testimonials.destroy', $t) }}" onsubmit="return confirm('Delete?')">@csrf @method('DELETE')
+                                <form method="POST" action="{{ route('admin.testimonials.destroy', $t) }}" onsubmit="return confirmDelete('this testimonial')">@csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>

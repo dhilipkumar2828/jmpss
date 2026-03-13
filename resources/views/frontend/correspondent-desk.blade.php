@@ -623,44 +623,33 @@
         <div class="container">
             <div class="corr-layout">
                 <div class="corr-message">
-                    <h2>A Message from the Correspondent</h2>
+                    <h2>{{ $section->title ?? 'A Message from the Correspondent' }}</h2>
                     <p class="opening-line">Dear Families, Students &amp; Well-Wishers,</p>
-                    <p>It is a privilege to address you as the Correspondent of Jeeva Memorial Senior Secondary School —
-                        an institution I hold close to my heart, born from a purpose far greater than education alone.
-                    </p>
-                    <p>Our school was founded under the <strong>Jeeva Memorial Trust</strong>, established in the memory
-                        of my beloved son <strong>Jeevakumar</strong>. The grief of losing him was profound, but from
-                        that grief came a resolve — to transform loss into legacy. This school is that legacy. Every
-                        child who walks through our gates carries forward the spirit of Jeevakumar.</p>
-                    <blockquote>"What started as a memorial has grown into a movement — a movement of hope, learning,
-                        and transformation."</blockquote>
-                    <p>Since our founding, we have strived to deliver quality education that is both accessible and
-                        excellent. Located at Thirukazhukundram, Kancheepuram, our school serves children from Pre.K.G.
-                        through XII Std., providing a CBSE-affiliated curriculum enriched with the warmth of a family
-                        environment.</p>
-                    <p>We have built an institution where <em>love, sharing, and caring</em> are not just words on a
-                        wall — they are lived values. Our campus is designed to be safe, stimulating, and nurturing,
-                        with dedicated facilities including computer labs, language labs, dance and art rooms, and
-                        Montessori-inspired kindergarten classrooms.</p>
-                    <p>My vision has always been simple: to ensure that every child who comes to JMPSSS leaves it better
-                        — more knowledgeable, more confident, more humane. I am deeply grateful to our dedicated
-                        teachers, our supportive parents, and above all, our students who give this institution its
-                        soul.</p>
-                    <p>Thank you for being part of the Jeeva Memorial family.</p>
+                    <div class="message-content-dynamic">
+                        @if($section)
+                            {!! nl2br(e($section->content)) !!}
+                        @else
+                            <p>It is a privilege to address you as the Correspondent of Jeeva Memorial Senior Secondary School —
+                            an institution I hold close to my heart, born from a purpose far greater than education alone.</p>
+                            <p>Since our founding, we have strived to deliver quality education that is both accessible and
+                            excellent. Located at Thirukazhukundram, Kancheepuram, our school serves children from Pre.K.G.
+                            through XII Std.</p>
+                        @endif
+                    </div>
                     <p>With blessings and gratitude,</p>
                     <div class="corr-signature">
                         <div class="sig-icon-red"><i class="fa-solid fa-heart"></i></div>
                         <div class="sig-text">
-                            <h4>Mr. G.K. Babu</h4>
-                            <span>Correspondent, Jeeva Memorial Trust &amp; JMPSSS</span>
+                            <h4>{{ $section->name ?? 'Mr. G.K. Babu' }}</h4>
+                            <span>{{ $section->designation ?? 'Correspondent' }}, JMPSSS</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="corr-card">
                     <div class="corr-photo"><i class="fa-solid fa-person"></i></div>
-                    <h3>Mr. G.K. Babu</h3>
-                    <span class="corr-designation">Correspondent</span>
+                    <h3>{{ $section->name ?? 'Mr. G.K. Babu' }}</h3>
+                    <span class="corr-designation">{{ $section->designation ?? 'Correspondent' }}</span>
                     <div class="corr-details">
                         <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Founder, Jeeva Memorial
                                 Trust</span></div>
@@ -672,8 +661,7 @@
                                 class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
                         <div class="cd-item"><i class="fa-solid fa-phone"></i><span>+91-7373418852</span></div>
                     </div>
-                    <div class="c-quote">"From love and loss came the greatest gift I could give — a school where
-                        thousands of children find their future."</div>
+                    <div class="c-quote">"{{ $section->quote ?? 'From love and loss came the greatest gift I could give — a school where thousands of children find their future.' }}"</div>
                 </div>
             </div>
         </div>

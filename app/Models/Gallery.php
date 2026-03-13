@@ -36,4 +36,9 @@ class Gallery extends Model
     {
         return $query->where('type', 'video');
     }
+
+    public function items()
+    {
+        return $this->hasMany(GalleryItem::class);
+    }
 }

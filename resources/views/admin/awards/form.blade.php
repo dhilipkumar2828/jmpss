@@ -3,7 +3,7 @@
 @section('page-title', isset($award) ? 'Edit Award' : 'Add Award')
 @section('breadcrumb', 'Admin / Awards / ' . (isset($award) ? 'Edit' : 'Add'))
 @section('content')
-<div style="max-width:700px;">
+<div>
     <a href="{{ route('admin.awards.index') }}" class="btn btn-outline btn-sm" style="margin-bottom:20px;"><i class="fas fa-arrow-left"></i> Back</a>
     <div class="card">
         <div class="card-header"><h3>🏆 {{ isset($award) ? 'Edit Award' : 'Add New Award' }}</h3></div>

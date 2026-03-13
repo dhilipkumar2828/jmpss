@@ -245,14 +245,15 @@
                 <div class="admission-form-wrapper">
                     <div class="admission-form-card">
                         <h3>Admission Enquiry</h3>
-                        <form>
+                        <form method="POST" action="{{ route('admission.submit') }}">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" placeholder="Child's Name" required>
+                                <input type="text" name="student_name" placeholder="Child's Name" required>
                             </div>
                             <div class="form-group grid-2" style="gap: 15px;">
-                                <input type="text" placeholder="Date of Birth (DD/MM/YYYY)" onfocus="(this.type='date')"
+                                <input type="text" name="dob" placeholder="Date of Birth (DD/MM/YYYY)" onfocus="(this.type='date')"
                                     required>
-                                <select required>
+                                <select name="grade_applying" required>
                                     <option value="" disabled selected>Applying For</option>
                                     <option value="kg">Kindergarten (KG)</option>
                                     <option value="primary">Primary (1-5)</option>
@@ -262,17 +263,17 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Parent's/Guardian's Name" required>
+                                <input type="text" name="parent_name" placeholder="Parent's/Guardian's Name" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="Parent's Email Address" required>
+                                <input type="email" name="email" placeholder="Parent's Email Address" required>
                             </div>
                             <div class="form-group grid-2" style="gap: 15px;">
-                                <input type="tel" placeholder="Phone Number" required>
-                                <input type="tel" placeholder="WhatsApp Number" required>
+                                <input type="tel" name="mobile" placeholder="Phone Number" required>
+                                <input type="tel" name="whatsapp" placeholder="WhatsApp Number">
                             </div>
                             <div class="form-group">
-                                <textarea placeholder="Parent's Note / Special Requirements (if any)" rows="3"
+                                <textarea name="address" placeholder="Parent's Note / Full Address" rows="3"
                                     style="width: 100%; padding: 15px; border: 1px solid #e0e6ed; border-radius: 10px; font-family: inherit; font-size: 15px;"></textarea>
                             </div>
                             <button type="submit" class="btn-primary w-100">Apply Now <i class="fa-solid fa-paper-plane"

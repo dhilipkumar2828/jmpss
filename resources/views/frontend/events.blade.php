@@ -56,126 +56,42 @@
                 </div>
 
                 <div class="events-page-grid">
-                    <!-- Event 1 -->
-                    <div class="event-card-page" onclick="showEventDetails(event, 'grant')" style="cursor: pointer;">
+                    @forelse($events as $event)
+                    <div class="event-card-page" onclick="showEventDetails(event, '{{ $event->id }}')" style="cursor: pointer;">
                         <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Event 1">
-                            <div class="event-date">12 <span>Oct</span></div>
+                            @if($event->image)
+                                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}">
+                            @else
+                                <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $event->title }}">
+                            @endif
+                            <div class="event-date">{{ $event->event_date->format('d') }} <span>{{ $event->event_date->format('M') }}</span></div>
                         </div>
                         <div class="event-info">
-                            <h3>Transfer of School Grants</h3>
-                            <p>Significant progress made in the allocation and transfer of essential school development
-                                grants for better facilities.</p>
+                            <h3>{{ $event->title }}</h3>
+                            <p>{{ Str::limit($event->description, 120) }}</p>
                             <a href="#" class="btn-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
-                    </div>
-
-                    <!-- Event 2 -->
-                    <div class="event-card-page" onclick="showEventDetails(event, 'sports')" style="cursor: pointer;">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/img02.jpg') }}" alt="Event 2">
-                            <div class="event-date">25 <span>Nov</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>Annual Sports Day Excellence</h3>
-                            <p>Celebrating the remarkable athletic achievements and sportsmanship demonstrated by our
-                                talented students.</p>
-                            <a href="#" class="btn-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                        {{-- Hidden data for JS --}}
+                        <div class="event-full-data" style="display:none;" 
+                             data-id="{{ $event->id }}"
+                             data-title="{{ $event->title }}"
+                             data-date="{{ $event->event_date->format('d F Y') }}"
+                             data-venue="{{ $event->venue ?? 'School Campus' }}"
+                             data-desc="{{ $event->description }}"
+                             data-img="{{ $event->image ? asset('storage/'.$event->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}"
+                             data-cat="{{ $event->is_featured ? 'Featured Event' : 'School Event' }}">
                         </div>
                     </div>
-
-                    <!-- Event 3 -->
-                    <div class="event-card-page" onclick="showEventDetails(event, 'science')" style="cursor: pointer;">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/img03.jpg') }}" alt="Event 3">
-                            <div class="event-date">05 <span>Dec</span></div>
+                    @empty
+                        <div style="grid-column: 1/-1; text-align: center; padding: 60px 0;">
+                            <p>No events found.</p>
                         </div>
-                        <div class="event-info">
-                            <h3>Science Exhibition 2024</h3>
-                            <p>Showcasing innovative scientific models and research projects created by our curious
-                                young
-                                minds.</p>
-                            <a href="#" class="btn-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Event 4 -->
-                    <div class="event-card-page" onclick="showEventDetails(event, 'academic')" style="cursor: pointer;">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/img04.jpg') }}" alt="Event 4">
-                            <div class="event-date">10 <span>Jan</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>Academic Toppers Award</h3>
-                            <p>Recognizing the dedication and hard work of our top-performing students in the recent
-                                board
-                                examinations.</p>
-                            <a href="#" class="btn-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Event 5 -->
-                    <div class="event-card-page" onclick="showEventDetails(event, 'cultural')" style="cursor: pointer;">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/new/env1.png') }}" alt="Event 5">
-                            <div class="event-date">15 <span>Feb</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>Cultural Fest 2025</h3>
-                            <p>A grand celebration of art, music, and dance bringing together talents from all across
-                                the
-                                student body.</p>
-                            <a href="#" class="btn-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Event 6 -->
-                    <div class="event-card-page" onclick="showEventDetails(event, 'ptm')" style="cursor: pointer;">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/new/env2.png') }}" alt="Event 6">
-                            <div class="event-date">20 <span>Mar</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>Parent-Teacher Meeting</h3>
-                            <p>An interactive session for parents and teachers to discuss the continued progress and
-                                development of the students.</p>
-                            <a href="#" class="btn-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Event 7 -->
-                    <div class="event-card-page" onclick="showEventDetails(event, 'library')" style="cursor: pointer;">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/new/env3.png') }}" alt="Event 7">
-                            <div class="event-date">10 <span>Apr</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>Digital Library Launch</h3>
-                            <p>Opening our new state-of-the-art digital library with over 10,000+ resources.</p>
-                            <a href="#" class="btn-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Event 8 -->
-                    <div class="event-card-page" onclick="showEventDetails(event, 'yoga')" style="cursor: pointer;">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/new/slider2.jpg') }}" alt="Event 8">
-                            <div class="event-date">21 <span>Jun</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>International Yoga Day</h3>
-                            <p>Students and staff participating in a mass yoga session for health and wellness.</p>
-                            <a href="#" class="btn-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
 
                 <!-- Pagination -->
-                <div class="pagination-wrapper mt-50">
-                    <a href="#" class="page-link active">1</a>
-                    <a href="#" class="page-link">2</a>
-                    <a href="#" class="page-link">3</a>
-                    <a href="#" class="page-link next-link"><i class="fa-solid fa-chevron-right"></i></a>
+                <div class="pagination-wrapper mt-50" style="display:flex; justify-content:center;">
+                    {{ $events->links() }}
                 </div>
             </div>
         </section>
@@ -313,31 +229,32 @@
                     <div class="visit-form-right">
                         <div class="booking-card">
                             <h3>Book Your Tour</h3>
-                            <form class="visit-form">
+                            <form class="visit-form" method="POST" action="{{ route('visit.submit') }}">
+                                @csrf
                                 <div class="form-group">
                                     <label>Full Name</label>
-                                    <input type="text" placeholder="Enter your name" required>
+                                    <input type="text" name="name" placeholder="Enter your name" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input type="email" placeholder="Enter your email" required>
+                                    <input type="email" name="email" placeholder="Enter your email" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input type="tel" placeholder="Enter phone number" required>
+                                    <input type="tel" name="mobile" placeholder="Enter phone number" required>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>Date of Visit</label>
-                                        <input type="date" required>
+                                        <input type="date" name="visit_date" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Preferred Time</label>
                                         <div class="custom-select-wrapper">
-                                            <select>
-                                                <option>Morning (10 AM)</option>
-                                                <option>Midday (12 PM)</option>
-                                                <option>Afternoon (2 PM)</option>
+                                            <select name="visit_time">
+                                                <option value="10 AM">Morning (10 AM)</option>
+                                                <option value="12 PM">Midday (12 PM)</option>
+                                                <option value="2 PM">Afternoon (2 PM)</option>
                                             </select>
                                             <i class="fa-solid fa-chevron-down select-arrow"></i>
                                         </div>
@@ -345,7 +262,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Purpose of Visit</label>
-                                    <textarea placeholder="Tell us about your interest..."></textarea>
+                                    <textarea name="purpose" placeholder="Tell us about your interest..."></textarea>
                                 </div>
                                 <button type="submit" class="btn-primary w-100">Schedule Visit</button>
                             </form>
@@ -502,25 +419,31 @@
 
     function showEventDetails(e, eventId) {
         if (e) e.preventDefault();
-        const data = eventData[eventId];
-        if (!data) return;
+        
+        // Find the data container in the clicked element or its parent
+        const card = e.currentTarget || document.querySelector(`.event-card-page[onclick*="'${eventId}'"]`);
+        if (!card) return;
+        
+        const dataWrap = card.querySelector('.event-full-data');
+        if (!dataWrap) return;
+
+        const data = {
+            title: dataWrap.getAttribute('data-title'),
+            date: dataWrap.getAttribute('data-date'),
+            venue: dataWrap.getAttribute('data-venue'),
+            content: dataWrap.getAttribute('data-desc'),
+            img: dataWrap.getAttribute('data-img'),
+            category: dataWrap.getAttribute('data-cat')
+        };
 
         document.getElementById('detail-title').innerText = data.title;
         document.getElementById('detail-category').innerHTML = `<i class="fa-solid fa-folder-open"></i> ${data.category}`;
-        document.getElementById('detail-img').src = eventAsset(data.img);
-        document.getElementById('detail-content').innerHTML = data.content;
+        document.getElementById('detail-img').src = data.img;
+        document.getElementById('detail-content').innerHTML = `<p>${data.content.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p>`;
 
         const galleryGrid = document.getElementById('detail-gallery-grid');
         if (galleryGrid) {
-            galleryGrid.innerHTML = '';
-            if (Array.isArray(data.highlights)) {
-                data.highlights.forEach((imgSrc) => {
-                    const imageEl = document.createElement('img');
-                    imageEl.src = eventAsset(imgSrc);
-                    imageEl.alt = 'Event Highlight';
-                    galleryGrid.appendChild(imageEl);
-                });
-            }
+            galleryGrid.innerHTML = ''; // Clear for now or handle dynamic highlights if added to DB
         }
 
         document.getElementById('events-grid-view').style.display = 'none';
@@ -530,7 +453,7 @@
         document.getElementById('page-title').innerText = 'EVENT DETAILS';
         document.getElementById('page-breadcrumbs').innerHTML =
             `<a href="${homeUrl}">Home</a> <span>›</span> <a href="#" onclick="showEventsGrid(event)">Events</a> <span>›</span> <a href="#" class="active">Details</a>`;
-        document.getElementById('hero-bg-img').src = eventAsset(data.img);
+        document.getElementById('hero-bg-img').src = data.img;
 
         updateEventsUrl(null, eventId, eventId);
         window.scrollTo({

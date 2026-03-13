@@ -3,10 +3,10 @@
             <!-- Left: Social Icons -->
             <div class="top-header-left">
                 <div class="social-icons-top">
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="{{ $settings['facebook_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="{{ $settings['instagram_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="{{ $settings['linkedin_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="{{ $settings['youtube_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
@@ -19,7 +19,19 @@
 
             <!-- Right: Login & Admission Buttons -->
             <div class="top-header-right">
-                <a href="{{ route('login') }}" class="top-btn login-btn {{ request()->routeIs('login') ? 'active' : '' }}"><i class="fa-solid fa-user"></i> Login</a>
+                @auth
+                    <div class="user-profile-nav" style="display:flex; align-items:center; gap:15px;">
+                        <span class="user-name" style="font-weight:600; color:var(--primary-color); font-size:14px;"><i class="fa-solid fa-user-circle"></i> {{ Auth::user()->name }}</span>
+                        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="top-btn" style="background:none; border:none; color:#dc2626; cursor:pointer; font-weight:600; padding:0; display:flex; align-items:center; gap:5px;">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="top-btn login-btn {{ request()->routeIs('login') ? 'active' : '' }}"><i class="fa-solid fa-user"></i> Login</a>
+                @endauth
                 <a href="{{ route('admissions') }}" class="top-btn admission-btn" id="headerAdmissionBtn"><i
                         class="fa-solid fa-graduation-cap"></i> Admission</a>
             </div>
