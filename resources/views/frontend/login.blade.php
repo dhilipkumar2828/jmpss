@@ -333,9 +333,7 @@
 
             <div class="auth-panel {{ $initialAuthMode === 'login' ? 'active' : '' }}" data-auth-panel="login">
                 <div class="login-tabs">
-                    <div class="login-tab active" data-type="student">Student</div>
-                    <div class="login-tab" data-type="parent">Parent</div>
-                    <div class="login-tab" data-type="faculty">Faculty</div>
+                    <div class="login-tab active" data-type="student">Portal Login</div>
                 </div>
 
                 <div class="login-form-body">
@@ -348,13 +346,13 @@
                         <input type="hidden" name="auth_mode" value="login">
 
                         <div class="form-group">
-                            <label for="login_email">Email Address</label>
-                            <i class="fa-solid fa-envelope"></i>
-                            <input type="email" id="login_email" name="login_email" placeholder="Enter your email address"
-                                value="{{ old('login_email') }}"
-                                class="{{ $errors->hasBag('login') && $errors->login->has('login_email') ? 'input-error' : '' }}"
+                            <label for="login_identifier">Email or Mobile Number</label>
+                            <i class="fa-solid fa-user-circle"></i>
+                            <input type="text" id="login_identifier" name="login_identifier" placeholder="Enter email or mobile"
+                                value="{{ old('login_identifier') }}"
+                                class="{{ $errors->hasBag('login') && $errors->login->has('login_identifier') ? 'input-error' : '' }}"
                                 required>
-                            @error('login_email', 'login')
+                            @error('login_identifier', 'login')
                                 <div class="form-error">{{ $message }}</div>
                             @enderror
                         </div>
@@ -411,16 +409,30 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label for="register_email">Email Address</label>
-                            <i class="fa-solid fa-envelope"></i>
-                            <input type="email" id="register_email" name="register_email"
-                                placeholder="Enter your email address" value="{{ old('register_email') }}"
-                                class="{{ $errors->hasBag('register') && $errors->register->has('register_email') ? 'input-error' : '' }}"
-                                required>
-                            @error('register_email', 'register')
-                                <div class="form-error">{{ $message }}</div>
-                            @enderror
+                        <div class="form-grid-2" style="display: grid; grid-template-columns: 1fr; gap: 0;">
+                            <div class="form-group">
+                                <label for="register_email">Email Address</label>
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" id="register_email" name="register_email"
+                                    placeholder="Enter your email address" value="{{ old('register_email') }}"
+                                    class="{{ $errors->hasBag('register') && $errors->register->has('register_email') ? 'input-error' : '' }}"
+                                    required>
+                                @error('register_email', 'register')
+                                    <div class="form-error">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="register_mobile">Mobile Number</label>
+                                <i class="fa-solid fa-phone"></i>
+                                <input type="text" id="register_mobile" name="register_mobile"
+                                    placeholder="Enter mobile number" value="{{ old('register_mobile') }}"
+                                    class="{{ $errors->hasBag('register') && $errors->register->has('register_mobile') ? 'input-error' : '' }}"
+                                    required>
+                                @error('register_mobile', 'register')
+                                    <div class="form-error">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group">

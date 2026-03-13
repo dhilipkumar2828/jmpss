@@ -4,7 +4,7 @@
 @section('breadcrumb', 'Admin / Events / ' . (isset($event) ? 'Edit' : 'Add'))
 @section('content')
 
-<div style="max-width:800px;">
+<div>
     <a href="{{ route('admin.events.index') }}" class="btn btn-outline btn-sm" style="margin-bottom:20px;"><i class="fas fa-arrow-left"></i> Back to Events</a>
 
     <div class="card">

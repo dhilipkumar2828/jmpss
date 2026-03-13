@@ -169,35 +169,35 @@
 </style>
 @endpush
 
+@php
+    $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
+    $primaryColor = $siteSettings['logo_green_900'] ?? '#004800';
+    $secondaryColor = $siteSettings['secondary_color'] ?? '#e14c1e';
+@endphp
+
 @section('content')
 <!-- Page Hero -->
     <section class="page-hero">
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
-            <span class="page-label">Academics</span>
+            <span class="page-label" style="background: {{ $secondaryColor }}">Academics</span>
             <h1>Awards & Achievements</h1>
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
-                <a href="#">Academics</a><span>›</span>
-                Awards
+                <span style="color: {{ $secondaryColor }}">Awards</span>
             </nav>
         </div>
     </section>
 
-    <!-- Intro Content (New Main Section Shape) -->
+    <!-- Intro Content -->
     <section class="story-classic">
         <div class="container">
             <div class="story-classic-grid">
                 <div class="sc-content">
-                    <div class="sc-eyebrow">Celebrating Excellence</div>
-                    <h2 class="sc-title">A Legacy of <span>Achievements</span></h2>
-                    <p class="sc-text lead">At JMPSSS, we believe in recognizing and nurturing the unique talents of
-                        every student, celebrating their hard work and dedication.</p>
-                    <p class="sc-text">Our journey is marked by numerous accolades in academics, sports, arts, and
-                        community service. These awards are a testament to the combined efforts of our students,
-                        teachers, and parents in building a culture of excellence.</p>
-                    <p class="sc-text">Explore our 'Wall of Fame' below to see the honors that define our institutional
-                        standard and inspire our future generations.</p>
+                    <div class="sc-eyebrow" style="color: {{ $secondaryColor }}">Celebrating Excellence</div>
+                    <h2 class="sc-title">A Legacy of <span style="color: {{ $primaryColor }}">Achievements</span></h2>
+                    <p class="sc-text lead" style="border-left-color: {{ $secondaryColor }}">At JMPSSS, we believe in recognizing and nurturing the unique talents of every student.</p>
+                    <p class="sc-text">Our journey is marked by numerous accolades in academics, sports, arts, and community service. These awards are a testament to the combined efforts of our students, teachers, and parents.</p>
                 </div>
                 <div class="sc-visual">
                     <img src="{{ asset('assets/jmpsss/image/new/award1.jpg') }}" alt="Awards" class="sc-img">
@@ -214,91 +214,41 @@
                 <h2 class="section-title">Our Recent Recognition</h2>
             </div>
 
-
             <div class="awards-gallery-grid mt-50">
+                @forelse($awards as $award)
                 <div class="award-gallery-card">
                     <div class="award-img-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/award1.jpg') }}" alt="Best School in District">
-                        <div class="award-overlay">
+                        @if($award->image)
+                            <img src="{{ asset('storage/'.$award->image) }}" alt="{{ $award->title }}">
+                        @else
+                            <img src="{{ asset('assets/jmpsss/image/new/award1.jpg') }}" alt="{{ $award->title }}">
+                        @endif
+                        <div class="award-overlay" style="background: rgba(0, 72, 0, 0.7);">
                             <i class="fa-solid fa-trophy popup-icon"></i>
                         </div>
                     </div>
                     <div class="award-gallery-info">
-                        <span class="award-gallery-year">2024</span>
-                        <h3>Best School in District</h3>
-                        <p>Total excellence in academics & infrastructure</p>
+                        <span class="award-gallery-year" style="background: {{ $secondaryColor }}">{{ $award->year }}</span>
+                        <h3 style="color: {{ $primaryColor }}">{{ $award->title }}</h3>
+                        <p>{{ $award->description }}</p>
+                        @if($award->recipient_name)
+                           <div style="font-size: 13px; font-weight: 600; margin-top: 8px; color: #666;">
+                               <i class="fa-solid fa-user-graduate"></i> Recipient: {{ $award->recipient_name }}
+                           </div>
+                        @endif
                     </div>
                 </div>
+                @empty
+                    <div style="grid-column: 1/-1; text-align: center; padding: 100px 0;">
+                        <i class="fa-solid fa-award" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
+                        <h3>Updates incoming</h3>
+                        <p>We are currently documenting our latest achievements. Check back soon!</p>
+                    </div>
+                @endforelse
+            </div>
 
-                <div class="award-gallery-card">
-                    <div class="award-img-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/award2.jpg') }}" alt="Sports Championship">
-                        <div class="award-overlay">
-                            <i class="fa-solid fa-medal popup-icon"></i>
-                        </div>
-                    </div>
-                    <div class="award-gallery-info">
-                        <span class="award-gallery-year">2025</span>
-                        <h3>Sports Championship</h3>
-                        <p>Inter-School Zonal Athletics Meet Winners</p>
-                    </div>
-                </div>
-
-                <div class="award-gallery-card">
-                    <div class="award-img-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/school22.jpg') }}" alt="Green Campus Award">
-                        <div class="award-overlay">
-                            <i class="fa-solid fa-leaf popup-icon"></i>
-                        </div>
-                    </div>
-                    <div class="award-gallery-info">
-                        <span class="award-gallery-year">2023</span>
-                        <h3>Green Campus Award</h3>
-                        <p>Extensive eco-friendly environment practices</p>
-                    </div>
-                </div>
-
-                <div class="award-gallery-card">
-                    <div class="award-img-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/award2.jpg') }}" alt="100% Board Results">
-                        <div class="award-overlay">
-                            <i class="fa-solid fa-award popup-icon"></i>
-                        </div>
-                    </div>
-                    <div class="award-gallery-info">
-                        <span class="award-gallery-year">Consistent</span>
-                        <h3>100% Board Results</h3>
-                        <p>Flawless record in Grade 10 & 12 CBSE exams</p>
-                    </div>
-                </div>
-
-                <div class="award-gallery-card">
-                    <div class="award-img-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/award1.jpg') }}" alt="National Science Fair">
-                        <div class="award-overlay">
-                            <i class="fa-solid fa-flask popup-icon"></i>
-                        </div>
-                    </div>
-                    <div class="award-gallery-info">
-                        <span class="award-gallery-year">2024</span>
-                        <h3>National Science Fair</h3>
-                        <p>Student Science Innovation Expo runners-up</p>
-                    </div>
-                </div>
-
-                <div class="award-gallery-card">
-                    <div class="award-img-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/school22.jpg') }}" alt="Cultural Excellence">
-                        <div class="award-overlay">
-                            <i class="fa-solid fa-palette popup-icon"></i>
-                        </div>
-                    </div>
-                    <div class="award-gallery-info">
-                        <span class="award-gallery-year">2025</span>
-                        <h3>Cultural Excellence</h3>
-                        <p>Top honors at the State Arts Festival</p>
-                    </div>
-                </div>
+            <div class="pagination-wrap" style="margin-top: 60px; display: flex; justify-content: center;">
+                {{ $awards->links() }}
             </div>
         </div>
     </section>

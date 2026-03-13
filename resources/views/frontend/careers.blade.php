@@ -447,27 +447,28 @@
                 <div class="apply-form-card">
                     <h3><i class="fa-solid fa-paper-plane" style="color:#e14c1e; margin-right:10px;"></i>Submit Your
                         Application</h3>
-                    <form id="careerForm" onsubmit="handleFormSubmit(event)">
+                    <form id="careerForm" method="POST" action="{{ route('career.submit') }}" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-row">
                             <div class="form-field">
-                                <label>First Name</label>
-                                <input type="text" placeholder="Your name" required>
+                                <label>Full Name</label>
+                                <input type="text" name="name" placeholder="Your name" required>
                             </div>
                             <div class="form-field">
                                 <label>Mobile Number</label>
-                                <input type="tel" placeholder="+91 XXXXX XXXXX" required>
+                                <input type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required>
                             </div>
                         </div>
 
                         <div class="form-field">
                             <label>Email Address</label>
-                            <input type="email" placeholder="example@gmail.com" required>
+                            <input type="email" name="email" placeholder="example@gmail.com" required>
                         </div>
 
                         <div class="form-row">
                             <div class="form-field">
                                 <label>Applying For</label>
-                                <select required>
+                                <select name="position_applied" required>
                                     <option value="">Select Role</option>
                                     <option value="english">English Teacher</option>
                                     <option value="maths">Mathematics Teacher</option>
@@ -480,28 +481,16 @@
                             </div>
                             <div class="form-field">
                                 <label>Experience (Years)</label>
-                                <input type="number" placeholder="e.g. 3" min="0" max="50">
+                                <input type="number" name="experience" placeholder="e.g. 3" min="0" max="50">
                             </div>
                         </div>
 
                         <div class="form-field">
-                            <label>Highest Qualification</label>
-                            <select>
-                                <option value="">Select Qualification</option>
-                                <option value="diploma">Diploma</option>
-                                <option value="bachelor">Bachelor's Degree (UG)</option>
-                                <option value="master">Master's Degree (PG)</option>
-                                <option value="mphil">M.Phil</option>
-                                <option value="phd">Ph.D</option>
-                            </select>
-                        </div>
-
-                        <div class="form-field">
                             <label>Upload CV (PDF / DOC)</label>
-                            <input type="file" accept=".pdf,.doc,.docx">
+                            <input type="file" name="resume" accept=".pdf,.doc,.docx">
                         </div>
 
-                        <button type="submit" class="submit-btn">
+                        <button type="submit" class="submit-btn" id="careerSubmitBtn">
                             <i class="fa-solid fa-paper-plane" style="margin-right:8px;"></i>Submit Application
                         </button>
                     </form>

@@ -1,19 +1,168 @@
 @extends('layouts.app')
 @section('title', 'JMPSSS | Jaypee Model Senior Secondary School')
 
+@push('styles')
+<style>
+    /* Hero Slider Styles */
+    .hero-slider {
+        position: relative;
+        height: 100vh;
+        min-height: 600px;
+        overflow: hidden;
+    }
+    .slider-wrapper {
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+    .hero-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 1.2s ease, visibility 1.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .hero-item.active {
+        opacity: 1;
+        visibility: visible;
+        z-index: 10;
+    }
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+        transition: transform 8s ease;
+    }
+    .hero-item.active .hero-bg {
+        transform: scale(1);
+    }
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+        z-index: 1;
+    }
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+        padding: 0 20px;
+        max-width: 900px;
+    }
+    .hero-content h1 {
+        font-size: clamp(32px, 8vw, 72px);
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transform: translateY(30px);
+        opacity: 0;
+        transition: all 0.8s 0.5s ease;
+    }
+    .banner-subtitle {
+        font-size: clamp(18px, 3vw, 24px);
+        margin-bottom: 30px;
+        opacity: 0.9;
+        transform: translateY(30px);
+        opacity: 0;
+        transition: all 0.8s 0.8s ease;
+    }
+    .hero-actions {
+        transform: translateY(30px);
+        opacity: 0;
+        transition: all 0.8s 1.1s ease;
+    }
+    .hero-item.active h1,
+    .hero-item.active .banner-subtitle,
+    .hero-item.active .hero-actions {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .slider-controls {
+        position: absolute;
+        bottom: 50px;
+        right: 50px;
+        z-index: 20;
+        display: flex;
+        gap: 15px;
+    }
+    .slider-prev, .slider-next {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        backdrop-filter: blur(5px);
+    }
+    .slider-prev:hover, .slider-next:hover {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+</style>
+@endpush
+
 @section('content')
-<!-- Hero Section -->
+<!-- Dynamic Hero Slider -->
+    @if($banners->isNotEmpty())
+    <section class="hero-slider">
+        <div class="slider-wrapper">
+            @foreach($banners as $index => $banner)
+            <div class="hero-item {{ $index == 0 ? 'active' : '' }}">
+                <div class="hero-overlay"></div>
+                <img src="{{ asset('storage/' . $banner->image_path) }}" alt="{{ $banner->title }}" class="hero-bg">
+                <div class="hero-content">
+                    <h1>{{ $banner->title ?? 'ACADEMIC EXCELLENCE' }}</h1>
+                    @if($banner->subtitle)
+                        <p class="banner-subtitle">{{ $banner->subtitle }}</p>
+                    @endif
+                    <div class="hero-actions">
+                        @if($banner->button_text)
+                            <a href="{{ $banner->button_link ?? '#' }}" class="btn-primary" style="margin-top:20px;">{{ $banner->button_text }}</a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @if($banners->count() > 1)
+        <div class="slider-controls">
+            <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        @endif
+    </section>
+    @else
     <section class="hero">
         <div class="hero-overlay"></div>
         <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Academic Excellence" class="hero-bg">
         <div class="hero-content">
-            <h1>ACADEMIC EXCELLENCE</h1>
+            <h1>{{ $sections['hero']->title ?? 'ACADEMIC EXCELLENCE' }}</h1>
             <div class="breadcrumbs">
-                <a href="#">Home</a> | <a href="#">Learning at JMPSSS</a> | <a href="#" class="active">Academic
-                    Excellence</a>
+                <a href="{{ route('home') }}">Home</a> | <a href="{{ route('about') }}">About JMPSSS</a>
             </div>
         </div>
     </section>
+    @endif
 
     <!-- About Section -->
     <section class="about section-padding">
@@ -28,11 +177,17 @@
             </div>
             <div class="about-text">
                 <span class="section-subtitle">About Us</span>
-                <h2 class="section-title-alt">Empowering Students Through Holistic Education</h2>
-                <p>Jaypee Model Senior Secondary School is dedicated to fostering an environment where academic rigor
-                    and holistic commitment go hand-in-hand. We believe in nurturing not just the intellect, but the
-                    character of every student.</p>
-                <ul class="about-feature-list">
+                <h2 class="section-title-alt">{{ $sections['about']->title ?? 'Empowering Students Through Holistic Education' }}</h2>
+                <div class="about-content-dynamic">
+                    @if($sections['about'])
+                        {!! nl2br(e($sections['about']->content)) !!}
+                    @else
+                        <p>Jaypee Model Senior Secondary School is dedicated to fostering an environment where academic rigor
+                        and holistic commitment go hand-in-hand. We believe in nurturing not just the intellect, but the
+                        character of every student.</p>
+                    @endif
+                </div>
+                <ul class="about-feature-list" style="margin-top: 20px;">
                     <li><i class="fa-solid fa-circle-check"></i> Experienced & Dedicated Faculty</li>
                     <li><i class="fa-solid fa-circle-check"></i> State-of-the-Art Learning Infrastructure</li>
                     <li><i class="fa-solid fa-circle-check"></i> Comprehensive Co-curricular Programs</li>
@@ -41,6 +196,49 @@
             </div>
         </div>
     </section>
+
+    <!-- Leadership Messages -->
+    @if($sections['principal'] || $sections['correspondent'])
+    <section class="leadership-section section-padding" style="background:#f8fafc;">
+        <div class="container">
+            <div class="text-center mb-50">
+                <span class="section-subtitle">Our Leadership</span>
+                <h2 class="section-title">Messages from our Leaders</h2>
+            </div>
+            <div class="grid-2" style="gap:40px;">
+                @if($sections['principal'])
+                <div class="message-card" style="background:white; padding:40px; border-radius:30px; box-shadow:0 15px 45px rgba(0,0,0,0.05); border-left:6px solid var(--primary);">
+                    <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
+                        <div style="width:70px; height:70px; background:var(--primary); border-radius:20px; display:grid; place-items:center; color:white; font-size:30px;"><i class="fas fa-user-tie"></i></div>
+                        <div>
+                            <h3 style="font-size:20px; color:var(--primary);">{{ $sections['principal']->name }}</h3>
+                            <p style="font-size:14px; color:var(--text-muted); font-weight:600;">{{ $sections['principal']->designation }}</p>
+                        </div>
+                    </div>
+                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">"{{ Str::limit($sections['principal']->quote, 150) }}"</p>
+                    <p style="font-size:15px; line-height:1.8; color:#555; margin-bottom:25px;">{{ Str::limit($sections['principal']->content, 200) }}</p>
+                    <a href="{{ route('principal-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
+                </div>
+                @endif
+
+                @if($sections['correspondent'])
+                <div class="message-card" style="background:white; padding:40px; border-radius:30px; box-shadow:0 15px 45px rgba(0,0,0,0.05); border-left:6px solid var(--accent);">
+                    <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
+                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; display:grid; place-items:center; color:var(--primary); font-size:30px;"><i class="fas fa-user-graduate"></i></div>
+                        <div>
+                            <h3 style="font-size:20px; color:var(--primary);">{{ $sections['correspondent']->name }}</h3>
+                            <p style="font-size:14px; color:var(--text-muted); font-weight:600;">{{ $sections['correspondent']->designation }}</p>
+                        </div>
+                    </div>
+                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">"{{ Str::limit($sections['correspondent']->quote, 150) }}"</p>
+                    <p style="font-size:15px; line-height:1.8; color:#555; margin-bottom:25px;">{{ Str::limit($sections['correspondent']->content, 200) }}</p>
+                    <a href="{{ route('correspondent-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
+                </div>
+                @endif
+            </div>
+        </div>
+    </section>
+    @endif
 
     <!-- Why Choose Us -->
     <section class="why-choose-us section-padding">
@@ -130,50 +328,24 @@
             <div class="events-slider">
                 <button class="slider-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="slider-container">
+                    @forelse($events as $event)
                     <div class="event-card">
                         <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="Event 1">
-                            <div class="event-date">12 <span>Oct</span></div>
+                            @if($event->image)
+                                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}">
+                            @else
+                                <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="{{ $event->title }}">
+                            @endif
+                            <div class="event-date">{{ $event->event_date->format('d') }} <span>{{ $event->event_date->format('M') }}</span></div>
                         </div>
                         <div class="event-info">
-                            <h3>Transfer of School Grants</h3>
-                            <p>Significant progress made in the allocation and transfer of essential school development
-                                grants for better facilities.</p>
+                            <h3>{{ $event->title }}</h3>
+                            <p>{{ Str::limit($event->description, 100) }}</p>
                         </div>
                     </div>
-                    <div class="event-card">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/img02.jpg') }}" alt="Event 2">
-                            <div class="event-date">25 <span>Nov</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>Annual Sports Day Excellence</h3>
-                            <p>Celebrating the remarkable athletic achievements and sportsmanship demonstrated by our
-                                talented students.</p>
-                        </div>
-                    </div>
-                    <div class="event-card">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/img03.jpg') }}" alt="Event 3">
-                            <div class="event-date">05 <span>Dec</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>Science Exhibition 2024</h3>
-                            <p>Showcasing innovative scientific models and research projects created by our curious
-                                young minds.</p>
-                        </div>
-                    </div>
-                    <div class="event-card">
-                        <div class="event-img-wrapper">
-                            <img src="{{ asset('assets/jmpsss/image/img04.jpg') }}" alt="Event 4">
-                            <div class="event-date">10 <span>Jan</span></div>
-                        </div>
-                        <div class="event-info">
-                            <h3>Academic Toppers Award</h3>
-                            <p>Recognizing the dedication and hard work of our top-performing students in the recent
-                                board examinations.</p>
-                        </div>
-                    </div>
+                    @empty
+                        <p style="color:white; text-align:center; grid-column: 1/-1;">No events available at the moment.</p>
+                    @endforelse
                 </div>
                 <button class="slider-btn next"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
@@ -193,54 +365,30 @@
                 </div>
                 <div class="testimonial-main-content">
                     <div class="testimonial-slider-track">
-                        <!-- Testimonial 1 -->
-                        <div class="testimonial-item active">
+                        @forelse($testimonials as $testimonial)
+                        <div class="testimonial-item {{ $loop->first ? 'active' : '' }}">
                             <div class="testimonial-content-area">
-                                <h3 class="testimonial-author">Ronald Richards</h3>
-                                <p class="testimonial-role">Student Parent</p>
-                                <p class="testimonial-quote">The quality of teaching staff and disciplined atmosphere at
-                                    JMPSSS helped my child improve academically and personally.</p>
+                                <h3 class="testimonial-author">{{ $testimonial->name }}</h3>
+                                <p class="testimonial-role">{{ $testimonial->designation ?? $testimonial->type }}</p>
+                                <p class="testimonial-quote">"{{ $testimonial->content }}"</p>
                                 <div class="testimonial-stars">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                        class="fa-solid fa-star"></i>
+                                    @for($i = 0; $i < $testimonial->rating; $i++)
+                                        <i class="fa-solid fa-star"></i>
+                                    @endfor
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 2 -->
-                        <div class="testimonial-item">
-                            <div class="testimonial-content-area">
-                                <h3 class="testimonial-author">Jane Cooper</h3>
-                                <p class="testimonial-role">Mother of Grade 5 Student</p>
-                                <p class="testimonial-quote">The focus on holistic development and extra-curricular
-                                    activities ensured my daughter grew into a confident individual.</p>
-                                <div class="testimonial-stars">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                        class="fa-solid fa-star"></i>
-                                </div>
+                        @empty
+                            <div class="testimonial-item active">
+                                <p class="testimonial-quote">No testimonials available yet.</p>
                             </div>
-                        </div>
-                        <!-- Testimonial 3 -->
-                        <div class="testimonial-item">
-                            <div class="testimonial-content-area">
-                                <h3 class="testimonial-author">Robert Fox</h3>
-                                <p class="testimonial-role">Father of Grade 10 Student</p>
-                                <p class="testimonial-quote">JMPSSS provides the perfect balance between traditional
-                                    values and modern educational technology. Exceptional experience!</p>
-                                <div class="testimonial-stars">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                        class="fa-solid fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                     <div class="testimonial-dots-wrapper">
                         <div class="testimonial-dots">
-                            <span class="dot active"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+                            @foreach($testimonials as $testimonial)
+                                <span class="dot {{ $loop->first ? 'active' : '' }}"></span>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -290,6 +438,54 @@
     -->
 
     <!-- Footer -->
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const items = document.querySelectorAll('.hero-item');
+    if(items.length <= 1) return;
+
+    let current = 0;
+    const interval = 6000;
+
+    function showSlide(index) {
+        items.forEach(item => item.classList.remove('active'));
+        items[index].classList.add('active');
+        current = index;
+    }
+
+    function nextSlide() {
+        let next = (current + 1) % items.length;
+        showSlide(next);
+    }
+
+    function prevSlide() {
+        let prev = (current - 1 + items.length) % items.length;
+        showSlide(prev);
+    }
+
+    let slideTimer = setInterval(nextSlide, interval);
+
+    const nextBtn = document.querySelector('.slider-next');
+    const prevBtn = document.querySelector('.slider-prev');
+
+    if(nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            clearInterval(slideTimer);
+            nextSlide();
+            slideTimer = setInterval(nextSlide, interval);
+        });
+    }
+
+    if(prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            clearInterval(slideTimer);
+            prevSlide();
+            slideTimer = setInterval(nextSlide, interval);
+        });
+    }
+});
+</script>
+@endpush
 @endsection
 
 

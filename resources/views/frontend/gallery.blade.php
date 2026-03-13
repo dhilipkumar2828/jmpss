@@ -441,440 +441,136 @@
 </style>
 @endpush
 
+@php
+    $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
+    $primaryColor = $siteSettings['logo_green_900'] ?? '#004800';
+    $secondaryColor = $siteSettings['secondary_color'] ?? '#e14c1e';
+@endphp
+
 @section('content')
 <!-- Page Hero -->
     <section class="page-hero">
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
-            <span class="page-label" id="pageLabel">Gallery</span>
-            <h1 id="pageTitle">Photos</h1>
-            <nav class="breadcrumb-trail" id="breadcrumbTrail">
+            <span class="page-label" style="background: {{ $secondaryColor }}">Gallery</span>
+            <h1>Photo Collections</h1>
+            <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
-                <a href="{{ route('gallery') }}">Gallery</a>
-                <span id="bcSep" style="display:none;">›</span>
-                <span id="bcCurrent" style="display:none;"></span>
+                <span style="color: {{ $secondaryColor }}">Photos</span>
             </nav>
         </div>
     </section>
 
-    <!-- ── Category Selection View ── -->
-    <section class="category-view" id="categoryView">
-        <div class="container">
-            <div class="text-center">
-                <span class="section-subtitle">Visual Journey</span>
-                <h2 class="section-title">Photo Collections</h2>
-                <p style="color:#666; margin-top:12px;">Select a category to explore our photo archives by year.</p>
-            </div>
-
-            <div class="cat-grid">
-                <!-- Category 1 -->
-                <div class="cat-card" onclick="openCategory('celebrations', 'Institutional Events')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="Institutional Events">
-                        <div class="cat-overlay"><i class="fa-solid fa-camera"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Institutional Events</h3>
-                        <p>Annual days, cultural festivals and celebrations</p>
-                    </div>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="cat-card" onclick="openCategory('academic', 'Academic Excellence')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/new/slider2.jpg') }}" alt="Academic Excellence">
-                        <div class="cat-overlay"><i class="fa-solid fa-graduation-cap"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Academic Excellence</h3>
-                        <p>Classroom learning and academic milestones</p>
-                    </div>
-                </div>
-
-                <!-- Category 3 -->
-                <div class="cat-card" onclick="openCategory('cultural', 'Cultural Resonance')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/img03.jpg') }}" alt="Cultural Resonance">
-                        <div class="cat-overlay"><i class="fa-solid fa-palette"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Cultural Resonance</h3>
-                        <p>Traditional dance, arts and creative workshops</p>
-                    </div>
-                </div>
-
-                <!-- Category 4 -->
-                <div class="cat-card" onclick="openCategory('sports', 'Athletic Spirit')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/img07.jpg') }}" alt="Athletic Spirit">
-                        <div class="cat-overlay"><i class="fa-solid fa-trophy"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Athletic Spirit</h3>
-                        <p>Zonal sports meets and playground action</p>
-                    </div>
-                </div>
-
-                <!-- Category 5 -->
-                <div class="cat-card" onclick="openCategory('environment', 'Campus Landscapes')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Campus Landscapes">
-                        <div class="cat-overlay"><i class="fa-solid fa-leaf"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Campus Landscapes</h3>
-                        <p>Lush green environment and school infrastructure</p>
-                    </div>
-                </div>
-
-                <!-- Category 6 -->
-                <div class="cat-card" onclick="openCategory('awards', 'Awards & Honors')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="Awards & Honors">
-                        <div class="cat-overlay"><i class="fa-solid fa-award"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Awards &amp; Honors</h3>
-                        <p>Recognizing the excellence of our students</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ── Gallery Detail View ── -->
-    <section class="gallery-view" id="galleryView">
+    <section class="gallery-view active" style="display: block;">
         <div class="container">
-            <div class="back-btn" onclick="closeCategory()">
-                <i class="fa-solid fa-arrow-left"></i> Back to Categories
+            
+            <div class="filter-wrap" style="margin-bottom: 40px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <a href="{{ route('gallery') }}" class="btn {{ !request('category') ? 'btn-primary' : 'btn-outline' }}" style="border-radius: 30px; padding: 8px 25px; {{ !request('category') ? 'background:'.$primaryColor : '' }}">All</a>
+                @foreach($categories as $cat)
+                    <a href="{{ route('gallery', ['category' => $cat]) }}" class="btn {{ request('category') == $cat ? 'btn-primary' : 'btn-outline' }}" style="border-radius: 30px; padding: 8px 25px; {{ request('category') == $cat ? 'background:'.$primaryColor : '' }}">{{ $cat }}</a>
+                @endforeach
             </div>
 
-            <!-- Content injected by JS -->
-            <div id="galleryContent"></div>
+            <div class="gallery-grid">
+                @forelse($albums as $album)
+                @php
+                    $photos = $album->items->where('item_type', 'photo');
+                    $firstPhoto = $photos->first();
+                    // Map photos for JS
+                    $photoData = $photos->map(fn($item) => ['src' => asset('storage/'.$item->file_path)])->values();
+                @endphp
+                <div class="gallery-item" onclick="openAlbumLightbox({{ json_encode($photoData) }}, '{{ $album->title }}', '{{ $album->category }}')">
+                    <div class="photo-thumb">
+                        @if($firstPhoto)
+                        <img src="{{ asset('storage/' . $firstPhoto->file_path) }}" alt="{{ $album->title }}" loading="lazy">
+                        @endif
+                        <div class="photo-overlay-btn">
+                            <i class="fa-solid fa-images" style="background: {{ $secondaryColor }}"></i>
+                            <span style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px;">{{ $photos->count() }} Photos</span>
+                        </div>
+                    </div>
+                    <div class="photo-details">
+                        <h3 style="color: {{ $primaryColor }}">{{ $album->title }}</h3>
+                        @if($album->category)
+                            <p style="font-size: 12px; color: #888;">{{ $album->category }}</p>
+                        @endif
+                    </div>
+                </div>
+                @empty
+                    <div style="grid-column: 1/-1; text-align: center; padding: 100px 0;">
+                        <i class="fa-solid fa-image" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
+                        <h3>No photos found</h3>
+                        <p>We are currently updating our gallery. Please check back later.</p>
+                    </div>
+                @endforelse
+            </div>
+
+            <div class="pagination-wrap" style="margin-top: 50px; display: justify-content: center;">
+                {{ $albums->links() }}
+            </div>
         </div>
     </section>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-content">
-            <span class="lightbox-close" id="lightboxClose"><i class="fa-solid fa-xmark"></i></span>
-            <img src="" alt="Gallery Lightbox" id="lightboxImg">
+            <span class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></span>
+            
             <div class="lightbox-nav">
-                <i class="fa-solid fa-chevron-left" id="prevBtn"></i>
-                <i class="fa-solid fa-chevron-right" id="nextBtn"></i>
+                <i class="fa-solid fa-chevron-left" onclick="changePhoto(-1)"></i>
+                <i class="fa-solid fa-chevron-right" onclick="changePhoto(1)"></i>
             </div>
+
+            <img src="" alt="Gallery Lightbox" id="lightboxImg">
+            
             <div class="lightbox-caption">
                 <h4 id="lightboxTitle"></h4>
                 <p id="lightboxCategory"></p>
+                <div id="photoCounter" style="font-size: 11px; margin-top: 5px; opacity: 0.7;"></div>
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
 @endsection
 
 @push('scripts')
 <script>
-    const galleryAssetRoot = @json(asset('assets/jmpsss'));
+    let currentAlbumPhotos = [];
+    let currentIndex = 0;
+    let albumTitle = '';
+    let albumCategory = '';
 
-    function galleryAsset(path) {
-        return `${galleryAssetRoot}/${path}`;
-    }
-
-    function updateGalleryUrl(category = null) {
-        const url = new URL(window.location.href);
-        if (category) {
-            url.searchParams.set('category', category);
-            url.hash = category;
-        } else {
-            url.searchParams.delete('category');
-            url.hash = '';
-        }
-        window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
-    }
-
-    const photoData = {
-        celebrations: {
-            label: 'Institutional Events',
-            years: {
-                '2024-25': [{
-                        src: 'image/img03.jpg',
-                        title: 'Annual Cultural Fest 2024'
-                    },
-                    {
-                        src: 'image/img08.jpg',
-                        title: 'Annual Sports Day Celebration'
-                    },
-                    {
-                        src: 'image/img11.jpg',
-                        title: 'Graduation Ceremony Highlights'
-                    },
-                    {
-                        src: 'image/new/slider1.jpg',
-                        title: 'School Anniversary Celebration'
-                    }
-                ],
-                '2023-24': [{
-                        src: 'image/new/slider2.jpg',
-                        title: 'Republic Day Parade 2023'
-                    },
-                    {
-                        src: 'image/new/env2.png',
-                        title: 'Independence Day Celebration'
-                    },
-                    {
-                        src: 'image/new/env3.png',
-                        title: 'Teachers Day Event 2023'
-                    }
-                ],
-                '2022-23': [{
-                        src: 'image/new/env1.png',
-                        title: 'School Foundation Day 2022'
-                    },
-                    {
-                        src: 'image/new/slider3.jpg',
-                        title: "Children's Day Celebration"
-                    }
-                ]
-            }
-        },
-        academic: {
-            label: 'Academic Excellence',
-            years: {
-                '2024-25': [{
-                        src: 'image/img02.jpg',
-                        title: 'Advanced Science Laboratory'
-                    },
-                    {
-                        src: 'image/img10.jpg',
-                        title: 'Computer Innovation Hub'
-                    },
-                    {
-                        src: 'image/new/school22.jpg',
-                        title: 'Interactive Smart Classroom'
-                    }
-                ],
-                '2023-24': [{
-                        src: 'image/new/slider2.jpg',
-                        title: 'Mathematics Olympiad Winners'
-                    },
-                    {
-                        src: 'image/new/slider1.jpg',
-                        title: 'Science Exhibition 2023'
-                    }
-                ]
-            }
-        },
-        cultural: {
-            label: 'Cultural Resonance',
-            years: {
-                '2024-25': [{
-                        src: 'image/img06.jpg',
-                        title: 'Digital Art & Creative Studio'
-                    },
-                    {
-                        src: 'image/img12.jpg',
-                        title: 'Traditional Dance Performance'
-                    },
-                    {
-                        src: 'image/new/env3.png',
-                        title: 'Kolam Art Competition'
-                    }
-                ],
-                '2023-24': [{
-                        src: 'image/img03.jpg',
-                        title: 'Folk Dance Showcase 2023'
-                    },
-                    {
-                        src: 'image/new/env2.png',
-                        title: 'Drama & Theatre Day'
-                    }
-                ]
-            }
-        },
-        sports: {
-            label: 'Athletic Spirit',
-            years: {
-                '2024-25': [{
-                        src: 'image/img04.jpg',
-                        title: 'Inter-School Basketball Meet'
-                    },
-                    {
-                        src: 'image/img07.jpg',
-                        title: 'Expansive Green Playground'
-                    },
-                    {
-                        src: 'image/img08.jpg',
-                        title: 'Sports Day Athletics Track'
-                    }
-                ],
-                '2023-24': [{
-                        src: 'image/new/slider3.jpg',
-                        title: 'District Kabaddi Champions 2023'
-                    },
-                    {
-                        src: 'image/img04.jpg',
-                        title: 'Volleyball Tournament Finals'
-                    }
-                ]
-            }
-        },
-        environment: {
-            label: 'Campus Landscapes',
-            years: {
-                '2024-25': [{
-                        src: 'image/img01.jpg',
-                        title: 'Main Building Aerial View'
-                    },
-                    {
-                        src: 'image/img05.jpg',
-                        title: 'The Wisdom Center - Library'
-                    },
-                    {
-                        src: 'image/img09.jpg',
-                        title: 'Botanical Learning Garden'
-                    },
-                    {
-                        src: 'image/new/slider3.jpg',
-                        title: 'School Campus Greenery'
-                    }
-                ],
-                '2023-24': [{
-                        src: 'image/new/slider1.jpg',
-                        title: 'Main Entrance Gate 2023'
-                    },
-                    {
-                        src: 'image/new/slider2.jpg',
-                        title: 'Classroom Wing Renovation'
-                    }
-                ]
-            }
-        },
-        awards: {
-            label: 'Awards & Honors',
-            years: {
-                '2024-25': [{
-                        src: 'image/img01.jpg',
-                        title: 'State Level Excellence Award 2024'
-                    },
-                    {
-                        src: 'image/img10.jpg',
-                        title: 'Best School Recognition'
-                    },
-                    {
-                        src: 'image/new/award1.jpg',
-                        title: 'Trophy Ceremony 2024'
-                    }
-                ],
-                '2023-24': [{
-                        src: 'image/img11.jpg',
-                        title: 'National Merit Award 2023'
-                    },
-                    {
-                        src: 'image/img02.jpg',
-                        title: 'Outstanding Performance Recognition'
-                    }
-                ]
-            }
-        }
-    };
-
-    let allLightboxItems = [];
-    let currentLightboxIndex = 0;
-
-    function openCategory(catKey) {
-        const categoryView = document.getElementById('categoryView');
-        const galleryView = document.getElementById('galleryView');
-        const content = document.getElementById('galleryContent');
-        const pageTitle = document.getElementById('pageTitle');
-        const bcSep = document.getElementById('bcSep');
-        const bcCurrent = document.getElementById('bcCurrent');
-
-        const data = photoData[catKey];
-        if (!data) return;
-
-        pageTitle.textContent = data.label;
-        bcSep.style.display = 'inline';
-        bcCurrent.textContent = data.label;
-        bcCurrent.style.display = 'inline';
-
-        allLightboxItems = [];
-        let html = '';
-        const years = Object.keys(data.years).sort().reverse();
-
-        years.forEach((year) => {
-            const photos = data.years[year];
-            html += `
-                <div class="year-section">
-                    <div class="year-heading">
-                        <span class="year-pill">${year}</span>
-                    </div>
-                    <div class="gallery-grid">
-            `;
-
-            photos.forEach((photo) => {
-                allLightboxItems.push(photo);
-                const globalIndex = allLightboxItems.length - 1;
-                html += `
-                    <div class="gallery-item" onclick="openLightbox(${globalIndex})">
-                        <div class="photo-thumb">
-                            <img src="${galleryAsset(photo.src)}" alt="${photo.title}" loading="lazy">
-                            <div class="photo-overlay-btn">
-                                <i class="fa-solid fa-expand"></i>
-                            </div>
-                        </div>
-                        <div class="photo-details">
-                            <h3>${photo.title}</h3>
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += `</div></div>`;
-        });
-
-        content.innerHTML = html;
-        categoryView.style.display = 'none';
-        galleryView.classList.add('active', 'fade-enter');
-        setTimeout(() => galleryView.classList.remove('fade-enter'), 600);
-
-        updateGalleryUrl(catKey);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    function closeCategory() {
-        const categoryView = document.getElementById('categoryView');
-        const galleryView = document.getElementById('galleryView');
-        const pageTitle = document.getElementById('pageTitle');
-        const bcSep = document.getElementById('bcSep');
-        const bcCurrent = document.getElementById('bcCurrent');
-
-        galleryView.classList.remove('active');
-        categoryView.style.display = 'block';
-        pageTitle.textContent = 'Photos';
-        bcSep.style.display = 'none';
-        bcCurrent.style.display = 'none';
-
-        updateGalleryUrl(null);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    function openLightbox(index) {
-        currentLightboxIndex = index;
-        const item = allLightboxItems[index];
-        if (!item) return;
-
-        document.getElementById('lightboxImg').src = galleryAsset(item.src);
-        document.getElementById('lightboxTitle').textContent = item.title;
-        document.getElementById('lightboxCategory').textContent = '';
+    function openAlbumLightbox(photos, title, category) {
+        currentAlbumPhotos = photos;
+        currentIndex = 0;
+        albumTitle = title;
+        albumCategory = category;
+        
+        updateLightboxContent();
+        
         document.getElementById('lightbox').classList.add('active');
         document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightboxContent() {
+        if (currentAlbumPhotos.length === 0) return;
+        
+        const photo = currentAlbumPhotos[currentIndex];
+        document.getElementById('lightboxImg').src = photo.src;
+        document.getElementById('lightboxTitle').textContent = albumTitle;
+        document.getElementById('lightboxCategory').textContent = albumCategory;
+        document.getElementById('photoCounter').textContent = `Photo ${currentIndex + 1} of ${currentAlbumPhotos.length}`;
+        
+        // Hide nav if only one photo
+        const nav = document.querySelector('.lightbox-nav');
+        nav.style.display = currentAlbumPhotos.length > 1 ? 'flex' : 'none';
+    }
+
+    function changePhoto(step) {
+        currentIndex += step;
+        if (currentIndex < 0) currentIndex = currentAlbumPhotos.length - 1;
+        if (currentIndex >= currentAlbumPhotos.length) currentIndex = 0;
+        updateLightboxContent();
     }
 
     function closeLightbox() {
@@ -882,50 +578,12 @@
         document.body.style.overflow = 'auto';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const categoryParam = new URLSearchParams(window.location.search).get('category');
-        const hashCategory = window.location.hash.replace('#', '');
-        const initialCategory = categoryParam || hashCategory;
-
-        if (initialCategory && photoData[initialCategory]) {
-            openCategory(initialCategory);
-        }
-
-        window.addEventListener('hashchange', () => {
-            const currentHash = window.location.hash.replace('#', '');
-            if (currentHash && photoData[currentHash]) {
-                openCategory(currentHash);
-            } else {
-                closeCategory();
-            }
-        });
-
-        const lightbox = document.getElementById('lightbox');
-        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
-
-        document.getElementById('prevBtn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            let index = currentLightboxIndex - 1;
-            if (index < 0) index = allLightboxItems.length - 1;
-            openLightbox(index);
-        });
-
-        document.getElementById('nextBtn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            let index = currentLightboxIndex + 1;
-            if (index >= allLightboxItems.length) index = 0;
-            openLightbox(index);
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return;
-            if (e.key === 'ArrowLeft') document.getElementById('prevBtn').click();
-            if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
-            if (e.key === 'Escape') closeLightbox();
-        });
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!document.getElementById('lightbox').classList.contains('active')) return;
+        if (e.key === 'ArrowLeft') changePhoto(-1);
+        if (e.key === 'ArrowRight') changePhoto(1);
+        if (e.key === 'Escape') closeLightbox();
     });
 </script>
 @endpush

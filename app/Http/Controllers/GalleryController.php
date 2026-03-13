@@ -3,34 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 use Throwable;
 
 class GalleryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $photos = Gallery::active()->photos()->paginate(12, '*', 'photos');
-            $videos = Gallery::active()->videos()->paginate(9, '*', 'videos');
+            // Get Galleries (Albums) that have at least one photo
+            $query = Gallery::active()->whereHas('items', function($q) {
+                $q->where('item_type', 'photo');
+            })->with(['items' => function($q) {
+                $q->where('item_type', 'photo');
+            }]);
+            
+            if ($request->filled('category')) {
+                $query->where('category', $request->category);
+            }
+
+            $albums = $query->paginate(12)->withQueryString();
+            $categories = Gallery::active()->pluck('category')->unique()->filter();
         } catch (Throwable $e) {
             report($e);
-            $photos = new LengthAwarePaginator(
-                collect(),
-                0,
-                12,
-                LengthAwarePaginator::resolveCurrentPage('photos'),
-                ['path' => LengthAwarePaginator::resolveCurrentPath(), 'pageName' => 'photos']
-            );
-            $videos = new LengthAwarePaginator(
-                collect(),
-                0,
-                9,
-                LengthAwarePaginator::resolveCurrentPage('videos'),
-                ['path' => LengthAwarePaginator::resolveCurrentPath(), 'pageName' => 'videos']
-            );
+            $albums = collect();
+            $categories = collect();
         }
 
-        return view('frontend.gallery', compact('photos', 'videos'));
+        return view('frontend.gallery', compact('albums', 'categories'));
+    }
+
+    public function videos(Request $request)
+    {
+        try {
+            // Get Galleries (Albums) that have at least one video
+            $query = Gallery::active()->whereHas('items', function($q) {
+                $q->where('item_type', 'video');
+            })->with(['items' => function($q) {
+                $q->where('item_type', 'video');
+            }]);
+            
+            if ($request->filled('category')) {
+                $query->where('category', $request->category);
+            }
+
+            $albums = $query->paginate(9)->withQueryString();
+            $categories = Gallery::active()->pluck('category')->unique()->filter();
+        } catch (Throwable $e) {
+            report($e);
+            $albums = collect();
+            $categories = collect();
+        }
+
+        return view('frontend.videos', compact('albums', 'categories'));
     }
 }

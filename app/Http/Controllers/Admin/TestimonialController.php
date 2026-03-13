@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
 {
-    public function index()  { return view('admin.testimonials.index', ['testimonials' => Testimonial::latest()->paginate(15)]); }
+    public function index()  { return view('admin.testimonials.index', ['testimonials' => Testimonial::latest()->paginate(10)]); }
     public function create() { return view('admin.testimonials.form'); }
 
     public function store(Request $request)

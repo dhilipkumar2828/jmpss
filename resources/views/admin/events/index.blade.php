@@ -43,7 +43,7 @@
                         <td>
                             <div style="display:flex;gap:6px;">
                                 <a href="{{ route('admin.events.edit', $event) }}" class="btn btn-outline btn-sm"><i class="fas fa-edit"></i></a>
-                                <form method="POST" action="{{ route('admin.events.destroy', $event) }}" onsubmit="return confirm('Delete this event?')">
+                                <form method="POST" action="{{ route('admin.events.destroy', $event) }}" onsubmit="return confirmDelete('this event')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                 </form>

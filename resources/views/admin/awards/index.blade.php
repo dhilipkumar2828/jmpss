@@ -24,7 +24,7 @@
                         <td>
                             <div style="display:flex;gap:6px;">
                                 <a href="{{ route('admin.awards.edit', $award) }}" class="btn btn-outline btn-sm"><i class="fas fa-edit"></i></a>
-                                <form method="POST" action="{{ route('admin.awards.destroy', $award) }}" onsubmit="return confirm('Delete this award?')">@csrf @method('DELETE')
+                                <form method="POST" action="{{ route('admin.awards.destroy', $award) }}" onsubmit="return confirmDelete('this award')">@csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>

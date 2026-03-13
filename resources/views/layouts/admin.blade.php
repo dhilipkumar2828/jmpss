@@ -7,16 +7,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    @php
+        $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $brandDeep = $siteSettings['logo_green_900'] ?? '#004f24';
+        $brandMed = $siteSettings['logo_green_700'] ?? '#026e33';
+        $brandGold = $siteSettings['logo_gold'] ?? '#c69c3a';
+    @endphp
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --primary: #1a3c6e; --primary-light: #2a5ba0;
-            --accent: #f59e0b; --accent-dark: #d97706;
+            --primary: {{ $brandDeep }}; --primary-light: {{ $brandMed }};
+            --accent: {{ $brandGold }}; --accent-dark: #b18c33;
             --sidebar-w: 260px;
-            --sidebar-bg: #0f2447;
+            --sidebar-bg: {{ $brandDeep }};
             --topbar-h: 64px;
             --text: #1e293b; --text-muted: #64748b;
-            --bg: #f1f5f9; --card-bg: #ffffff;
+            --bg: #f8faf9; --card-bg: #ffffff;
             --border: #e2e8f0;
             --success: #10b981; --danger: #ef4444; --warning: #f59e0b; --info: #3b82f6;
         }
@@ -154,6 +162,30 @@
         /* Hamburger */
         .sidebar-toggle { display: none; width: 36px; height: 36px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; place-items: center; cursor: pointer; font-size: 18px; color: var(--text); }
 
+        /* Dropdown */
+        .admin-dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 100%; right: 0; 
+            margin-top: 10px; width: 200px; 
+            background: white; border-radius: 12px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            border: 1px solid var(--border);
+            display: none; flex-direction: column; overflow: hidden; z-index: 1000;
+        }
+        .dropdown-menu.show { display: flex; animation: slideDown 0.2s ease; }
+        .dropdown-item {
+            padding: 12px 16px; font-size: 13px; color: var(--text);
+            text-decoration: none; display: flex; align-items: center; gap: 10px;
+            transition: background 0.2s;
+        }
+        .dropdown-item:hover { background: #f8fafc; }
+        .dropdown-divider { height: 1px; background: var(--border); }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 900px) {
             .sidebar { transform: translateX(-100%); }
@@ -172,11 +204,13 @@
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
-        <div class="sidebar-brand-icon">J</div>
-        <div class="sidebar-brand-text">
-            <strong>JMPSS Admin</strong>
-            <span>School Management</span>
-        </div>
+        <a href="{{ route('admin.dashboard') }}" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+            <img src="{{ asset('assets/jmpsss/image/logo.png') }}" style="width:44px; height:44px; object-fit:contain;" alt="Logo">
+            <div class="sidebar-brand-text">
+                <strong>JMPSS Admin</strong>
+                <span>School Management</span>
+            </div>
+        </a>
     </div>
 
     <span class="sidebar-section-label">Main</span>
@@ -186,6 +220,11 @@
                 <i class="fas fa-chart-pie"></i> Dashboard
             </a>
         </li>
+        <li>
+            <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                <i class="fas fa-users"></i> Registered Users
+            </a>
+        </li>
     </ul>
 
     <span class="sidebar-section-label">Content</span>
@@ -193,6 +232,11 @@
         <li>
             <a href="{{ route('admin.home-sections.index') }}" class="{{ request()->routeIs('admin.home-sections.*') ? 'active' : '' }}">
                 <i class="fas fa-home"></i> Home Sections
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.banners.index') }}" class="{{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
+                <i class="fas fa-image"></i> Banners
             </a>
         </li>
         <li>
@@ -217,19 +261,60 @@
         </li>
     </ul>
 
+    <span class="sidebar-section-label">Inquiries</span>
+    <ul class="sidebar-nav">
+        <li>
+            <a href="{{ route('admin.admissions.index') }}" class="{{ request()->routeIs('admin.admissions.*') ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i> Admissions
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.careers.index') }}" class="{{ request()->routeIs('admin.careers.*') ? 'active' : '' }}">
+                <i class="fas fa-briefcase"></i> Careers
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.visit-requests.index') }}" class="{{ request()->routeIs('admin.visit-requests.*') ? 'active' : '' }}">
+                <i class="fas fa-walking"></i> Visit Requests
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.contact-messages.index') }}" class="{{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">
+                <i class="fas fa-envelope-open-text"></i> Messages
+            </a>
+        </li>
+    </ul>
+
     <span class="sidebar-section-label">Site</span>
     <ul class="sidebar-nav">
+        <li>
+            <a href="{{ route('admin.settings.general') }}" class="{{ request()->routeIs('admin.settings.general') ? 'active' : '' }}">
+                <i class="fas fa-cog"></i> General Settings
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.settings.appearance') }}" class="{{ request()->routeIs('admin.settings.appearance') ? 'active' : '' }}">
+                <i class="fas fa-palette"></i> Appearance
+            </a>
+        </li>
         <li><a href="{{ route('home') }}" target="_blank"><i class="fas fa-external-link-alt"></i> View Website</a></li>
     </ul>
 
     <div class="sidebar-footer">
-        <div class="admin-profile">
-            <div class="admin-avatar">{{ strtoupper(substr(Auth::guard('admin')->user()->name, 0, 1)) }}</div>
+        <a href="{{ route('admin.profile') }}" class="admin-profile" style="text-decoration:none;">
+            <div class="admin-avatar">
+                @if(Auth::guard('admin')->user()->avatar)
+                    <img src="{{ asset('storage/'.Auth::guard('admin')->user()->avatar) }}" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                @else
+                    {{ strtoupper(substr(Auth::guard('admin')->user()->name, 0, 1)) }}
+                @endif
+            </div>
             <div class="admin-info">
                 <strong>{{ Auth::guard('admin')->user()->name }}</strong>
                 <span>{{ Auth::guard('admin')->user()->role }}</span>
             </div>
-        </div>
+            <i class="fas fa-chevron-right" style="margin-left:auto; font-size:10px; color:rgba(255,255,255,0.3);"></i>
+        </a>
     </div>
 </aside>
 
@@ -247,11 +332,37 @@
             </div>
         </div>
         <div class="topbar-right">
-            <a href="{{ route('home') }}" class="topbar-btn" target="_blank" title="View Website"><i class="fas fa-eye"></i></a>
-            <form method="POST" action="{{ route('admin.logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
-            </form>
+            <div class="admin-dropdown">
+                <button class="admin-profile-top" id="adminDropdownBtn" style="display:flex; align-items:center; gap:10px; padding:6px 14px; border-radius:12px; background:var(--bg); border:1px solid var(--border); transition:all 0.2s; cursor:pointer; outline:none;">
+                    <div class="top-avatar" style="width:32px; height:32px; border-radius:8px; background:var(--accent); color:var(--primary); display:grid; place-items:center; font-weight:700; font-size:13px; overflow:hidden;">
+                        @if(Auth::guard('admin')->user()->avatar)
+                            <img src="{{ asset('storage/'.Auth::guard('admin')->user()->avatar) }}" style="width:100%; height:100%; object-fit:cover;">
+                        @else
+                            {{ strtoupper(substr(Auth::guard('admin')->user()->name, 0, 1)) }}
+                        @endif
+                    </div>
+                    <div style="text-align:left; line-height:1.2;">
+                        <strong style="display:block; font-size:13px; color:var(--text);">{{ Auth::guard('admin')->user()->name }}</strong>
+                        <span style="font-size:11px; color:var(--text-muted);">{{ Auth::guard('admin')->user()->role }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size:10px; color:var(--text-muted); margin-left:4px;"></i>
+                </button>
+                <div class="dropdown-menu" id="adminDropdown">
+                    <a href="{{ route('admin.profile') }}" class="dropdown-item">
+                        <i class="fas fa-user-circle"></i> My Profile
+                    </a>
+                    <a href="{{ route('admin.settings.appearance') }}" class="dropdown-item">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                        @csrf
+                        <button type="submit" class="dropdown-item" style="width:100%; text-align:left; border:none; background:none; cursor:pointer; color:#ef4444;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -273,7 +384,49 @@
     </main>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
+// Toastr Setup
+toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "timeOut": "3000"
+};
+
+@if(session('success'))
+    toastr.success("{{ session('success') }}");
+@endif
+
+@if(session('error'))
+    toastr.error("{{ session('error') }}");
+@endif
+
+// Delete Confirmation with SweetAlert2
+function confirmDelete(title = 'this item') {
+    event.preventDefault(); // Stop form submission
+    const form = event.target.closest('form');
+    
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `Do you want to delete ${title}? This action cannot be undone.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#64748b',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel',
+        background: '#ffffff',
+        borderRadius: '16px'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+        }
+    });
+    return false;
+}
+
 // Auto show sidebar toggle on small screens
 const sidebarToggle = document.getElementById('toggle-btn');
 function checkSize() {
@@ -287,14 +440,24 @@ function checkSize() {
 checkSize();
 window.addEventListener('resize', checkSize);
 
-// Auto-hide flash messages
-setTimeout(() => {
-    document.querySelectorAll('.flash-wrap .alert').forEach(el => {
-        el.style.transition = 'opacity 0.5s';
-        el.style.opacity = '0';
-        setTimeout(() => el.remove(), 500);
+// Dropdown Toggle
+const dropdownBtn = document.getElementById('adminDropdownBtn');
+const dropdownMenu = document.getElementById('adminDropdown');
+
+if (dropdownBtn) {
+    dropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle('show');
     });
-}, 4000);
+}
+
+window.addEventListener('click', () => {
+    if (dropdownMenu && dropdownMenu.classList.contains('show')) {
+        dropdownMenu.classList.remove('show');
+    }
+});
+
+// Toastr for AJAX or generic use can be added here
 </script>
 @stack('scripts')
 </body>

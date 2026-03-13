@@ -428,454 +428,219 @@
 </style>
 @endpush
 
+@php
+    $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
+    $primaryColor = $siteSettings['logo_green_900'] ?? '#004800';
+    $secondaryColor = $siteSettings['secondary_color'] ?? '#e14c1e';
+@endphp
+
 @section('content')
 <!-- Page Hero -->
     <section class="page-hero">
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
-            <span class="page-label" id="pageLabel">Gallery</span>
-            <h1 id="pageTitle">Videos</h1>
+            <span class="page-label" style="background: {{ $secondaryColor }}">Gallery</span>
+            <h1>Video Collections</h1>
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
-                <a href="{{ route('videos') }}">Gallery</a>
-                <span id="bcSep" style="display:none;">›</span>
-                <span id="bcCurrent" style="display:none;"></span>
+                <span style="color: {{ $secondaryColor }}">Videos</span>
             </nav>
         </div>
     </section>
 
-    <!-- ── Category Selection View ── -->
-    <section class="category-view" id="categoryView">
+    <!-- ── Video Gallery View ── -->
+    <section class="category-view" style="display: block; background: #fff; padding-top: 60px;">
         <div class="container">
-            <div class="text-center">
-                <span class="section-subtitle">Visual Journey</span>
-                <h2 class="section-title">Video Collections</h2>
-                <p style="color:#666; margin-top:12px;">Select a category to explore our video archives by year.</p>
+            
+            <div class="filter-wrap" style="margin-bottom: 40px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <a href="{{ route('videos') }}" class="btn {{ !request('category') ? 'btn-primary' : 'btn-outline' }}" style="border-radius: 30px; padding: 8px 25px; {{ !request('category') ? 'background:'.$primaryColor : '' }}">All</a>
+                @foreach($categories as $cat)
+                    <a href="{{ route('videos', ['category' => $cat]) }}" class="btn {{ request('category') == $cat ? 'btn-primary' : 'btn-outline' }}" style="border-radius: 30px; padding: 8px 25px; {{ request('category') == $cat ? 'background:'.$primaryColor : '' }}">{{ $cat }}</a>
+                @endforeach
             </div>
 
             <div class="cat-grid">
-                <!-- Category 1 -->
-                <div class="cat-card" onclick="openCategory('institutional', 'Institutional Events')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="Institutional Events">
-                        <div class="cat-overlay"><i class="fa-solid fa-video"></i></div>
+                @forelse($albums as $album)
+                @php
+                    $videosList = $album->items->where('item_type', 'video');
+                    $firstVideo = $videosList->first();
+                    $videoData = $videosList->map(fn($v) => [
+                        'src' => $v->video_url,
+                        'title' => $album->title
+                    ])->values();
+                @endphp
+                <div class="video-item-card" onclick="openAlbumVideos({{ json_encode($videoData) }}, '{{ $album->title }}')">
+                    <div class="video-thumb">
+                        <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $album->title }}">
+                        <div class="video-overlay-btn">
+                            <i class="fa-solid fa-play" style="background: {{ $secondaryColor }}"></i>
+                            <span style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px;">{{ $videosList->count() }} Videos</span>
+                        </div>
+                        @if($album->category)
+                            <span class="video-cat-badge" style="background: {{ $primaryColor }}">{{ $album->category }}</span>
+                        @endif
                     </div>
-                    <div class="cat-card-body">
-                        <h3>Institutional Events</h3>
-                        <p>Annual days, school functions and special ceremonies</p>
-                    </div>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="cat-card" onclick="openCategory('cultural', 'Cultural Programs')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/img03.jpg') }}" alt="Cultural Programs">
-                        <div class="cat-overlay"><i class="fa-solid fa-masks-theater"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Cultural Programs</h3>
-                        <p>Dance, drama, music and creative arts performances</p>
-                    </div>
-                </div>
-
-                <!-- Category 3 -->
-                <div class="cat-card" onclick="openCategory('sports', 'Sports & Athletics')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/img08.jpg') }}" alt="Sports & Athletics">
-                        <div class="cat-overlay"><i class="fa-solid fa-running"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Sports &amp; Athletics</h3>
-                        <p>Sports meets, tournaments and athletic achievements</p>
+                    <div class="video-details">
+                        <h3 style="color: {{ $primaryColor }}">{{ $album->title }}</h3>
+                        <p>{{ Str::limit($album->description, 80) }}</p>
                     </div>
                 </div>
-
-                <!-- Category 4 -->
-                <div class="cat-card" onclick="openCategory('academic', 'Academic Excellence')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/new/slider2.jpg') }}" alt="Academic Excellence">
-                        <div class="cat-overlay"><i class="fa-solid fa-graduation-cap"></i></div>
+                @empty
+                    <div style="grid-column: 1/-1; text-align: center; padding: 100px 0;">
+                        <i class="fa-solid fa-video-slash" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
+                        <h3>No videos found</h3>
+                        <p>Our video collection is coming soon!</p>
                     </div>
-                    <div class="cat-card-body">
-                        <h3>Academic Excellence</h3>
-                        <p>Science fairs, olympiads and academic achievements</p>
-                    </div>
-                </div>
-
-                <!-- Category 5 -->
-                <div class="cat-card" onclick="openCategory('campus', 'Campus Tour')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Campus Tour">
-                        <div class="cat-overlay"><i class="fa-solid fa-school"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>Campus Tour</h3>
-                        <p>Explore our vibrant campus and modern facilities</p>
-                    </div>
-                </div>
-
-                <!-- Category 6 -->
-                <div class="cat-card" onclick="openCategory('highlights', 'School Highlights')">
-                    <div class="cat-card-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/img07.jpg') }}" alt="School Highlights">
-                        <div class="cat-overlay"><i class="fa-solid fa-star"></i></div>
-                    </div>
-                    <div class="cat-card-body">
-                        <h3>School Highlights</h3>
-                        <p>Best moments and memorable milestones</p>
-                    </div>
-                </div>
+                @endforelse
             </div>
-        </div>
-    </section>
 
-    <!-- ── Video Detail View ── -->
-    <section class="gallery-view" id="galleryView">
-        <div class="container">
-            <div class="back-btn" onclick="closeCategory()">
-                <i class="fa-solid fa-arrow-left"></i> Back to Categories
+            <div class="pagination-wrap" style="margin-top: 50px; display: justify-content: center;">
+                {{ $albums->links() }}
             </div>
-            <!-- Content injected by JS -->
-            <div id="galleryContent"></div>
         </div>
     </section>
 
     <!-- Video Modal -->
-    <div class="video-modal-v3" id="videoModal">
-        <div class="video-modal-content">
-            <span class="close-video-modal" id="closeVideo">&times;</span>
+    <div class="video-modal-v3" id="videoModal" onclick="closeVideoModal(event)">
+        <div class="video-modal-content" onclick="event.stopPropagation()">
+            <button class="close-video-modal" id="closeVideo" onclick="closeVideoModal()" type="button">&times;</button>
             <div class="video-player-container">
                 <div id="videoPlaceholder"></div>
             </div>
+
+            <!-- Video Playlist / Counter -->
+            <div class="video-nav" id="videoNav" style="display:none; align-items:center; justify-content:space-between; margin-top:15px;">
+                <button class="btn btn-outline" onclick="changeVideo(-1); return false;" type="button" style="color:#fff; border-color:#fff; padding:8px 16px;">
+                    <i class="fas fa-chevron-left"></i> Prev
+                </button>
+                <div id="videoCounter" style="color:#fff; font-size:14px; font-weight:600; text-align:center;"></div>
+                <button class="btn btn-outline" onclick="changeVideo(1); return false;" type="button" style="color:#fff; border-color:#fff; padding:8px 16px;">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Video Thumbnails List -->
+            <div id="videoThumbnails" style="display:none; margin-top:12px; gap:8px; flex-wrap:wrap; justify-content:center;"></div>
         </div>
     </div>
-
-    <!-- Footer -->
 @endsection
 
 @push('scripts')
 <script>
-    const videoAssetRoot = @json(asset('assets/jmpsss'));
+    let currentAlbumVideos = [];
+    let currentVideoIndex = 0;
 
-    function videoAsset(path) {
-        return `${videoAssetRoot}/${path}`;
-    }
+    function openAlbumVideos(videos, title) {
+        currentAlbumVideos = videos;
+        currentVideoIndex = 0;
 
-    function updateVideosUrl(category = null) {
-        const url = new URL(window.location.href);
-        if (category) {
-            url.searchParams.set('category', category);
-            url.hash = category;
-        } else {
-            url.searchParams.delete('category');
-            url.hash = '';
-        }
-        window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
-    }
+        updateVideoModalContent();
+        buildVideoThumbnails();
 
-    const videoData = {
-        institutional: {
-            label: 'Institutional Events',
-            years: {
-                '2024-25': [{
-                        type: 'local',
-                        src: 'image/School_Admission_Cinematic_Background_Video.mp4',
-                        thumb: 'image/new/slider3.jpg',
-                        cat: 'Institutional',
-                        title: 'Cinematic Campus Tour 2024',
-                        desc: 'A journey through the architectural and academic heart of our school.'
-                    },
-                    {
-                        type: 'youtube',
-                        src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                        thumb: 'image/img08.jpg',
-                        cat: 'Institutional',
-                        title: 'Annual Day 2024',
-                        desc: 'A grand celebration of achievements, talents and milestones.'
-                    }
-                ],
-                '2023-24': [{
-                        type: 'local',
-                        src: 'image/Video_Generation_From_Logo_Name.mp4',
-                        thumb: 'image/new/slider1.jpg',
-                        cat: 'Institutional',
-                        title: 'The Crest Heritage 2023',
-                        desc: 'The story of our foundation and the vision that guides us today.'
-                    },
-                    {
-                        type: 'youtube',
-                        src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                        thumb: 'image/new/slider2.jpg',
-                        cat: 'Institutional',
-                        title: 'Independence Day 2023',
-                        desc: 'Patriotic celebrations and flag hoisting ceremony highlights.'
-                    }
-                ]
-            }
-        },
-        cultural: {
-            label: 'Cultural Programs',
-            years: {
-                '2024-25': [{
-                        type: 'youtube',
-                        src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                        thumb: 'image/img03.jpg',
-                        cat: 'Cultural',
-                        title: 'Annual Arts Festival 2024',
-                        desc: 'Showcasing the creative spirit and talent of our vibrant student body.'
-                    },
-                    {
-                        type: 'youtube',
-                        src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                        thumb: 'image/img06.jpg',
-                        cat: 'Cultural',
-                        title: 'Traditional Dance Showcase',
-                        desc: 'A mesmerizing classical and folk dance performance by our students.'
-                    }
-                ],
-                '2023-24': [{
-                    type: 'youtube',
-                    src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                    thumb: 'image/img12.jpg',
-                    cat: 'Cultural',
-                    title: 'Drama Day 2023',
-                    desc: 'Original theatrical performances written and performed by students.'
-                }]
-            }
-        },
-        sports: {
-            label: 'Sports & Athletics',
-            years: {
-                '2024-25': [{
-                        type: 'youtube',
-                        src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                        thumb: 'image/img08.jpg',
-                        cat: 'Athletics',
-                        title: 'Inter-School Sports Meet 2024',
-                        desc: 'Relive the grit, passion, and sportsmanship on the school field.'
-                    },
-                    {
-                        type: 'youtube',
-                        src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                        thumb: 'image/img04.jpg',
-                        cat: 'Athletics',
-                        title: 'Basketball Tournament Finals',
-                        desc: 'An intense final match that went down to the wire.'
-                    }
-                ],
-                '2023-24': [{
-                    type: 'youtube',
-                    src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                    thumb: 'image/img07.jpg',
-                    cat: 'Athletics',
-                    title: 'District Kabaddi Championship 2023',
-                    desc: 'Our team brought home the district championship trophy.'
-                }]
-            }
-        },
-        academic: {
-            label: 'Academic Excellence',
-            years: {
-                '2024-25': [{
-                    type: 'youtube',
-                    src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                    thumb: 'image/img02.jpg',
-                    cat: 'Academic',
-                    title: 'Science Innovation Fair 2024',
-                    desc: 'Brilliant student projects and scientific innovations on display.'
-                }],
-                '2023-24': [{
-                    type: 'youtube',
-                    src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                    thumb: 'image/img10.jpg',
-                    cat: 'Academic',
-                    title: 'Mathematics Olympiad 2023',
-                    desc: 'State-level winners share their winning strategies and experiences.'
-                }]
-            }
-        },
-        campus: {
-            label: 'Campus Tour',
-            years: {
-                '2024-25': [{
-                        type: 'local',
-                        src: 'image/School_Admission_Cinematic_Background_Video.mp4',
-                        thumb: 'image/new/slider3.jpg',
-                        cat: 'Campus',
-                        title: 'Full Campus Walkthrough 2024',
-                        desc: 'A complete tour of our state-of-the-art facilities.'
-                    },
-                    {
-                        type: 'youtube',
-                        src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                        thumb: 'image/img05.jpg',
-                        cat: 'Campus',
-                        title: 'Library & Learning Center',
-                        desc: 'Explore our modern library with thousands of books and digital resources.'
-                    }
-                ]
-            }
-        },
-        highlights: {
-            label: 'School Highlights',
-            years: {
-                '2024-25': [{
-                    type: 'local',
-                    src: 'image/Video_Generation_From_Logo_Name.mp4',
-                    thumb: 'image/new/slider1.jpg',
-                    cat: 'Highlights',
-                    title: 'JMPSSS - Year in Review 2024',
-                    desc: 'A beautiful montage of our best moments through the academic year.'
-                }],
-                '2023-24': [{
-                    type: 'youtube',
-                    src: 'https://www.youtube.com/embed/ScMzIvxBSi4',
-                    thumb: 'image/new/slider2.jpg',
-                    cat: 'Highlights',
-                    title: 'Best of JMPSSS 2023',
-                    desc: 'Top memories and proudest achievements from 2022-23.'
-                }]
-            }
-        }
-    };
-
-    function openCategory(catKey) {
-        const categoryView = document.getElementById('categoryView');
-        const galleryView = document.getElementById('galleryView');
-        const content = document.getElementById('galleryContent');
-        const pageTitle = document.getElementById('pageTitle');
-        const bcSep = document.getElementById('bcSep');
-        const bcCurrent = document.getElementById('bcCurrent');
-
-        const data = videoData[catKey];
-        if (!data) return;
-
-        pageTitle.textContent = data.label;
-        bcSep.style.display = 'inline';
-        bcCurrent.textContent = data.label;
-        bcCurrent.style.display = 'inline';
-
-        let html = '';
-        const years = Object.keys(data.years).sort().reverse();
-
-        years.forEach((year) => {
-            const videos = data.years[year];
-            html += `
-                <div class="year-section">
-                    <div class="year-heading">
-                        <span class="year-pill">${year}</span>
-                    </div>
-                    <div class="video-year-grid">
-            `;
-
-            videos.forEach((video) => {
-                html += `
-                    <div class="video-item-card"
-                         data-video-type="${video.type}"
-                         data-video-src="${video.src}"
-                         onclick="openVideo(this)">
-                        <div class="video-thumb">
-                            <img src="${videoAsset(video.thumb)}" alt="${video.title}" loading="lazy">
-                            <div class="video-overlay-btn">
-                                <i class="fa-solid fa-play"></i>
-                            </div>
-                            <span class="video-cat-badge">${video.cat}</span>
-                        </div>
-                        <div class="video-details">
-                            <h3>${video.title}</h3>
-                            <p>${video.desc}</p>
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += `</div></div>`;
-        });
-
-        content.innerHTML = html;
-
-        categoryView.style.display = 'none';
-        galleryView.classList.add('active', 'fade-enter');
-        setTimeout(() => galleryView.classList.remove('fade-enter'), 600);
-
-        updateVideosUrl(catKey);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    function closeCategory() {
-        const categoryView = document.getElementById('categoryView');
-        const galleryView = document.getElementById('galleryView');
-        const pageTitle = document.getElementById('pageTitle');
-        const bcSep = document.getElementById('bcSep');
-        const bcCurrent = document.getElementById('bcCurrent');
-
-        galleryView.classList.remove('active');
-        categoryView.style.display = 'block';
-        pageTitle.textContent = 'Videos';
-        bcSep.style.display = 'none';
-        bcCurrent.style.display = 'none';
-
-        updateVideosUrl(null);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    function openVideo(card) {
-        const type = card.getAttribute('data-video-type');
-        const src = card.getAttribute('data-video-src');
         const modal = document.getElementById('videoModal');
-        const placeholder = document.getElementById('videoPlaceholder');
-
-        if (type === 'local') {
-            placeholder.innerHTML =
-                `<video controls autoplay><source src="${videoAsset(src)}" type="video/mp4"></video>`;
-        } else {
-            placeholder.innerHTML =
-                `<iframe src="${src}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-        }
-
         modal.classList.add('active');
+        modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
 
-    function closeVideoModal() {
-        const modal = document.getElementById('videoModal');
+    function updateVideoModalContent() {
+        if (currentAlbumVideos.length === 0) return;
+
+        const video = currentAlbumVideos[currentVideoIndex];
         const placeholder = document.getElementById('videoPlaceholder');
+        const videoId = extractYoutubeId(video.src);
+
+        placeholder.innerHTML = videoId
+            ? `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+            : `<div style="color:#fff;text-align:center;padding:50px;">Invalid video URL</div>`;
+
+        const counter = document.getElementById('videoCounter');
+        counter.innerHTML = `<span style="opacity:0.7;">Playing</span> <strong>${currentVideoIndex + 1}</strong> <span style="opacity:0.7;">of</span> <strong>${currentAlbumVideos.length}</strong>`;
+
+        // Show/hide nav
+        const nav = document.getElementById('videoNav');
+        nav.style.display = currentAlbumVideos.length > 1 ? 'flex' : 'none';
+
+        // Update active thumbnail
+        document.querySelectorAll('.vid-thumb-item').forEach((el, i) => {
+            el.style.opacity = i === currentVideoIndex ? '1' : '0.5';
+            el.style.border = i === currentVideoIndex ? '2px solid #e14c1e' : '2px solid transparent';
+        });
+    }
+
+    function buildVideoThumbnails() {
+        const container = document.getElementById('videoThumbnails');
+        container.innerHTML = '';
+        if (currentAlbumVideos.length <= 1) { container.style.display = 'none'; return; }
+
+        currentAlbumVideos.forEach((video, i) => {
+            const videoId = extractYoutubeId(video.src);
+            const thumb = document.createElement('div');
+            thumb.className = 'vid-thumb-item';
+            thumb.title = `Video ${i + 1}`;
+            thumb.style.cssText = `
+                width:80px; height:55px; border-radius:6px; overflow:hidden; cursor:pointer;
+                border:2px solid ${i === 0 ? '#e14c1e' : 'transparent'};
+                opacity:${i === 0 ? '1' : '0.5'}; transition:all 0.2s;
+            `;
+            thumb.innerHTML = `<img src="https://img.youtube.com/vi/${videoId}/mqdefault.jpg"
+                style="width:100%;height:100%;object-fit:cover;" onerror="this.src='/assets/jmpsss/image/new/slider1.jpg'">`;
+            thumb.onclick = (e) => { e.stopPropagation(); currentVideoIndex = i; updateVideoModalContent(); };
+            container.appendChild(thumb);
+        });
+        container.style.display = 'flex';
+    }
+
+    function changeVideo(step) {
+        currentVideoIndex += step;
+        if (currentVideoIndex < 0) currentVideoIndex = currentAlbumVideos.length - 1;
+        if (currentVideoIndex >= currentAlbumVideos.length) currentVideoIndex = 0;
+        updateVideoModalContent();
+    }
+
+    function closeVideoModal(event) {
+        // If triggered from backdrop click, event.target must be the modal itself
+        if (event && event.target !== document.getElementById('videoModal') && event.type === 'click') {
+            if (event.currentTarget === document.getElementById('videoModal') && event.target !== event.currentTarget) {
+                return; // clicked inside content, ignore
+            }
+        }
+        const modal = document.getElementById('videoModal');
         modal.classList.remove('active');
-        placeholder.innerHTML = '';
+        modal.style.display = 'none';
+        document.getElementById('videoPlaceholder').innerHTML = '';
         document.body.style.overflow = 'auto';
     }
 
+    // Wire up close button explicitly
     document.addEventListener('DOMContentLoaded', function() {
-        const categoryParam = new URLSearchParams(window.location.search).get('category');
-        const hashCategory = window.location.hash.replace('#', '');
-        const initialCategory = categoryParam || hashCategory;
-
-        if (initialCategory && videoData[initialCategory]) {
-            openCategory(initialCategory);
-        }
-
-        window.addEventListener('hashchange', () => {
-            const currentHash = window.location.hash.replace('#', '');
-            if (currentHash && videoData[currentHash]) {
-                openCategory(currentHash);
-            } else {
-                closeCategory();
-            }
+        document.getElementById('closeVideo').addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeVideoModal();
         });
 
-        const videoModal = document.getElementById('videoModal');
-        document.getElementById('closeVideo').addEventListener('click', closeVideoModal);
-        videoModal.addEventListener('click', (e) => {
-            if (e.target === videoModal) closeVideoModal();
+        // Backdrop click
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) closeVideoModal();
         });
+    });
+
+    function extractYoutubeId(url) {
+        if (!url) return '';
+        if (url.includes('embed/')) return url.split('embed/')[1].split('?')[0];
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : '';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('videoModal');
+        if (!modal.classList.contains('active') && modal.style.display !== 'flex') return;
+        if (e.key === 'ArrowLeft') { e.preventDefault(); changeVideo(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); changeVideo(1); }
+        if (e.key === 'Escape') { e.preventDefault(); closeVideoModal(); }
     });
 </script>
 @endpush
-
-

@@ -499,8 +499,8 @@
             <div class="principal-layout">
                 <div class="principal-card">
                     <div class="principal-photo"><i class="fa-solid fa-user-tie"></i></div>
-                    <h3>School Principal</h3>
-                    <span class="designation">Principal</span>
+                    <h3>{{ $section->name ?? 'School Principal' }}</h3>
+                    <span class="designation">{{ $section->designation ?? 'Principal' }}</span>
                     <div class="principal-details">
                         <div class="pd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
                                 School</span></div>
@@ -511,38 +511,30 @@
                         <div class="pd-item"><i
                                 class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
                     </div>
-                    <div class="p-quote">"Education is not preparation for life — education is life itself."</div>
+                    <div class="p-quote">"{{ $section->quote ?? 'Education is not preparation for life — education is life itself.' }}"</div>
                 </div>
 
                 <div class="principal-message">
-                    <h2>A Warm Welcome from the Principal</h2>
+                    <h2>{{ $section->title ?? 'A Warm Welcome from the Principal' }}</h2>
                     <p class="opening-line">Dear Students, Parents &amp; Visitors,</p>
-                    <p>It is with immense pride and deep sense of responsibility that I welcome you to Jeeva Memorial
-                        Senior Secondary School — a place where young minds are nurtured, character is shaped, and
-                        futures are built with care and commitment.</p>
-                    <p>We are at the heart of the Thirukazhukundram community, and we have continued to succeed in
-                        providing local families an excellent education delivered by exceptional teachers in
-                        purpose-built, inspiring facilities. Our achievements can be seen through consistent academic
-                        improvements, award-winning extra-curricular programmes, and the confident, well-rounded young
-                        people who graduate from our halls each year.</p>
-                    <blockquote>"We do not just teach. We inspire, we guide, and we build the future — one student at a
-                        time."</blockquote>
-                    <p>At JMPSSS, we believe education must go beyond textbooks. Our curriculum is designed to spark
-                        curiosity, foster creativity, and nurture the innate talents within every child. Through
-                        activity-based learning, language labs, science facilities, and co-curricular programmes, we
-                        ensure that each student experiences success every single day.</p>
-                    <p>We follow the CBSE curriculum faithfully while enriching it with the values of love, integrity,
-                        and community. Our school is not merely an institution — it is a family, and every student is
-                        our own. We strive to maintain an environment that is warm, inclusive, and safe.</p>
-                    <p>I invite you to be an active partner in your child's educational journey. When school and home
-                        work together, extraordinary things happen. I look forward to walking this path with you —
-                        towards a bright, purposeful future for every child entrusted to our care.</p>
+                    <div class="message-content-dynamic">
+                        @if($section)
+                            {!! nl2br(e($section->content)) !!}
+                        @else
+                            <p>It is with immense pride and deep sense of responsibility that I welcome you to Jeeva Memorial
+                            Senior Secondary School — a place where young minds are nurtured, character is shaped, and
+                            futures are built with care and commitment.</p>
+                            <p>We are at the heart of the Thirukazhukundram community, and we have continued to succeed in
+                            providing local families an excellent education delivered by exceptional teachers in
+                            purpose-built, inspiring facilities.</p>
+                        @endif
+                    </div>
                     <p>With warm regards and every good wish,</p>
                     <div class="principal-signature">
                         <div class="sig-icon"><i class="fa-solid fa-feather-pointed"></i></div>
                         <div class="sig-text">
-                            <h4>The Principal</h4>
-                            <span>Jeeva Memorial Senior Secondary School, Thirukazhukundram</span>
+                            <h4>{{ $section->name ?? 'The Principal' }}</h4>
+                            <span>{{ $section->designation ?? 'Principal' }}, JMPSSS</span>
                         </div>
                     </div>
                 </div>

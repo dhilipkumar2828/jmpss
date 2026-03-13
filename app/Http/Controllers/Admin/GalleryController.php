@@ -9,60 +9,122 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
-    public function index()  { return view('admin.gallery.index', ['galleries' => Gallery::latest()->paginate(15)]); }
+    public function index()  { return view('admin.gallery.index', ['galleries' => Gallery::latest()->paginate(10)]); }
     public function create() { return view('admin.gallery.form'); }
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'type'        => 'required|in:photo,video',
-            'file'        => 'nullable|image|max:5120',
-            'video_url'   => 'nullable|url|max:500',
-            'category'    => 'nullable|string|max:100',
-            'sort_order'  => 'integer|min:0',
-            'is_active'   => 'boolean',
+        $request->validate([
+            'groups.*.title'       => 'required|string|max:255',
+            'groups.*.category'    => 'nullable|string|max:100',
+            'groups.*.description' => 'nullable|string',
+            'groups.*.photos.*'    => 'nullable|image|max:10240',
+            'groups.*.video_urls.*' => 'nullable|url|max:500',
         ]);
-        if ($request->hasFile('file')) {
-            $data['file_path'] = $request->file('file')->store('gallery', 'public');
+
+        $groupCount = 0;
+        foreach ($request->input('groups', []) as $index => $group) {
+            // Create ONE Gallery record (Album)
+            $gallery = Gallery::create([
+                'title'       => $group['title'],
+                'category'    => $group['category'] ?? null,
+                'description' => $group['description'] ?? null,
+                'type'        => 'photo', // Default but we can handle mixed
+                'is_active'   => true,
+                'sort_order'  => 0,
+            ]);
+
+            // Save multiple Photos
+            if ($request->hasFile("groups.$index.photos")) {
+                foreach ($request->file("groups.$index.photos") as $file) {
+                    $gallery->items()->create([
+                        'item_type' => 'photo',
+                        'file_path' => $file->store('gallery', 'public'),
+                    ]);
+                }
+            }
+
+            // Save multiple Video URLs
+            if (isset($group['video_urls'])) {
+                $urls = array_filter($group['video_urls']);
+                foreach ($urls as $url) {
+                    $gallery->items()->create([
+                        'item_type' => 'video',
+                        'video_url' => $url,
+                    ]);
+                }
+            }
+            $groupCount++;
         }
-        $data['is_active']  = $request->boolean('is_active', true);
-        $data['sort_order'] = $request->input('sort_order', 0);
-        unset($data['file']);
-        Gallery::create($data);
-        return redirect()->route('admin.gallery.index')->with('success', 'Gallery item added!');
+
+        return redirect()->route('admin.gallery.index')->with('success', "$groupCount functions added successfully!");
     }
 
     public function edit(Gallery $gallery) { return view('admin.gallery.form', compact('gallery')); }
 
     public function update(Request $request, Gallery $gallery)
     {
-        $data = $request->validate([
+        $request->validate([
             'title'       => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'type'        => 'required|in:photo,video',
-            'file'        => 'nullable|image|max:5120',
-            'video_url'   => 'nullable|url|max:500',
             'category'    => 'nullable|string|max:100',
-            'sort_order'  => 'integer|min:0',
+            'description' => 'nullable|string',
             'is_active'   => 'boolean',
+            'new_photos.*' => 'nullable|image|max:10240',
+            'new_video_urls.*' => 'nullable|url|max:500',
         ]);
-        if ($request->hasFile('file')) {
-            if ($gallery->file_path) Storage::disk('public')->delete($gallery->file_path);
-            $data['file_path'] = $request->file('file')->store('gallery', 'public');
+
+        $gallery->update([
+            'title'       => $request->title,
+            'category'    => $request->category,
+            'description' => $request->description,
+            'is_active'   => $request->boolean('is_active', true),
+        ]);
+
+        // Add new photos
+        if ($request->hasFile('new_photos')) {
+            foreach ($request->file('new_photos') as $file) {
+                $gallery->items()->create([
+                    'item_type' => 'photo',
+                    'file_path' => $file->store('gallery', 'public'),
+                ]);
+            }
         }
-        $data['is_active']  = $request->boolean('is_active');
-        $data['sort_order'] = $request->input('sort_order', 0);
-        unset($data['file']);
-        $gallery->update($data);
-        return redirect()->route('admin.gallery.index')->with('success', 'Gallery item updated!');
+
+        // Add new video URLs
+        if ($request->filled('new_video_urls')) {
+            $urls = array_filter($request->new_video_urls);
+            foreach ($urls as $url) {
+                $gallery->items()->create([
+                    'item_type' => 'video',
+                    'video_url' => $url,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.gallery.index')->with('success', 'Album updated successfully!');
     }
 
-    public function destroy(Gallery $gallery) {
-        if ($gallery->file_path) Storage::disk('public')->delete($gallery->file_path);
-        $gallery->delete();
-        return redirect()->route('admin.gallery.index')->with('success', 'Gallery item deleted!');
+    public function destroy(Gallery $gallery)
+    {
+        // Delete all files in storage
+        foreach ($gallery->items as $item) {
+            if ($item->file_path) {
+                Storage::disk('public')->delete($item->file_path);
+            }
+        }
+        
+        $gallery->delete(); // Cascades to gallery_items
+        return redirect()->route('admin.gallery.index')->with('success', 'Album and all its media deleted!');
+    }
+
+    public function destroyItem($id)
+    {
+        $item = \App\Models\GalleryItem::findOrFail($id);
+        if ($item->file_path) {
+            Storage::disk('public')->delete($item->file_path);
+        }
+        $item->delete();
+        return response()->json(['success' => true]);
     }
     public function show(Gallery $gallery) { return redirect()->route('admin.gallery.edit', $gallery); }
 }
