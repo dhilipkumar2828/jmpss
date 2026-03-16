@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
-use App\Models\HomeSection;
 use App\Models\Gallery;
 use App\Models\Event;
 use App\Models\Award;
@@ -25,34 +24,6 @@ class DatabaseSeeder extends Seeder
                 'is_active' => true,
             ]
         );
-
-        // Home Sections
-        HomeSection::insert([
-            [
-                'section_type' => 'principal',
-                'title' => "Principal's Desk",
-                'name' => 'Dr. R. Krishnamurthy',
-                'designation' => 'Principal, JMPSS',
-                'content' => 'Welcome to JMPSS - a place where knowledge meets character. Our mission is to nurture young minds with values, skills, and vision to face tomorrow\'s challenges. We believe every child is unique and we are committed to bringing out the best in each student.',
-                'quote' => 'Education is not preparation for life; education is life itself.',
-                'sort_order' => 1,
-                'is_active' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'section_type' => 'correspondent',
-                'title' => "Correspondent's Desk",
-                'name' => 'Shri. M. Jayakumar',
-                'designation' => 'Correspondent, JMPSS',
-                'content' => 'JMPSS was founded with a singular vision - to provide world-class education to every child irrespective of their background. We continue to grow and evolve, embracing modern teaching methodologies while staying true to our core values of discipline, integrity, and excellence.',
-                'quote' => 'The roots of education are bitter, but the fruit is sweet.',
-                'sort_order' => 2,
-                'is_active' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
 
         // Events
         Event::insert([

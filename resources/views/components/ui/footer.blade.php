@@ -35,14 +35,14 @@
             </div>
             <div class="footer-links">
                 <h3>Address</h3>
-                <p><i class="fa-solid fa-location-dot"></i> {{ $settings['school_address'] ?? 'No.210, Palla Egai Village, Puliur Post, Thirukazhukundram T.K., Kancheepuram Dist. Pin-603 109' }}</p>
-                <p><i class="fa-solid fa-phone"></i> {{ $settings['school_phone_1'] ?? '+91-7373418852' }}{{ isset($settings['school_phone_2']) ? ', ' . $settings['school_phone_2'] : '' }}</p>
-                <p><i class="fa-solid fa-envelope"></i> {{ $settings['school_email'] ?? 'jeevamemorialschool@gmail.com' }}</p>
+                <p><i class="fa-solid fa-location-dot"></i> No.210, Palla Egai Village, Puliur Post, Thirukazhukundram T.K., Kancheepuram Dist. Pin-603 109</p>
+                <p><i class="fa-solid fa-phone"></i> +91-7373418852, +91-8939222122</p>
+                <p><i class="fa-solid fa-envelope"></i> jeevamemorialschool@gmail.com</p>
                 <div class="social-icons">
-                    <a href="{{ $settings['facebook_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="{{ $settings['instagram_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="{{ $settings['linkedin_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="{{ $settings['youtube_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
         </div>

@@ -499,8 +499,8 @@
             <div class="principal-layout">
                 <div class="principal-card">
                     <div class="principal-photo"><i class="fa-solid fa-user-tie"></i></div>
-                    <h3>{{ $section->name ?? 'School Principal' }}</h3>
-                    <span class="designation">{{ $section->designation ?? 'Principal' }}</span>
+                    <h3>Dr. R. Krishnamurthy</h3>
+                    <span class="designation">Principal, JMPSS</span>
                     <div class="principal-details">
                         <div class="pd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
                                 School</span></div>
@@ -511,30 +511,22 @@
                         <div class="pd-item"><i
                                 class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
                     </div>
-                    <div class="p-quote">"{{ $section->quote ?? 'Education is not preparation for life — education is life itself.' }}"</div>
+                    <div class="p-quote">"Education is not preparation for life; education is life itself."</div>
                 </div>
 
                 <div class="principal-message">
-                    <h2>{{ $section->title ?? 'A Warm Welcome from the Principal' }}</h2>
+                    <h2>Welcome to JMPSS</h2>
                     <p class="opening-line">Dear Students, Parents &amp; Visitors,</p>
                     <div class="message-content-dynamic">
-                        @if($section)
-                            {!! nl2br(e($section->content)) !!}
-                        @else
-                            <p>It is with immense pride and deep sense of responsibility that I welcome you to Jeeva Memorial
-                            Senior Secondary School — a place where young minds are nurtured, character is shaped, and
-                            futures are built with care and commitment.</p>
-                            <p>We are at the heart of the Thirukazhukundram community, and we have continued to succeed in
-                            providing local families an excellent education delivered by exceptional teachers in
-                            purpose-built, inspiring facilities.</p>
-                        @endif
+                        <p>Welcome to JMPSS - a place where knowledge meets character. Our mission is to nurture young minds with values, skills, and vision to face tomorrow's challenges. We believe every child is unique and we are committed to bringing out the best in each student.</p>
+                        <p>It is with immense pride and deep sense of responsibility that I welcome you to Jeeva Memorial Senior Secondary School — a place where young minds are nurtured, character is shaped, and futures are built with care and commitment.</p>
                     </div>
                     <p>With warm regards and every good wish,</p>
                     <div class="principal-signature">
                         <div class="sig-icon"><i class="fa-solid fa-feather-pointed"></i></div>
                         <div class="sig-text">
-                            <h4>{{ $section->name ?? 'The Principal' }}</h4>
-                            <span>{{ $section->designation ?? 'Principal' }}, JMPSSS</span>
+                            <h4>Dr. R. Krishnamurthy</h4>
+                            <span>Principal, JMPSSS</span>
                         </div>
                     </div>
                 </div>

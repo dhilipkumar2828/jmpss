@@ -8,10 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     @php
-        $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
-        $brandDeep = $siteSettings['logo_green_900'] ?? '#004f24';
-        $brandMed = $siteSettings['logo_green_700'] ?? '#026e33';
-        $brandGold = $siteSettings['logo_gold'] ?? '#c69c3a';
+        $brandDeep = '#002800';
+        $brandMed = '#004800';
+        $brandGold = '#c5a059';
     @endphp
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -229,11 +228,7 @@
 
     <span class="sidebar-section-label">Content</span>
     <ul class="sidebar-nav">
-        <li>
-            <a href="{{ route('admin.home-sections.index') }}" class="{{ request()->routeIs('admin.home-sections.*') ? 'active' : '' }}">
-                <i class="fas fa-home"></i> Home Sections
-            </a>
-        </li>
+
         <li>
             <a href="{{ route('admin.banners.index') }}" class="{{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
                 <i class="fas fa-image"></i> Banners
@@ -283,21 +278,6 @@
                 <i class="fas fa-envelope-open-text"></i> Messages
             </a>
         </li>
-    </ul>
-
-    <span class="sidebar-section-label">Site</span>
-    <ul class="sidebar-nav">
-        <li>
-            <a href="{{ route('admin.settings.general') }}" class="{{ request()->routeIs('admin.settings.general') ? 'active' : '' }}">
-                <i class="fas fa-cog"></i> General Settings
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.settings.appearance') }}" class="{{ request()->routeIs('admin.settings.appearance') ? 'active' : '' }}">
-                <i class="fas fa-palette"></i> Appearance
-            </a>
-        </li>
-        <li><a href="{{ route('home') }}" target="_blank"><i class="fas fa-external-link-alt"></i> View Website</a></li>
     </ul>
 
     <div class="sidebar-footer">
@@ -350,9 +330,6 @@
                 <div class="dropdown-menu" id="adminDropdown">
                     <a href="{{ route('admin.profile') }}" class="dropdown-item">
                         <i class="fas fa-user-circle"></i> My Profile
-                    </a>
-                    <a href="{{ route('admin.settings.appearance') }}" class="dropdown-item">
-                        <i class="fas fa-cog"></i> Settings
                     </a>
                     <div class="dropdown-divider"></div>
                     <form method="POST" action="{{ route('admin.logout') }}">

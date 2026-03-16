@@ -21,27 +21,24 @@
     <link rel="stylesheet" href="{{ asset('assets/jmpsss/responsive.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    @php
-        $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
-        $recentEvents = \App\Models\Event::where('is_active', true)->latest('event_date')->take(3)->get();
-    @endphp
     <style>
         :root {
-            @if(isset($siteSettings['logo_green_900'])) --logo-green-900: {{ $siteSettings['logo_green_900'] }} !important; @endif
-            @if(isset($siteSettings['logo_green_700'])) --logo-green-700: {{ $siteSettings['logo_green_700'] }} !important; @endif
-            @if(isset($siteSettings['logo_green_500'])) --logo-green-500: {{ $siteSettings['logo_green_500'] }} !important; @endif
-            @if(isset($siteSettings['logo_orange'])) --logo-orange: {{ $siteSettings['logo_orange'] }} !important; @endif
-            @if(isset($siteSettings['logo_gold'])) --logo-gold: {{ $siteSettings['logo_gold'] }} !important; @endif
-            @if(isset($siteSettings['logo_gold_light'])) --logo-gold-light: {{ $siteSettings['logo_gold_light'] }} !important; @endif
+            --logo-green-900: #002800 !important;
+            --logo-green-700: #004800 !important;
+            --logo-green-500: #006400 !important;
+            --logo-orange: #e14c1e !important;
+            --logo-gold: #c5a059 !important;
+            --logo-gold-light: #e5c079 !important;
             
-            @if(isset($siteSettings['primary_color'])) --primary-color: {{ $siteSettings['primary_color'] }} !important; @endif
-            @if(isset($siteSettings['secondary_color'])) --secondary-color: {{ $siteSettings['secondary_color'] }} !important; @endif
-            @if(isset($siteSettings['bg_dark'])) --bg-dark: {{ $siteSettings['bg_dark'] }} !important; @endif
+            --primary-color: #e14c1e !important;
+            --secondary-color: #004800 !important;
+            --bg-dark: #002800 !important;
         }
     </style>
 </head>
 @php
     $hideChrome = trim($__env->yieldContent('hide_chrome')) === '1';
+    $siteSettings = []; // Hardcoded values used in components directly or fallback logic
 @endphp
 
 <body class="@yield('body_class')">
@@ -65,7 +62,7 @@
     </div>
 
     @unless ($hideChrome)
-        <x-ui.footer :settings="$siteSettings" :recentEvents="$recentEvents" />
+        <x-ui.footer :settings="$siteSettings" />
     @endunless
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
