@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Banner extends Model
 {
     protected $fillable = [
+        'page',
+        'banner_type',
         'title',
         'subtitle',
         'image_path',
@@ -15,4 +17,9 @@ class Banner extends Model
         'sort_order',
         'is_active',
     ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
 }

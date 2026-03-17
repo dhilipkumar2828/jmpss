@@ -15,10 +15,10 @@
                 <thead>
                     <tr>
                         <th>Order</th>
+                        <th>Page</th>
+                        <th>Type</th>
                         <th>Preview</th>
                         <th>Title</th>
-                        <th>Subtitle</th>
-                        <th>Link</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -27,12 +27,12 @@
                     @foreach($banners as $banner)
                     <tr>
                         <td>{{ $banner->sort_order }}</td>
+                        <td><span class="badge badge-info">{{ ucfirst($banner->page) }}</span></td>
+                        <td><span class="badge badge-gray">{{ ucfirst(str_replace('_', ' ', $banner->banner_type)) }}</span></td>
                         <td>
                             <img src="{{ asset('storage/' . $banner->image_path) }}" style="width: 100px; height: 50px; object-fit: cover; border-radius: 4px;">
                         </td>
                         <td>{{ $banner->title }}</td>
-                        <td>{{ Str::limit($banner->subtitle, 30) }}</td>
-                        <td>{{ $banner->button_link }}</td>
                         <td>
                             <span class="badge {{ $banner->is_active ? 'badge-success' : 'badge-gray' }}">
                                 {{ $banner->is_active ? 'Active' : 'Hidden' }}

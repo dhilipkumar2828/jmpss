@@ -34,6 +34,79 @@
             --secondary-color: #004800 !important;
             --bg-dark: #002800 !important;
         }
+
+        /* ── Global Premium Pagination (Fixes Bullets & Design) ── */
+        .pagination, .pagination ul {
+            display: flex !important;
+            list-style: none !important;
+            list-style-type: none !important;
+            padding: 0 !important;
+            gap: 10px !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: 30px 0 !important;
+        }
+        .pagination li, .page-item {
+            list-style: none !important;
+            list-style-type: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .pagination li::before, .pagination li::after {
+            content: none !important;
+            display: none !important;
+        }
+        .page-item .page-link, .pagination a, .pagination span {
+            width: 42px !important;
+            height: 42px !important;
+            display: grid !important;
+            place-items: center !important;
+            border-radius: 50% !important;
+            border: 1px solid #eee !important;
+            background: #fff !important;
+            color: var(--secondary-color) !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+        }
+        .page-item.active .page-link, .pagination .active span {
+            background: var(--primary-color) !important;
+            color: #fff !important;
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 4px 12px rgba(225, 76, 30, 0.3) !important;
+        }
+        .page-item.disabled .page-link, .pagination .disabled span {
+            color: #ccc !important;
+            opacity: 0.6 !important;
+            cursor: not-allowed !important;
+        }
+        .page-item:hover:not(.active):not(.disabled) .page-link {
+            border-color: var(--primary-color) !important;
+            color: var(--primary-color) !important;
+            background: #fff !important;
+            transform: translateY(-3px) !important;
+        }
+        .pagination svg, nav svg {
+            width: 1.2rem !important;
+            height: 1.2rem !important;
+            display: inline-block !important;
+            vertical-align: middle !important;
+        }
+        /* Hide redundant mobile arrows */
+        nav div.flex.justify-between.flex-1.sm\:hidden { display: none !important; }
+        nav > div.hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+        }
+        .pagination-meta, nav p.text-sm {
+            text-align: center !important;
+            font-size: 14px !important;
+            color: #777 !important;
+            margin-bottom: 0 !important;
+        }
     </style>
 </head>
 @php

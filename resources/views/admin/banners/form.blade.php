@@ -18,21 +18,46 @@
 
             <div class="form-grid-2">
                 <div class="form-group">
-                    <label class="form-label">Banner Image (Recommended: 1920x800)</label>
+                    <label class="form-label">Target Page</label>
+                    <select name="page" class="form-control" required>
+                        <option value="home" {{ old('page', $banner->page ?? '') == 'home' ? 'selected' : '' }}>Home Page</option>
+                        <option value="about" {{ old('page', $banner->page ?? '') == 'about' ? 'selected' : '' }}>About Us</option>
+                        <option value="academics" {{ old('page', $banner->page ?? '') == 'academics' ? 'selected' : '' }}>Academics</option>
+                        <option value="admissions" {{ old('page', $banner->page ?? '') == 'admissions' ? 'selected' : '' }}>Admissions</option>
+                        <option value="gallery" {{ old('page', $banner->page ?? '') == 'gallery' ? 'selected' : '' }}>Gallery</option>
+                        <option value="videos" {{ old('page', $banner->page ?? '') == 'videos' ? 'selected' : '' }}>Videos</option>
+                        <option value="events" {{ old('page', $banner->page ?? '') == 'events' ? 'selected' : '' }}>Campus Life/Events</option>
+                        <option value="awards" {{ old('page', $banner->page ?? '') == 'awards' ? 'selected' : '' }}>Awards</option>
+                        <option value="careers" {{ old('page', $banner->page ?? '') == 'careers' ? 'selected' : '' }}>Careers</option>
+                        <option value="contact" {{ old('page', $banner->page ?? '') == 'contact' ? 'selected' : '' }}>Contact Us</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Display Type</label>
+                    <select name="banner_type" class="form-control" required>
+                        <option value="slider" {{ old('banner_type', $banner->banner_type ?? '') == 'slider' ? 'selected' : '' }}>Home Slider</option>
+                        <option value="page_header" {{ old('banner_type', $banner->banner_type ?? '') == 'page_header' ? 'selected' : '' }}>Inner Page Header</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-grid-2">
+                <div class="form-group">
+                    <label class="form-label">Banner Image (Slider: 1920x800, Header: 1920x400)</label>
                     <input type="file" name="image" class="form-control" {{ isset($banner) ? '' : 'required' }} onchange="previewFile(this)">
                     @if(isset($banner))
                         <div style="margin-top: 10px;">
-                            <img src="{{ asset('storage/' . $banner->image_path) }}" id="preview-img" style="width: 200px; height: 100px; object-fit: cover; border-radius: 8px;">
+                            <img src="{{ asset('storage/' . $banner->image_path) }}" id="preview-img" style="width: 240px; border-radius: 8px;">
                         </div>
                     @else
                         <div id="preview-wrap" style="margin-top: 10px; display: none;">
-                            <img id="preview-img" style="width: 200px; height: 100px; object-fit: cover; border-radius: 8px;">
+                            <img id="preview-img" style="width: 240px; border-radius: 8px;">
                         </div>
                     @endif
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Title</label>
+                    <label class="form-label">Main Heading / Title</label>
                     <input type="text" name="title" class="form-control" value="{{ old('title', $banner->title ?? '') }}" placeholder="e.g. ACADEMIC EXCELLENCE">
                 </div>
             </div>

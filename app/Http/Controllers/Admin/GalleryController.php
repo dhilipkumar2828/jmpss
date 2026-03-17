@@ -39,7 +39,7 @@ class GalleryController extends Controller
                 foreach ($request->file("groups.$index.photos") as $file) {
                     $gallery->items()->create([
                         'item_type' => 'photo',
-                        'file_path' => $file->store('gallery', 'public'),
+                        'file_path' => $file->store('uploads/gallery', 'public'),
                     ]);
                 }
             }
@@ -85,7 +85,7 @@ class GalleryController extends Controller
             foreach ($request->file('new_photos') as $file) {
                 $gallery->items()->create([
                     'item_type' => 'photo',
-                    'file_path' => $file->store('gallery', 'public'),
+                    'file_path' => $file->store('uploads/gallery', 'public'),
                 ]);
             }
         }
