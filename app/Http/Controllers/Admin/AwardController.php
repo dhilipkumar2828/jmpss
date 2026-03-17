@@ -16,12 +16,18 @@ class AwardController extends Controller
         $data = $request->validate([
             'title'          => 'required|string|max:255',
             'description'    => 'nullable|string',
+            'image'          => 'nullable|image|max:10240',
             'recipient_name' => 'nullable|string|max:255',
             'recipient_class'=> 'nullable|string|max:100',
             'year'           => 'required|integer|min:1900|max:2100',
             'category'       => 'nullable|string|max:100',
             'is_active'      => 'boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('uploads/awards', 'public');
+        }
+
         $data['is_active'] = $request->boolean('is_active', true);
         Award::create($data);
         return redirect()->route('admin.awards.index')->with('success', 'Award created!');
@@ -34,17 +40,33 @@ class AwardController extends Controller
         $data = $request->validate([
             'title'          => 'required|string|max:255',
             'description'    => 'nullable|string',
+            'image'          => 'nullable|image|max:10240',
             'recipient_name' => 'nullable|string|max:255',
             'recipient_class'=> 'nullable|string|max:100',
             'year'           => 'required|integer|min:1900|max:2100',
             'category'       => 'nullable|string|max:100',
             'is_active'      => 'boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            if ($award->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($award->image)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($award->image);
+            }
+            $data['image'] = $request->file('image')->store('uploads/awards', 'public');
+        }
+
         $data['is_active'] = $request->boolean('is_active');
         $award->update($data);
         return redirect()->route('admin.awards.index')->with('success', 'Award updated!');
     }
 
-    public function destroy(Award $award) { $award->delete(); return redirect()->route('admin.awards.index')->with('success', 'Award deleted!'); }
+    public function destroy(Award $award) 
+    { 
+        if ($award->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($award->image)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($award->image);
+        }
+        $award->delete(); 
+        return redirect()->route('admin.awards.index')->with('success', 'Award deleted!'); 
+    }
     public function show(Award $award)    { return redirect()->route('admin.awards.edit', $award); }
 }

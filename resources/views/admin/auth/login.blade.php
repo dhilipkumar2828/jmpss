@@ -10,21 +10,22 @@
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --primary: #1a3c6e; --primary-light: #2a5ba0;
-            --accent: #f59e0b; --accent-dark: #d97706;
+            --primary: #004800; --primary-light: #006400;
+            --accent: #e14c1e; --accent-dark: #c5a059;
+            --bg-dark: #002800;
         }
         body {
             font-family: 'Outfit', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: stretch;
-            background: #0f2447;
+            background: var(--bg-dark);
         }
 
         /* Left Panel */
         .login-left {
             flex: 1;
-            background: linear-gradient(135deg, #1a3c6e 0%, #2a5ba0 50%, #1e4d87 100%);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             padding: 60px;
             position: relative; overflow: hidden;
@@ -33,7 +34,7 @@
             content: ''; position: absolute;
             top: -20%; right: -20%;
             width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(225,76,30,0.2) 0%, transparent 70%);
             border-radius: 50%;
             animation: pulse 6s ease-in-out infinite;
         }
@@ -46,12 +47,13 @@
         }
         @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
         .brand { text-align: center; z-index: 1; position: relative; }
-        .brand-icon { width: 90px; height: 90px; background: var(--accent); border-radius: 24px; display: grid; place-items: center; font-size: 42px; font-weight: 800; color: var(--primary); margin: 0 auto 24px; box-shadow: 0 16px 40px rgba(245,158,11,0.4); }
+        .brand-icon { width: 120px; height: 120px; background: white; border-radius: 30px; display: grid; place-items: center; padding: 15px; margin: 0 auto 24px; box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
+        .brand-icon img { width: 100%; height: auto; object-fit: contain; }
         .brand h1 { font-size: 2.5rem; font-weight: 800; color: white; margin-bottom: 8px; }
         .brand p { color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 48px; }
         .features { list-style: none; text-align: left; }
         .features li { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.85); font-size: 15px; margin-bottom: 16px; }
-        .features li i { width: 32px; height: 32px; background: rgba(245,158,11,0.2); color: var(--accent); border-radius: 8px; display: grid; place-items: center; font-size: 14px; flex-shrink: 0; }
+        .features li i { width: 32px; height: 32px; background: rgba(225, 76, 30, 0.2); color: var(--accent); border-radius: 8px; display: grid; place-items: center; font-size: 14px; flex-shrink: 0; }
 
         /* Right Panel */
         .login-right {
@@ -72,7 +74,7 @@
             transition: all 0.2s ease; background: white;
             outline: none;
         }
-        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(26,60,110,0.1); }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(0, 72, 0, 0.1); }
         .form-control.error-field { border-color: #ef4444; }
         .input-wrapper { position: relative; }
         .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 16px; }
@@ -90,7 +92,7 @@
             border-radius: 12px; cursor: pointer; transition: all 0.3s ease;
             font-family: 'Outfit', sans-serif; letter-spacing: 0.3px;
         }
-        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(26,60,110,0.35); }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0, 72, 0, 0.35); }
         .btn-login:active { transform: translateY(0); }
 
         .error-msg { color: #ef4444; font-size: 13px; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
@@ -117,7 +119,9 @@
 <div class="login-left">
     <a href="{{ route('home') }}" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Website</a>
     <div class="brand">
-        <div class="brand-icon">J</div>
+        <div class="brand-icon">
+            <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSS Logo">
+        </div>
         <h1>JMPSS</h1>
         <p>School Management Admin Panel</p>
         <ul class="features">

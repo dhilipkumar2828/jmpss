@@ -21,27 +21,97 @@
     <link rel="stylesheet" href="{{ asset('assets/jmpsss/responsive.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    @php
-        $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
-        $recentEvents = \App\Models\Event::where('is_active', true)->latest('event_date')->take(3)->get();
-    @endphp
     <style>
         :root {
-            @if(isset($siteSettings['logo_green_900'])) --logo-green-900: {{ $siteSettings['logo_green_900'] }} !important; @endif
-            @if(isset($siteSettings['logo_green_700'])) --logo-green-700: {{ $siteSettings['logo_green_700'] }} !important; @endif
-            @if(isset($siteSettings['logo_green_500'])) --logo-green-500: {{ $siteSettings['logo_green_500'] }} !important; @endif
-            @if(isset($siteSettings['logo_orange'])) --logo-orange: {{ $siteSettings['logo_orange'] }} !important; @endif
-            @if(isset($siteSettings['logo_gold'])) --logo-gold: {{ $siteSettings['logo_gold'] }} !important; @endif
-            @if(isset($siteSettings['logo_gold_light'])) --logo-gold-light: {{ $siteSettings['logo_gold_light'] }} !important; @endif
+            --logo-green-900: #002800 !important;
+            --logo-green-700: #004800 !important;
+            --logo-green-500: #006400 !important;
+            --logo-orange: #e14c1e !important;
+            --logo-gold: #c5a059 !important;
+            --logo-gold-light: #e5c079 !important;
             
-            @if(isset($siteSettings['primary_color'])) --primary-color: {{ $siteSettings['primary_color'] }} !important; @endif
-            @if(isset($siteSettings['secondary_color'])) --secondary-color: {{ $siteSettings['secondary_color'] }} !important; @endif
-            @if(isset($siteSettings['bg_dark'])) --bg-dark: {{ $siteSettings['bg_dark'] }} !important; @endif
+            --primary-color: #e14c1e !important;
+            --secondary-color: #004800 !important;
+            --bg-dark: #002800 !important;
+        }
+
+        /* ── Global Premium Pagination (Fixes Bullets & Design) ── */
+        .pagination, .pagination ul {
+            display: flex !important;
+            list-style: none !important;
+            list-style-type: none !important;
+            padding: 0 !important;
+            gap: 10px !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: 30px 0 !important;
+        }
+        .pagination li, .page-item {
+            list-style: none !important;
+            list-style-type: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .pagination li::before, .pagination li::after {
+            content: none !important;
+            display: none !important;
+        }
+        .page-item .page-link, .pagination a, .pagination span {
+            width: 42px !important;
+            height: 42px !important;
+            display: grid !important;
+            place-items: center !important;
+            border-radius: 50% !important;
+            border: 1px solid #eee !important;
+            background: #fff !important;
+            color: var(--secondary-color) !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+        }
+        .page-item.active .page-link, .pagination .active span {
+            background: var(--primary-color) !important;
+            color: #fff !important;
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 4px 12px rgba(225, 76, 30, 0.3) !important;
+        }
+        .page-item.disabled .page-link, .pagination .disabled span {
+            color: #ccc !important;
+            opacity: 0.6 !important;
+            cursor: not-allowed !important;
+        }
+        .page-item:hover:not(.active):not(.disabled) .page-link {
+            border-color: var(--primary-color) !important;
+            color: var(--primary-color) !important;
+            background: #fff !important;
+            transform: translateY(-3px) !important;
+        }
+        .pagination svg, nav svg {
+            width: 1.2rem !important;
+            height: 1.2rem !important;
+            display: inline-block !important;
+            vertical-align: middle !important;
+        }
+        /* Hide redundant mobile arrows */
+        nav div.flex.justify-between.flex-1.sm\:hidden { display: none !important; }
+        nav > div.hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+        }
+        .pagination-meta, nav p.text-sm {
+            text-align: center !important;
+            font-size: 14px !important;
+            color: #777 !important;
+            margin-bottom: 0 !important;
         }
     </style>
 </head>
 @php
     $hideChrome = trim($__env->yieldContent('hide_chrome')) === '1';
+    $siteSettings = []; // Hardcoded values used in components directly or fallback logic
 @endphp
 
 <body class="@yield('body_class')">
@@ -65,7 +135,7 @@
     </div>
 
     @unless ($hideChrome)
-        <x-ui.footer :settings="$siteSettings" :recentEvents="$recentEvents" />
+        <x-ui.footer :settings="$siteSettings" />
     @endunless
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
