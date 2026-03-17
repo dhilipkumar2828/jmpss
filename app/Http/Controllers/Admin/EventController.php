@@ -24,6 +24,7 @@ class EventController extends Controller
         $data = $request->validate([
             'title'       => 'required|string|max:255',
             'description' => 'nullable|string',
+            'image'       => 'nullable|image|max:10240',
             'event_date'  => 'required|date',
             'event_time'  => 'nullable',
             'venue'       => 'nullable|string|max:255',
@@ -31,6 +32,11 @@ class EventController extends Controller
             'is_featured' => 'boolean',
             'is_active'   => 'boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('uploads/events', 'public');
+        }
+
         $data['is_featured'] = $request->boolean('is_featured');
         $data['is_active']   = $request->boolean('is_active', true);
         Event::create($data);
@@ -47,6 +53,7 @@ class EventController extends Controller
         $data = $request->validate([
             'title'       => 'required|string|max:255',
             'description' => 'nullable|string',
+            'image'       => 'nullable|image|max:10240',
             'event_date'  => 'required|date',
             'event_time'  => 'nullable',
             'venue'       => 'nullable|string|max:255',
@@ -54,6 +61,14 @@ class EventController extends Controller
             'is_featured' => 'boolean',
             'is_active'   => 'boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            if ($event->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($event->image)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($event->image);
+            }
+            $data['image'] = $request->file('image')->store('uploads/events', 'public');
+        }
+
         $data['is_featured'] = $request->boolean('is_featured');
         $data['is_active']   = $request->boolean('is_active');
         $event->update($data);
@@ -62,6 +77,9 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
+        if ($event->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($event->image)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($event->image);
+        }
         $event->delete();
         return redirect()->route('admin.events.index')->with('success', 'Event deleted successfully!');
     }

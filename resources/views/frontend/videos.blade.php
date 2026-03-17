@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset('storage/'.$pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -440,7 +440,10 @@
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
             <span class="page-label" style="background: {{ $secondaryColor }}">Gallery</span>
-            <h1>Video Collections</h1>
+            <h1>{{ $pageBanner->title ?? 'Video Collections' }}</h1>
+            @if($pageBanner && $pageBanner->subtitle)
+                <p style="font-size: 18px; opacity: 0.9; margin-top: -10px;">{{ $pageBanner->subtitle }}</p>
+            @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
                 <span style="color: {{ $secondaryColor }}">Videos</span>
@@ -494,7 +497,7 @@
                 @endforelse
             </div>
 
-            <div class="pagination-wrap" style="margin-top: 50px; display: justify-content: center;">
+            <div class="pagination-wrap" style="margin-top: 60px;">
                 {{ $albums->links() }}
             </div>
         </div>

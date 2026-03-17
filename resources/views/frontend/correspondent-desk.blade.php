@@ -623,33 +623,30 @@
         <div class="container">
             <div class="corr-layout">
                 <div class="corr-message">
-                    <h2>{{ $section->title ?? 'A Message from the Correspondent' }}</h2>
+                    <h2>A Message from the Correspondent</h2>
                     <p class="opening-line">Dear Families, Students &amp; Well-Wishers,</p>
                     <div class="message-content-dynamic">
-                        @if($section)
-                            {!! nl2br(e($section->content)) !!}
-                        @else
-                            <p>It is a privilege to address you as the Correspondent of Jeeva Memorial Senior Secondary School —
-                            an institution I hold close to my heart, born from a purpose far greater than education alone.</p>
-                            <p>Since our founding, we have strived to deliver quality education that is both accessible and
-                            excellent. Located at Thirukazhukundram, Kancheepuram, our school serves children from Pre.K.G.
-                            through XII Std.</p>
-                        @endif
+                        <p>JMPSS was founded with a singular vision - to provide world-class education to every child irrespective of their background. We continue to grow and evolve, embracing modern teaching methodologies while staying true to our core values of discipline, integrity, and excellence.</p>
+                        <p>It is a privilege to address you as the Correspondent of Jeeva Memorial Senior Secondary School —
+                        an institution I hold close to my heart, born from a purpose far greater than education alone.</p>
+                        <p>Since our founding, we have strived to deliver quality education that is both accessible and
+                        excellent. Located at Thirukazhukundram, Kancheepuram, our school serves children from Pre.K.G.
+                        through XII Std.</p>
                     </div>
                     <p>With blessings and gratitude,</p>
                     <div class="corr-signature">
                         <div class="sig-icon-red"><i class="fa-solid fa-heart"></i></div>
                         <div class="sig-text">
-                            <h4>{{ $section->name ?? 'Mr. G.K. Babu' }}</h4>
-                            <span>{{ $section->designation ?? 'Correspondent' }}, JMPSSS</span>
+                            <h4>Mr. G.K. Babu</h4>
+                            <span>Correspondent, JMPSSS</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="corr-card">
                     <div class="corr-photo"><i class="fa-solid fa-person"></i></div>
-                    <h3>{{ $section->name ?? 'Mr. G.K. Babu' }}</h3>
-                    <span class="corr-designation">{{ $section->designation ?? 'Correspondent' }}</span>
+                    <h3>Mr. G.K. Babu</h3>
+                    <span class="corr-designation">Correspondent</span>
                     <div class="corr-details">
                         <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Founder, Jeeva Memorial
                                 Trust</span></div>
@@ -661,7 +658,7 @@
                                 class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
                         <div class="cd-item"><i class="fa-solid fa-phone"></i><span>+91-7373418852</span></div>
                     </div>
-                    <div class="c-quote">"{{ $section->quote ?? 'From love and loss came the greatest gift I could give — a school where thousands of children find their future.' }}"</div>
+                    <div class="c-quote">"From love and loss came the greatest gift I could give — a school where thousands of children find their future."</div>
                 </div>
             </div>
         </div>

@@ -29,8 +29,11 @@ class HomeController extends Controller
                 'principal' => $homeSections->where('section_type', 'principal')->first(),
                 'correspondent' => $homeSections->where('section_type', 'correspondent')->first(),
             ];
-
-            $banners = \App\Models\Banner::where('is_active', '=', true)->orderBy('sort_order', 'asc')->get();
+            $banners = \App\Models\Banner::where('page', '=', 'home')
+                ->where('banner_type', '=', 'slider')
+                ->active()
+                ->orderBy('sort_order', 'asc')
+                ->get();
         } catch (Throwable $e) {
             report($e);
             $events = collect();

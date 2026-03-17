@@ -55,8 +55,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('admin.auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // Home Sections
-        Route::resource('home-sections', HomeSectionController::class);
 
         // Gallery
         Route::delete('gallery/item/{id}', [AdminGalleryController::class, 'destroyItem'])->name('gallery.item.destroy');
@@ -99,11 +97,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
         Route::delete('users/{id}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
 
-        // Settings
-        Route::get('settings/appearance', [App\Http\Controllers\Admin\SettingController::class, 'appearance'])->name('settings.appearance');
-        Route::post('settings/appearance', [App\Http\Controllers\Admin\SettingController::class, 'updateAppearance'])->name('settings.appearance.update');
-        Route::get('settings/general', [App\Http\Controllers\Admin\SettingController::class, 'general'])->name('settings.general');
-        Route::post('settings/general', [App\Http\Controllers\Admin\SettingController::class, 'updateGeneral'])->name('settings.general.update');
+
     });
 });
 

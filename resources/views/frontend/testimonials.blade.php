@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @php
     $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
     $primaryColor = $siteSettings['logo_green_900'] ?? '#004800';
@@ -6,6 +7,43 @@
 
 @push('styles')
 <style>
+    /* ── Page Hero ── */
+    .page-hero {
+        position: relative;
+        height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        overflow: hidden;
+    }
+    .page-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('{{ $pageBanner ? asset('storage/'.$pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+        z-index: 0;
+    }
+    .page-hero-bg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 72, 0, 0.55);
+    }
+    .page-hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    .page-hero-content h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        font-family: 'Outfit', sans-serif;
+    }
+    .breadcrumb-trail { font-size: 14px; opacity: 0.85; }
+    .breadcrumb-trail a { color: #fff; text-decoration: none; }
+    .breadcrumb-trail span { margin: 0 8px; opacity: 0.6; }
+
     .testimonial-details-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -47,7 +85,10 @@
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
             <span class="page-label" style="background: {{ $secondaryColor }}">Voices</span>
-            <h1>Community Feedback</h1>
+            <h1>{{ $pageBanner->title ?? 'Community Feedback' }}</h1>
+            @if($pageBanner && $pageBanner->subtitle)
+                <p style="font-size: 18px; opacity: 0.9; margin-top: -10px;">{{ $pageBanner->subtitle }}</p>
+            @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
                 <span style="color: {{ $secondaryColor }}">Testimonials</span>

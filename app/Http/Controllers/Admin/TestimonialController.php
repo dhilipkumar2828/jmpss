@@ -16,6 +16,7 @@ class TestimonialController extends Controller
         $data = $request->validate([
             'name'         => 'required|string|max:255',
             'designation'  => 'nullable|string|max:255',
+            'avatar'       => 'nullable|image|max:5120',
             'content'      => 'required|string',
             'rating'       => 'required|integer|min:1|max:5',
             'type'         => 'required|in:student,parent,alumni,staff',
@@ -23,6 +24,11 @@ class TestimonialController extends Controller
             'is_featured'  => 'boolean',
             'is_active'    => 'boolean',
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $data['avatar'] = $request->file('avatar')->store('uploads/testimonials', 'public');
+        }
+
         $data['is_featured'] = $request->boolean('is_featured');
         $data['is_active']   = $request->boolean('is_active', true);
         Testimonial::create($data);
@@ -36,6 +42,7 @@ class TestimonialController extends Controller
         $data = $request->validate([
             'name'         => 'required|string|max:255',
             'designation'  => 'nullable|string|max:255',
+            'avatar'       => 'nullable|image|max:5120',
             'content'      => 'required|string',
             'rating'       => 'required|integer|min:1|max:5',
             'type'         => 'required|in:student,parent,alumni,staff',
@@ -43,12 +50,27 @@ class TestimonialController extends Controller
             'is_featured'  => 'boolean',
             'is_active'    => 'boolean',
         ]);
+
+        if ($request->hasFile('avatar')) {
+            if ($testimonial->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($testimonial->avatar)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($testimonial->avatar);
+            }
+            $data['avatar'] = $request->file('avatar')->store('uploads/testimonials', 'public');
+        }
+
         $data['is_featured'] = $request->boolean('is_featured');
         $data['is_active']   = $request->boolean('is_active');
         $testimonial->update($data);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial updated!');
     }
 
-    public function destroy(Testimonial $t) { $t->delete(); return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted!'); }
+    public function destroy(Testimonial $t) 
+    { 
+        if ($t->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($t->avatar)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($t->avatar);
+        }
+        $t->delete(); 
+        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted!'); 
+    }
     public function show(Testimonial $t)    { return redirect()->route('admin.testimonials.edit', $t); }
 }

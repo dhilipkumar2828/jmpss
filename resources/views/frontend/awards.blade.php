@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset('storage/'.$pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -181,7 +181,10 @@
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
             <span class="page-label" style="background: {{ $secondaryColor }}">Academics</span>
-            <h1>Awards & Achievements</h1>
+            <h1>{{ $pageBanner->title ?? 'Awards & Achievements' }}</h1>
+            @if($pageBanner && $pageBanner->subtitle)
+                <p style="font-size: 18px; opacity: 0.9; margin-top: -10px;">{{ $pageBanner->subtitle }}</p>
+            @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
                 <span style="color: {{ $secondaryColor }}">Awards</span>

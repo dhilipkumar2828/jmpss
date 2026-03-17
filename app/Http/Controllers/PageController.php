@@ -9,13 +9,11 @@ class PageController extends Controller
 {
     public function principalDesk()
     {
-        $section = HomeSection::active()->where('section_type', '=', 'principal', 'and')->first(['*']);
-        return view('frontend.principal-desk', compact('section'));
+        return view('frontend.principal-desk');
     }
 
     public function correspondentDesk()
     {
-        $section = HomeSection::active()->where('section_type', '=', 'correspondent', 'and')->first(['*']);
-        return view('frontend.correspondent-desk', compact('section'));
+        return view('frontend.correspondent-desk');
     }
 }

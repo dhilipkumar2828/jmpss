@@ -8,10 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     @php
-        $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
-        $brandDeep = $siteSettings['logo_green_900'] ?? '#004f24';
-        $brandMed = $siteSettings['logo_green_700'] ?? '#026e33';
-        $brandGold = $siteSettings['logo_gold'] ?? '#c69c3a';
+        $brandDeep = '#002800';
+        $brandMed = '#004800';
+        $brandGold = '#c5a059';
     @endphp
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -186,6 +185,68 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Global Pagination Styles (Fixes Cluttered Tables) */
+        .pagination-wrapper-global, .pagination-wrapper {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 12px !important;
+            margin-top: 32px !important;
+            width: 100% !important;
+            clear: both !important;
+        }
+
+        /* Destroy ANY bullet points in ANY pagination list */
+        .pagination, .pagination ul, [role="navigation"] ul {
+            display: flex !important; 
+            list-style: none !important; 
+            list-style-type: none !important;
+            padding: 0 !important; 
+            gap: 8px !important; 
+            justify-content: center !important; 
+            align-items: center !important; 
+            margin: 0 !important;
+        }
+        .pagination li, .page-item, [role="navigation"] li { 
+            list-style: none !important; 
+            list-style-type: none !important;
+            margin: 0 !important; 
+            padding: 0 !important; 
+            border: none !important; 
+            background: none !important;
+        }
+        .pagination li::before, .pagination li::after, [role="navigation"] li::before { 
+            content: none !important; 
+            display: none !important; 
+        }
+        
+        .page-item .page-link, .pagination a, .pagination span, [role="navigation"] a, [role="navigation"] span {
+            width: 38px !important; height: 38px !important; display: grid !important; place-items: center !important; 
+            border-radius: 10px !important; border: 1px solid var(--border) !important;
+            background: white !important; color: var(--text) !important; font-size: 14px !important; 
+            font-weight: 600 !important; text-decoration: none !important; transition: all 0.2s !important; min-width: 38px !important;
+        }
+        .page-item.active .page-link, .pagination .active span, .active .page-link { 
+            background: var(--primary) !important; color: white !important; border-color: var(--primary) !important; 
+        }
+        .page-item.disabled .page-link, .pagination .disabled span { color: var(--text-muted) !important; opacity: 0.5 !important; cursor: not-allowed !important; }
+        .page-item:hover:not(.active):not(.disabled) .page-link { border-color: var(--primary) !important; color: var(--primary) !important; background: #f8fafc !important; }
+        
+        /* Fix for giant icons in pagination */
+        .pagination svg, nav svg { width: 1.1rem !important; height: 1.1rem !important; display: inline-block !important; vertical-align: middle !important; }
+
+        /* Aggressively hide all secondary pagination blocks (the 'Simple' ones) */
+        nav > div.flex.justify-between.flex-1.sm\:hidden,
+        nav > div.flex.items-center.justify-between > div.flex.justify-between.flex-1,
+        [role="navigation"] > div:first-child:not(.pagination-meta) {
+            display: none !important;
+        }
+
+        /* Meta text (Showing X to Y...) styling */
+        .pagination-meta p, nav .text-sm, .pagination-wrapper .text-muted {
+            font-size: 13px !important; color: var(--text-muted) !important; text-align: center !important; margin: 0 !important;
+        }
+        
         @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 900px) {
             .sidebar { transform: translateX(-100%); }
@@ -205,11 +266,11 @@
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
         <a href="{{ route('admin.dashboard') }}" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-            <img src="{{ asset('assets/jmpsss/image/logo.png') }}" style="width:44px; height:44px; object-fit:contain;" alt="Logo">
-            <div class="sidebar-brand-text">
+            <img src="{{ asset('assets/jmpsss/image/logo.png') }}" style="width:220px; height:50px; object-fit:contain;" alt="Logo">
+            {{-- <div class="sidebar-brand-text">
                 <strong>JMPSS Admin</strong>
                 <span>School Management</span>
-            </div>
+            </div> --}}
         </a>
     </div>
 
@@ -229,11 +290,7 @@
 
     <span class="sidebar-section-label">Content</span>
     <ul class="sidebar-nav">
-        <li>
-            <a href="{{ route('admin.home-sections.index') }}" class="{{ request()->routeIs('admin.home-sections.*') ? 'active' : '' }}">
-                <i class="fas fa-home"></i> Home Sections
-            </a>
-        </li>
+
         <li>
             <a href="{{ route('admin.banners.index') }}" class="{{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
                 <i class="fas fa-image"></i> Banners
@@ -283,21 +340,6 @@
                 <i class="fas fa-envelope-open-text"></i> Messages
             </a>
         </li>
-    </ul>
-
-    <span class="sidebar-section-label">Site</span>
-    <ul class="sidebar-nav">
-        <li>
-            <a href="{{ route('admin.settings.general') }}" class="{{ request()->routeIs('admin.settings.general') ? 'active' : '' }}">
-                <i class="fas fa-cog"></i> General Settings
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.settings.appearance') }}" class="{{ request()->routeIs('admin.settings.appearance') ? 'active' : '' }}">
-                <i class="fas fa-palette"></i> Appearance
-            </a>
-        </li>
-        <li><a href="{{ route('home') }}" target="_blank"><i class="fas fa-external-link-alt"></i> View Website</a></li>
     </ul>
 
     <div class="sidebar-footer">
@@ -350,9 +392,6 @@
                 <div class="dropdown-menu" id="adminDropdown">
                     <a href="{{ route('admin.profile') }}" class="dropdown-item">
                         <i class="fas fa-user-circle"></i> My Profile
-                    </a>
-                    <a href="{{ route('admin.settings.appearance') }}" class="dropdown-item">
-                        <i class="fas fa-cog"></i> Settings
                     </a>
                     <div class="dropdown-divider"></div>
                     <form method="POST" action="{{ route('admin.logout') }}">

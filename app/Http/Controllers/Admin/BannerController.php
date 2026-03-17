@@ -24,6 +24,8 @@ class BannerController extends Controller
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'page' => 'required|string',
+            'banner_type' => 'required|string',
             'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'sort_order' => 'integer|min:0',
@@ -32,10 +34,10 @@ class BannerController extends Controller
         $data = $request->all();
         
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('banners', 'public');
+            $data['image_path'] = $request->file('image')->store('uploads/banners', 'public');
         }
 
-        $data['is_active'] = $request->boolean('is_active', true);
+        $data['is_active'] = $request->has('is_active');
 
         Banner::create($data);
 
@@ -51,6 +53,8 @@ class BannerController extends Controller
     {
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'page' => 'required|string',
+            'banner_type' => 'required|string',
             'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'sort_order' => 'integer|min:0',
@@ -59,13 +63,13 @@ class BannerController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('image')) {
-            if ($banner->image_path) {
+            if ($banner->image_path && Storage::disk('public')->exists($banner->image_path)) {
                 Storage::disk('public')->delete($banner->image_path);
             }
-            $data['image_path'] = $request->file('image')->store('banners', 'public');
+            $data['image_path'] = $request->file('image')->store('uploads/banners', 'public');
         }
 
-        $data['is_active'] = $request->boolean('is_active');
+        $data['is_active'] = $request->has('is_active');
 
         $banner->update($data);
 
@@ -74,10 +78,10 @@ class BannerController extends Controller
 
     public function destroy(Banner $banner)
     {
-        if ($banner->image_path) {
-            Storage::disk('public')->delete((string)$banner->image_path);
+        if ($banner->image_path && Storage::disk('public')->exists($banner->image_path)) {
+            Storage::disk('public')->delete($banner->image_path);
         }
-        $banner->deleteOrFail();
+        $banner->delete();
         return back()->with('success', 'Banner deleted successfully.');
     }
 }
