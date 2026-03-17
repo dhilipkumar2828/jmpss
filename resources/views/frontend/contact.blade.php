@@ -2,14 +2,15 @@
 @section('title', 'Contact Us | JMPSSS | Jaypee Model Senior Secondary School')
 
 @section('content')
-<!-- Hero Section -->
+    <!-- Hero Section -->
     <section class="hero contact-hero">
         <div class="hero-overlay"></div>
         <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Contact Us" class="hero-bg">
         <div class="hero-content">
             <h1>CONTACT US</h1>
             <div class="breadcrumbs">
-                <a href="{{ route('home') }}">Home</a> <span>›</span> <a href="{{ route('contact') }}" class="active">Contact Us</a>
+                <a href="{{ route('home') }}">Home</a> <span>›</span> <a href="{{ route('contact') }}"
+                    class="active">Contact Us</a>
             </div>
         </div>
     </section>
@@ -51,22 +52,23 @@
                 <!-- Form -->
                 <div class="contact-form-wrapper">
                     <h3 class="form-title">Send Us a Message</h3>
-                    <form action="{{ route('contact.submit') }}" method="POST" class="contact-form">
+                    <form action="{{ route('contact.submit') }}" method="POST" id="contactForm" class="contact-form">
                         @csrf
                         <div class="input-group">
-                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="text" name="name" id="name" placeholder="Your Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
                         </div>
                         <div class="input-group">
-                            <input type="email" name="email" placeholder="Email Address" required>
+                            <input type="email" name="email" id="email" placeholder="Email Address" required>
                         </div>
                         <div class="input-group">
-                            <input type="tel" name="mobile" placeholder="Mobile Number" required>
+                            <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                         </div>
                         <div class="input-group">
-                            <input type="text" name="subject" placeholder="Subject" required>
+                            <input type="text" name="subject" id="subject" placeholder="Subject" required>
                         </div>
                         <div class="input-group">
-                            <textarea name="message" placeholder="Write your message here..." rows="5" required></textarea>
+                            <textarea name="message" id="message" placeholder="Write your message here..." rows="5"
+                                required></textarea>
                         </div>
                         <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Submit
                             Feedback <i class="fa-solid fa-paper-plane"></i></button>
@@ -86,4 +88,87 @@
     <!-- Footer -->
 @endsection
 
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Custom method for alphabets only
+            $.validator.addMethod("lettersonly", function (value, element) {
+                return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
+            }, "Letters and spaces only please");
 
+            // Initialize Validation
+            $("#contactForm").validate({
+                rules: {
+                    name: {
+                        required: true,
+                        lettersonly: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    mobile: {
+                        required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 10
+                    },
+                    subject: {
+                        required: true
+                    },
+                    message: {
+                        required: true
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Please enter your name",
+                        lettersonly: "Your name must contain only alphabets"
+                    },
+                    email: {
+                        required: "Please enter a valid email address",
+                        email: "Please enter a valid email address"
+                    },
+                    mobile: {
+                        required: "Please enter your mobile number",
+                        digits: "Please enter a valid 10-digit mobile number",
+                        minlength: "Mobile number must be exactly 10 digits",
+                        maxlength: "Mobile number must be exactly 10 digits"
+                    },
+                    subject: {
+                        required: "Please enter a subject"
+                    },
+                    message: {
+                        required: "Please write your message"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.input-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+    <style>
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 80%;
+            margin-top: 0.25rem;
+            display: block;
+            text-align: left;
+        }
+
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+    </style>
+@endpush
