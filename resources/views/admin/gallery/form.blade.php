@@ -265,6 +265,11 @@
     @media (max-width: 768px) {
         .form-grid-2 { grid-template-columns: 1fr; }
     }
+
+    /* Validation Styles */
+    .required-asterisk { color: #e14c1e; margin-left: 3px; }
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+    .error-field { border-color: #ef4444 !important; }
 </style>
 @endpush
 
@@ -304,7 +309,7 @@
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="form-group mb-3">
-                                    <label class="form-label">Album Title <span class="text-danger">*</span></label>
+                                    <label class="form-label">Album Title <span class="required-asterisk">*</span></label>
                                     <input type="text" name="title" class="form-control" value="{{ old('title', $gallery->title) }}" placeholder="e.g. Annual Sports Day 2025" required>
                                 </div>
                             </div>
@@ -390,7 +395,7 @@
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="form-group mb-3">
-                                    <label class="form-label">Album Title <span class="text-danger">*</span></label>
+                                    <label class="form-label">Album Title <span class="required-asterisk">*</span></label>
                                     <input type="text" name="groups[0][title]" class="form-control" placeholder="e.g. Diwali Function 2024" required>
                                 </div>
                             </div>
@@ -485,7 +490,7 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="form-group mb-3">
-                            <label class="form-label">Album Title *</label>
+                            <label class="form-label">Album Title <span class="required-asterisk">*</span></label>
                             <input type="text" name="groups[${idx}][title]" class="form-control" placeholder="Enter title" required>
                         </div>
                     </div>
@@ -633,5 +638,25 @@
             e.target.closest('.dropzone-container').style.background = '#f8fafc';
         }
     });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Initialize jQuery Validation
+    $('#gallery-form').validate({
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            error.addClass('error-msg');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('error-field');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('error-field');
+        }
+    });
+});
 </script>
 @endpush
