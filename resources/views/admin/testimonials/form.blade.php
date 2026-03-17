@@ -2,6 +2,15 @@
 @section('title', isset($testimonial) ? 'Edit Testimonial' : 'Add Testimonial')
 @section('page-title', isset($testimonial) ? 'Edit Testimonial' : 'Add Testimonial')
 @section('breadcrumb', 'Admin / Testimonials / ' . (isset($testimonial) ? 'Edit' : 'Add'))
+
+@push('styles')
+<style>
+    .required-asterisk { color: #e14c1e; margin-left: 3px; }
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+    .error-field { border-color: #ef4444 !important; }
+</style>
+@endpush
+
 @section('content')
 <div>
     <a href="{{ route('admin.testimonials.index') }}" class="btn btn-outline btn-sm" style="margin-bottom:20px;"><i class="fas fa-arrow-left"></i> Back</a>
@@ -12,7 +21,7 @@
                 @csrf @if(isset($testimonial)) @method('PUT') @endif
                 <div class="form-grid-2">
                     <div class="form-group">
-                        <label class="form-label">Full Name *</label>
+                        <label class="form-label">Full Name <span class="required-asterisk">*</span></label>
                         <input type="text" name="name" class="form-control @error('name') error-field @enderror" value="{{ old('name', $testimonial->name ?? '') }}" required>
                         @error('name')<div class="error-msg">{{ $message }}</div>@enderror
                     </div>
@@ -22,13 +31,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Testimonial Content *</label>
+                    <label class="form-label">Testimonial Content <span class="required-asterisk">*</span></label>
                     <textarea name="content" class="form-control @error('content') error-field @enderror" rows="5" placeholder="What they said about JMPSS..." required>{{ old('content', $testimonial->content ?? '') }}</textarea>
                     @error('content')<div class="error-msg">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-grid-3">
                     <div class="form-group">
-                        <label class="form-label">Type *</label>
+                        <label class="form-label">Type <span class="required-asterisk">*</span></label>
                         <select name="type" class="form-control" required>
                             @foreach(['student','parent','alumni','staff'] as $type)
                             <option value="{{ $type }}" {{ old('type', $testimonial->type ?? '') == $type ? 'selected' : '' }}>{{ ucfirst($type) }}</option>
@@ -36,7 +45,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Rating (1-5) *</label>
+                        <label class="form-label">Rating (1-5) <span class="required-asterisk">*</span></label>
                         <select name="rating" class="form-control" required>
                             @for($i=5;$i>=1;$i--)
                             <option value="{{ $i }}" {{ old('rating', $testimonial->rating ?? 5) == $i ? 'selected' : '' }}>{{ $i }} ★ {{ $i == 5 ? '(Excellent)' : ($i == 4 ? '(Good)' : '') }}</option>
@@ -67,3 +76,42 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('form').validate({
+        rules: {
+            name: { required: true, minlength: 2 },
+            content: { required: true, minlength: 10 },
+            type: { required: true },
+            rating: { required: true }
+        },
+        messages: {
+            name: { 
+                required: "<i class='fas fa-exclamation-circle'></i> Please enter the full name.",
+                minlength: "<i class='fas fa-exclamation-circle'></i> Name must be at least 2 characters."
+            },
+            content: { 
+                required: "<i class='fas fa-exclamation-circle'></i> Please enter the testimonial content.",
+                minlength: "<i class='fas fa-exclamation-circle'></i> Content must be at least 10 characters."
+            },
+            type: { required: "<i class='fas fa-exclamation-circle'></i> Please select a type." },
+            rating: { required: "<i class='fas fa-exclamation-circle'></i> Please select a rating." }
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            error.addClass('error-msg');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('error-field');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('error-field');
+        }
+    });
+});
+</script>
+@endpush

@@ -2,6 +2,15 @@
 @section('title', isset($award) ? 'Edit Award' : 'Add Award')
 @section('page-title', isset($award) ? 'Edit Award' : 'Add Award')
 @section('breadcrumb', 'Admin / Awards / ' . (isset($award) ? 'Edit' : 'Add'))
+
+@push('styles')
+<style>
+    .required-asterisk { color: #e14c1e; margin-left: 3px; }
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+    .error-field { border-color: #ef4444 !important; }
+</style>
+@endpush
+
 @section('content')
 <div>
     <a href="{{ route('admin.awards.index') }}" class="btn btn-outline btn-sm" style="margin-bottom:20px;"><i class="fas fa-arrow-left"></i> Back</a>
@@ -11,7 +20,7 @@
             <form method="POST" action="{{ isset($award) ? route('admin.awards.update', $award) : route('admin.awards.store') }}">
                 @csrf @if(isset($award)) @method('PUT') @endif
                 <div class="form-group">
-                    <label class="form-label">Award Title *</label>
+                    <label class="form-label">Award Title <span class="required-asterisk">*</span></label>
                     <input type="text" name="title" class="form-control @error('title') error-field @enderror" value="{{ old('title', $award->title ?? '') }}" required placeholder="e.g. State Mathematics Olympiad Gold">
                     @error('title')<div class="error-msg">{{ $message }}</div>@enderror
                 </div>
@@ -31,7 +40,7 @@
                 </div>
                 <div class="form-grid-2">
                     <div class="form-group">
-                        <label class="form-label">Year *</label>
+                        <label class="form-label">Year <span class="required-asterisk">*</span></label>
                         <input type="number" name="year" class="form-control @error('year') error-field @enderror" value="{{ old('year', $award->year ?? date('Y')) }}" min="1900" max="2100" required>
                         @error('year')<div class="error-msg">{{ $message }}</div>@enderror
                     </div>
@@ -53,3 +62,38 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('form').validate({
+        rules: {
+            title: { required: true, minlength: 3 },
+            year: { required: true, digits: true }
+        },
+        messages: {
+            title: { 
+                required: "<i class='fas fa-exclamation-circle'></i> Please enter the award title.",
+                minlength: "<i class='fas fa-exclamation-circle'></i> Title must be at least 3 characters."
+            },
+            year: { 
+                required: "<i class='fas fa-exclamation-circle'></i> Please enter the year.",
+                digits: "<i class='fas fa-exclamation-circle'></i> Please enter a valid number."
+            }
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            error.addClass('error-msg');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('error-field');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('error-field');
+        }
+    });
+});
+</script>
+@endpush
