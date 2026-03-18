@@ -25,7 +25,10 @@ class AwardController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads/awards', 'public');
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/awards'), $filename);
+            $data['image'] = 'uploads/awards/' . $filename;
         }
 
         $data['is_active'] = $request->boolean('is_active', true);
@@ -49,10 +52,13 @@ class AwardController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($award->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($award->image)) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($award->image);
+            if ($award->image && file_exists(public_path($award->image))) {
+                unlink(public_path($award->image));
             }
-            $data['image'] = $request->file('image')->store('uploads/awards', 'public');
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/awards'), $filename);
+            $data['image'] = 'uploads/awards/' . $filename;
         }
 
         $data['is_active'] = $request->boolean('is_active');
@@ -62,8 +68,8 @@ class AwardController extends Controller
 
     public function destroy(Award $award) 
     { 
-        if ($award->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($award->image)) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($award->image);
+        if ($award->image && file_exists(public_path($award->image))) {
+            unlink(public_path($award->image));
         }
         $award->delete(); 
         return redirect()->route('admin.awards.index')->with('success', 'Award deleted!'); 

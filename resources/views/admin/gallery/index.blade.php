@@ -253,9 +253,7 @@
                 @php 
                     $firstPhoto = $g->items()->where('item_type', 'photo')->first();
                     if($firstPhoto && $firstPhoto->file_path) {
-                        $imagePath = (str_starts_with($firstPhoto->file_path, 'assets/') || str_starts_with($firstPhoto->file_path, 'http')) 
-                            ? asset($firstPhoto->file_path) 
-                            : asset('storage/'.$firstPhoto->file_path);
+                        $imagePath = asset($firstPhoto->file_path);
                     } else {
                         $imagePath = null;
                     }

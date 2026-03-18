@@ -22,7 +22,7 @@
                 @forelse($recentEvents ?? [] as $event)
                 <div class="footer-event-item">
                     <div class="event-thumb">
-                        <img src="{{ Str::startsWith($event->image, 'assets/') ? asset($event->image) : asset('storage/' . $event->image) }}" alt="{{ $event->title }}">
+                        <img src="{{ Str::startsWith($event->image, 'assets/') ? asset($event->image) : asset($event->image) }}" alt="{{ $event->title }}">
                     </div>
                     <div class="event-info-footer">
                         <a href="{{ route('events') }}">{{ $event->title }}</a>

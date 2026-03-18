@@ -21,7 +21,7 @@
     .page-hero-bg {
         position: absolute;
         inset: 0;
-        background: url('{{ $pageBanner ? asset('storage/'.$pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+        background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
         z-index: 0;
     }
     .page-hero-bg::after {
@@ -116,7 +116,7 @@
                     </div>
                     <div class="testimonial-user">
                         @if($testimonial->avatar)
-                            <img src="{{ asset('storage/'.$testimonial->avatar) }}" alt="{{ $testimonial->name }}">
+                            <img src="{{ asset($testimonial->avatar) }}" alt="{{ $testimonial->name }}">
                         @else
                             <div style="width:50px; height:50px; border-radius:50%; background:#f0f0f0; display:grid; place-items:center; color:{{ $primaryColor }}; font-weight:bold;">
                                 {{ substr($testimonial->name, 0, 1) }}

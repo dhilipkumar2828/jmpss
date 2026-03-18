@@ -40,7 +40,10 @@ class InquiryController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('resume')) {
-            $data['resume_path'] = $request->file('resume')->store('resumes', 'public');
+            $file = $request->file('resume');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/resumes'), $filename);
+            $data['resume_path'] = 'uploads/resumes/' . $filename;
         }
 
         CareerApplication::create($data);

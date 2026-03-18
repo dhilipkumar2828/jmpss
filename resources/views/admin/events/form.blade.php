@@ -21,7 +21,7 @@
             <h3>📅 {{ isset($event) ? 'Edit Event' : 'Add New Event' }}</h3>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ isset($event) ? route('admin.events.update', $event) : route('admin.events.store') }}">
+            <form method="POST" action="{{ isset($event) ? route('admin.events.update', $event) : route('admin.events.store') }}" enctype="multipart/form-data">
                 @csrf
                 @if(isset($event)) @method('PUT') @endif
 
@@ -55,6 +55,22 @@
                 <div class="form-group">
                     <label class="form-label">Venue</label>
                     <input type="text" name="venue" class="form-control" placeholder="e.g. School Auditorium" value="{{ old('venue', $event->venue ?? '') }}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Event Image</label>
+                    <div style="display: flex; gap: 20px; align-items: start;">
+                        @if(isset($event) && $event->image)
+                            <div style="width: 120px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);">
+                                <img src="{{ asset($event->image) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        @endif
+                        <div style="flex: 1;">
+                            <input type="file" name="image" class="form-control @error('image') error-field @enderror" accept="image/*">
+                            <p class="form-text">Recommended size: 800x600px. Max: 2MB.</p>
+                            @error('image') <div class="error-msg">{{ $message }}</div> @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <div style="display:flex;gap:32px;margin-bottom:24px;">

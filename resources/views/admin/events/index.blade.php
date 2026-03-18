@@ -32,8 +32,21 @@
                     <tr>
                         <td style="color:var(--text-muted);font-size:13px;">{{ $loop->iteration }}</td>
                         <td>
-                            <div style="font-weight:700;font-size:14px;">{{ $event->title }}</div>
-                            <div style="font-size:12px;color:var(--text-muted);">{{ Str::limit($event->description, 60) }}</div>
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                @if($event->image)
+                                    <div style="width:40px;height:40px;border-radius:6px;overflow:hidden;background:#f8fafc;flex-shrink:0;">
+                                        <img src="{{ asset($event->image) }}" style="width:100%;height:100%;object-fit:cover;">
+                                    </div>
+                                @else
+                                    <div style="width:40px;height:40px;border-radius:6px;background:#f1f5f9;display:grid;place-items:center;color:#94a3b8;flex-shrink:0;">
+                                        <i class="fas fa-image" style="font-size:14px;"></i>
+                                    </div>
+                                @endif
+                                <div>
+                                    <div style="font-weight:700;font-size:14px;">{{ $event->title }}</div>
+                                    <div style="font-size:12px;color:var(--text-muted);">{{ Str::limit($event->description, 60) }}</div>
+                                </div>
+                            </div>
                         </td>
                         <td style="white-space:nowrap;font-size:13px;">{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</td>
                         <td style="font-size:13px;color:var(--text-muted);">{{ $event->venue ?? '—' }}</td>

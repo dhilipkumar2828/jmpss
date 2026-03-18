@@ -19,7 +19,7 @@
 
             <!-- Right: Login & Admission Buttons -->
             <div class="top-header-right">
-                @auth
+                {{-- @auth
                     <div class="user-profile-nav" style="display:flex; align-items:center; gap:15px;">
                         <span class="user-name" style="font-weight:600; color:var(--primary-color); font-size:14px;"><i class="fa-solid fa-user-circle"></i> {{ Auth::user()->name }}</span>
                         <form action="{{ route('logout') }}" method="POST" style="display:inline;">
@@ -31,7 +31,7 @@
                     </div>
                 @else
                     <a href="{{ route('login') }}" class="top-btn login-btn {{ request()->routeIs('login') ? 'active' : '' }}"><i class="fa-solid fa-user"></i> Login</a>
-                @endauth
+                @endauth --}}
                 <a href="{{ route('admissions') }}" class="top-btn admission-btn" id="headerAdmissionBtn"><i
                         class="fa-solid fa-graduation-cap"></i> Admission</a>
             </div>

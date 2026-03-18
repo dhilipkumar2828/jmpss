@@ -34,7 +34,10 @@ class EventController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads/events', 'public');
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/events'), $filename);
+            $data['image'] = 'uploads/events/' . $filename;
         }
 
         $data['is_featured'] = $request->boolean('is_featured');
@@ -63,10 +66,13 @@ class EventController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($event->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($event->image)) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($event->image);
+            if ($event->image && file_exists(public_path($event->image))) {
+                unlink(public_path($event->image));
             }
-            $data['image'] = $request->file('image')->store('uploads/events', 'public');
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/events'), $filename);
+            $data['image'] = 'uploads/events/' . $filename;
         }
 
         $data['is_featured'] = $request->boolean('is_featured');
@@ -77,8 +83,8 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
-        if ($event->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($event->image)) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($event->image);
+        if ($event->image && file_exists(public_path($event->image))) {
+            unlink(public_path($event->image));
         }
         $event->delete();
         return redirect()->route('admin.events.index')->with('success', 'Event deleted successfully!');

@@ -129,7 +129,7 @@
             @foreach($banners as $index => $banner)
             <div class="hero-item {{ $index == 0 ? 'active' : '' }}">
                 <div class="hero-overlay"></div>
-                <img src="{{ asset('storage/' . $banner->image_path) }}" alt="{{ $banner->title }}" class="hero-bg">
+                <img src="{{ asset($banner->image_path) }}" alt="{{ $banner->title }}" class="hero-bg">
                 <div class="hero-content">
                     <h1>{{ $banner->title ?? 'ACADEMIC EXCELLENCE' }}</h1>
                     @if($banner->subtitle)
@@ -332,7 +332,7 @@
                     <div class="event-card">
                         <div class="event-img-wrapper">
                             @if($event->image)
-                                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}">
+                                <img src="{{ asset($event->image) }}" alt="{{ $event->title }}">
                             @else
                                 <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="{{ $event->title }}">
                             @endif

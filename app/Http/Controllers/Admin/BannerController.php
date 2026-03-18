@@ -34,7 +34,10 @@ class BannerController extends Controller
         $data = $request->all();
         
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('uploads/banners', 'public');
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/banners'), $filename);
+            $data['image_path'] = 'uploads/banners/' . $filename;
         }
 
         $data['is_active'] = $request->has('is_active');
@@ -63,10 +66,13 @@ class BannerController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('image')) {
-            if ($banner->image_path && Storage::disk('public')->exists($banner->image_path)) {
-                Storage::disk('public')->delete($banner->image_path);
+            if ($banner->image_path && file_exists(public_path($banner->image_path))) {
+                unlink(public_path($banner->image_path));
             }
-            $data['image_path'] = $request->file('image')->store('uploads/banners', 'public');
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/banners'), $filename);
+            $data['image_path'] = 'uploads/banners/' . $filename;
         }
 
         $data['is_active'] = $request->has('is_active');
@@ -78,8 +84,8 @@ class BannerController extends Controller
 
     public function destroy(Banner $banner)
     {
-        if ($banner->image_path && Storage::disk('public')->exists($banner->image_path)) {
-            Storage::disk('public')->delete($banner->image_path);
+        if ($banner->image_path && file_exists(public_path($banner->image_path))) {
+            unlink(public_path($banner->image_path));
         }
         $banner->delete();
         return back()->with('success', 'Banner deleted successfully.');

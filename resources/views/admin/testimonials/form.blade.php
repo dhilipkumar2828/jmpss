@@ -17,7 +17,7 @@
     <div class="card">
         <div class="card-header"><h3>💬 {{ isset($testimonial) ? 'Edit Testimonial' : 'Add New Testimonial' }}</h3></div>
         <div class="card-body">
-            <form method="POST" action="{{ isset($testimonial) ? route('admin.testimonials.update', $testimonial) : route('admin.testimonials.store') }}">
+            <form method="POST" action="{{ isset($testimonial) ? route('admin.testimonials.update', $testimonial) : route('admin.testimonials.store') }}" enctype="multipart/form-data">
                 @csrf @if(isset($testimonial)) @method('PUT') @endif
                 <div class="form-grid-2">
                     <div class="form-group">
@@ -28,6 +28,22 @@
                     <div class="form-group">
                         <label class="form-label">Designation / Role</label>
                         <input type="text" name="designation" class="form-control" value="{{ old('designation', $testimonial->designation ?? '') }}" placeholder="e.g. Parent of Grade X student">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Avatar / Photo</label>
+                    <div style="display: flex; gap: 20px; align-items: start;">
+                        @if(isset($testimonial) && $testimonial->avatar)
+                            <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 1px solid var(--border);">
+                                <img src="{{ asset($testimonial->avatar) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        @endif
+                        <div style="flex: 1;">
+                            <input type="file" name="avatar" class="form-control @error('avatar') error-field @enderror" accept="image/*">
+                            <p class="form-text">Optional. Profile photo. Max: 2MB.</p>
+                            @error('avatar') <div class="error-msg">{{ $message }}</div> @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
