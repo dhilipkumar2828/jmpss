@@ -3,6 +3,14 @@
 @section('title', isset($banner) ? 'Edit Banner' : 'Add Banner')
 @section('page-title', isset($banner) ? 'Edit Banner' : 'Add Banner')
 
+@push('styles')
+<style>
+    .required-asterisk { color: #e14c1e; margin-left: 3px; }
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+    .error-field { border-color: #ef4444 !important; }
+</style>
+@endpush
+
 @section('content')
 <div class="card">
     <div class="card-header">
@@ -18,7 +26,7 @@
 
             <div class="form-grid-2">
                 <div class="form-group">
-                    <label class="form-label">Target Page</label>
+                    <label class="form-label">Target Page <span class="required-asterisk">*</span></label>
                     <select name="page" class="form-control" required>
                         <option value="home" {{ old('page', $banner->page ?? '') == 'home' ? 'selected' : '' }}>Home Page</option>
                         <option value="about" {{ old('page', $banner->page ?? '') == 'about' ? 'selected' : '' }}>About Us</option>
@@ -33,7 +41,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Display Type</label>
+                    <label class="form-label">Display Type <span class="required-asterisk">*</span></label>
                     <select name="banner_type" class="form-control" required>
                         <option value="slider" {{ old('banner_type', $banner->banner_type ?? '') == 'slider' ? 'selected' : '' }}>Home Slider</option>
                         <option value="page_header" {{ old('banner_type', $banner->banner_type ?? '') == 'page_header' ? 'selected' : '' }}>Inner Page Header</option>
@@ -43,7 +51,7 @@
 
             <div class="form-grid-2">
                 <div class="form-group">
-                    <label class="form-label">Banner Image (Slider: 1920x800, Header: 1920x400)</label>
+                    <label class="form-label">Banner Image (Slider: 1920x800, Header: 1920x400) {!! isset($banner) ? '' : '<span class="required-asterisk">*</span>' !!}</label>
                     <input type="file" name="image" class="form-control" {{ isset($banner) ? '' : 'required' }} onchange="previewFile(this)">
                     @if(isset($banner))
                         <div style="margin-top: 10px;">
@@ -115,3 +123,38 @@ function previewFile(input) {
 }
 </script>
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('form').validate({
+        rules: {
+            page: { required: true },
+            banner_type: { required: true },
+            @if(!isset($banner))
+            image: { required: true }
+            @endif
+        },
+        messages: {
+            page: { required: "<i class='fas fa-exclamation-circle'></i> Please select a target page." },
+            banner_type: { required: "<i class='fas fa-exclamation-circle'></i> Please select a display type." },
+            @if(!isset($banner))
+            image: { required: "<i class='fas fa-exclamation-circle'></i> Please upload a banner image." }
+            @endif
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            error.addClass('error-msg');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('error-field');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('error-field');
+        }
+    });
+});
+</script>
+@endpush

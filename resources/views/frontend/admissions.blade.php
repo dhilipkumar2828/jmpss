@@ -166,6 +166,26 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             display: block;
         }
+
+        /* Validation Styles */
+        .invalid-feedback {
+            color: #e14c1e;
+            font-size: 13px;
+            margin-top: 5px;
+            display: block;
+            font-family: 'Inter', sans-serif;
+        }
+        .form-group input.is-invalid,
+        .form-group select.is-invalid,
+        .form-group textarea.is-invalid {
+            border-color: #e14c1e;
+            box-shadow: 0 0 0 3px rgba(225, 76, 30, 0.1);
+            background: #fff;
+        }
+        .required-asterisk {
+            color: #e14c1e;
+            margin-left: 3px;
+        }
 </style>
 @endpush
 
@@ -248,28 +268,39 @@
                         <form method="POST" action="{{ route('admission.submit') }}">
                             @csrf
                             <div class="form-group">
-                                <input type="text" name="student_name" placeholder="Child's Name" required>
+                                <label style="display:none;">Student Name <span class="required-asterisk">*</span></label>
+                                <input type="text" name="student_name" placeholder="Child's Name *" required>
                             </div>
                             <div class="form-group grid-2" style="gap: 15px;">
-                                <input type="text" name="dob" placeholder="Date of Birth (DD/MM/YYYY)" onfocus="(this.type='date')"
-                                    required>
-                                <select name="grade_applying" required>
-                                    <option value="" disabled selected>Applying For</option>
-                                    <option value="kg">Kindergarten (KG)</option>
-                                    <option value="primary">Primary (1-5)</option>
-                                    <option value="middle">Middle (6-8)</option>
-                                    <option value="secondary">Secondary (9-10)</option>
-                                    <option value="senior">Senior Secondary (11-12)</option>
-                                </select>
+                                <div>
+                                    <label style="display:none;">Date of Birth <span class="required-asterisk">*</span></label>
+                                    <input type="text" name="dob" placeholder="Date of Birth (DD/MM/YYYY) *" onfocus="(this.type='date')" required>
+                                </div>
+                                <div>
+                                    <label style="display:none;">Grade Applying For <span class="required-asterisk">*</span></label>
+                                    <select name="grade_applying" required>
+                                        <option value="" disabled selected>Applying For *</option>
+                                        <option value="kg">Kindergarten (KG)</option>
+                                        <option value="primary">Primary (1-5)</option>
+                                        <option value="middle">Middle (6-8)</option>
+                                        <option value="secondary">Secondary (9-10)</option>
+                                        <option value="senior">Senior Secondary (11-12)</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="parent_name" placeholder="Parent's/Guardian's Name" required>
+                                <label style="display:none;">Parent's/Guardian's Name <span class="required-asterisk">*</span></label>
+                                <input type="text" name="parent_name" placeholder="Parent's/Guardian's Name *" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" name="email" placeholder="Parent's Email Address" required>
+                                <label style="display:none;">Email <span class="required-asterisk">*</span></label>
+                                <input type="email" name="email" placeholder="Parent's Email Address *" required>
                             </div>
                             <div class="form-group grid-2" style="gap: 15px;">
-                                <input type="tel" name="mobile" placeholder="Phone Number" required>
+                                <div>
+                                    <label style="display:none;">Phone Number <span class="required-asterisk">*</span></label>
+                                    <input type="tel" name="mobile" placeholder="Phone Number *" required>
+                                </div>
                                 <input type="tel" name="whatsapp" placeholder="WhatsApp Number">
                             </div>
                             <div class="form-group">
@@ -356,4 +387,71 @@
     </section>
 @endsection
 
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Restrict input to alphabets only for Full Name
+            $('input[name="student_name"], input[name="parent_name"]').on('input', function () {
+                let value = $(this).val();
+                value = value.replace(/[^a-zA-Z\s]/g, '');
+                $(this).val(value);
+            });
 
+            // Restrict input to numbers only & max 10 digits for Mobile
+            $('input[name="mobile"], input[name="whatsapp"]').on('input', function () {
+                let value = $(this).val();
+                value = value.replace(/[^0-9]/g, '');
+                if (value.length > 10) {
+                    value = value.slice(0, 10);
+                }
+                $(this).val(value);
+            });
+
+            // Add custom validation methods
+            $.validator.addMethod("lettersonly", function(value, element) {
+                return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
+            }, "Please enter only alphabets.");
+
+            $.validator.addMethod("exactlength", function(value, element, param) {
+                return this.optional(element) || value.length == param;
+            }, $.validator.format("Please enter exactly {0} characters."));
+
+            // Initialize jQuery Validation
+            $('form[action="{{ route('admission.submit') }}"]').validate({
+                rules: {
+                    student_name: { required: true, lettersonly: true, minlength: 2 },
+                    dob: { required: true },
+                    grade_applying: { required: true },
+                    parent_name: { required: true, lettersonly: true, minlength: 2 },
+                    email: { required: true, email: true },
+                    mobile: { required: true, digits: true, exactlength: 10 }
+                },
+                messages: {
+                    student_name: { required: "Please enter child's name", minlength: "Name must be at least 2 characters" },
+                    dob: { required: "Please enter date of birth" },
+                    grade_applying: { required: "Please select a grade" },
+                    parent_name: { required: "Please enter parent's name", minlength: "Name must be at least 2 characters" },
+                    email: { required: "Please enter a valid email address" },
+                    mobile: { required: "Please enter a phone number", digits: "Please enter only numbers", exactlength: "Phone Number must be exactly 10 digits" }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    if(element.parent('div').length) {
+                        element.parent('div').append(error);
+                    } else {
+                        element.closest('.form-group').append(error);
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+@endpush

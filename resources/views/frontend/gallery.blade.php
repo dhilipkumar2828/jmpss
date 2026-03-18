@@ -2,8 +2,8 @@
 @section('title', 'Photo Gallery | JMPSSS - Jaypee Model Senior Secondary School')
 
 @push('styles')
-<style>
-/* ── Page Hero ── */
+    <style>
+        /* ── Page Hero ── */
         .page-hero {
             position: relative;
             height: 380px;
@@ -438,7 +438,7 @@
         .fade-enter {
             animation: viewFadeIn 0.5s forwards;
         }
-</style>
+    </style>
 @endpush
 
 @php
@@ -448,7 +448,7 @@
 @endphp
 
 @section('content')
-<!-- Page Hero -->
+    <!-- Page Hero -->
     <section class="page-hero">
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
@@ -459,7 +459,7 @@
             @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
-                <span style="color: {{ $secondaryColor }}">Photos</span>
+                <span style="color: white; font-weight: bold;">Photos</span>
             </nav>
         </div>
     </section>
@@ -467,39 +467,47 @@
     <!-- ── Gallery Detail View ── -->
     <section class="gallery-view active" style="display: block;">
         <div class="container">
-            
-            <div class="filter-wrap" style="margin-bottom: 40px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-                <a href="{{ route('gallery') }}" class="btn {{ !request('category') ? 'btn-primary' : 'btn-outline' }}" style="border-radius: 30px; padding: 8px 25px; {{ !request('category') ? 'background:'.$primaryColor : '' }}">All</a>
+
+            <div class="filter-wrap"
+                style="margin-bottom: 40px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <a href="{{ route('gallery') }}" class="btn {{ !request('category') ? 'btn-primary' : 'btn-outline' }}"
+                    style="border-radius: 30px; padding: 8px 25px; {{ !request('category') ? 'background:' . $primaryColor : '' }}">All</a>
                 @foreach($categories as $cat)
-                    <a href="{{ route('gallery', ['category' => $cat]) }}" class="btn {{ request('category') == $cat ? 'btn-primary' : 'btn-outline' }}" style="border-radius: 30px; padding: 8px 25px; {{ request('category') == $cat ? 'background:'.$primaryColor : '' }}">{{ $cat }}</a>
+                    <a href="{{ route('gallery', ['category' => $cat]) }}"
+                        class="btn {{ request('category') == $cat ? 'btn-primary' : 'btn-outline' }}"
+                        style="border-radius: 30px; padding: 8px 25px; {{ request('category') == $cat ? 'background:' . $primaryColor : '' }}">{{ $cat }}</a>
                 @endforeach
             </div>
 
             <div class="gallery-grid">
                 @forelse($albums as $album)
-                @php
-                    $photos = $album->items->where('item_type', 'photo');
-                    $firstPhoto = $photos->first();
-                    // Map photos for JS
-                    $photoData = $photos->map(fn($item) => ['src' => asset('storage/'.$item->file_path)])->values();
-                @endphp
-                <div class="gallery-item" onclick="openAlbumLightbox({{ json_encode($photoData) }}, '{{ $album->title }}', '{{ $album->category }}')">
-                    <div class="photo-thumb">
-                        @if($firstPhoto)
-                        <img src="{{ asset('storage/' . $firstPhoto->file_path) }}" alt="{{ $album->title }}" loading="lazy">
-                        @endif
-                        <div class="photo-overlay-btn">
-                            <i class="fa-solid fa-images" style="background: {{ $secondaryColor }}"></i>
-                            <span style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px;">{{ $photos->count() }} Photos</span>
+                    @php
+                        $photos = $album->items->where('item_type', 'photo');
+                        $firstPhoto = $photos->first();
+                        // Map photos for JS
+                        $photoData = $photos->map(fn($item) => ['src' => asset('storage/' . $item->file_path)])->values();
+                    @endphp
+                    <div class="gallery-item"
+                        onclick="openAlbumLightbox({{ json_encode($photoData) }}, '{{ $album->title }}', '{{ $album->category }}')">
+                        <div class="photo-thumb">
+                            @if($firstPhoto)
+                                <img src="{{ asset('storage/' . $firstPhoto->file_path) }}" alt="{{ $album->title }}"
+                                    loading="lazy">
+                            @endif
+                            <div class="photo-overlay-btn">
+                                <i class="fa-solid fa-images" style="background: {{ $secondaryColor }}"></i>
+                                <span
+                                    style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px;">{{ $photos->count() }}
+                                    Photos</span>
+                            </div>
+                        </div>
+                        <div class="photo-details">
+                            <h3 style="color: {{ $primaryColor }}">{{ $album->title }}</h3>
+                            @if($album->category)
+                                <p style="font-size: 12px; color: #888;">{{ $album->category }}</p>
+                            @endif
                         </div>
                     </div>
-                    <div class="photo-details">
-                        <h3 style="color: {{ $primaryColor }}">{{ $album->title }}</h3>
-                        @if($album->category)
-                            <p style="font-size: 12px; color: #888;">{{ $album->category }}</p>
-                        @endif
-                    </div>
-                </div>
                 @empty
                     <div style="grid-column: 1/-1; text-align: center; padding: 100px 0;">
                         <i class="fa-solid fa-image" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
@@ -519,14 +527,14 @@
     <div class="lightbox" id="lightbox">
         <div class="lightbox-content">
             <span class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></span>
-            
+
             <div class="lightbox-nav">
                 <i class="fa-solid fa-chevron-left" onclick="changePhoto(-1)"></i>
                 <i class="fa-solid fa-chevron-right" onclick="changePhoto(1)"></i>
             </div>
 
             <img src="" alt="Gallery Lightbox" id="lightboxImg">
-            
+
             <div class="lightbox-caption">
                 <h4 id="lightboxTitle"></h4>
                 <p id="lightboxCategory"></p>
@@ -537,58 +545,56 @@
 @endsection
 
 @push('scripts')
-<script>
-    let currentAlbumPhotos = [];
-    let currentIndex = 0;
-    let albumTitle = '';
-    let albumCategory = '';
+    <script>
+        let currentAlbumPhotos = [];
+        let currentIndex = 0;
+        let albumTitle = '';
+        let albumCategory = '';
 
-    function openAlbumLightbox(photos, title, category) {
-        currentAlbumPhotos = photos;
-        currentIndex = 0;
-        albumTitle = title;
-        albumCategory = category;
-        
-        updateLightboxContent();
-        
-        document.getElementById('lightbox').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+        function openAlbumLightbox(photos, title, category) {
+            currentAlbumPhotos = photos;
+            currentIndex = 0;
+            albumTitle = title;
+            albumCategory = category;
 
-    function updateLightboxContent() {
-        if (currentAlbumPhotos.length === 0) return;
-        
-        const photo = currentAlbumPhotos[currentIndex];
-        document.getElementById('lightboxImg').src = photo.src;
-        document.getElementById('lightboxTitle').textContent = albumTitle;
-        document.getElementById('lightboxCategory').textContent = albumCategory;
-        document.getElementById('photoCounter').textContent = `Photo ${currentIndex + 1} of ${currentAlbumPhotos.length}`;
-        
-        // Hide nav if only one photo
-        const nav = document.querySelector('.lightbox-nav');
-        nav.style.display = currentAlbumPhotos.length > 1 ? 'flex' : 'none';
-    }
+            updateLightboxContent();
 
-    function changePhoto(step) {
-        currentIndex += step;
-        if (currentIndex < 0) currentIndex = currentAlbumPhotos.length - 1;
-        if (currentIndex >= currentAlbumPhotos.length) currentIndex = 0;
-        updateLightboxContent();
-    }
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-    function closeLightbox() {
-        document.getElementById('lightbox').classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
+        function updateLightboxContent() {
+            if (currentAlbumPhotos.length === 0) return;
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (!document.getElementById('lightbox').classList.contains('active')) return;
-        if (e.key === 'ArrowLeft') changePhoto(-1);
-        if (e.key === 'ArrowRight') changePhoto(1);
-        if (e.key === 'Escape') closeLightbox();
-    });
-</script>
+            const photo = currentAlbumPhotos[currentIndex];
+            document.getElementById('lightboxImg').src = photo.src;
+            document.getElementById('lightboxTitle').textContent = albumTitle;
+            document.getElementById('lightboxCategory').textContent = albumCategory;
+            document.getElementById('photoCounter').textContent = `Photo ${currentIndex + 1} of ${currentAlbumPhotos.length}`;
+
+            // Hide nav if only one photo
+            const nav = document.querySelector('.lightbox-nav');
+            nav.style.display = currentAlbumPhotos.length > 1 ? 'flex' : 'none';
+        }
+
+        function changePhoto(step) {
+            currentIndex += step;
+            if (currentIndex < 0) currentIndex = currentAlbumPhotos.length - 1;
+            if (currentIndex >= currentAlbumPhotos.length) currentIndex = 0;
+            updateLightboxContent();
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'ArrowLeft') changePhoto(-1);
+            if (e.key === 'ArrowRight') changePhoto(1);
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
 @endpush
-
-

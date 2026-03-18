@@ -29,6 +29,26 @@
             margin-bottom: 28px;
         }
     }
+
+    /* Validation Styles */
+    .invalid-feedback {
+        color: #e14c1e;
+        font-size: 13px;
+        margin-top: 5px;
+        display: block;
+        font-family: 'Inter', sans-serif;
+    }
+    .form-group input.is-invalid,
+    .form-group select.is-invalid,
+    .form-group textarea.is-invalid {
+        border-color: #e14c1e;
+        box-shadow: 0 0 0 3px rgba(225, 76, 30, 0.1);
+        background: #fff;
+    }
+    .required-asterisk {
+        color: #e14c1e;
+        margin-left: 3px;
+    }
 </style>
 @endpush
 
@@ -232,20 +252,20 @@
                             <form class="visit-form" method="POST" action="{{ route('visit.submit') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Full Name</label>
+                                    <label>Full Name <span class="required-asterisk">*</span></label>
                                     <input type="text" name="name" placeholder="Enter your name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Email Address</label>
+                                    <label>Email Address <span class="required-asterisk">*</span></label>
                                     <input type="email" name="email" placeholder="Enter your email" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Phone Number</label>
+                                    <label>Phone Number <span class="required-asterisk">*</span></label>
                                     <input type="tel" name="mobile" placeholder="Enter phone number" required>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label>Date of Visit</label>
+                                        <label>Date of Visit <span class="required-asterisk">*</span></label>
                                         <input type="date" name="visit_date" required>
                                     </div>
                                     <div class="form-group">
@@ -522,6 +542,68 @@
         }
 
         showEventsGrid();
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Restrict input to alphabets only for Full Name
+        $('input[name="name"]').on('input', function () {
+            let value = $(this).val();
+            value = value.replace(/[^a-zA-Z\s]/g, '');
+            $(this).val(value);
+        });
+
+        // Restrict input to numbers only & max 10 digits for Mobile
+        $('input[name="mobile"]').on('input', function () {
+            let value = $(this).val();
+            value = value.replace(/[^0-9]/g, '');
+            if (value.length > 10) {
+                value = value.slice(0, 10);
+            }
+            $(this).val(value);
+        });
+
+        // Add custom validation methods
+        $.validator.addMethod("lettersonly", function(value, element) {
+            return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
+        }, "Please enter only alphabets.");
+
+        $.validator.addMethod("exactlength", function(value, element, param) {
+            return this.optional(element) || value.length == param;
+        }, $.validator.format("Please enter exactly {0} characters."));
+
+        // Initialize jQuery Validation
+        $('form.visit-form').validate({
+            rules: {
+                name: { required: true, lettersonly: true, minlength: 2 },
+                email: { required: true, email: true },
+                mobile: { required: true, digits: true, exactlength: 10 },
+                visit_date: { required: true }
+            },
+            messages: {
+                name: { required: "Please enter your full name", minlength: "Name must be at least 2 characters" },
+                email: { required: "Please enter a valid email address" },
+                mobile: { required: "Please enter your phone number", digits: "Please enter only numbers", exactlength: "Phone Number must be exactly 10 digits" },
+                visit_date: { required: "Please select a visit date" }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                if(element.parent('.custom-select-wrapper').length) {
+                    element.closest('.form-group').append(error);
+                } else {
+                    element.closest('.form-group').append(error);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
     });
 </script>
 @endpush
