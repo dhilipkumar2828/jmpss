@@ -17,7 +17,7 @@
     <div class="card">
         <div class="card-header"><h3>🏆 {{ isset($award) ? 'Edit Award' : 'Add New Award' }}</h3></div>
         <div class="card-body">
-            <form method="POST" action="{{ isset($award) ? route('admin.awards.update', $award) : route('admin.awards.store') }}">
+            <form method="POST" action="{{ isset($award) ? route('admin.awards.update', $award) : route('admin.awards.store') }}" enctype="multipart/form-data">
                 @csrf @if(isset($award)) @method('PUT') @endif
                 <div class="form-group">
                     <label class="form-label">Award Title <span class="required-asterisk">*</span></label>
@@ -47,6 +47,22 @@
                     <div class="form-group">
                         <label class="form-label">Category</label>
                         <input type="text" name="category" class="form-control" value="{{ old('category', $award->category ?? '') }}" placeholder="e.g. Academic, Sports">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Award Image</label>
+                    <div style="display: flex; gap: 20px; align-items: start;">
+                        @if(isset($award) && $award->image)
+                            <div style="width: 120px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);">
+                                <img src="{{ asset($award->image) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        @endif
+                        <div style="flex: 1;">
+                            <input type="file" name="image" class="form-control @error('image') error-field @enderror" accept="image/*">
+                            <p class="form-text">Recommended size: 600x400px. Max: 2MB.</p>
+                            @error('image') <div class="error-msg">{{ $message }}</div> @enderror
+                        </div>
                     </div>
                 </div>
                 <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;font-weight:500;margin-bottom:24px;">

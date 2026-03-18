@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset('storage/'.$pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -485,13 +485,13 @@
                         $photos = $album->items->where('item_type', 'photo');
                         $firstPhoto = $photos->first();
                         // Map photos for JS
-                        $photoData = $photos->map(fn($item) => ['src' => asset('storage/' . $item->file_path)])->values();
+                        $photoData = $photos->map(fn($item) => ['src' => asset($item->file_path)])->values();
                     @endphp
                     <div class="gallery-item"
                         onclick="openAlbumLightbox({{ json_encode($photoData) }}, '{{ $album->title }}', '{{ $album->category }}')">
                         <div class="photo-thumb">
                             @if($firstPhoto)
-                                <img src="{{ asset('storage/' . $firstPhoto->file_path) }}" alt="{{ $album->title }}"
+                                <img src="{{ asset($firstPhoto->file_path) }}" alt="{{ $album->title }}"
                                     loading="lazy">
                             @endif
                             <div class="photo-overlay-btn">

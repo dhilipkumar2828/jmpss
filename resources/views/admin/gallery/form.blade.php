@@ -333,9 +333,7 @@
                                 <div class="media-card" id="item-{{ $item->id }}">
                                     @if($item->item_type == 'photo')
                                         @php
-                                            $imagePath = (str_starts_with($item->file_path, 'assets/') || str_starts_with($item->file_path, 'http')) 
-                                                ? asset($item->file_path) 
-                                                : asset('storage/'.$item->file_path);
+                                            $imagePath = asset($item->file_path);
                                         @endphp
                                         <img src="{{ $imagePath }}" alt="Gallery Image" loading="lazy">
                                     @else
@@ -358,7 +356,7 @@
                         <div class="row">
                             <div class="col-lg-6 mb-4 mb-lg-0">
                                 <div class="form-section-title"><i class="fas fa-plus-circle"></i> Add More Photos</div>
-                                <div class="dropzone-container" onclick="document.getElementById('edit-photos-input').click()">
+                                <div class="dropzone-container">
                                     <i class="fas fa-cloud-upload-alt"></i>
                                     <h4>Click or Drag Photos</h4>
                                     <p>Select multiple images to add to this album</p>
@@ -416,7 +414,7 @@
                         <div class="row">
                             <div class="col-lg-6 mb-4 mb-lg-0">
                                 <div class="form-section-title"><i class="fas fa-camera"></i> Photos</div>
-                                <div class="dropzone-container" onclick="this.querySelector('input').click()">
+                                <div class="dropzone-container">
                                     <i class="fas fa-images"></i>
                                     <h4>Drop Photos Here</h4>
                                     <p>Select multiple images (Max 10MB per file)</p>
@@ -510,7 +508,7 @@
                 <div class="row">
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <div class="form-section-title"><i class="fas fa-camera"></i> Photos</div>
-                        <div class="dropzone-container" onclick="this.querySelector('input').click()">
+                        <div class="dropzone-container">
                             <i class="fas fa-images"></i>
                             <h4>Drop Photos Here</h4>
                             <p>Select multiple images</p>

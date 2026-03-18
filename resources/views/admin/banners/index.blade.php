@@ -30,7 +30,7 @@
                         <td><span class="badge badge-info">{{ ucfirst($banner->page) }}</span></td>
                         <td><span class="badge badge-gray">{{ ucfirst(str_replace('_', ' ', $banner->banner_type)) }}</span></td>
                         <td>
-                            <img src="{{ asset('storage/' . $banner->image_path) }}" style="width: 100px; height: 50px; object-fit: cover; border-radius: 4px;">
+                            <img src="{{ asset($banner->image_path) }}" style="width: 100px; height: 50px; object-fit: cover; border-radius: 4px;">
                         </td>
                         <td>{{ $banner->title }}</td>
                         <td>

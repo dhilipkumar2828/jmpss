@@ -34,7 +34,7 @@
                 @foreach($photoItems as $photo)
                     <figure class="photo-card" title="{{ $photo->title ?? 'Gallery photo' }}">
                         @if(!empty($photo->file_path))
-                            <img src="{{ asset('storage/' . $photo->file_path) }}" alt="{{ $photo->title ?? 'Photo' }}" loading="lazy">
+                            <img src="{{ asset($photo->file_path) }}" alt="{{ $photo->title ?? 'Photo' }}" loading="lazy">
                         @else
                             <img src="https://jmpsss.com/wp-content/uploads/2015/11/school.jpg" alt="School gallery" loading="lazy">
                         @endif

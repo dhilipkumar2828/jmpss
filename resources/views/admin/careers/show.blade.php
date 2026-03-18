@@ -42,7 +42,7 @@
         <div class="detail-group" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">
             <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 10px; font-weight: 600; text-transform: uppercase;">Resume / CV</label>
             @if($application->resume_path)
-                <a href="{{ asset('storage/' . $application->resume_path) }}" target="_blank" class="btn btn-primary btn-sm">
+                <a href="{{ asset($application->resume_path) }}" target="_blank" class="btn btn-primary btn-sm">
                     <i class="fas fa-file-pdf"></i> View Resume
                 </a>
             @else

@@ -80,7 +80,7 @@
                     <div class="event-card-page" onclick="showEventDetails(event, '{{ $event->id }}')" style="cursor: pointer;">
                         <div class="event-img-wrapper">
                             @if($event->image)
-                                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}">
+                                <img src="{{ asset($event->image) }}" alt="{{ $event->title }}">
                             @else
                                 <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $event->title }}">
                             @endif
@@ -98,7 +98,7 @@
                              data-date="{{ $event->event_date->format('d F Y') }}"
                              data-venue="{{ $event->venue ?? 'School Campus' }}"
                              data-desc="{{ $event->description }}"
-                             data-img="{{ $event->image ? asset('storage/'.$event->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}"
+                             data-img="{{ $event->image ? asset($event->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}"
                              data-cat="{{ $event->is_featured ? 'Featured Event' : 'School Event' }}">
                         </div>
                     </div>

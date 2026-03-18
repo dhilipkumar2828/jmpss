@@ -55,7 +55,7 @@
                     <input type="file" name="image" class="form-control" {{ isset($banner) ? '' : 'required' }} onchange="previewFile(this)">
                     @if(isset($banner))
                         <div style="margin-top: 10px;">
-                            <img src="{{ asset('storage/' . $banner->image_path) }}" id="preview-img" style="width: 240px; border-radius: 8px;">
+                            <img src="{{ asset($banner->image_path) }}" id="preview-img" style="width: 240px; border-radius: 8px;">
                         </div>
                     @else
                         <div id="preview-wrap" style="margin-top: 10px; display: none;">

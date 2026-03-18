@@ -26,7 +26,10 @@ class TestimonialController extends Controller
         ]);
 
         if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request->file('avatar')->store('uploads/testimonials', 'public');
+            $file = $request->file('avatar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/testimonials'), $filename);
+            $data['avatar'] = 'uploads/testimonials/' . $filename;
         }
 
         $data['is_featured'] = $request->boolean('is_featured');
@@ -52,10 +55,13 @@ class TestimonialController extends Controller
         ]);
 
         if ($request->hasFile('avatar')) {
-            if ($testimonial->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($testimonial->avatar)) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($testimonial->avatar);
+            if ($testimonial->avatar && file_exists(public_path($testimonial->avatar))) {
+                unlink(public_path($testimonial->avatar));
             }
-            $data['avatar'] = $request->file('avatar')->store('uploads/testimonials', 'public');
+            $file = $request->file('avatar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/testimonials'), $filename);
+            $data['avatar'] = 'uploads/testimonials/' . $filename;
         }
 
         $data['is_featured'] = $request->boolean('is_featured');
@@ -66,8 +72,8 @@ class TestimonialController extends Controller
 
     public function destroy(Testimonial $t) 
     { 
-        if ($t->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($t->avatar)) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($t->avatar);
+        if ($t->avatar && file_exists(public_path($t->avatar))) {
+            unlink(public_path($t->avatar));
         }
         $t->delete(); 
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted!'); 
