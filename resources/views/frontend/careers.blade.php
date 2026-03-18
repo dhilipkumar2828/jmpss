@@ -2,8 +2,8 @@
 @section('title', 'Careers | JMPSSS | Jaypee Model Senior Secondary School')
 
 @push('styles')
-<style>
-/* ── Page Hero ── */
+    <style>
+        /* ── Page Hero ── */
         .page-hero {
             position: relative;
             height: 380px;
@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset('storage/'.$pageBanner->image_path) : asset('assets/jmpsss/image/new/slider2.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset('storage/' . $pageBanner->image_path) : asset('assets/jmpsss/image/new/slider2.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -328,6 +328,26 @@
             box-shadow: 0 10px 30px rgba(0, 72, 0, 0.25);
         }
 
+        /* Validation Styles */
+        .invalid-feedback {
+            color: #e14c1e;
+            font-size: 13px;
+            margin-top: 5px;
+            display: block;
+            font-family: 'Inter', sans-serif;
+        }
+        .form-field input.is-invalid,
+        .form-field select.is-invalid,
+        .form-field textarea.is-invalid {
+            border-color: #e14c1e;
+            box-shadow: 0 0 0 3px rgba(225, 76, 30, 0.1);
+            background: #fff;
+        }
+        .required-asterisk {
+            color: #e14c1e;
+            margin-left: 3px;
+        }
+
         @media (max-width: 900px) {
             .application-wrapper {
                 grid-template-columns: 1fr;
@@ -343,11 +363,11 @@
                 grid-template-columns: 1fr;
             }
         }
-</style>
+    </style>
 @endpush
 
 @section('content')
-<!-- Page Hero -->
+    <!-- Page Hero -->
     <section class="page-hero">
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
@@ -443,7 +463,8 @@
                         </div>
                     </div>
 
-                    <img src="{{ asset('assets/jmpsss/image/new/school22.jpg') }}" alt="School Campus" class="apply-decor-img">
+                    <img src="{{ asset('assets/jmpsss/image/new/school22.jpg') }}" alt="School Campus"
+                        class="apply-decor-img">
                 </div>
 
                 <!-- Right Form -->
@@ -454,23 +475,23 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-field">
-                                <label>Full Name</label>
+                                <label>Full Name <span class="required-asterisk">*</span></label>
                                 <input type="text" name="name" placeholder="Your name" required>
                             </div>
                             <div class="form-field">
-                                <label>Mobile Number</label>
+                                <label>Mobile Number <span class="required-asterisk">*</span></label>
                                 <input type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required>
                             </div>
                         </div>
 
                         <div class="form-field">
-                            <label>Email Address</label>
+                            <label>Email Address <span class="required-asterisk">*</span></label>
                             <input type="email" name="email" placeholder="example@gmail.com" required>
                         </div>
 
                         <div class="form-row">
                             <div class="form-field">
-                                <label>Applying For</label>
+                                <label>Applying For <span class="required-asterisk">*</span></label>
                                 <select name="position_applied" required>
                                     <option value="">Select Role</option>
                                     <option value="english">English Teacher</option>
@@ -489,9 +510,10 @@
                         </div>
 
                         <div class="form-field">
-                            <label>Upload CV (PDF / DOC)</label>
-                            <input type="file" name="resume" accept=".pdf,.doc,.docx">
+                            <label>Upload CV (PDF / DOC) <span class="required-asterisk">*</span></label>
+                            <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
                         </div>
+
 
                         <button type="submit" class="submit-btn" id="careerSubmitBtn">
                             <i class="fa-solid fa-paper-plane" style="margin-right:8px;"></i>Submit Application
@@ -505,4 +527,96 @@
     <!-- Footer -->
 @endsection
 
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Restrict input to alphabets only for Full Name
+            $('input[name="name"]').on('input', function () {
+                let value = $(this).val();
+                value = value.replace(/[^a-zA-Z\s]/g, '');
+                $(this).val(value);
+            });
 
+            // Restrict input to numbers only & max 10 digits for Mobile
+            $('input[name="mobile"]').on('input', function () {
+                let value = $(this).val();
+                value = value.replace(/[^0-9]/g, '');
+                if (value.length > 10) {
+                    value = value.slice(0, 10);
+                }
+                $(this).val(value);
+            });
+
+            // Add custom validation methods
+            $.validator.addMethod("lettersonly", function(value, element) {
+                return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
+            }, "Please enter only alphabets.");
+
+            $.validator.addMethod("exactlength", function(value, element, param) {
+                return this.optional(element) || value.length == param;
+            }, $.validator.format("Please enter exactly {0} characters."));
+
+            // Initialize jQuery Validation
+            $('#careerForm').validate({
+                rules: {
+                    name: {
+                        required: true,
+                        lettersonly: true,
+                        minlength: 2
+                    },
+                    mobile: {
+                        required: true,
+                        digits: true,
+                        exactlength: 10
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    position_applied: {
+                        required: true
+                    },
+                    resume: {
+                        required: true,
+                        extension: "pdf|doc|docx"
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Please enter your full name",
+                        minlength: "Name must be at least 2 characters"
+                    },
+                    mobile: {
+                        required: "Please enter your mobile number",
+                        digits: "Please enter only numbers",
+                        exactlength: "Mobile Number must be exactly 10 digits"
+                    },
+                    email: {
+                        required: "Please enter a valid email address",
+                        email: "Please enter a valid email format"
+                    },
+                    position_applied: {
+                        required: "Please select the position you are applying for"
+                    },
+                    resume: {
+                        required: "Please upload your CV",
+                        extension: "Only PDF, DOC, or DOCX files are allowed"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-field').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+@endpush

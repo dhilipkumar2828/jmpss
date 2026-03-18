@@ -2,6 +2,15 @@
 @section('title', isset($event) ? 'Edit Event' : 'Add Event')
 @section('page-title', isset($event) ? 'Edit Event' : 'Add New Event')
 @section('breadcrumb', 'Admin / Events / ' . (isset($event) ? 'Edit' : 'Add'))
+
+@push('styles')
+<style>
+    .required-asterisk { color: #e14c1e; margin-left: 3px; }
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+    .error-field { border-color: #ef4444 !important; }
+</style>
+@endpush
+
 @section('content')
 
 <div>
@@ -17,7 +26,7 @@
                 @if(isset($event)) @method('PUT') @endif
 
                 <div class="form-group">
-                    <label class="form-label">Event Title *</label>
+                    <label class="form-label">Event Title <span class="required-asterisk">*</span></label>
                     <input type="text" name="title" class="form-control @error('title') error-field @enderror" placeholder="e.g. Annual Sports Day 2025" value="{{ old('title', $event->title ?? '') }}" required>
                     @error('title') <div class="error-msg">{{ $message }}</div> @enderror
                 </div>
@@ -29,7 +38,7 @@
 
                 <div class="form-grid-3">
                     <div class="form-group">
-                        <label class="form-label">Event Date *</label>
+                        <label class="form-label">Event Date <span class="required-asterisk">*</span></label>
                         <input type="date" name="event_date" class="form-control @error('event_date') error-field @enderror" value="{{ old('event_date', isset($event) ? \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') : '') }}" required>
                         @error('event_date') <div class="error-msg">{{ $message }}</div> @enderror
                     </div>
@@ -70,3 +79,35 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('form').validate({
+        rules: {
+            title: { required: true, minlength: 3 },
+            event_date: { required: true }
+        },
+        messages: {
+            title: { 
+                required: "<i class='fas fa-exclamation-circle'></i> Please enter the event title.",
+                minlength: "<i class='fas fa-exclamation-circle'></i> Title must be at least 3 characters."
+            },
+            event_date: { required: "<i class='fas fa-exclamation-circle'></i> Please select an event date." }
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            error.addClass('error-msg');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('error-field');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('error-field');
+        }
+    });
+});
+</script>
+@endpush

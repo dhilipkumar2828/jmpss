@@ -25,13 +25,25 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
+        // Find the admin by email first
+        $admin = Admin::where('email', $request->email)->first();
+
+        if (!$admin) {
+            // Email does not exist
+            return back()->withErrors([
+                'email' => 'Email is Wrong',
+            ])->withInput($request->only('email'));
+        }
+
+        // Email exists, try to authenticate
         if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
             return redirect()->intended(route('admin.dashboard'));
         }
 
+        // If attempt fails here, the password must be wrong
         return back()->withErrors([
-            'email' => 'These credentials do not match our records.',
+            'password' => 'Password is Wrong',
         ])->withInput($request->only('email'));
     }
 
