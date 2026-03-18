@@ -14,9 +14,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Order</th>
+                        <th>S.No</th>
+                        {{-- <th>Order</th> --}}
                         <th>Page</th>
-                        <th>Type</th>
+                        {{-- <th>Type</th> --}}
                         <th>Preview</th>
                         <th>Title</th>
                         <th>Status</th>
@@ -26,9 +27,10 @@
                 <tbody>
                     @foreach($banners as $banner)
                     <tr>
-                        <td>{{ $banner->sort_order }}</td>
+                        <td style="color:var(--text-muted);font-size:13px;">{{ ($banners->currentPage() - 1) * $banners->perPage() + $loop->iteration }}</td>
+                        {{-- <td>{{ $banner->sort_order }}</td> --}}
                         <td><span class="badge badge-info">{{ ucfirst($banner->page) }}</span></td>
-                        <td><span class="badge badge-gray">{{ ucfirst(str_replace('_', ' ', $banner->banner_type)) }}</span></td>
+                        {{-- <td><span class="badge badge-gray">{{ ucfirst(str_replace('_', ' ', $banner->banner_type)) }}</span></td> --}}
                         <td>
                             <img src="{{ asset($banner->image_path) }}" style="width: 100px; height: 50px; object-fit: cover; border-radius: 4px;">
                         </td>

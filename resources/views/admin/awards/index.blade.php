@@ -11,11 +11,11 @@
     <div class="card-body" style="padding:0">
         <div class="table-wrap">
             <table>
-                <thead><tr><th>#</th><th>Award</th><th>Recipient</th><th>Year</th><th>Category</th><th>Status</th><th>Actions</th></tr></thead>
+                <thead><tr><th>S.No</th><th>Award</th><th>Recipient</th><th>Year</th><th>Category</th><th>Status</th><th>Actions</th></tr></thead>
                 <tbody>
                     @forelse($awards as $award)
                     <tr>
-                        <td style="color:var(--text-muted);font-size:13px;">{{ $loop->iteration }}</td>
+                        <td style="color:var(--text-muted);font-size:13px;">{{ ($awards->currentPage() - 1) * $awards->perPage() + $loop->iteration }}</td>
                         <td>
                             <div style="display:flex;align-items:center;gap:12px;">
                                 @if($award->image)

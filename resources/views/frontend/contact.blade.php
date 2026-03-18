@@ -5,9 +5,12 @@
     <!-- Hero Section -->
     <section class="hero contact-hero">
         <div class="hero-overlay"></div>
-        <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Contact Us" class="hero-bg">
+        <img src="{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Contact Us" class="hero-bg">
         <div class="hero-content">
-            <h1>CONTACT US</h1>
+            <h1>{{ $pageBanner->title ?? 'CONTACT US' }}</h1>
+            @if($pageBanner && $pageBanner->subtitle)
+                <p style="font-size: 18px; opacity: 0.9; margin-top: -10px; color: white;">{{ $pageBanner->subtitle }}</p>
+            @endif
             <div class="breadcrumbs">
                 <a href="{{ route('home') }}">Home</a> <span>›</span> <a href="{{ route('contact') }}"
                     class="active">Contact Us</a>

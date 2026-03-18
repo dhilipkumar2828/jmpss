@@ -13,6 +13,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>S.No</th>
                         <th>Date Joined</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -23,6 +24,7 @@
                 <tbody>
                     @foreach($users as $user)
                     <tr>
+                        <td style="color:var(--text-muted);font-size:13px;">{{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}</td>
                         <td>{{ $user->created_at->format('d M Y') }}</td>
                         <td><strong>{{ $user->name }}</strong></td>
                         <td>{{ $user->email }}</td>

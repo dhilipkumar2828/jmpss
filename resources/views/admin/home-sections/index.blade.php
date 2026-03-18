@@ -11,11 +11,11 @@
     <div class="card-body" style="padding:0">
         <div class="table-wrap">
             <table>
-                <thead><tr><th>#</th><th>Section</th><th>Type</th><th>Person</th><th>Sort</th><th>Status</th><th>Actions</th></tr></thead>
+                <thead><tr><th>S.No</th><th>Section</th><th>Type</th><th>Person</th><th>Sort</th><th>Status</th><th>Actions</th></tr></thead>
                 <tbody>
                     @forelse($sections as $s)
                     <tr>
-                        <td style="color:var(--text-muted);font-size:13px;">{{ $loop->iteration }}</td>
+                        <td style="color:var(--text-muted);font-size:13px;">{{ ($sections->currentPage() - 1) * $sections->perPage() + $loop->iteration }}</td>
                         <td><div style="font-weight:700;font-size:14px;">{{ $s->title }}</div><div style="font-size:12px;color:var(--text-muted);">{{ Str::limit($s->content, 70) }}</div></td>
                         <td><span class="badge badge-info">{{ ucfirst($s->section_type) }}</span></td>
                         <td><div style="font-size:13px;font-weight:600;">{{ $s->name ?? '—' }}</div><div style="font-size:12px;color:var(--text-muted);">{{ $s->designation }}</div></td>

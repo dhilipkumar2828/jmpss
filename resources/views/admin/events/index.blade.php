@@ -17,7 +17,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>S.No</th>
                         <th>Event</th>
                         <th>Date</th>
                         <th>Venue</th>
@@ -30,7 +30,7 @@
                 <tbody>
                     @forelse($events as $event)
                     <tr>
-                        <td style="color:var(--text-muted);font-size:13px;">{{ $loop->iteration }}</td>
+                        <td style="color:var(--text-muted);font-size:13px;">{{ ($events->currentPage() - 1) * $events->perPage() + $loop->iteration }}</td>
                         <td>
                             <div style="display:flex;align-items:center;gap:12px;">
                                 @if($event->image)

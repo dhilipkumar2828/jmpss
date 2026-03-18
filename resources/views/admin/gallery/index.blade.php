@@ -226,14 +226,41 @@
         font-size: 0.9rem !important;
         color: var(--text-muted) !important;
     }
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 32px;
+    }
+
+    .page-header-info h2 {
+        font-weight: 800;
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .page-header-info p {
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
 </style>
 @endpush
 
 @section('content')
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
-    <div>
-        <h2 class="fw-bold mb-1">🖼️ Media Library</h2>
-        <p class="text-muted mb-0">Organize and manage your school's photo albums and video galleries.</p>
+<div class="page-header">
+    <div class="page-header-info">
+        <h2>🖼️ Media Library</h2>
+        <p>Organize and manage your school's photo albums and video galleries.</p>
     </div>
     <a href="{{ route('admin.gallery.create') }}" class="btn btn-primary btn-lg shadow-sm">
         <i class="fas fa-plus-circle me-2"></i> Create New Album

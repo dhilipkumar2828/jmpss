@@ -279,7 +279,7 @@
         <a href="{{ route('admin.gallery.index') }}" class="btn btn-outline">
             <i class="fas fa-chevron-left"></i> Back to Gallery
         </a>
-        <div class="d-none d-md-block">
+        <div class="d-none d-md-block" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
             <span class="text-muted small">Manage your school albums and media</span>
         </div>
     </div>
@@ -448,8 +448,8 @@
         @endif
 
         <div class="premium-card sticky-bottom-custom" style="position: sticky; bottom: 20px; z-index: 10;">
-            <div class="card-body py-3 d-flex justify-content-between align-items-center">
-                <div class="d-none d-md-block">
+            <div class="card-body py-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <div class="d-none d-md-block" style="margin-bottom: 5px;">
                     <p class="text-muted small mb-0"><i class="fas fa-cloud-upload-alt me-1"></i> Changes will be saved to the database immediately.</p>
                 </div>
                 <div class="d-flex gap-3">

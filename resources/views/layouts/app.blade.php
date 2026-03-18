@@ -119,16 +119,6 @@
         <x-ui.navbar :settings="$siteSettings" />
     @endunless
 
-    @if (!$hideChrome && (session('success') || session('error')))
-        <div class="flash-wrap" id="flash-wrap">
-            @if (session('success'))
-                <div class="flash success">{{ session('success') }}</div>
-            @endif
-            @if (session('error'))
-                <div class="flash error">{{ session('error') }}</div>
-            @endif
-        </div>
-    @endif
 
     <div id="page-content">
         @yield('content')
