@@ -346,7 +346,7 @@
         <a href="{{ route('admin.profile') }}" class="admin-profile" style="text-decoration:none;">
             <div class="admin-avatar">
                 @if(Auth::guard('admin')->user()->avatar)
-                    <img src="{{ asset('storage/'.Auth::guard('admin')->user()->avatar) }}" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                    <img src="{{ asset(Auth::guard('admin')->user()->avatar) }}" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
                 @else
                     {{ strtoupper(substr(Auth::guard('admin')->user()->name, 0, 1)) }}
                 @endif
@@ -378,7 +378,7 @@
                 <button class="admin-profile-top" id="adminDropdownBtn" style="display:flex; align-items:center; gap:10px; padding:6px 14px; border-radius:12px; background:var(--bg); border:1px solid var(--border); transition:all 0.2s; cursor:pointer; outline:none;">
                     <div class="top-avatar" style="width:32px; height:32px; border-radius:8px; background:var(--accent); color:var(--primary); display:grid; place-items:center; font-weight:700; font-size:13px; overflow:hidden;">
                         @if(Auth::guard('admin')->user()->avatar)
-                            <img src="{{ asset('storage/'.Auth::guard('admin')->user()->avatar) }}" style="width:100%; height:100%; object-fit:cover;">
+                            <img src="{{ asset(Auth::guard('admin')->user()->avatar) }}" style="width:100%; height:100%; object-fit:cover;">
                         @else
                             {{ strtoupper(substr(Auth::guard('admin')->user()->name, 0, 1)) }}
                         @endif

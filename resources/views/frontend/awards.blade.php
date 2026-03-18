@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset('storage/'.$pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -222,7 +222,7 @@
                 <div class="award-gallery-card">
                     <div class="award-img-wrapper">
                         @if($award->image)
-                            <img src="{{ asset('storage/'.$award->image) }}" alt="{{ $award->title }}">
+                            <img src="{{ asset($award->image) }}" alt="{{ $award->title }}">
                         @else
                             <img src="{{ asset('assets/jmpsss/image/new/award1.jpg') }}" alt="{{ $award->title }}">
                         @endif

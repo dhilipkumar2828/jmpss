@@ -53,5 +53,6 @@ class BannerComposer
         }
 
         $view->with('pageBanner', $pageBanner);
+        $view->with('recentEvents', \App\Models\Event::active()->latest('event_date')->take(3)->get());
     }
 }

@@ -23,6 +23,11 @@ class CareerApplicationController extends Controller
     public function destroy($id)
     {
         $application = CareerApplication::findOrFail($id);
+        
+        if ($application->resume_path && file_exists(public_path($application->resume_path))) {
+            unlink(public_path($application->resume_path));
+        }
+
         $application->delete();
         return back()->with('success', 'Career application deleted successfully.');
     }

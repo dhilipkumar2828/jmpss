@@ -36,7 +36,7 @@
                         <td>{{ $app->mobile }}</td>
                         <td>
                             @if($app->resume_path)
-                            <a href="{{ asset('storage/' . $app->resume_path) }}" target="_blank" class="badge badge-success">
+                            <a href="{{ asset($app->resume_path) }}" target="_blank" class="badge badge-success">
                                 <i class="fas fa-file-download"></i> Download
                             </a>
                             @else

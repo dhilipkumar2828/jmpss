@@ -22,31 +22,44 @@ class GalleryController extends Controller
             'groups.*.video_urls.*' => 'nullable|url|max:500',
         ]);
 
+        $groupInputs = $request->input('groups', []);
+        $groupFiles = $request->file('groups', []);
+        $allIndices = array_unique(array_merge(array_keys($groupInputs), array_keys($groupFiles)));
+
         $groupCount = 0;
-        foreach ($request->input('groups', []) as $index => $group) {
+        foreach ($allIndices as $index) {
+            $groupData = $groupInputs[$index] ?? [];
+            
             // Create ONE Gallery record (Album)
             $gallery = Gallery::create([
-                'title'       => $group['title'],
-                'category'    => $group['category'] ?? null,
-                'description' => $group['description'] ?? null,
-                'type'        => 'photo', // Default but we can handle mixed
+                'title'       => $groupData['title'] ?? 'Untitled Album',
+                'category'    => $groupData['category'] ?? null,
+                'description' => $groupData['description'] ?? null,
+                'type'        => 'photo',
                 'is_active'   => true,
                 'sort_order'  => 0,
             ]);
 
             // Save multiple Photos
-            if ($request->hasFile("groups.$index.photos")) {
-                foreach ($request->file("groups.$index.photos") as $file) {
-                    $gallery->items()->create([
-                        'item_type' => 'photo',
-                        'file_path' => $file->store('uploads/gallery', 'public'),
-                    ]);
+            if (isset($groupFiles[$index]['photos'])) {
+                $photos = $groupFiles[$index]['photos'];
+                if (!is_array($photos)) $photos = [$photos];
+                
+                foreach ($photos as $file) {
+                    if ($file->isValid()) {
+                        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                        $file->move(public_path('uploads/gallery'), $filename);
+                        $gallery->items()->create([
+                            'item_type' => 'photo',
+                            'file_path' => 'uploads/gallery/' . $filename,
+                        ]);
+                    }
                 }
             }
 
             // Save multiple Video URLs
-            if (isset($group['video_urls'])) {
-                $urls = array_filter($group['video_urls']);
+            if (isset($groupData['video_urls'])) {
+                $urls = array_filter($groupData['video_urls']);
                 foreach ($urls as $url) {
                     $gallery->items()->create([
                         'item_type' => 'video',
@@ -82,11 +95,20 @@ class GalleryController extends Controller
 
         // Add new photos
         if ($request->hasFile('new_photos')) {
-            foreach ($request->file('new_photos') as $file) {
-                $gallery->items()->create([
-                    'item_type' => 'photo',
-                    'file_path' => $file->store('uploads/gallery', 'public'),
-                ]);
+            $files = $request->file('new_photos');
+            // If it's a single file (not an array), wrap it
+            if (!is_array($files)) {
+                $files = [$files];
+            }
+            foreach ($files as $file) {
+                if ($file->isValid()) {
+                    $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                    $file->move(public_path('uploads/gallery'), $filename);
+                    $gallery->items()->create([
+                        'item_type' => 'photo',
+                        'file_path' => 'uploads/gallery/' . $filename,
+                    ]);
+                }
             }
         }
 
@@ -108,8 +130,8 @@ class GalleryController extends Controller
     {
         // Delete all files in storage
         foreach ($gallery->items as $item) {
-            if ($item->file_path) {
-                Storage::disk('public')->delete($item->file_path);
+            if ($item->file_path && file_exists(public_path($item->file_path))) {
+                unlink(public_path($item->file_path));
             }
         }
         
@@ -120,8 +142,8 @@ class GalleryController extends Controller
     public function destroyItem($id)
     {
         $item = \App\Models\GalleryItem::findOrFail($id);
-        if ($item->file_path) {
-            Storage::disk('public')->delete($item->file_path);
+        if ($item->file_path && file_exists(public_path($item->file_path))) {
+            unlink(public_path($item->file_path));
         }
         $item->delete();
         return response()->json(['success' => true]);

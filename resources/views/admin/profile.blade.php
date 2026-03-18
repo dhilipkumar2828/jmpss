@@ -19,7 +19,7 @@
                     <div class="avatar-upload-group" style="text-align: center;">
                         <div class="avatar-preview-box" style="width: 150px; height: 150px; border-radius: 20px; background: #f8fafc; border: 2px dashed var(--border); margin: 0 auto 15px; display: grid; place-items: center; overflow: hidden; position: relative;">
                             @if($user->avatar)
-                                <img src="{{ asset('storage/'.$user->avatar) }}" id="preview-img" style="width:100%; height:100%; object-fit:cover;">
+                                <img src="{{ asset($user->avatar) }}" id="preview-img" style="width:100%; height:100%; object-fit:cover;">
                             @else
                                 <i class="fas fa-user-circle" id="preview-placeholder" style="font-size: 60px; color: #cbd5e1;"></i>
                                 <img id="preview-img" style="width:100%; height:100%; object-fit:cover; display:none;">
