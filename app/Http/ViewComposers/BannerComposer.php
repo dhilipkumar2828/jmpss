@@ -18,16 +18,19 @@ class BannerComposer
             $map = [
                 'home' => 'home',
                 'about' => 'about',
+                'principal-desk' => 'about',
+                'correspondent-desk' => 'about',
+                'mandatory-disclosure' => 'about',
                 'academics' => 'academics',
-                'admissions' => 'admissions',
+                'admissions' => 'academics',
+                'awards' => 'academics',
                 'gallery' => 'gallery',
-                'videos' => 'videos',
-                'events' => 'events',
-                'awards' => 'awards',
+                'videos' => 'gallery',
+                'events' => 'campus-life',
+                'infrastructure' => 'campus-life',
+                'facilities' => 'campus-life',
                 'careers' => 'careers',
                 'contact' => 'contact',
-                'principal-desk' => 'about', // Fallback to about
-                'correspondent-desk' => 'about',
             ];
 
             foreach ($map as $route => $key) {
@@ -38,10 +41,12 @@ class BannerComposer
             }
         }
 
-        // Get the specific header banner for this page
+        // Get the specific banner for this page
+        // We prefer 'page_header' type, but will take any active banner for this page
         $pageBanner = Banner::where('page', '=', $page)
-            ->where('banner_type', '=', 'page_header')
             ->active()
+            ->orderByRaw("CASE WHEN banner_type = 'page_header' THEN 0 ELSE 1 END")
+            ->orderBy('sort_order', 'asc')
             ->first();
             
         // If not found, try a default header banner

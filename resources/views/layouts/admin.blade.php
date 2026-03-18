@@ -405,17 +405,6 @@
         </div>
     </header>
 
-    <!-- Flash Messages -->
-    @if(session('success') || session('error'))
-    <div class="flash-wrap">
-        @if(session('success'))
-        <div class="alert alert-success"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>
-        @endif
-        @if(session('error'))
-        <div class="alert alert-error"><i class="fas fa-times-circle"></i> {{ session('error') }}</div>
-        @endif
-    </div>
-    @endif
 
     <!-- Content -->
     <main class="content">

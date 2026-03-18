@@ -4,15 +4,63 @@
 @section('content')
 <main class="page-shell" id="mandatory-disclosure">
     <div class="site-container">
+    <style>
+        .page-hero {
+            position: relative;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        .page-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider3.jpg') }}') center/cover no-repeat;
+            z-index: 0;
+        }
+        .page-hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 72, 0, 0.55);
+        }
+        .page-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .page-hero-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+        }
+        .breadcrumb { margin-top: 10px; display: flex; justify-content: center; gap: 8px; font-size: 14px; }
+        .breadcrumb a { color: #fff; text-decoration: none; opacity: 0.8; }
+        .breadcrumb span { color: #fff; opacity: 0.6; }
+    </style>
+
+    <div class="site-container">
         <section class="page-hero">
-            <h1>Mandatory Public Disclosure (Appendix-IX)</h1>
-            <p>This page is intentionally structured for CBSE disclosure updates. Unknown fields are left blank or marked as pending update.</p>
-            <div class="breadcrumb">
-                <a href="{{ route('home') }}">Home</a>
-                <span>/</span>
-                <span>Mandatory Disclosure</span>
+            <div class="page-hero-bg"></div>
+            <div class="page-hero-content">
+                <h1>{{ $pageBanner->title ?? 'Mandatory Public Disclosure (Appendix-IX)' }}</h1>
+                @if($pageBanner && $pageBanner->subtitle)
+                    <p style="font-size: 18px; opacity: 0.9; margin-top: -10px; color: white;">{{ $pageBanner->subtitle }}</p>
+                @else
+                    <p style="font-size: 16px; opacity: 0.8;">CBSE compliance and institutional details</p>
+                @endif
+                <div class="breadcrumb">
+                    <a href="{{ route('home') }}">Home</a>
+                    <span>/</span>
+                    <span>Mandatory Disclosure</span>
+                </div>
             </div>
         </section>
+    </div>
     </div>
 
     <x-ui.section-wrapper eyebrow="Section A" title="General Information">

@@ -17,7 +17,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ asset('assets/jmpsss/image/new/slider3.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider3.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -609,7 +609,10 @@
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
             <span class="page-label">About Us</span>
-            <h1>Correspondent's Desk</h1>
+            <h1>{{ $pageBanner->title ?? "Correspondent's Desk" }}</h1>
+            @if($pageBanner && $pageBanner->subtitle)
+                <p style="font-size: 18px; opacity: 0.9; margin-top: -10px; color: white;">{{ $pageBanner->subtitle }}</p>
+            @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
                 <a href="{{ route('about') }}">About Us</a><span>›</span>

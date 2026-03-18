@@ -25,7 +25,7 @@ class BannerController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
             'page' => 'required|string',
-            'banner_type' => 'required|string',
+            // 'banner_type' => 'required|string',
             'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'sort_order' => 'integer|min:0',
@@ -41,6 +41,11 @@ class BannerController extends Controller
         }
 
         $data['is_active'] = $request->has('is_active');
+        
+        // Default banner type if not provided
+        if (!isset($data['banner_type'])) {
+            $data['banner_type'] = ($data['page'] === 'home') ? 'slider' : 'page_header';
+        }
 
         Banner::create($data);
 
@@ -57,7 +62,7 @@ class BannerController extends Controller
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'page' => 'required|string',
-            'banner_type' => 'required|string',
+            // 'banner_type' => 'required|string',
             'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'sort_order' => 'integer|min:0',
@@ -76,6 +81,11 @@ class BannerController extends Controller
         }
 
         $data['is_active'] = $request->has('is_active');
+
+        // Default banner type if not provided
+        if (!isset($data['banner_type'])) {
+            $data['banner_type'] = ($data['page'] === 'home') ? 'slider' : 'page_header';
+        }
 
         $banner->update($data);
 

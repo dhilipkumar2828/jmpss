@@ -3,9 +3,56 @@
 
 @section('content')
     <!-- Page Header -->
+    <style>
+        .page-header {
+            position: relative;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+            margin-bottom: 0px;
+        }
+        .page-header-bg {
+            position: absolute;
+            inset: 0;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider2.jpg') }}') center/cover no-repeat;
+            z-index: 0;
+        }
+        .page-header-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 72, 0, 0.55);
+        }
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+        }
+        .page-header-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .breadcrumb { margin-top: 10px; display: flex; justify-content: center; gap: 8px; font-size: 14px; list-style: none; padding: 0; }
+        .breadcrumb a { color: #fff; text-decoration: none; opacity: 0.8; }
+        .breadcrumb li { color: #fff; opacity: 0.8; }
+        .breadcrumb li + li::before { content: "›"; margin-right: 8px; margin-left: -4px; opacity: 0.6; }
+    </style>
+
+    <!-- Page Header -->
     <section class="page-header reveal reveal-scale" data-reveal-once>
-        <div class="container">
-            <h1>Scholarly Infrastructure</h1>
+        <div class="page-header-bg"></div>
+        <div class="page-header-content">
+            <h1>{{ $pageBanner->title ?? 'Scholarly Infrastructure' }}</h1>
+            @if($pageBanner && $pageBanner->subtitle)
+                <p style="font-size: 18px; opacity: 0.9; margin-top: -10px; color: white;">{{ $pageBanner->subtitle }}</p>
+            @endif
             <ul class="breadcrumb">
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li>Infrastructure</li>

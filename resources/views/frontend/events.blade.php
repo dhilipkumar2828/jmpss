@@ -56,9 +56,12 @@
 <!-- Hero Section -->
     <section class="hero contact-hero">
         <div class="hero-overlay"></div>
-        <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="Events" class="hero-bg" id="hero-bg-img">
+        <img src="{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="Events" class="hero-bg" id="hero-bg-img">
         <div class="hero-content">
-            <h1 id="page-title">EVENTS & ACHIEVEMENTS</h1>
+            <h1 id="page-title">{{ $pageBanner->title ?? 'EVENTS & ACHIEVEMENTS' }}</h1>
+            @if($pageBanner && $pageBanner->subtitle)
+                <p style="font-size: 18px; opacity: 0.9; margin-top: -10px; color: white;">{{ $pageBanner->subtitle }}</p>
+            @endif
             <div class="breadcrumbs" id="page-breadcrumbs">
                 <a href="{{ route('home') }}">Home</a> <span>›</span> <a href="{{ route('events') }}" class="active">Events</a>
             </div>
