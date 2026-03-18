@@ -281,11 +281,11 @@
                 <i class="fas fa-chart-pie"></i> Dashboard
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                 <i class="fas fa-users"></i> Registered Users
             </a>
-        </li>
+        </li> --}}
     </ul>
 
     <span class="sidebar-section-label">Content</span>
