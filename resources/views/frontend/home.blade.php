@@ -176,15 +176,26 @@
                 </div>
             </div>
             <div class="about-text">
-                <span class="section-subtitle">About Us</span>
-                <h2 class="section-title-alt">{{ $sections['about']->title ?? 'Empowering Students Through Holistic Education' }}</h2>
+                {{-- <span class="section-subtitle">Welcome to JMPSSS</span> --}}
+                <h2 class="section-title-alt">{{ $sections['about']->title ?? 'Welcome to JMPSSS' }}</h2>
                 <div class="about-content-dynamic">
                     @if($sections['about'])
                         {!! nl2br(e($sections['about']->content)) !!}
                     @else
-                        <p>Jaypee Model Senior Secondary School is dedicated to fostering an environment where academic rigor
-                        and holistic commitment go hand-in-hand. We believe in nurturing not just the intellect, but the
-                        character of every student.</p>
+                        <p>JEEVA MEMORIAL PUBLIC SCHOOL, the faculty and the Management welcome you to our school community.
+                            At JEEVA MEMORIAL PUBLIC SCHOOL, we give students a wide range of options in their education and career. As a not-for-profit organisation, we devote our resources to delivering high-quality educational programmes that can unlock learners' potential.
+                            Our programmes and qualifications set the global standard for international education. They are created by subject experts,
+                            rooted in academic rigour and reflect the latest educational
+                            research.
+                            They provide a strong platform for learners to progress from
+                            one stage to the next and are well supported by teaching and
+                            learning resources.
+                            Together with schools, we develop confident, responsible,
+                            reflective, innovative and engaged equipped for success in the
+                            fast-changing modern world.
+                            This is an initiative by the JEEVA MEMORIAL TRUST to give
+                            value based education to all segments of the society.
+                        </p>
                     @endif
                 </div>
                 <ul class="about-feature-list" style="margin-top: 20px;">

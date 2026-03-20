@@ -214,13 +214,14 @@
                 <div class="sc-content">
                     <div class="sc-eyebrow">Join Our Community</div>
                     <h2 class="sc-title">Your Child's <span>Future</span> Starts Here</h2>
-                    <p class="sc-text lead">Experience a seamless admission process designed to welcome your family into
-                        the JMPSSS community with open arms.</p>
-                    <p class="sc-text">We believe in nurturing every child's potential. Our admissions for the 2026-27
-                        academic year are now open for Pre-KG through Grade XII. We invite you to explore our campus and
-                        meet our dedicated educators.</p>
-                    <p class="sc-text">Follow the simple steps below to begin the journey towards academic excellence
-                        and holistic growth for your child.</p>
+                    <p class="sc-text lead">Application for admission shall be obtained on payment of tprescribed registration fee towards the cost of prospectus and Application form.</p>
+                    <p class="sc-text lead">Pupils coming from other schools and states must produce the following documents.</p>
+                    <p class="sc-text">Transfer the certificate duly signed by the principal/Head Master of the previous school attended, and counter signed by educational officer.</p>
+                    <p class="sc-text">Mark sheet and conduct certificate from the institution last attended.</p>
+                    <p class="sc-text">Birth certificate from the following (for KG children) extract from the Register of Birth or from a Magistrate's office (signed by magistrate) or municipal office. No other Birth certificates will be accepted.</p>
+                    <p class="sc-text">Community certificate in the case of SC, ST, BC and MBC from Thasildar. No pupil will be admitted without the above documents</p>
+                    <p class="sc-text">Once the candidate gets selected for the admission, she/he has to immediately pay the term fees.</p>
+                    <p class="sc-text">Full tution fees should be paid for the term even if the child leaves before the end of the term.</p>
                 </div>
                 <div class="sc-visual">
                     <img src="{{ asset('assets/jmpsss/image/new/school22.jpg') }}" alt="Students" class="sc-img">

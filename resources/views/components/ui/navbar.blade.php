@@ -3,10 +3,10 @@
             <!-- Left: Social Icons -->
             <div class="top-header-left">
                 <div class="social-icons-top">
-                    <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="{{ $settings['facebook_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="{{ $settings['instagram_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    {{-- <a href="{{ $settings['linkedin_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a> --}}
+                    <a href="{{ $settings['youtube_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
@@ -60,9 +60,9 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('principal-desk') }}"><i class="fa-solid fa-user-tie"></i> Principal's Desk</a>
+                            <li><a href="{{ route('principal-desk') }}"><i class="fa-solid fa-user-tie"></i> Chairman's Desk</a>
                             </li>
-                            <li><a href="{{ route('correspondent-desk') }}"><i class="fa-solid fa-briefcase"></i> Correspondent's
+                            <li><a href="{{ route('correspondent-desk') }}"><i class="fa-solid fa-briefcase"></i> Director & Correspondent's
                                     Desk</a></li>
                         </ul>
                     </li>

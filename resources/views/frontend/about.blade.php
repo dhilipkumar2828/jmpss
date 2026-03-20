@@ -353,187 +353,74 @@
             border-top: 1px solid #e8f0e8;
         }
 
-        .vv-item {
-            padding: 28px 20px;
-            border-right: 1px solid #e8f0e8;
-            cursor: default;
-            transition: background 0.3s;
-            position: relative;
-            overflow: hidden;
+        /* ── Club Showcase V2 (Yellow Theme) ── */
+        .clubs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            margin-bottom: 50px;
         }
 
-        .vv-item:last-child {
-            border-right: none;
-        }
-
-        .vv-item:hover {
-            background: #f4faf4;
-        }
-
-        /* Colored top accent line per item */
-        .vv-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #004800;
-            transform: scaleX(0);
-            transition: transform 0.3s;
-            transform-origin: left;
-        }
-
-        .vv-item:hover::before {
-            transform: scaleX(1);
-        }
-
-        .vv-item:nth-child(1)::before {
-            background: #004800;
-        }
-
-        .vv-item:nth-child(2)::before {
-            background: #e14c1e;
-        }
-
-        .vv-item:nth-child(3)::before {
-            background: #1a7ad4;
-        }
-
-        .vv-item:nth-child(4)::before {
-            background: #a030c0;
-        }
-
-        .vv-item:nth-child(5)::before {
-            background: #c07a00;
-        }
-
-        .vv-item:nth-child(6)::before {
-            background: #007858;
-        }
-
-        .vv-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+        .club-card-v2 {
+            background: #fffdf0; /* Light cream/yellow */
+            border: 1px solid #f5ecb3;
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 14px;
-            background: #eaf4ea;
-            transition: background 0.3s;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
 
-        .vv-item:nth-child(1) .vv-icon {
-            background: #e8f4e8;
+        .club-card-v2:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(211, 47, 47, 0.12);
+            background: #fffdeb;
         }
 
-        .vv-item:nth-child(2) .vv-icon {
-            background: #fdeee8;
+        .club-icon-v2 {
+            width: 70px;
+            height: 70px;
+            background: #fff;
+            color: #d32f2f;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+            margin: 0 auto 25px;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.1);
         }
 
-        .vv-item:nth-child(3) .vv-icon {
-            background: #e4eef9;
-        }
-
-        .vv-item:nth-child(4) .vv-icon {
-            background: #f4e8fa;
-        }
-
-        .vv-item:nth-child(5) .vv-icon {
-            background: #fdf3e0;
-        }
-
-        .vv-item:nth-child(6) .vv-icon {
-            background: #e0f4ee;
-        }
-
-        .vv-item:hover:nth-child(1) .vv-icon {
-            background: #004800;
-        }
-
-        .vv-item:hover:nth-child(2) .vv-icon {
-            background: #e14c1e;
-        }
-
-        .vv-item:hover:nth-child(3) .vv-icon {
-            background: #1a7ad4;
-        }
-
-        .vv-item:hover:nth-child(4) .vv-icon {
-            background: #a030c0;
-        }
-
-        .vv-item:hover:nth-child(5) .vv-icon {
-            background: #c07a00;
-        }
-
-        .vv-item:hover:nth-child(6) .vv-icon {
-            background: #007858;
-        }
-
-        .vv-icon i {
+        .club-card-v2 h4 {
             font-size: 20px;
-            color: #004800;
-            transition: color 0.3s;
-        }
-
-        .vv-item:nth-child(2) .vv-icon i {
-            color: #e14c1e;
-        }
-
-        .vv-item:nth-child(3) .vv-icon i {
-            color: #1a7ad4;
-        }
-
-        .vv-item:nth-child(4) .vv-icon i {
-            color: #a030c0;
-        }
-
-        .vv-item:nth-child(5) .vv-icon i {
-            color: #c07a00;
-        }
-
-        .vv-item:nth-child(6) .vv-icon i {
-            color: #007858;
-        }
-
-        .vv-item:hover .vv-icon i {
-            color: #fff;
-        }
-
-        .vv-num {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: #bbb;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .vv-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1a1a1a;
+            font-weight: 800;
+            color: #d32f2f;
+            margin-bottom: 18px;
             font-family: 'Outfit', sans-serif;
-            line-height: 1.3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .vv-desc {
-            font-size: 12.5px;
-            color: #666;
-            line-height: 1.6;
-            margin-top: 8px;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
+        .club-card-v2 p {
+            font-size: 14.5px;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 0;
+            flex-grow: 1;
         }
 
-        .vv-item:hover .vv-desc {
-            max-height: 120px;
-            opacity: 1;
+        @media (max-width: 991px) {
+            .clubs-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
+        @media (max-width: 650px) {
+            .clubs-grid { grid-template-columns: 1fr; }
+            .club-card-v2 { padding: 35px 25px; }
+        }
+
 
         .mv-card:nth-child(2) {
             background: linear-gradient(145deg, #b83300, #e14c1e);
@@ -1161,15 +1048,34 @@
                 <!-- Left: Content & Stats -->
                 <div class="sc-content">
                     <div class="sc-eyebrow">Our Story</div>
-                    <h2 class="sc-title">Nurturing Minds, <br><span>Building Futures</span></h2>
+                    <h2 class="sc-title">The Salient features of the School</h2>
 
-                    <p class="sc-text lead">Founded under the Jeeva Memorial Trust by Mr. G.K. Babu &mdash; in loving
-                        memory of his son Jeevakumar.</p>
+                    <p class="sc-text lead">JEEVA MEMORIAL TRUST, founded by Mr. G.K. Babu, in the
+                        memory of his beloved son JEEVAKUMAR is the source of
+                        inspiration for a model school in Thirukazhukundram.</p>
 
-                    <p class="sc-text">Our school stands as a living legacy of love, purpose, and hope in
-                        Thirukazhukundram. We are a CBSE-affiliated co-education institution offering classes from
-                        Pre.K.G. to XII Std in a modern, safe, and stimulating environment.</p>
-
+                    <p class="sc-text">The School offers education under CBSE pattern.
+                                        The School offers co-education from Pre. K.G. to VIII Std.
+                                        Love, sharing and caring are the keynotes of the relationships in
+                                        the School. Therefore, the School is a home where each one
+                                        lives for the other and all of them live for God.
+                                        The integral items inter linked with the School curriculum.
+                                        Comfortable staff rooms, a language lab, a computer lab,
+                                        dance room, art room and an audio visual room, all
+                                        contribute to enhance the learning experience and life during
+                                        vital years of their growth.
+                                        The class rooms for the kindergarten children are fully
+                                        equipped with a wide array of materials that facilitate a play
+                                        way learning and another fun filled day, right in the School.
+                                        JMPS also provides the safest environment for your child
+                                        during the day so that you can rest assured with the guarantee
+                                        that your child will never be away from the watchful eyes of
+                                        our trained support staff or teachers.
+                                        The lawns, the play area and the construction have all been
+                                        designed keeping in mind the comfort and safety of your child.
+                                        The School has an impressive computer lab designed for very
+                                        young learners in a playful ambience.
+                    </p>
                     <div class="sc-stats-wrapper">
                         <div class="sc-stat-item">
                             <strong class="sc-stat-number" data-target="15" data-suffix="+">0+</strong>
@@ -1215,8 +1121,11 @@
             <div class="mv-panel mv-mission">
                 <span class="mv-panel-tag"><i class="fa-solid fa-bullseye"></i> Mission</span>
                 <h3>Our Mission</h3>
-                <p>To provide a stimulating, inclusive, and values-driven education that empowers every student to
-                    realise their full potential — academically, socially, and morally.</p>
+                <p>To support and encourage all the deserving
+                    students and elevate them to higher level. To
+                    encourage and support budding talents by
+                    providing all the necessary infrastructure and
+                    world class facilities within the campus.</p>
                 <ul>
                     <li><i class="fa-solid fa-circle-check"></i> Building responsible citizens of tomorrow</li>
                     <li><i class="fa-solid fa-circle-check"></i> Nurturing confidence, integrity &amp; compassion</li>
@@ -1233,8 +1142,11 @@
             <div class="mv-panel mv-vision">
                 <span class="mv-panel-tag"><i class="fa-solid fa-eye"></i> Vision</span>
                 <h3>Our Vision</h3>
-                <p>To be a centre of educational excellence in Tamil Nadu — where tradition meets innovation, and every
-                    child is inspired to dream big and lead with purpose.</p>
+                <p>To encourage and motivate
+                    students through all ways and
+                    means and by providing a
+                    place to Enrich, Educate and
+                    Elevate lives.</p>
                 <ul>
                     <li><i class="fa-solid fa-circle-check"></i> Celebrating diversity &amp; fostering curiosity</li>
                     <li><i class="fa-solid fa-circle-check"></i> Shaping leaders, thinkers &amp; changemakers</li>
@@ -1244,53 +1156,52 @@
 
         </div>
 
-        <!-- Values Strip (hover to reveal description) -->
-        <div class="vv-strip">
-            <div class="vv-item">
-                <div class="vv-icon"><i class="fa-solid fa-book-open"></i></div>
-                <span class="vv-num">01</span>
-                <div class="vv-title">Academic Excellence</div>
-                <div class="vv-desc">Rigorous CBSE curriculum delivered with passion — building strong foundations from
-                    kindergarten through Grade XII.</div>
-            </div>
-            <div class="vv-item">
-                <div class="vv-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
-                <span class="vv-num">02</span>
-                <div class="vv-title">Holistic Development</div>
-                <div class="vv-desc">Intellectual, physical, creative, and moral growth through co-curricular programmes
-                    and sports.</div>
-            </div>
-            <div class="vv-item">
-                <div class="vv-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <span class="vv-num">03</span>
-                <div class="vv-title">Safe Environment</div>
-                <div class="vv-desc">A nurturing campus with trained staff ensuring the comfort and safety of every
-                    child every day.</div>
-            </div>
-            <div class="vv-item">
-                <div class="vv-icon"><i class="fa-solid fa-people-group"></i></div>
-                <span class="vv-num">04</span>
-                <div class="vv-title">Community &amp; Belonging</div>
-                <div class="vv-desc">Love, sharing, and caring are the core notes of all relationships within our school
-                    family.</div>
-            </div>
-            <div class="vv-item">
-                <div class="vv-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                <span class="vv-num">05</span>
-                <div class="vv-title">Innovation in Learning</div>
-                <div class="vv-desc">Activity-based and Montessori methods encourage self-discovery and experiential
-                    learning at every stage.</div>
-            </div>
-            <div class="vv-item">
-                <div class="vv-icon"><i class="fa-solid fa-star"></i></div>
-                <span class="vv-num">06</span>
-                <div class="vv-title">Integrity &amp; Ethics</div>
-                <div class="vv-desc">Strong values, social responsibility, and a sense of purpose instilled in every
-                    student from the very first day.</div>
+        <!-- Club Activities Showcase (Always Visible Full Content) -->
+        <div class="container" style="margin-bottom: 80px;">
+            <div class="clubs-grid">
+                <!-- 01 Literary Club -->
+                <div class="club-card-v2">
+                    <div class="club-icon-v2"><i class="fa-solid fa-book-open"></i></div>
+                    <h4>LITERARY CLUB</h4>
+                    <p>English literary club has conducted various competitions and activities to improve skills in listening, speaking, reading and writing. The different competition such as handwriting, speech, poem recitation, debate, story telling, word-O-word, jam, Tongue twister etc is conducted. The winners are awarded with certificates.</p>
+                </div>
+
+                <!-- 02 Math Club -->
+                <div class="club-card-v2">
+                    <div class="club-icon-v2"><i class="fa-solid fa-calculator"></i></div>
+                    <h4>MATH CLUB</h4>
+                    <p>The function of maths club are fun based. These help the school children to enjoy, appreciate and acquire basic knowledge in maths by organizing competition group activities and puzzles. Math fun game, Lab kid game, Tables Recitation, Album competition etc, were some of the activities of MATH club.</p>
+                </div>
+
+                <!-- 03 Historical Club -->
+                <div class="club-card-v2">
+                    <div class="club-icon-v2"><i class="fa-solid fa-landmark-dome"></i></div>
+                    <h4>HISTORICAL CLUB</h4>
+                    <p>Historical club conducted many competitions & activities such as food festival, field trips and fashion parade, Drama to inculcate the moral values and to spread the message of humanity among our school students.</p>
+                </div>
+
+                <!-- 04 Go Green Club -->
+                <div class="club-card-v2">
+                    <div class="club-icon-v2"><i class="fa-solid fa-leaf"></i></div>
+                    <h4>GO GREEN CLUB</h4>
+                    <p>Go green club conducted many competition and activities to enhance the mental ability of children, science quiz, debate, group discussions, model making were organized to make children more effective in science.</p>
+                </div>
+
+                <!-- 05 Hindi Nivas -->
+                <div class="club-card-v2">
+                    <div class="club-icon-v2"><i class="fa-solid fa-language"></i></div>
+                    <h4>HINDI NIVAS</h4>
+                    <p>Hindi nivas conducted various activities to improve the values of Hindi language among the students. It conducted Hindi Handwriting, Dictation, Speech, Story telling, Dohe recitation, Quiz etc.</p>
+                </div>
+
+                <!-- 06 IT Club -->
+                <div class="club-card-v2">
+                    <div class="club-icon-v2"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h4>IT CLUB</h4>
+                    <p>To make the children multi talented, IT Club has conducted many practical work outs in Computer Lab which sharpen the minds of the students and update them with the current knowledge.</p>
+                </div>
             </div>
         </div>
-
-    </section>
 
     <!-- Our Foundation -->
     <section class="trust-section">
@@ -1313,7 +1224,7 @@
                         <h2>Founded on <span>Love &amp; Inspiration</span></h2>
                         <div class="trust-divider-line"></div>
                         <p>JEEVA MEMORIAL TRUST was established by <strong style="color:rgba(255,255,255,0.9)">Mr. G.K.
-                                Babu</strong> in the cherished memory of his beloved son <strong
+                                Babu</strong> in the memory of his beloved son <strong
                                 style="color:rgba(255,255,255,0.9)">Jeevakumar</strong>. That profound act of love
                             became the seed from which our school grew &mdash; a place where thousands of children now
                             find light, learning, and a future.</p>
@@ -1321,7 +1232,7 @@
                             <div class="trust-founder-avatar">GKB</div>
                             <div class="trust-founder-meta">
                                 <strong>Mr. G.K. Babu</strong>
-                                <span>Correspondent &amp; Founder, Jeeva Memorial Trust</span>
+                                <span>Founder &amp; Chairman, Jeeva Memorial Trust</span>
                             </div>
                         </div>
                     </div>

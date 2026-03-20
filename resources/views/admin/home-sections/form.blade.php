@@ -14,15 +14,15 @@
                     <div class="form-group">
                         <label class="form-label">Section Type *</label>
                         <select name="section_type" class="form-control" required>
-                            <option value="principal" {{ old('section_type', $section->section_type ?? '') == 'principal' ? 'selected' : '' }}>👨‍💼 Principal's Desk</option>
-                            <option value="correspondent" {{ old('section_type', $section->section_type ?? '') == 'correspondent' ? 'selected' : '' }}>👔 Correspondent's Desk</option>
+                            <option value="principal" {{ old('section_type', $section->section_type ?? '') == 'principal' ? 'selected' : '' }}>👨‍💼 Chairman's Desk</option>
+                            <option value="correspondent" {{ old('section_type', $section->section_type ?? '') == 'correspondent' ? 'selected' : '' }}>👔 Director & Correspondent's Desk</option>
                             <option value="hero" {{ old('section_type', $section->section_type ?? '') == 'hero' ? 'selected' : '' }}>🎯 Hero Section</option>
                             <option value="about" {{ old('section_type', $section->section_type ?? '') == 'about' ? 'selected' : '' }}>📋 About Section</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Section Title *</label>
-                        <input type="text" name="title" class="form-control @error('title') error-field @enderror" value="{{ old('title', $section->title ?? '') }}" required placeholder="e.g. Principal's Desk">
+                        <input type="text" name="title" class="form-control @error('title') error-field @enderror" value="{{ old('title', $section->title ?? '') }}" required placeholder="e.g. Chairman's Desk">
                         @error('title')<div class="error-msg">{{ $message }}</div>@enderror
                     </div>
                 </div>

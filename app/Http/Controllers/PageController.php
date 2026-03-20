@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function principalDesk()
+    public function chairmanDesk()
     {
-        return view('frontend.principal-desk');
+        return view('frontend.chairman-desk');
     }
 
     public function correspondentDesk()

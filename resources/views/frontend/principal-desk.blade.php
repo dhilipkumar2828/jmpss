@@ -485,14 +485,14 @@
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
             <span class="page-label">About Us</span>
-            <h1>{{ $pageBanner->title ?? "Principal's Desk" }}</h1>
+            <h1>{{ $pageBanner->title ?? "Chairman's Desk" }}</h1>
             @if($pageBanner && $pageBanner->subtitle)
                 <p style="font-size: 18px; opacity: 0.9; margin-top: -10px; color: white;">{{ $pageBanner->subtitle }}</p>
             @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
                 <a href="{{ route('about') }}">About Us</a><span>›</span>
-                Principal's Desk
+                Chairman's Desk
             </nav>
         </div>
     </section>
@@ -502,8 +502,8 @@
             <div class="principal-layout">
                 <div class="principal-card">
                     <div class="principal-photo"><i class="fa-solid fa-user-tie"></i></div>
-                    <h3>Dr. R. Krishnamurthy</h3>
-                    <span class="designation">Principal, JMPSS</span>
+                    <h3>Mr. G.K. Babu</h3>
+                    <span class="designation">Founder & Chairman, JMPSS</span>
                     <div class="principal-details">
                         <div class="pd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
                                 School</span></div>
@@ -517,19 +517,20 @@
                     <div class="p-quote">"Education is not preparation for life; education is life itself."</div>
                 </div>
 
-                <div class="principal-message">
-                    <h2>Welcome to JMPSS</h2>
+                <div class="chairman-message">
+                    <h2>A Message from the Chairman</h2>
                     <p class="opening-line">Dear Students, Parents &amp; Visitors,</p>
                     <div class="message-content-dynamic">
-                        <p>Welcome to JMPSS - a place where knowledge meets character. Our mission is to nurture young minds with values, skills, and vision to face tomorrow's challenges. We believe every child is unique and we are committed to bringing out the best in each student.</p>
-                        <p>It is with immense pride and deep sense of responsibility that I welcome you to Jeeva Memorial Senior Secondary School — a place where young minds are nurtured, character is shaped, and futures are built with care and commitment.</p>
+                        <p>Education is unending life long process. It begins when one enters the stage of life until he/she has his exit. Formal education is given by educational institutions. The aims and objectives of any educational institution must be to instill in the students genuine human and spiritual values, a genuine concern for the welfare of others and commitment to truth and justice and last but not least academic excellence and all round development of one's personality to meet situation in life.</p>
+                        <p>The aim / vision of JMPS is to form integrated and responsible diligent person committed to peace and justice and ambitious for outstanding achievements.</p>
+                        <p>JMPS is trying its best to achieve this goal. To realize this we offer many co-curricular activities which help unfold hidden talents of the students. Writing stories, poems and short essays are one of the activities which help students to develop the thinking and look at the things happening in the world at different angles.</p>
                     </div>
-                    <p>With warm regards and every good wish,</p>
+                    <p>My sincere THANKS to all parents, well wishers, teachers and students for the support and cooperation.</p>
                     <div class="principal-signature">
                         <div class="sig-icon"><i class="fa-solid fa-feather-pointed"></i></div>
                         <div class="sig-text">
-                            <h4>Dr. R. Krishnamurthy</h4>
-                            <span>Principal, JMPSSS</span>
+                            <h4>Mr. G.K. Babu</h4>
+                            <span>Founder & Chairman, JMPSSS</span>
                         </div>
                     </div>
                 </div>
@@ -545,7 +546,7 @@
                 <!-- Left Details -->
                 <div class="obj-left-title">
                     <span class="section-subtitle">Our Commitment</span>
-                    <h2 class="section-title">Principal's Key Objectives</h2>
+                    <h2 class="section-title">Chairman's Key Objectives</h2>
                     <p>At JMPSSS, our mission thrives on clear, actionable objectives that put the holistic development
                         and well-being of our students at the forefront.</p>
                     <div class="obj-visual-accent">
