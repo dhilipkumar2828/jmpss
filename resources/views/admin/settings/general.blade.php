@@ -61,12 +61,12 @@
                         <input type="url" name="instagram_url" id="instagram_url" class="form-control" value="{{ old('instagram_url', $settings['instagram_url'] ?? '') }}">
                     </div>
 
-                    <div class="form-group" style="margin-bottom: 20px;">
+                    {{-- <div class="form-group" style="margin-bottom: 20px;">
                         <label for="linkedin_url" style="display: block; margin-bottom: 8px; font-weight: 600;">
                             <i class="fab fa-linkedin" style="color: #0A66C2;"></i> LinkedIn URL
                         </label>
                         <input type="url" name="linkedin_url" id="linkedin_url" class="form-control" value="{{ old('linkedin_url', $settings['linkedin_url'] ?? '') }}">
-                    </div>
+                    </div> --}}
 
                     <div class="form-group" style="margin-bottom: 20px;">
                         <label for="youtube_url" style="display: block; margin-bottom: 8px; font-weight: 600;">

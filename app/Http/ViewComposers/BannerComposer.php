@@ -57,6 +57,21 @@ class BannerComposer
                 ->first();
         }
 
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $defaults = [
+            'school_address' => 'No.210, Palla Egai Village, Puliur Post, Thirukazhukundram T.K., Kancheepuram Dist. Pin-603 109',
+            'school_phone_1' => '+91-7373418852',
+            'school_phone_2' => '+91-8939222122',
+            'school_email'   => 'jeevamemorialschool@gmail.com',
+            'facebook_url'   => 'https://www.facebook.com/p/Jeeva-Memorial-Public-School-100065720670012/',
+            'instagram_url'  => 'https://www.instagram.com/jeevamemorialpublicschool/',
+            // 'linkedin_url'   => '#',
+            'youtube_url'    => 'https://www.youtube.com/channel/UCEe4LgSQuNMCqHu8TvQssGA',
+        ];
+
+        $settings = array_merge($defaults, $settings);
+
+        $view->with('settings', $settings);
         $view->with('pageBanner', $pageBanner);
         $view->with('recentEvents', \App\Models\Event::active()->latest('event_date')->take(3)->get());
     }

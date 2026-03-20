@@ -60,10 +60,10 @@ class SettingController extends Controller
             'school_phone_1' => '+91-7373418852',
             'school_phone_2' => '+91-8939222122',
             'school_email'   => 'jeevamemorialschool@gmail.com',
-            'facebook_url'   => '#',
-            'instagram_url'  => '#',
-            'linkedin_url'   => '#',
-            'youtube_url'    => '#',
+            'facebook_url'   => 'https://www.facebook.com/p/Jeeva-Memorial-Public-School-100065720670012/',
+            'instagram_url'  => 'https://www.instagram.com/jeevamemorialpublicschool/',
+            // 'linkedin_url'   => '#',
+            'youtube_url'    => 'https://www.youtube.com/channel/UCEe4LgSQuNMCqHu8TvQssGA',
         ];
 
         $settings = array_merge($defaults, $settings);
