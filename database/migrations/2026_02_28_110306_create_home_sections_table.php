@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('home_sections', function (Blueprint $table) {
             $table->id();
-            $table->enum('section_type', ['principal', 'correspondent', 'hero', 'about']);
+            $table->enum('section_type', ['chairman', 'correspondent', 'hero', 'about']);
             $table->string('title');
             $table->string('name')->nullable();
             $table->string('designation')->nullable();

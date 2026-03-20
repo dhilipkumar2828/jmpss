@@ -18,7 +18,7 @@ class BannerComposer
             $map = [
                 'home' => 'home',
                 'about' => 'about',
-                'principal-desk' => 'about',
+                'chairman-desk' => 'about',
                 'correspondent-desk' => 'about',
                 'mandatory-disclosure' => 'about',
                 'academics' => 'academics',

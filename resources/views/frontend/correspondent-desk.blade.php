@@ -609,19 +609,73 @@
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
             <span class="page-label">About Us</span>
-            <h1>{{ $pageBanner->title ?? "Correspondent's Desk" }}</h1>
+            <h1>{{ $pageBanner->title ?? "Director & Correspondent's Desk" }}</h1>
             @if($pageBanner && $pageBanner->subtitle)
                 <p style="font-size: 18px; opacity: 0.9; margin-top: -10px; color: white;">{{ $pageBanner->subtitle }}</p>
             @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
                 <a href="{{ route('about') }}">About Us</a><span>›</span>
-                Correspondent's Desk
+                Director & Correspondent's Desk
             </nav>
         </div>
     </section>
 
-    <!-- Correspondent Message -->
+    <!-- Director Message -->
+    <section class="corr-section">
+        <div class="container">
+            <div class="corr-layout">
+                <div class="corr-message">
+                    <h2>A Message from the Managing Director</h2>
+                    <p class="opening-line">Dear Families, Students &amp; Well-Wishers,</p>
+                    <div class="message-content-dynamic">
+                        <p>Our school is well respected in our community and our JMPS.
+                            Students are proud to wear our uniform and be a part of 'JMPS
+                            family'. I would like to thank all parents for sending their children
+                            to JMPS. I also thank them for putting their trust and confidence
+                            in our ability to provide a reliable 'all round' education which will
+                            enable their children to become multitalented citizens of
+                            modern India. JMPS has facilities, the resources, the Teachers
+                            and the management to ensure this is sustained for future years.
+                        </p>
+                        <p>I thank our JMPS staff to do an outstanding job and totally
+                            committed to the education of JMPS students. You work long
+                            hours, sometimes in difficult circumstances.
+                        </p>
+                        <p>I sincerely acknowledge the co-operation and support extended
+                            by all parents, public and well wishers.
+                        </p>
+                    </div>
+                    <p>With best wishes & prayers.</p>
+                    <div class="corr-signature">
+                        <div class="sig-icon-red"><i class="fa-solid fa-heart"></i></div>
+                        <div class="sig-text">
+                            <h4>Mrs. B.Komalavathi</h4>
+                            <span>Director, JMPSSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="corr-card">
+                    <div class="corr-photo"><i class="fa-solid fa-person"></i></div>
+                    <h3>Mrs. B.Komalavathi</h3>
+                    <span class="corr-designation">Director</span>
+                    <div class="corr-details">
+                        <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Director, Jeeva Memorial
+                                Trust</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
+                                School</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-location-dot"></i><span>Thirukazhukundram,
+                                Kancheepuram Dist.</span></div>
+                        <div class="cd-item"><i
+                                class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-phone"></i><span>+91-7373418852</span></div>
+                    </div>
+                    <div class="c-quote">"From love and loss came the greatest gift I could give — a school where thousands of children find their future."</div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="corr-section">
         <div class="container">
             <div class="corr-layout">
@@ -629,18 +683,20 @@
                     <h2>A Message from the Correspondent</h2>
                     <p class="opening-line">Dear Families, Students &amp; Well-Wishers,</p>
                     <div class="message-content-dynamic">
-                        <p>JMPSS was founded with a singular vision - to provide world-class education to every child irrespective of their background. We continue to grow and evolve, embracing modern teaching methodologies while staying true to our core values of discipline, integrity, and excellence.</p>
-                        <p>It is a privilege to address you as the Correspondent of Jeeva Memorial Senior Secondary School —
-                        an institution I hold close to my heart, born from a purpose far greater than education alone.</p>
-                        <p>Since our founding, we have strived to deliver quality education that is both accessible and
-                        excellent. Located at Thirukazhukundram, Kancheepuram, our school serves children from Pre.K.G.
-                        through XII Std.</p>
+                        <p>The words of Oscar Wilde, " The aim of life is self development to realize one's nature perfectly". I have realized that if the fertile soil of the mind is enriched with the values of love, kindness and patience the saplings of good education and character will grow strong trees and bear good fruits.</p>
+                        <p>"The aim of education should be to teach the child to think, not what to think. "This has been the endeavour of JMPS! Along with touching the zenith of academic excellence our earnest endeavours at JMPS! is to help our children fill their life with the light of positivity.
+                        </p>
+                        <p>With combined efforts of our hardworking and dedicated faculty and support of staff, goodwill of our friends, blessings and guidance of our patrons. We are confident that JMPS will continue to evolve consistently.
+                        </p>
+                        <p>The school management has always taken keen interest, providing qualitative infrastructure, encouragement and unflinching support in growing and marching ahead in all avenues of the school's functioning.       
+                        </p>
+                        <p>We are indeed grateful to the parents for reposing year, such complete confidence and trusting their childrento us to mould them worthy citizens of the society.
+                        </p>
                     </div>
-                    <p>With blessings and gratitude,</p>
                     <div class="corr-signature">
                         <div class="sig-icon-red"><i class="fa-solid fa-heart"></i></div>
                         <div class="sig-text">
-                            <h4>Mr. G.K. Babu</h4>
+                            <h4>Mrs. B.Mohana Lakshmi Srikanth, B.E.,</h4>
                             <span>Correspondent, JMPSSS</span>
                         </div>
                     </div>
@@ -648,10 +704,10 @@
 
                 <div class="corr-card">
                     <div class="corr-photo"><i class="fa-solid fa-person"></i></div>
-                    <h3>Mr. G.K. Babu</h3>
+                    <h3>Mrs. B.Mohana Lakshmi Srikanth, B.E.,</h3>
                     <span class="corr-designation">Correspondent</span>
                     <div class="corr-details">
-                        <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Founder, Jeeva Memorial
+                        <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Correspondent, Jeeva Memorial
                                 Trust</span></div>
                         <div class="cd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
                                 School</span></div>

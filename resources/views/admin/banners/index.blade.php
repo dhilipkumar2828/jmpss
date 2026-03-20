@@ -3,7 +3,7 @@
 @section('title', 'Banners')
 @section('page-title', 'Banners')
 
-@section('content')
+@section('content') 
 <div class="card">
     <div class="card-header">
         <h3>Homepage Banners</h3>

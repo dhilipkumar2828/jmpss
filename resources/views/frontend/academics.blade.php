@@ -187,6 +187,131 @@
             margin-top: 4px;
             font-size: 14px;
         }
+
+        /* ── Activities Showcase ── */
+        .activities-showcase {
+            padding: 100px 0;
+            background: #fff;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .activity-card {
+            background: #fff;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 72, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 72, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .activity-header {
+            padding: 40px 40px 20px;
+            background: linear-gradient(135deg, rgba(0, 72, 0, 0.05) 0%, rgba(225, 76, 30, 0.05) 100%);
+            position: relative;
+        }
+
+        .activity-header h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .activity-header .header-accent {
+            width: 50px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 10px;
+        }
+
+        .activity-body {
+            padding: 30px 40px 40px;
+        }
+
+        .sub-activity-group {
+            margin-bottom: 30px;
+        }
+
+        .sub-activity-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .sub-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sub-title i {
+            width: 40px;
+            height: 40px;
+            background: rgba(225, 76, 30, 0.1);
+            color: var(--secondary);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 18px;
+        }
+
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .activity-list li {
+            padding: 10px 15px;
+            background: #f8fafc;
+            border-radius: 12px;
+            font-size: 14.5px;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid transparent;
+        }
+
+        .activity-list li::before {
+            content: '•';
+            color: var(--secondary);
+            font-weight: 900;
+        }
+
+        .activity-list li:hover {
+            background: #fff;
+            border-color: rgba(225, 76, 30, 0.3);
+            color: var(--primary);
+            transform: translateX(3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 991px) {
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 </style>
 @endpush
 
@@ -216,27 +341,22 @@
                 <!-- Left: Content -->
                 <div class="sc-content">
                     <div class="sc-eyebrow">Our Approach</div>
-                    <h2 class="sc-title">Global Standards with <br><span>Local Values</span></h2>
+                    <h2 class="sc-title">School Curriculum</h2>
 
-                    <p class="sc-text lead">The School follows the curriculum evolved by the Central Board of Secondary
-                        Education.</p>
+                    <p class="sc-text lead">The School follows the curriculum evolved by the Central Board of
+                        Secondary Education followed in India and many countries in Asia.The syllabus is constantly evolving and is hailed as one of the best   among the School programs world wide.
+                    </p>
 
-                    <p class="sc-text">The syllabus is constantly evolving and is hailed as one of the best among the
-                        School programs worldwide. English literary club has conducted various competitions and
-                        activities to improve skills in listening, speaking, reading and writing.</p>
-
-                    <p class="sc-text">As far as the learning strategies are concerned <strong>‘Learning by
-                            doing’</strong> is the principle which forms the basis of the new education policy.</p>
+                    <p class="sc-text">As far as the learning strategies are concerned 'Learning by doing'is the principle which forms the basis of the new education policy, the main thrust being on adopting a learner- centered one so that the learners are better equipped to face life outside the protective walls of the institution and the learning becomes more useful and meaningful.
+                    </p>
 
                     <ul class="check-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Sets clear learning objectives in English,
-                            Mathematics and Science.</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Focuses on developing knowledge and skills in core
-                            subjects.</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Provides a Natural Progression throughout the years
-                            of primary education.</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Compatible with other curriculum and
-                            internationally relevant.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Sets clear learning objectives in English, Mathematics and Science.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Focuses on developing knowledge and skills in core subjects which form an excellent foundation for future study focuses on learners' development in each year.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Provides a Natural Progression through out the years of primary education.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Is Compatible with other curriculum and internationally relevant and sensitive to different needs and cultures.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Gives you optional routes to use sections that suit your learners' needs.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Provides schools with international bench marks.</li>
                     </ul>
                 </div>
 
@@ -365,6 +485,81 @@
 
 
             </div>
+
+            <!-- Activities Showcase -->
+            {{-- <div class="activities-showcase"> --}}
+                <div class="activities-grid" style="margin-top: 50px;">
+                    <!-- Fitness for Fitness -->
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <h3>Fitness for Fitness</h3>
+                            <div class="header-accent"></div>
+                        </div>
+                        <div class="activity-body">
+                            <div class="sub-activity-group">
+                                <h4 class="sub-title"><i class="fa-solid fa-masks-theater"></i> Cultural Activities</h4>
+                                <ul class="activity-list">
+                                    <li>Music</li>
+                                    <li>Dance</li>
+                                    <li>Dramatics</li>
+                                    <li>Arts and Crafts</li>
+                                    <li>Public Speech</li>
+                                </ul>
+                            </div>
+                            <div class="sub-activity-group">
+                                <h4 class="sub-title"><i class="fa-solid fa-volleyball"></i> Sports & Games</h4>
+                                <ul class="activity-list">
+                                    <li>Mass drill</li>
+                                    <li>Gymnastics</li>
+                                    <li>Yogasanas</li>
+                                    <li>Karate</li>
+                                    <li>Silambam</li>
+                                    <li>Badminton</li>
+                                    <li>Chess</li>
+                                    <li>Carrom</li>
+                                    <li>Volley ball</li>
+                                    <li>Kho-Kho</li>
+                                    <li>Kabadi</li>
+                                    <li>Cricket</li>
+                                    <li>Skating</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Happy Extra Curriculum -->
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <h3>Happy Extra Curriculum</h3>
+                            <div class="header-accent"></div>
+                        </div>
+                        <div class="activity-body">
+                            <div class="sub-activity-group">
+                                <h4 class="sub-title"><i class="fa-solid fa-om"></i> Spiritual Activities</h4>
+                                <ul class="activity-list">
+                                    <li>Meditation and Silent Sitting</li>
+                                    <li>Value Education</li>
+                                    <li>Teaching of the Vedas</li>
+                                    <li>Service Activities</li>
+                                    <li>Seminar on Human Values</li>
+                                    <li>Value Festival</li>
+                                    <li>Celebration of all Religious Festivals</li>
+                                </ul>
+                            </div>
+                            <div class="sub-activity-group">
+                                <h4 class="sub-title"><i class="fa-solid fa-star"></i> Other Activities</h4>
+                                <ul class="activity-list">
+                                    <li>Personality Development</li>
+                                    <li>Spoken English Course</li>
+                                    <li>International Competitive Exams</li>
+                                    <li>Career Guidance</li>
+                                    <li>Computer Course</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{-- </div> --}}
 
             <div class="curriculum-extra-banner mt-50">
                 <div class="banner-content">
