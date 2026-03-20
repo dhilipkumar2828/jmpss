@@ -244,7 +244,7 @@
             const activeMap = {
                 '/': 'Home',
                 '/about': 'About Us',
-                '/principal-desk': 'About Us',
+                '/chairman-desk': 'About Us',
                 '/correspondent-desk': 'About Us',
                 '/academics': 'Academics',
                 '/admissions': 'Academics',

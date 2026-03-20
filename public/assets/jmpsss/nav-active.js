@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pageMap = {
         'index.html': 'Home',
         'who-we-are.html': 'About Us',
-        'principal-desk.html': 'About Us',
+        'chairman-desk': 'About Us',
         'correspondent-desk.html': 'About Us',
         'curriculum.html': 'Academics',
         'admissions.html': 'Academics',

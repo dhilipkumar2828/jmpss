@@ -228,7 +228,7 @@
                     </div>
                     <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">"{{ Str::limit($sections['principal']->quote, 150) }}"</p>
                     <p style="font-size:15px; line-height:1.8; color:#555; margin-bottom:25px;">{{ Str::limit($sections['principal']->content, 200) }}</p>
-                    <a href="{{ route('principal-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
+                    <a href="{{ route('chairman-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
                 </div>
                 @endif
 

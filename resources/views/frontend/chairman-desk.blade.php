@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Principal\'s Desk | JMPSSS')
+@section('title', 'Chairman\'s Desk | JMPSSS')
 
 @push('styles')
 <style>
@@ -68,19 +68,19 @@
             opacity: 0.6;
         }
 
-        .principal-section {
+        .chairman-section {
             padding: 90px 0;
             background: #fff;
         }
 
-        .principal-layout {
+        .chairman-layout {
             display: grid;
             grid-template-columns: 320px 1fr;
             gap: 60px;
             align-items: start;
         }
 
-        .principal-card {
+        .chairman-card {
             background: linear-gradient(160deg, #004800, #002800);
             border-radius: 24px;
             padding: 36px 28px;
@@ -91,7 +91,7 @@
             box-shadow: 0 20px 50px rgba(0, 72, 0, 0.3);
         }
 
-        .principal-photo {
+        .chairman-photo {
             width: 170px;
             height: 170px;
             border-radius: 50%;
@@ -104,12 +104,12 @@
             justify-content: center;
         }
 
-        .principal-photo i {
+        .chairman-photo i {
             font-size: 75px;
             color: rgba(255, 255, 255, 0.45);
         }
 
-        .principal-card h3 {
+        .chairman-card h3 {
             font-size: 21px;
             font-weight: 700;
             font-family: 'Outfit', sans-serif;
@@ -129,7 +129,7 @@
             margin-bottom: 22px;
         }
 
-        .principal-details {
+        .chairman-details {
             text-align: left;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
             padding-top: 18px;
@@ -167,7 +167,7 @@
             border-left: 3px solid #e14c1e;
         }
 
-        .principal-message h2 {
+        .chairman-message h2 {
             font-size: 36px;
             color: #004800;
             font-weight: 700;
@@ -185,14 +185,14 @@
             font-style: italic;
         }
 
-        .principal-message p {
+        .chairman-message p {
             font-size: 16px;
             color: #555;
             line-height: 1.9;
             margin-bottom: 18px;
         }
 
-        .principal-message blockquote {
+        .chairman-message blockquote {
             border-left: 4px solid #004800;
             padding: 18px 26px;
             background: #f4f8f4;
@@ -205,7 +205,7 @@
             line-height: 1.6;
         }
 
-        .principal-signature {
+        .chairman-signature {
             margin-top: 34px;
             padding-top: 26px;
             border-top: 1px solid #e0e0e0;
@@ -497,14 +497,14 @@
         </div>
     </section>
 
-    <section class="principal-section">
+    <section class="chairman-section">
         <div class="container">
-            <div class="principal-layout">
-                <div class="principal-card">
-                    <div class="principal-photo"><i class="fa-solid fa-user-tie"></i></div>
+            <div class="chairman-layout">
+                <div class="chairman-card">
+                    <div class="chairman-photo"><i class="fa-solid fa-user-tie"></i></div>
                     <h3>Mr. G.K. Babu</h3>
                     <span class="designation">Founder & Chairman, JMPSS</span>
-                    <div class="principal-details">
+                    <div class="chairman-details">
                         <div class="pd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
                                 School</span></div>
                         <div class="pd-item"><i class="fa-solid fa-certificate"></i><span>CBSE Affiliated — No:
@@ -526,7 +526,7 @@
                         <p>JMPS is trying its best to achieve this goal. To realize this we offer many co-curricular activities which help unfold hidden talents of the students. Writing stories, poems and short essays are one of the activities which help students to develop the thinking and look at the things happening in the world at different angles.</p>
                     </div>
                     <p>My sincere THANKS to all parents, well wishers, teachers and students for the support and cooperation.</p>
-                    <div class="principal-signature">
+                    <div class="chairman-signature">
                         <div class="sig-icon"><i class="fa-solid fa-feather-pointed"></i></div>
                         <div class="sig-text">
                             <h4>Mr. G.K. Babu</h4>
