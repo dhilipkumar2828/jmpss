@@ -3,10 +3,10 @@
             <!-- Left: Social Icons -->
             <div class="top-header-left">
                 <div class="social-icons-top">
-                    <a href="{{ $settings['facebook_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="{{ $settings['instagram_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/p/Jeeva-Memorial-Public-School-100065720670012/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jeevamemorialpublicschool/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                     {{-- <a href="{{ $settings['linkedin_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a> --}}
-                    <a href="{{ $settings['youtube_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/channel/UCEe4LgSQuNMCqHu8TvQssGA" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
