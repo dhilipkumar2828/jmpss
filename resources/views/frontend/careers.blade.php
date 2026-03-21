@@ -575,7 +575,7 @@
                         <div class="form-field">
                             <label>Upload CV (PDF / DOC) <span class="required-asterisk">*</span></label>
                             <div class="file-upload-wrapper">
-                                <input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx" required>
+                                <input type="file" name="resume" id="resume" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
                                 <div class="file-upload-label">
                                     <span class="file-upload-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Choose File</span>
                                     <span class="file-name" id="fileNameDisplay">No file chosen</span>
@@ -647,10 +647,11 @@
                     position_applied: {
                         required: true
                     },
-                    // resume: {
-                    //     required: true,
-                    //     extension: "pdf|doc|docx"
-                    // }
+                    resume: {
+                        required: true,
+                        extension: "pdf|doc|docx",
+                        accept: "application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    }
                 },
                 messages: {
                     name: {
@@ -669,10 +670,11 @@
                     position_applied: {
                         required: "Please select the position you are applying for"
                     },
-                    // resume: {
-                    //     required: "Please upload your CV",
-                    //     extension: "Only PDF, DOC, or DOCX files are allowed"
-                    // }
+                    resume: {
+                        required: "Please upload your CV",
+                        extension: "Only PDF, DOC, or DOCX files are allowed",
+                        accept: "Only PDF, DOC, or DOCX files are allowed"
+                    }
                 },
                 errorElement: 'span',
                 errorPlacement: function (error, element) {
