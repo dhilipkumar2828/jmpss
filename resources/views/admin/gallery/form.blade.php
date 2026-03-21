@@ -598,14 +598,18 @@
             borderRadius: '16px'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`/admin/gallery/item/${id}`, {
+                const deleteUrl = '{{ route("admin.gallery.item.destroy", ":id") }}'.replace(':id', id);
+                fetch(deleteUrl, {
                     method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Accept': 'application/json'
                     }
                 })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) throw new Error('Server error: ' + res.status);
+                    return res.json();
+                })
                 .then(data => {
                     if (data.success) {
                         const item = document.getElementById(`item-${id}`);
@@ -613,10 +617,13 @@
                         item.style.opacity = '0';
                         setTimeout(() => item.remove(), 300);
                         toastr.success('Media item deleted');
+                    } else {
+                        toastr.error('Error deleting media');
                     }
                 })
                 .catch(err => {
-                    toastr.error('Error deleting media');
+                    console.error(err);
+                    toastr.error('Error deleting media: ' + err.message);
                 });
             }
         });
