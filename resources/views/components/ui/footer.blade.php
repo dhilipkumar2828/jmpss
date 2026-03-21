@@ -40,9 +40,9 @@
                 <p><i class="fa-solid fa-envelope"></i> jeevamemorialschool@gmail.com</p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/p/Jeeva-Memorial-Public-School-100065720670012/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="{{ $settings['instagram_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/jeevamemorialpublicschool/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                     {{-- <a href="{{ $settings['linkedin_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-linkedin"></i></a> --}}
-                    <a href="{{ $settings['youtube_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/channel/UCEe4LgSQuNMCqHu8TvQssGA" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
         </div>
