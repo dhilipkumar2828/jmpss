@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-        background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider1.jpg') }}') center/cover no-repeat;
+        background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -457,7 +457,7 @@
                 @endphp
                 <div class="video-item-card" onclick="openAlbumVideos({{ json_encode($videoData) }}, '{{ $album->title }}')">
                     <div class="video-thumb">
-                        <img src="{{ asset('assets/JMPSSS/image/new/slider1.jpg') }}" alt="{{ $album->title }}">
+                        <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $album->title }}">
                         <div class="video-overlay-btn">
                             <i class="fa-solid fa-play" style="background: {{ $secondaryColor }}"></i>
                             <span style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px;">{{ $videosList->count() }} Videos</span>
@@ -570,7 +570,7 @@
                 opacity:${i === 0 ? '1' : '0.5'}; transition:all 0.2s;
             `;
             thumb.innerHTML = `<img src="https://img.youtube.com/vi/${videoId}/mqdefault.jpg"
-                style="width:100%;height:100%;object-fit:cover;" onerror="this.src='/assets/JMPSSS/image/new/slider1.jpg'">`;
+                style="width:100%;height:100%;object-fit:cover;" onerror="this.src='/assets/jmpsss/image/new/slider1.jpg'">`;
             thumb.onclick = (e) => { e.stopPropagation(); currentVideoIndex = i; updateVideoModalContent(); };
             container.appendChild(thumb);
         });

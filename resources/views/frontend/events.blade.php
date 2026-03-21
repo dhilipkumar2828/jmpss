@@ -58,7 +58,7 @@
     <!-- Hero Section -->
     <section class="hero contact-hero">
         <div class="hero-overlay"></div>
-        <img src="{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider1.jpg') }}"
+        <img src="{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}"
             alt="Events" class="hero-bg" id="hero-bg-img">
         <div class="hero-content">
             <h1 id="page-title">{{ $pageBanner->title ?? 'EVENTS & ACHIEVEMENTS' }}</h1>
@@ -90,7 +90,7 @@
                                 @if ($event->image)
                                     <img src="{{ asset($event->image) }}" alt="{{ $event->title }}">
                                 @else
-                                    <img src="{{ asset('assets/JMPSSS/image/new/slider1.jpg') }}" alt="{{ $event->title }}">
+                                    <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $event->title }}">
                                 @endif
                                 <div class="event-date">{{ $event->event_date->format('d') }}
                                     <span>{{ $event->event_date->format('M') }}</span></div>
@@ -105,7 +105,7 @@
                             <div class="event-full-data" style="display:none;" data-id="{{ $event->id }}"
                                 data-title="{{ $event->title }}" data-date="{{ $event->event_date->format('d F Y') }}"
                                 data-venue="{{ $event->venue ?? 'School Campus' }}" data-desc="{{ $event->description }}"
-                                data-img="{{ $event->image ? asset($event->image) : asset('assets/JMPSSS/image/new/slider1.jpg') }}"
+                                data-img="{{ $event->image ? asset($event->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}"
                                 data-cat="{{ $event->is_featured ? 'Featured Event' : 'School Event' }}">
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                     <!-- Main Content -->
                     <div class="event-detail-main">
                         <div class="detail-featured-img">
-                            <img id="detail-img" src="{{ asset('assets/JMPSSS/image/img01.jpg') }}" alt="Event Image">
+                            <img id="detail-img" src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="Event Image">
                         </div>
 
                         <div class="detail-meta">
@@ -171,7 +171,7 @@
                             <h3>Recent Events</h3>
                             <div class="recent-event-list">
                                 <div class="recent-item">
-                                    <img src="{{ asset('assets/JMPSSS/image/img02.jpg') }}" alt="Sports Day"
+                                    <img src="{{ asset('assets/jmpsss/image/img02.jpg') }}" alt="Sports Day"
                                         onclick="showEventDetails(event, 'sports')">
                                     <div class="recent-info">
                                         <a href="#" onclick="showEventDetails(event, 'sports')">Annual Sports Day
@@ -180,7 +180,7 @@
                                     </div>
                                 </div>
                                 <div class="recent-item">
-                                    <img src="{{ asset('assets/JMPSSS/image/img03.jpg') }}" alt="Science Exhibition"
+                                    <img src="{{ asset('assets/jmpsss/image/img03.jpg') }}" alt="Science Exhibition"
                                         onclick="showEventDetails(event, 'science')">
                                     <div class="recent-info">
                                         <a href="#" onclick="showEventDetails(event, 'science')">Science
@@ -189,7 +189,7 @@
                                     </div>
                                 </div>
                                 <div class="recent-item">
-                                    <img src="{{ asset('assets/JMPSSS/image/img04.jpg') }}" alt="Academic Award"
+                                    <img src="{{ asset('assets/jmpsss/image/img04.jpg') }}" alt="Academic Award"
                                         onclick="showEventDetails(event, 'academic')">
                                     <div class="recent-info">
                                         <a href="#" onclick="showEventDetails(event, 'academic')">Academic Toppers
@@ -319,7 +319,7 @@
 
 @push('scripts')
     <script>
-        const eventAssetRoot = @json(asset('assets/JMPSSS'));
+        const eventAssetRoot = @json(asset('assets/jmpsss'));
         const homeUrl = @json(route('home'));
         const eventsUrl = @json(route('events'));
 

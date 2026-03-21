@@ -5,7 +5,7 @@
     <!-- Hero Section -->
     <section class="hero contact-hero">
         <div class="hero-overlay"></div>
-        <img src="{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider3.jpg') }}" alt="Contact Us" class="hero-bg">
+        <img src="{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Contact Us" class="hero-bg">
         <div class="hero-content">
             <h1>{{ $pageBanner->title ?? 'CONTACT US' }}</h1>
             @if($pageBanner && $pageBanner->subtitle)

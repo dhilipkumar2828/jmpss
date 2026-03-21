@@ -2,7 +2,7 @@
         <div class="container footer-grid">
             <div class="footer-info">
                 <div class="footer-logo">
-                    <img src="{{ asset('assets/JMPSSS/image/tab.png') }}" alt="JMPSSS Logo">
+                    <img src="{{ asset('assets/jmpsss/image/tab.png') }}" alt="JMPSSS Logo">
                 </div>
                 <p>JEEVA MEMORIAL TRUST, founded by Mr. G.K. Babu, in the memory of his beloved son JEEVAKUMAR is the
                     source of inspiration for a model school in Thirukazhukundram. It is the outcome of inspiration.</p>

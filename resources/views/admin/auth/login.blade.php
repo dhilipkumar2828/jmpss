@@ -376,7 +376,7 @@
         <!-- <a href="{{ route('home') }}" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Website</a> -->
         <div class="brand">
             <div class="brand-icon">
-                <img src="{{ asset('assets/JMPSSS/logo.png') }}" alt="JMPSSSS Logo">
+                <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSSS Logo">
             </div>
             <h1>JMPSSSS</h1>
             <p>School Management Admin Panel</p>

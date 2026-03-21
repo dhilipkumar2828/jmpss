@@ -17,7 +17,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider2.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider2.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -550,7 +550,7 @@
                     <p>At JMPSSS, our mission thrives on clear, actionable objectives that put the holistic development
                         and well-being of our students at the forefront.</p>
                     <div class="obj-visual-accent">
-                        <img src="{{ asset('assets/JMPSSS/image/new/slider2.jpg') }}" alt="Students engaging in activities">
+                        <img src="{{ asset('assets/jmpsss/image/new/slider2.jpg') }}" alt="Students engaging in activities">
                     </div>
                 </div>
 

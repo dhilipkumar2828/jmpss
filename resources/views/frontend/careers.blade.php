@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider2.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider2.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -526,7 +526,7 @@
                         </div>
                     </div>
 
-                    <img src="{{ asset('assets/JMPSSS/image/new/school22.jpg') }}" alt="School Campus"
+                    <img src="{{ asset('assets/jmpsss/image/new/school22.jpg') }}" alt="School Campus"
                         class="apply-decor-img">
                 </div>
 
