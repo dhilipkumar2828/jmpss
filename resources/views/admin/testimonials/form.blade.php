@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Testimonial Content <span class="required-asterisk">*</span></label>
-                    <textarea name="content" class="form-control @error('content') error-field @enderror" rows="5" placeholder="What they said about JMPSS..." required>{{ old('content', $testimonial->content ?? '') }}</textarea>
+                    <textarea name="content" class="form-control @error('content') error-field @enderror" rows="5" placeholder="What they said about JMPSSSS..." required>{{ old('content', $testimonial->content ?? '') }}</textarea>
                     @error('content')<div class="error-msg">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-grid-3">

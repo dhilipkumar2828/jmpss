@@ -11,13 +11,13 @@ class EventController extends Controller
     public function index()
     {
         try {
-            $events = Event::active()->paginate(9);
+            $events = Event::active()->paginate(8);
         } catch (Throwable $e) {
             report($e);
             $events = new LengthAwarePaginator(
                 collect(),
                 0,
-                9,
+                8,
                 LengthAwarePaginator::resolveCurrentPage(),
                 ['path' => LengthAwarePaginator::resolveCurrentPath()]
             );

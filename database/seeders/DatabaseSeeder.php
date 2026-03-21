@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // Admin
         Admin::updateOrCreate(
-            ['email' => 'admin@jmpss.edu'],
+            ['email' => 'admin@JMPSSSs.edu'],
             [
                 'name' => 'Super Admin',
                 'password' => Hash::make('Admin@1234'),
@@ -37,17 +37,17 @@ class DatabaseSeeder extends Seeder
         Award::insert([
             ['title' => 'State Level Mathematics Olympiad - Gold', 'description' => 'First place in State Mathematics Olympiad 2024.', 'recipient_name' => 'Aarav Sharma', 'recipient_class' => 'Class X', 'year' => 2024, 'category' => 'Academic', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
             ['title' => 'District Sports Champion - Athletics', 'description' => 'Gold medal in 100m sprint at District Level Sports Meet.', 'recipient_name' => 'Priya Devi', 'recipient_class' => 'Class IX', 'year' => 2024, 'category' => 'Sports', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
-            ['title' => 'Best School Award - District', 'description' => 'Awarded best school in the district for academic excellence.', 'recipient_name' => 'JMPSS', 'recipient_class' => null, 'year' => 2024, 'category' => 'Institutional', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
+            ['title' => 'Best School Award - District', 'description' => 'Awarded best school in the district for academic excellence.', 'recipient_name' => 'JMPSSSS', 'recipient_class' => null, 'year' => 2024, 'category' => 'Institutional', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
             ['title' => 'National Science Talent Search', 'description' => 'Selected for National Science Talent Search Examination.', 'recipient_name' => 'Karthik Raj', 'recipient_class' => 'Class VIII', 'year' => 2023, 'category' => 'Academic', 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         // Testimonials (5 school-related)
         Testimonial::insert([
-            ['name' => 'Mrs. Anitha Suresh', 'designation' => 'Parent of Grade VIII student', 'content' => 'JMPSS has transformed my child with strong academics and discipline. Teachers are approachable and the school environment is safe and encouraging.', 'rating' => 5, 'type' => 'parent', 'passing_year' => null, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Mrs. Anitha Suresh', 'designation' => 'Parent of Grade VIII student', 'content' => 'JMPSSSS has transformed my child with strong academics and discipline. Teachers are approachable and the school environment is safe and encouraging.', 'rating' => 5, 'type' => 'parent', 'passing_year' => null, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Mr. Karthikeyan R', 'designation' => 'Parent of Grade VI student', 'content' => 'We are very happy with the concept-based teaching and regular parent communication. My son is now more confident in class participation.', 'rating' => 5, 'type' => 'parent', 'passing_year' => null, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Ms. Priyadharshini M', 'designation' => 'Alumni - Batch 2022', 'content' => 'The teachers at JMPSS gave me the right foundation for higher studies. The academic guidance and lab exposure helped me perform well in board exams.', 'rating' => 5, 'type' => 'alumni', 'passing_year' => 2022, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Ms. Priyadharshini M', 'designation' => 'Alumni - Batch 2022', 'content' => 'The teachers at JMPSSSS gave me the right foundation for higher studies. The academic guidance and lab exposure helped me perform well in board exams.', 'rating' => 5, 'type' => 'alumni', 'passing_year' => 2022, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Mrs. Lalitha Kumar', 'designation' => 'Parent of Grade IV student', 'content' => 'The school balances studies and co-curricular activities very well. My daughter enjoys learning and has improved in communication skills.', 'rating' => 5, 'type' => 'parent', 'passing_year' => null, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Mr. Senthil Prabhu', 'designation' => 'Parent of Grade X student', 'content' => 'Board exam preparation support at JMPSS is excellent. Teachers provide close mentoring, practice schedules, and timely feedback to students.', 'rating' => 5, 'type' => 'parent', 'passing_year' => null, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Mr. Senthil Prabhu', 'designation' => 'Parent of Grade X student', 'content' => 'Board exam preparation support at JMPSSSS is excellent. Teachers provide close mentoring, practice schedules, and timely feedback to students.', 'rating' => 5, 'type' => 'parent', 'passing_year' => null, 'is_featured' => true, 'is_active' => true, 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         $this->call([

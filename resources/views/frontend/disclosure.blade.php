@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'CBSE Mandatory Disclosure – JMPSS')
+@section('title', 'CBSE Mandatory Disclosure – JMPSSSS')
 
 @section('content')
     <!-- Page Header -->

@@ -326,7 +326,7 @@
         <div class="login-card" id="portalAuthCard" data-initial-auth="{{ $initialAuthMode }}">
             <div class="login-header">
                 <div class="login-form-logo">
-                    <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo">
+                    <img src="{{ asset('assets/JMPSSS/logo.png') }}" alt="JMPSSS Logo">
                 </div>
                 <h1>Welcome Back</h1>
             </div>

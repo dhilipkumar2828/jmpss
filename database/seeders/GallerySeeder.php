@@ -20,9 +20,9 @@ class GallerySeeder extends Seeder
             'sort_order'  => 1,
         ]);
         foreach ([
-            'assets/jmpsss/image/img01.jpg',
-            'assets/jmpsss/image/img02.jpg',
-            'assets/jmpsss/image/img03.jpg',
+            'assets/JMPSSS/image/img01.jpg',
+            'assets/JMPSSS/image/img02.jpg',
+            'assets/JMPSSS/image/img03.jpg',
         ] as $path) {
             GalleryItem::create(['gallery_id' => $diwali->id, 'item_type' => 'photo', 'file_path' => $path]);
         }
@@ -38,9 +38,9 @@ class GallerySeeder extends Seeder
             'sort_order'  => 2,
         ]);
         foreach ([
-            'assets/jmpsss/image/img04.jpg',
-            'assets/jmpsss/image/img05.jpg',
-            'assets/jmpsss/image/img06.jpg',
+            'assets/JMPSSS/image/img04.jpg',
+            'assets/JMPSSS/image/img05.jpg',
+            'assets/JMPSSS/image/img06.jpg',
         ] as $path) {
             GalleryItem::create(['gallery_id' => $pongal->id, 'item_type' => 'photo', 'file_path' => $path]);
         }
@@ -56,8 +56,8 @@ class GallerySeeder extends Seeder
             'sort_order'  => 3,
         ]);
         foreach ([
-            'assets/jmpsss/image/img07.jpg',
-            'assets/jmpsss/image/img08.jpg',
+            'assets/JMPSSS/image/img07.jpg',
+            'assets/JMPSSS/image/img08.jpg',
         ] as $path) {
             GalleryItem::create(['gallery_id' => $annualDay->id, 'item_type' => 'photo', 'file_path' => $path]);
         }
@@ -73,8 +73,8 @@ class GallerySeeder extends Seeder
             'sort_order'  => 4,
         ]);
         foreach ([
-            'assets/jmpsss/image/new/slider1.jpg',
-            'assets/jmpsss/image/new/slider2.jpg',
+            'assets/JMPSSS/image/new/slider1.jpg',
+            'assets/JMPSSS/image/new/slider2.jpg',
         ] as $path) {
             GalleryItem::create(['gallery_id' => $sports->id, 'item_type' => 'photo', 'file_path' => $path]);
         }
@@ -88,7 +88,7 @@ class GallerySeeder extends Seeder
             'is_active'   => true,
             'sort_order'  => 5,
         ]);
-        GalleryItem::create(['gallery_id' => $science->id, 'item_type' => 'photo', 'file_path' => 'assets/jmpsss/image/img01.jpg']);
+        GalleryItem::create(['gallery_id' => $science->id, 'item_type' => 'photo', 'file_path' => 'assets/JMPSSS/image/img01.jpg']);
         GalleryItem::create(['gallery_id' => $science->id, 'item_type' => 'video', 'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ']);
     }
 }

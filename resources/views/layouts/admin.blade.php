@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Panel') – JMPSS</title>
+    <title>@yield('title', 'Admin Panel') – JMPSSSS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -266,9 +266,9 @@
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
         <a href="{{ route('admin.dashboard') }}" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-            <img src="{{ asset('assets/jmpsss/image/logo.png') }}" style="width:220px; height:50px; object-fit:contain;" alt="Logo">
+            <img src="{{ asset('assets/JMPSSS/image/logo.png') }}" style="width:220px; height:50px; object-fit:contain;" alt="Logo">
             {{-- <div class="sidebar-brand-text">
-                <strong>JMPSS Admin</strong>
+                <strong>JMPSSSS Admin</strong>
                 <span>School Management</span>
             </div> --}}
         </a>
@@ -370,7 +370,7 @@
             </button>
             <div>
                 <h1>@yield('page-title', 'Dashboard')</h1>
-                <div class="topbar-breadcrumb">@yield('breadcrumb', 'JMPSS Admin')</div>
+                <div class="topbar-breadcrumb">@yield('breadcrumb', 'JMPSSSS Admin')</div>
             </div>
         </div>
         <div class="topbar-right">

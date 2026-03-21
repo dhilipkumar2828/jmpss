@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Academic Performance – JMPSS')
+@section('title', 'Academic Performance – JMPSSSS')
 
 @section('content')
     <!-- Page Header -->

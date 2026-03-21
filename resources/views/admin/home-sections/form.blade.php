@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Designation</label>
-                        <input type="text" name="designation" class="form-control" value="{{ old('designation', $section->designation ?? '') }}" placeholder="e.g. Principal, JMPSS">
+                        <input type="text" name="designation" class="form-control" value="{{ old('designation', $section->designation ?? '') }}" placeholder="e.g. Principal, JMPSSSS">
                     </div>
                 </div>
                 <div class="form-group">

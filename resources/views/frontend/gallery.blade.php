@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -55,24 +55,7 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        .breadcrumb-trail {
-            font-size: 14px;
-            opacity: 0.85;
-        }
 
-        .breadcrumb-trail a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .breadcrumb-trail a:hover {
-            color: #e14c1e;
-        }
-
-        .breadcrumb-trail span {
-            margin: 0 8px;
-            opacity: 0.6;
-        }
 
         /* ── Category View ── */
         .category-view {
@@ -459,7 +442,7 @@
             @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
-                <span style="color: white; font-weight: bold;">Photos</span>
+                <span>Photos</span>
             </nav>
         </div>
     </section>

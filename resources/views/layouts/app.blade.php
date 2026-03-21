@@ -14,11 +14,11 @@
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="{{ asset('assets/jmpsss/image/tab.png') }}">
-    <link rel="stylesheet" href="{{ asset('assets/jmpsss/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/JMPSSS/image/tab.png') }}">
+    <link rel="stylesheet" href="{{ asset('assets/JMPSSS/style.css') }}">
 
     @stack('styles')
-    <link rel="stylesheet" href="{{ asset('assets/jmpsss/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/JMPSSS/responsive.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
@@ -145,7 +145,7 @@
         @endif
     </script>
 
-    <script src="{{ asset('assets/jmpsss/nav-active.js') }}"></script>
+    <script src="{{ asset('assets/JMPSSS/nav-active.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('.bottom-header');
@@ -165,15 +165,17 @@
 
             if (nextBtn && prevBtn && container) {
                 nextBtn.addEventListener('click', () => {
+                    const scrollAmount = container.clientWidth + 20; // Container width + gap
                     container.scrollBy({
-                        left: 300,
+                        left: scrollAmount,
                         behavior: 'smooth'
                     });
                 });
 
                 prevBtn.addEventListener('click', () => {
+                    const scrollAmount = container.clientWidth + 20;
                     container.scrollBy({
-                        left: -300,
+                        left: -scrollAmount,
                         behavior: 'smooth'
                     });
                 });

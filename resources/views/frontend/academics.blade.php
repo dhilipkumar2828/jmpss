@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider3.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider3.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -362,7 +362,7 @@
 
                 <!-- Right: Visual -->
                 <div class="sc-visual">
-                    <img src="{{ asset('assets/jmpsss/image/new/CURRICULUM.jpg') }}" alt="Students Learning" class="sc-img">
+                    <img src="{{ asset('assets/JMPSSS/image/new/CURRICULUM.jpg') }}" alt="Students Learning" class="sc-img">
                 </div>
 
             </div>
@@ -407,7 +407,7 @@
                         </div>
                     </div>
                     <div class="timeline-image-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/CURRICULUM1.avif') }}" alt="Kids Activity">
+                        <img src="{{ asset('assets/JMPSSS/image/new/CURRICULUM1.avif') }}" alt="Kids Activity">
                     </div>
                 </div>
 
@@ -444,7 +444,7 @@
                         </div>
                     </div>
                     <div class="timeline-image-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/CURRICULUM2.jpg') }}" alt="Champs Activity">
+                        <img src="{{ asset('assets/JMPSSS/image/new/CURRICULUM2.jpg') }}" alt="Champs Activity">
                     </div>
                 </div>
 
@@ -479,7 +479,7 @@
                         </div>
                     </div>
                     <div class="timeline-image-wrapper">
-                        <img src="{{ asset('assets/jmpsss/image/new/CURRICULM3.jpg') }}" alt="IIT NEET Prep">
+                        <img src="{{ asset('assets/JMPSSS/image/new/CURRICULM3.jpg') }}" alt="IIT NEET Prep">
                     </div>
                 </div>
 

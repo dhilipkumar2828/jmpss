@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db   = 'jmpss';
+$db   = 'JMPSSSs';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
