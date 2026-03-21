@@ -647,10 +647,10 @@
                     position_applied: {
                         required: true
                     },
-                    resume: {
-                        required: true,
-                        extension: "pdf|doc|docx"
-                    }
+                    // resume: {
+                    //     required: true,
+                    //     extension: "pdf|doc|docx"
+                    // }
                 },
                 messages: {
                     name: {
@@ -669,10 +669,10 @@
                     position_applied: {
                         required: "Please select the position you are applying for"
                     },
-                    resume: {
-                        required: "Please upload your CV",
-                        extension: "Only PDF, DOC, or DOCX files are allowed"
-                    }
+                    // resume: {
+                    //     required: "Please upload your CV",
+                    //     extension: "Only PDF, DOC, or DOCX files are allowed"
+                    // }
                 },
                 errorElement: 'span',
                 errorPlacement: function (error, element) {
