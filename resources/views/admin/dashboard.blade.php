@@ -75,14 +75,14 @@
         </div>
         <a href="{{ route('admin.contact-messages.index') }}" class="btn btn-outline btn-sm" style="margin-top:auto;">View Messages →</a>
     </div>
-    <div class="stat-card">
+    {{-- <div class="stat-card">
         <div class="stat-icon" style="background:#f3e8ff;color:#6b21a8"><i class="fas fa-users"></i></div>
         <div>
             <div class="stat-value">{{ $stats['users'] }}</div>
             <div class="stat-label">Registered Users</div>
         </div>
         <a href="{{ route('admin.users.index') }}" class="btn btn-outline btn-sm" style="margin-top:auto;">View Users →</a>
-    </div>
+    </div> --}}
 </div>
 
 <!-- Recent Data Grid -->
