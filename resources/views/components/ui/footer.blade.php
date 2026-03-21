@@ -39,7 +39,7 @@
                 <p><i class="fa-solid fa-phone"></i> +91-7373418852, +91-8939222122</p>
                 <p><i class="fa-solid fa-envelope"></i> jeevamemorialschool@gmail.com</p>
                 <div class="social-icons">
-                    <a href="{{ $settings['facebook_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/p/Jeeva-Memorial-Public-School-100065720670012/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
                     <a href="{{ $settings['instagram_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                     {{-- <a href="{{ $settings['linkedin_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-linkedin"></i></a> --}}
                     <a href="{{ $settings['youtube_url'] ?? '#' }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
