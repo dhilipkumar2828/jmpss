@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -210,7 +210,7 @@
             margin-top: 50px;
             position: relative;
             min-height: 380px;
-            background: url('{{ asset('assets/JMPSSS/image/mv-bg.png') }}') center/cover no-repeat;
+            background: url('{{ asset('assets/jmpsss/image/mv-bg.png') }}') center/cover no-repeat;
             background-attachment: fixed;
         }
 
@@ -1098,7 +1098,7 @@
 
                 <!-- Right: Visual -->
                 <div class="sc-visual">
-                    <img src="{{ asset('assets/JMPSSS/image/img01.jpg') }}" alt="JMPSSS Campus" class="sc-img">
+                    <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="JMPSSS Campus" class="sc-img">
                 </div>
 
             </div>

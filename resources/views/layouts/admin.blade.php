@@ -266,7 +266,7 @@
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
         <a href="{{ route('admin.dashboard') }}" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-            <img src="{{ asset('assets/JMPSSS/image/logo.png') }}" style="width:220px; height:50px; object-fit:contain;" alt="Logo">
+            <img src="{{ asset('assets/jmpsss/image/logo.png') }}" style="width:220px; height:50px; object-fit:contain;" alt="Logo">
             {{-- <div class="sidebar-brand-text">
                 <strong>JMPSSSS Admin</strong>
                 <span>School Management</span>

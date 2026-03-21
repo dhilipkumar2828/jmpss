@@ -154,7 +154,7 @@
     @else
     <section class="hero">
         <div class="hero-overlay"></div>
-        <img src="{{ asset('assets/JMPSSS/image/new/slider3.jpg') }}" alt="Academic Excellence" class="hero-bg">
+        <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Academic Excellence" class="hero-bg">
         <div class="hero-content">
             <h1>{{ $sections['hero']->title ?? 'ACADEMIC EXCELLENCE' }}</h1>
             <div class="breadcrumbs">
@@ -169,10 +169,10 @@
         <div class="container grid-2 about-grid">
             <div class="about-images-wrapper">
                 <div class="about-img-1">
-                    <img src="{{ asset('assets/JMPSSS/image/new/slider1.jpg') }}" alt="School Building">
+                    <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="School Building">
                 </div>
                 <div class="about-img-2">
-                    <img src="{{ asset('assets/JMPSSS/image/new/slider2.jpg') }}" alt="Students Learning">
+                    <img src="{{ asset('assets/jmpsss/image/new/slider2.jpg') }}" alt="Students Learning">
                 </div>
             </div>
             <div class="about-text">
@@ -339,7 +339,7 @@
                             @if($event->image)
                                 <img src="{{ asset($event->image) }}" alt="{{ $event->title }}">
                             @else
-                                <img src="{{ asset('assets/JMPSSS/image/img01.jpg') }}" alt="{{ $event->title }}">
+                                <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="{{ $event->title }}">
                             @endif
                             <div class="event-date">{{ $event->event_date->format('d') }} <span>{{ $event->event_date->format('M') }}</span></div>
                         </div>
@@ -366,7 +366,7 @@
             </div>
             <div class="testimonial-right">
                 <div class="testimonial-avatar-wrapper">
-                    <img src="{{ asset('assets/JMPSSS/logo.png') }}" alt="JMPSSS Logo" class="testimonial-avatar">
+                    <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo" class="testimonial-avatar">
                 </div>
                 <div class="testimonial-main-content">
                     <div class="testimonial-slider-track">
@@ -421,7 +421,7 @@
     <!-- New Video Admission Section -->
     <!-- <section class="video-admission-section">
         <video autoplay muted loop id="admission-bg-video" class="admission-video-bg">
-            <source src="{{ asset('assets/JMPSSS/image/Video_Generation_From_Logo_Name.mp4') }}" type="video/mp4">
+            <source src="{{ asset('assets/jmpsss/image/Video_Generation_From_Logo_Name.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="video-overlay"></div>
