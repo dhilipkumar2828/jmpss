@@ -17,7 +17,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider3.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider3.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -629,17 +629,17 @@
                     <h2>A Message from the Managing Director</h2>
                     <p class="opening-line">Dear Families, Students &amp; Well-Wishers,</p>
                     <div class="message-content-dynamic">
-                        <p>Our school is well respected in our community and our JMPS.
-                            Students are proud to wear our uniform and be a part of 'JMPS
+                        <p>Our school is well respected in our community and our JMPSSS.
+                            Students are proud to wear our uniform and be a part of 'JMPSSS
                             family'. I would like to thank all parents for sending their children
-                            to JMPS. I also thank them for putting their trust and confidence
+                            to JMPSSS. I also thank them for putting their trust and confidence
                             in our ability to provide a reliable 'all round' education which will
                             enable their children to become multitalented citizens of
-                            modern India. JMPS has facilities, the resources, the Teachers
+                            modern India. JMPSSS has facilities, the resources, the Teachers
                             and the management to ensure this is sustained for future years.
                         </p>
-                        <p>I thank our JMPS staff to do an outstanding job and totally
-                            committed to the education of JMPS students. You work long
+                        <p>I thank our JMPSSS staff to do an outstanding job and totally
+                            committed to the education of JMPSSS students. You work long
                             hours, sometimes in difficult circumstances.
                         </p>
                         <p>I sincerely acknowledge the co-operation and support extended
@@ -657,7 +657,7 @@
                 </div>
 
                 <div class="corr-card">
-                    <div class="corr-photo"><i class="fa-solid fa-person"></i></div>
+                    <div class="corr-photo"><i class="fa-solid fa-user-graduate"></i></div>
                     <h3>Mrs. B.Komalavathi</h3>
                     <span class="corr-designation">Director</span>
                     <div class="corr-details">
@@ -684,9 +684,9 @@
                     <p class="opening-line">Dear Families, Students &amp; Well-Wishers,</p>
                     <div class="message-content-dynamic">
                         <p>The words of Oscar Wilde, " The aim of life is self development to realize one's nature perfectly". I have realized that if the fertile soil of the mind is enriched with the values of love, kindness and patience the saplings of good education and character will grow strong trees and bear good fruits.</p>
-                        <p>"The aim of education should be to teach the child to think, not what to think. "This has been the endeavour of JMPS! Along with touching the zenith of academic excellence our earnest endeavours at JMPS! is to help our children fill their life with the light of positivity.
+                        <p>"The aim of education should be to teach the child to think, not what to think. "This has been the endeavour of JMPSSS! Along with touching the zenith of academic excellence our earnest endeavours at JMPSSS! is to help our children fill their life with the light of positivity.
                         </p>
-                        <p>With combined efforts of our hardworking and dedicated faculty and support of staff, goodwill of our friends, blessings and guidance of our patrons. We are confident that JMPS will continue to evolve consistently.
+                        <p>With combined efforts of our hardworking and dedicated faculty and support of staff, goodwill of our friends, blessings and guidance of our patrons. We are confident that JMPSSS will continue to evolve consistently.
                         </p>
                         <p>The school management has always taken keen interest, providing qualitative infrastructure, encouragement and unflinching support in growing and marching ahead in all avenues of the school's functioning.       
                         </p>
@@ -703,7 +703,7 @@
                 </div>
 
                 <div class="corr-card">
-                    <div class="corr-photo"><i class="fa-solid fa-person"></i></div>
+                    <div class="corr-photo"><i class="fa-solid fa-user-graduate"></i></div>
                     <h3>Mrs. B.Mohana Lakshmi Srikanth, B.E.,</h3>
                     <span class="corr-designation">Correspondent</span>
                     <div class="corr-details">
@@ -744,7 +744,7 @@
 
                 <!-- Right: Visual -->
                 <div class="sc-visual">
-                    <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="Foundation Campus" class="sc-img">
+                    <img src="{{ asset('assets/JMPSSS/image/img01.jpg') }}" alt="Foundation Campus" class="sc-img">
                 </div>
 
             </div>
@@ -756,7 +756,7 @@
         <div class="container">
             <div class="text-center">
                 <span class="section-subtitle">Our Direction</span>
-                <h2 class="section-title">Correspondent's Key Initiatives</h2>
+                <h2 class="section-title">Key Initiatives</h2>
             </div>
             <div class="init-grid">
                 <div class="init-card">

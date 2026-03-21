@@ -36,7 +36,7 @@
                         @if(!empty($photo->file_path))
                             <img src="{{ asset($photo->file_path) }}" alt="{{ $photo->title ?? 'Photo' }}" loading="lazy">
                         @else
-                            <img src="https://jmpsss.com/wp-content/uploads/2015/11/school.jpg" alt="School gallery" loading="lazy">
+                            <img src="https://JMPSSS.com/wp-content/uploads/2015/11/school.jpg" alt="School gallery" loading="lazy">
                         @endif
                         <figcaption class="photo-title">{{ $photo->title ?? 'Gallery item' }}</figcaption>
                     </figure>

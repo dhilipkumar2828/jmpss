@@ -17,7 +17,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Annual Sports Day 2024',
                 'description' => 'A day filled with athletic competitions and sportsmanship.',
-                'image' => 'assets/jmpsss/image/new/env2.png',
+                'image' => 'assets/JMPSSS/image/new/env2.png',
                 'event_date' => Carbon::now()->addDays(15),
                 'event_time' => '09:00:00',
                 'venue' => 'School Ground',
@@ -27,7 +27,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Science & Innovation Fair',
                 'description' => 'Showcasing the scientific creativity of our students.',
-                'image' => 'assets/jmpsss/image/new/env3.png',
+                'image' => 'assets/JMPSSS/image/new/env3.png',
                 'event_date' => Carbon::now()->addDays(30),
                 'event_time' => '10:00:00',
                 'venue' => 'School Auditorium',
@@ -37,7 +37,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Inter-School Cultural Meet',
                 'description' => 'Celebrating diverse cultures through music and dance.',
-                'image' => 'assets/jmpsss/image/new/env1.png',
+                'image' => 'assets/JMPSSS/image/new/env1.png',
                 'event_date' => Carbon::now()->subDays(5),
                 'event_time' => '11:00:00',
                 'venue' => 'Main Hall',

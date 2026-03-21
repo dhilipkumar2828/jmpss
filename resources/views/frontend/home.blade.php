@@ -154,7 +154,7 @@
     @else
     <section class="hero">
         <div class="hero-overlay"></div>
-        <img src="{{ asset('assets/jmpsss/image/new/slider3.jpg') }}" alt="Academic Excellence" class="hero-bg">
+        <img src="{{ asset('assets/JMPSSS/image/new/slider3.jpg') }}" alt="Academic Excellence" class="hero-bg">
         <div class="hero-content">
             <h1>{{ $sections['hero']->title ?? 'ACADEMIC EXCELLENCE' }}</h1>
             <div class="breadcrumbs">
@@ -169,10 +169,10 @@
         <div class="container grid-2 about-grid">
             <div class="about-images-wrapper">
                 <div class="about-img-1">
-                    <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="School Building">
+                    <img src="{{ asset('assets/JMPSSS/image/new/slider1.jpg') }}" alt="School Building">
                 </div>
                 <div class="about-img-2">
-                    <img src="{{ asset('assets/jmpsss/image/new/slider2.jpg') }}" alt="Students Learning">
+                    <img src="{{ asset('assets/JMPSSS/image/new/slider2.jpg') }}" alt="Students Learning">
                 </div>
             </div>
             <div class="about-text">
@@ -217,35 +217,29 @@
                 <h2 class="section-title">Messages from our Leaders</h2>
             </div>
             <div class="grid-2" style="gap:40px;">
-                @if($sections['principal'])
                 <div class="message-card" style="background:white; padding:40px; border-radius:30px; box-shadow:0 15px 45px rgba(0,0,0,0.05); border-left:6px solid var(--primary);">
                     <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
-                        <div style="width:70px; height:70px; background:var(--primary); border-radius:20px; display:grid; place-items:center; color:white; font-size:30px;"><i class="fas fa-user-tie"></i></div>
+                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; display:grid; place-items:center; color:var(--primary); font-size:30px;"><i class="fas fa-user-graduate"></i></div>
                         <div>
-                            <h3 style="font-size:20px; color:var(--primary);">{{ $sections['principal']->name }}</h3>
-                            <p style="font-size:14px; color:var(--text-muted); font-weight:600;">{{ $sections['principal']->designation }}</p>
+                            <h3 style="font-size:20px; color:var(--primary);">Mr. G.K. Babu</h3>
+                            <p style="font-size:14px; color:var(--text-muted); font-weight:600;">Founder & Chairman</p>
                         </div>
                     </div>
-                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">"{{ Str::limit($sections['principal']->quote, 150) }}"</p>
-                    <p style="font-size:15px; line-height:1.8; color:#555; margin-bottom:25px;">{{ Str::limit($sections['principal']->content, 200) }}</p>
+                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">“Education is unending life long process. It begins when one enters the stage of life until he/she has his exit. Formal education is given by educational institutions. The aims and objectives of any educational institution must be to instill in the students genuine human and spiritual values, a genuine concern for the welfare of others and commitment to truth and justice....”</p>
                     <a href="{{ route('chairman-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
                 </div>
-                @endif
 
-                @if($sections['correspondent'])
                 <div class="message-card" style="background:white; padding:40px; border-radius:30px; box-shadow:0 15px 45px rgba(0,0,0,0.05); border-left:6px solid var(--accent);">
                     <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
                         <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; display:grid; place-items:center; color:var(--primary); font-size:30px;"><i class="fas fa-user-graduate"></i></div>
                         <div>
-                            <h3 style="font-size:20px; color:var(--primary);">{{ $sections['correspondent']->name }}</h3>
-                            <p style="font-size:14px; color:var(--text-muted); font-weight:600;">{{ $sections['correspondent']->designation }}</p>
+                            <h3 style="font-size:20px; color:var(--primary);">Mrs. B.Komalavathi</h3>
+                            <p style="font-size:14px; color:var(--text-muted); font-weight:600;">Director</p>
                         </div>
                     </div>
-                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">"{{ Str::limit($sections['correspondent']->quote, 150) }}"</p>
-                    <p style="font-size:15px; line-height:1.8; color:#555; margin-bottom:25px;">{{ Str::limit($sections['correspondent']->content, 200) }}</p>
+                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">"Our school is well respected in our community and our JMPSSS. Students are proud to wear our uniform and be a part of 'JMPSSS family'. I would like to thank all parents for sending their children to JMPSSS. I also thank them for putting their trust and confidence in our ability to provide a reliable 'all round' education which will enable their children to become multitalented citizens of modern India...."</p>
                     <a href="{{ route('correspondent-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
                 </div>
-                @endif
             </div>
         </div>
     </section>
@@ -345,7 +339,7 @@
                             @if($event->image)
                                 <img src="{{ asset($event->image) }}" alt="{{ $event->title }}">
                             @else
-                                <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="{{ $event->title }}">
+                                <img src="{{ asset('assets/JMPSSS/image/img01.jpg') }}" alt="{{ $event->title }}">
                             @endif
                             <div class="event-date">{{ $event->event_date->format('d') }} <span>{{ $event->event_date->format('M') }}</span></div>
                         </div>
@@ -372,7 +366,7 @@
             </div>
             <div class="testimonial-right">
                 <div class="testimonial-avatar-wrapper">
-                    <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo" class="testimonial-avatar">
+                    <img src="{{ asset('assets/JMPSSS/logo.png') }}" alt="JMPSSS Logo" class="testimonial-avatar">
                 </div>
                 <div class="testimonial-main-content">
                     <div class="testimonial-slider-track">
@@ -427,7 +421,7 @@
     <!-- New Video Admission Section -->
     <!-- <section class="video-admission-section">
         <video autoplay muted loop id="admission-bg-video" class="admission-video-bg">
-            <source src="{{ asset('assets/jmpsss/image/Video_Generation_From_Logo_Name.mp4') }}" type="video/mp4">
+            <source src="{{ asset('assets/JMPSSS/image/Video_Generation_From_Logo_Name.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="video-overlay"></div>

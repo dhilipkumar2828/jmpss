@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider2.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider2.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -293,10 +293,72 @@
             background: #fff;
         }
 
-        .form-field input[type="file"] {
-            padding: 10px;
-            background: #fff;
+        .file-upload-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
             cursor: pointer;
+            z-index: 2;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #fafafa;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 8px 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .file-upload-wrapper:hover .file-upload-label {
+            border-color: #004800;
+            background: #fff;
+        }
+
+        .file-upload-btn {
+            background: #004800;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .file-upload-wrapper:hover .file-upload-btn {
+            background: #e14c1e;
+        }
+
+        .file-name {
+            font-size: 14px;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .file-upload-wrapper input.is-invalid + .file-upload-label {
+            border-color: #e14c1e;
+            background: rgba(225, 76, 30, 0.02);
         }
 
         .form-field select {
@@ -378,7 +440,7 @@
             @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
-                <span>Careers</span>
+                <span class="active">Careers</span>
             </nav>
         </div>
     </section>
@@ -459,11 +521,12 @@
                         </div>
                         <div class="contact-info-item">
                             <i class="fa-solid fa-location-dot"></i>
-                            <span>No.210, Palla Egai Village, Thirukazhukundram</span>
+                            <span>No.210, Palla Egai Village, Puliur Post, Thirukazhukundram T.K.
+                                Kancheepuram Dist. Pin-603 109.</span>
                         </div>
                     </div>
 
-                    <img src="{{ asset('assets/jmpsss/image/new/school22.jpg') }}" alt="School Campus"
+                    <img src="{{ asset('assets/JMPSSS/image/new/school22.jpg') }}" alt="School Campus"
                         class="apply-decor-img">
                 </div>
 
@@ -511,7 +574,13 @@
 
                         <div class="form-field">
                             <label>Upload CV (PDF / DOC) <span class="required-asterisk">*</span></label>
-                            <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
+                            <div class="file-upload-wrapper">
+                                <input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx" required>
+                                <div class="file-upload-label">
+                                    <span class="file-upload-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Choose File</span>
+                                    <span class="file-name" id="fileNameDisplay">No file chosen</span>
+                                </div>
+                            </div>
                         </div>
 
 
@@ -616,6 +685,15 @@
                 unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 }
+            });
+
+            // Update file name display
+            $('#resume').on('change', function() {
+                const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+                $('#fileNameDisplay').text(fileName);
+                
+                // Trigger validation on change
+                $(this).valid();
             });
         });
     </script>

@@ -17,7 +17,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider2.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider2.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -501,9 +501,9 @@
         <div class="container">
             <div class="chairman-layout">
                 <div class="chairman-card">
-                    <div class="chairman-photo"><i class="fa-solid fa-user-tie"></i></div>
+                    <div class="chairman-photo"><i class="fa-solid fa-user-graduate"></i></div>
                     <h3>Mr. G.K. Babu</h3>
-                    <span class="designation">Founder & Chairman, JMPSS</span>
+                    <span class="designation">Founder & Chairman, JMPSSSS</span>
                     <div class="chairman-details">
                         <div class="pd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
                                 School</span></div>
@@ -522,8 +522,8 @@
                     <p class="opening-line">Dear Students, Parents &amp; Visitors,</p>
                     <div class="message-content-dynamic">
                         <p>Education is unending life long process. It begins when one enters the stage of life until he/she has his exit. Formal education is given by educational institutions. The aims and objectives of any educational institution must be to instill in the students genuine human and spiritual values, a genuine concern for the welfare of others and commitment to truth and justice and last but not least academic excellence and all round development of one's personality to meet situation in life.</p>
-                        <p>The aim / vision of JMPS is to form integrated and responsible diligent person committed to peace and justice and ambitious for outstanding achievements.</p>
-                        <p>JMPS is trying its best to achieve this goal. To realize this we offer many co-curricular activities which help unfold hidden talents of the students. Writing stories, poems and short essays are one of the activities which help students to develop the thinking and look at the things happening in the world at different angles.</p>
+                        <p>The aim / vision of JMPSSS is to form integrated and responsible diligent person committed to peace and justice and ambitious for outstanding achievements.</p>
+                        <p>JMPSSS is trying its best to achieve this goal. To realize this we offer many co-curricular activities which help unfold hidden talents of the students. Writing stories, poems and short essays are one of the activities which help students to develop the thinking and look at the things happening in the world at different angles.</p>
                     </div>
                     <p>My sincere THANKS to all parents, well wishers, teachers and students for the support and cooperation.</p>
                     <div class="chairman-signature">
@@ -550,7 +550,7 @@
                     <p>At JMPSSS, our mission thrives on clear, actionable objectives that put the holistic development
                         and well-being of our students at the forefront.</p>
                     <div class="obj-visual-accent">
-                        <img src="{{ asset('assets/jmpsss/image/new/slider2.jpg') }}" alt="Students engaging in activities">
+                        <img src="{{ asset('assets/JMPSSS/image/new/slider2.jpg') }}" alt="Students engaging in activities">
                     </div>
                 </div>
 

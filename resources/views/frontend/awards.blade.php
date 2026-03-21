@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -55,24 +55,7 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        .breadcrumb-trail {
-            font-size: 14px;
-            opacity: 0.85;
-        }
 
-        .breadcrumb-trail a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .breadcrumb-trail a:hover {
-            color: #e14c1e;
-        }
-
-        .breadcrumb-trail span {
-            margin: 0 8px;
-            opacity: 0.6;
-        }
 
         /* ── Our Story (Classic Overlap) ── */
         .story-classic {
@@ -187,7 +170,7 @@
             @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
-                <span style="color: {{ $secondaryColor }}">Awards</span>
+                <span>Awards</span>
             </nav>
         </div>
     </section>
@@ -203,7 +186,7 @@
                     <p class="sc-text">Our journey is marked by numerous accolades in academics, sports, arts, and community service. These awards are a testament to the combined efforts of our students, teachers, and parents.</p>
                 </div>
                 <div class="sc-visual">
-                    <img src="{{ asset('assets/jmpsss/image/new/award1.jpg') }}" alt="Awards" class="sc-img">
+                    <img src="{{ asset('assets/JMPSSS/image/new/award1.jpg') }}" alt="Awards" class="sc-img">
                 </div>
             </div>
         </div>
@@ -224,7 +207,7 @@
                         @if($award->image)
                             <img src="{{ asset($award->image) }}" alt="{{ $award->title }}">
                         @else
-                            <img src="{{ asset('assets/jmpsss/image/new/award1.jpg') }}" alt="{{ $award->title }}">
+                            <img src="{{ asset('assets/JMPSSS/image/new/award1.jpg') }}" alt="{{ $award->title }}">
                         @endif
                         <div class="award-overlay" style="background: rgba(0, 72, 0, 0.7);">
                             <i class="fa-solid fa-trophy popup-icon"></i>

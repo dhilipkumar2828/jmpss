@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Institutional Announcements – JMPSS')
+@section('title', 'Institutional Announcements – JMPSSSS')
 
 @section('content')
     <!-- Page Header -->
@@ -35,7 +35,7 @@
                             <small
                                 style="text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 1.5px; margin-bottom: 10px; display: block;">March
                                 1, 2026</small>
-                            <h3 style="margin-top: 0; font-size: 20px; color: var(--primary); margin-bottom: 15px;">JMPSS
+                            <h3 style="margin-top: 0; font-size: 20px; color: var(--primary); margin-bottom: 15px;">JMPSSSS
                                 Awarded "School of Scholarly Excellence" 2026</h3>
                             <p style="font-size: 14px; margin-bottom: 15px;">We are honored to receive the prestigious
                                 national award for scholarly discipline and academic contribution to the NCERT community.

@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-        background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+        background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -55,24 +55,7 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        .breadcrumb-trail {
-            font-size: 14px;
-            opacity: 0.85;
-        }
 
-        .breadcrumb-trail a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .breadcrumb-trail a:hover {
-            color: #e14c1e;
-        }
-
-        .breadcrumb-trail span {
-            margin: 0 8px;
-            opacity: 0.6;
-        }
 
         /* ── Category View ── */
         .category-view {
@@ -446,7 +429,7 @@
             @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
-                <span style="color: {{ $secondaryColor }}">Videos</span>
+                <span>Videos</span>
             </nav>
         </div>
     </section>
@@ -474,7 +457,7 @@
                 @endphp
                 <div class="video-item-card" onclick="openAlbumVideos({{ json_encode($videoData) }}, '{{ $album->title }}')">
                     <div class="video-thumb">
-                        <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $album->title }}">
+                        <img src="{{ asset('assets/JMPSSS/image/new/slider1.jpg') }}" alt="{{ $album->title }}">
                         <div class="video-overlay-btn">
                             <i class="fa-solid fa-play" style="background: {{ $secondaryColor }}"></i>
                             <span style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 11px;">{{ $videosList->count() }} Videos</span>
@@ -587,7 +570,7 @@
                 opacity:${i === 0 ? '1' : '0.5'}; transition:all 0.2s;
             `;
             thumb.innerHTML = `<img src="https://img.youtube.com/vi/${videoId}/mqdefault.jpg"
-                style="width:100%;height:100%;object-fit:cover;" onerror="this.src='/assets/jmpsss/image/new/slider1.jpg'">`;
+                style="width:100%;height:100%;object-fit:cover;" onerror="this.src='/assets/JMPSSS/image/new/slider1.jpg'">`;
             thumb.onclick = (e) => { e.stopPropagation(); currentVideoIndex = i; updateVideoModalContent(); };
             container.appendChild(thumb);
         });

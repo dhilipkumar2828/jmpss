@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -210,7 +210,7 @@
             margin-top: 50px;
             position: relative;
             min-height: 380px;
-            background: url('{{ asset('assets/jmpsss/image/mv-bg.png') }}') center/cover no-repeat;
+            background: url('{{ asset('assets/JMPSSS/image/mv-bg.png') }}') center/cover no-repeat;
             background-attachment: fixed;
         }
 
@@ -1067,7 +1067,7 @@
                                         The class rooms for the kindergarten children are fully
                                         equipped with a wide array of materials that facilitate a play
                                         way learning and another fun filled day, right in the School.
-                                        JMPS also provides the safest environment for your child
+                                        JMPSSS also provides the safest environment for your child
                                         during the day so that you can rest assured with the guarantee
                                         that your child will never be away from the watchful eyes of
                                         our trained support staff or teachers.
@@ -1098,7 +1098,7 @@
 
                 <!-- Right: Visual -->
                 <div class="sc-visual">
-                    <img src="{{ asset('assets/jmpsss/image/img01.jpg') }}" alt="JMPSSS Campus" class="sc-img">
+                    <img src="{{ asset('assets/JMPSSS/image/img01.jpg') }}" alt="JMPSSS Campus" class="sc-img">
                 </div>
 
             </div>
@@ -1278,7 +1278,7 @@
             <div class="container">
                 <p>&ldquo;From love and loss came the greatest gift &mdash; a school where thousands of children now
                     find their future.&rdquo;</p>
-                <cite>&mdash; Mr. G.K. Babu, Correspondent, Jeeva Memorial Trust</cite>
+                <cite>&mdash; Mr. G.K. Babu, Founder & Chairman, Jeeva Memorial Trust</cite>
             </div>
         </div>
 

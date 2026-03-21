@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider2.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/JMPSSS/image/new/slider2.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -224,7 +224,7 @@
                     <p class="sc-text">Full tution fees should be paid for the term even if the child leaves before the end of the term.</p>
                 </div>
                 <div class="sc-visual">
-                    <img src="{{ asset('assets/jmpsss/image/new/school22.jpg') }}" alt="Students" class="sc-img">
+                    <img src="{{ asset('assets/JMPSSS/image/new/school22.jpg') }}" alt="Students" class="sc-img">
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@
             <!-- Center: Logo -->
             <div class="top-header-center">
                 <a href="{{ route('home') }}" class="logo">
-                    <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo">
+                    <img src="{{ asset('assets/JMPSSS/logo.png') }}" alt="JMPSSS Logo">
                 </a>
             </div>
 
@@ -50,7 +50,7 @@
                 <ul class="nav-links">
                     <li class="mobile-nav-logo-item">
                         <a href="{{ route('home') }}" aria-label="JMPSSS Home">
-                            <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo">
+                            <img src="{{ asset('assets/JMPSSS/logo.png') }}" alt="JMPSSS Logo">
                         </a>
                     </li>
                     <li><a href="{{ route('home') }}">Home</a></li>
@@ -103,7 +103,7 @@
                 </ul>
             </nav>
             <div class="sticky-logo">
-                <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo">
+                <img src="{{ asset('assets/JMPSSS/logo.png') }}" alt="JMPSSS Logo">
             </div>
         </div>
         <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>

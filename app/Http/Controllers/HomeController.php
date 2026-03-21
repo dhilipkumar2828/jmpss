@@ -12,9 +12,9 @@ class HomeController extends Controller
     public function index()
     {
         try {
-            $events = Event::active()->where('is_featured', '=', 1)->take(6)->get();
+            $events = Event::active()->where('is_featured', '=', 1)->take(12)->get();
             if ($events->isEmpty()) {
-                $events = Event::active()->take(6)->get();
+                $events = Event::active()->take(12)->get();
             }
             
             $testimonials = Testimonial::active()->where('is_featured', '=', 1)->take(5)->get();
