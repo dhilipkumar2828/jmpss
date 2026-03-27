@@ -721,7 +721,7 @@
                     <div class="corr-signature">
                         <div class="sig-icon-red"><i class="fa-solid fa-heart"></i></div>
                         <div class="sig-text">
-                            <h4>Mrs. Ranjini Kumaran M.Sc., B.Ed.</h4>
+                            <h4>Mrs. Ranjini Kumaran M.Sc., B.Ed. Mathematics</h4>
                             <span>Principal, JMPSSS</span>
                         </div>
                     </div>
@@ -729,7 +729,7 @@
 
                 <div class="corr-card">
                     <div class="corr-photo"><i class="fa-solid fa-user-graduate"></i></div>
-                    <h3>Mrs. Ranjini Kumaran M.Sc., B.Ed.</h3>
+                    <h3>Mrs. Ranjini Kumaran M.Sc., B.Ed. Mathematics</h3>
                     <span class="corr-designation">Principal</span>
                     <div class="corr-details">
                         <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Principal, Jeeva Memorial
