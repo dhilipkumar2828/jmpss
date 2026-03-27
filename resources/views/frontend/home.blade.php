@@ -225,7 +225,7 @@
                             <p style="font-size:14px; color:var(--text-muted); font-weight:600;">Founder & Chairman</p>
                         </div>
                     </div>
-                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">“It gives me immense pleasure to welcome you to JMPSSS. JMPSSS stands as a symbol of excellence, dedication, and holistic development. We believe that education is not just about academic achievement, but also about shaping character, building confidence, and nurturing responsible citizens of tomorrow....”</p>
+                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">“It gives me immense pleasure to welcome you to JMPSSS. JMPSSS stands as a symbol of excellence, dedication, and holistic development. We believe that education is not just about academic achievement, but also about shaping character, building confidence....”</p>
                     <a href="{{ route('chairman-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
                 </div>
 
