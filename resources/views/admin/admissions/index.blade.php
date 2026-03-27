@@ -20,7 +20,6 @@
                         <th>Email</th>
                         <th>Mobile</th>
                         <th>Grade</th>
-                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -34,11 +33,6 @@
                         <td>{{ $admission->email }}</td>
                         <td>{{ $admission->mobile }}</td>
                         <td><span class="badge badge-info">{{ strtoupper($admission->grade_applying) }}</span></td>
-                        <td>
-                            <span class="badge {{ $admission->status == 'pending' ? 'badge-warning' : 'badge-success' }}">
-                                {{ ucfirst($admission->status) }}
-                            </span>
-                        </td>
                         <td>
                             <div style="display: flex; gap: 8px;">
                                 <a href="{{ route('admin.admissions.show', $admission->id) }}" class="btn btn-outline btn-sm">
