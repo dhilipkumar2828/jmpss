@@ -1142,11 +1142,7 @@
             <div class="mv-panel mv-vision">
                 <span class="mv-panel-tag"><i class="fa-solid fa-eye"></i> Vision</span>
                 <h3>Our Vision</h3>
-                <p>To encourage and motivate
-                    students through all ways and
-                    means and by providing a
-                    place to Enrich, Educate and
-                    Elevate lives.</p>
+                <p>The aim / vision of JMPSSS is to form integrated and responsible diligent person committed to peace and justice and ambitious for outstanding achievements.</p>
                 <ul>
                     <li><i class="fa-solid fa-circle-check"></i> Celebrating diversity &amp; fostering curiosity</li>
                     <li><i class="fa-solid fa-circle-check"></i> Shaping leaders, thinkers &amp; changemakers</li>

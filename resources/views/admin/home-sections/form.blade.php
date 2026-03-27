@@ -15,7 +15,7 @@
                         <label class="form-label">Section Type *</label>
                         <select name="section_type" class="form-control" required>
                             <option value="principal" {{ old('section_type', $section->section_type ?? '') == 'principal' ? 'selected' : '' }}>👨‍💼 Chairman's Desk</option>
-                            <option value="correspondent" {{ old('section_type', $section->section_type ?? '') == 'correspondent' ? 'selected' : '' }}>👔 Director & Correspondent's Desk</option>
+                            <option value="correspondent" {{ old('section_type', $section->section_type ?? '') == 'correspondent' ? 'selected' : '' }}>👔 Management Team</option>
                             <option value="hero" {{ old('section_type', $section->section_type ?? '') == 'hero' ? 'selected' : '' }}>🎯 Hero Section</option>
                             <option value="about" {{ old('section_type', $section->section_type ?? '') == 'about' ? 'selected' : '' }}>📋 About Section</option>
                         </select>
