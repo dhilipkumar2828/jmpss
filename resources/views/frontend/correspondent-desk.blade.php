@@ -645,7 +645,7 @@
                 </div>
 
                 <div class="corr-card">
-                    <div class="corr-photo"><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="corr-photo"><img src="{{ asset('images/manager.jpeg') }}" alt="Mrs. B.Komalavathi" style="width: 100%; height: 100%; object-fit: cover;"></div>
                     <h3>Mrs. B.Komalavathi</h3>
                     <span class="corr-designation">Managing Director</span>
                     <div class="corr-details">
@@ -687,7 +687,7 @@
                 </div>
 
                 <div class="corr-card">
-                    <div class="corr-photo"><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="corr-photo"><img src="{{ asset('images/corrspond.jpeg') }}" alt="Mrs. B.Mohana Lakshmi Srikanth" style="width: 100%; height: 100%; object-fit: cover;"></div>
                     <h3>Mrs. B.Mohana Lakshmi Srikanth, B.E.,</h3>
                     <span class="corr-designation">Correspondent</span>
                     <div class="corr-details">

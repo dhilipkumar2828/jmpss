@@ -501,7 +501,7 @@
         <div class="container">
             <div class="chairman-layout">
                 <div class="chairman-card">
-                    <div class="chairman-photo"><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="chairman-photo"><img src="{{ asset('images/chairman.jpeg') }}" alt="Mr. G.K. Babu" style="width: 100%; height: 100%; object-fit: cover;"></div>
                     <h3>Mr. G.K. Babu</h3>
                     <span class="designation">Founder & Chairman, JMPSSS</span>
                     <div class="chairman-details">

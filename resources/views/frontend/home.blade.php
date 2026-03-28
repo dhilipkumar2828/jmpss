@@ -219,7 +219,7 @@
             <div class="grid-2" style="gap:40px;">
                 <div class="message-card" style="background:white; padding:40px; border-radius:30px; box-shadow:0 15px 45px rgba(0,0,0,0.05); border-left:6px solid var(--primary);">
                     <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
-                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; display:grid; place-items:center; color:var(--primary); font-size:30px;"><i class="fas fa-user-graduate"></i></div>
+                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; overflow:hidden;"><img src="{{ asset('images/chairman.jpeg') }}" alt="Mr. G.K. Babu" style="width: 100%; height: 100%; object-fit: cover;"></div>
                         <div>
                             <h3 style="font-size:20px; color:var(--primary);">Mr. G.K. Babu</h3>
                             <p style="font-size:14px; color:var(--text-muted); font-weight:600;">Founder & Chairman</p>
@@ -231,7 +231,7 @@
 
                 <div class="message-card" style="background:white; padding:40px; border-radius:30px; box-shadow:0 15px 45px rgba(0,0,0,0.05); border-left:6px solid var(--accent);">
                     <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
-                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; display:grid; place-items:center; color:var(--primary); font-size:30px;"><i class="fas fa-user-graduate"></i></div>
+                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; overflow:hidden;"><img src="{{ asset('images/manager.jpeg') }}" alt="Mrs. B.Komalavathi" style="width: 100%; height: 100%; object-fit: cover;"></div>
                         <div>
                             <h3 style="font-size:20px; color:var(--primary);">Mrs. B.Komalavathi</h3>
                             <p style="font-size:14px; color:var(--text-muted); font-weight:600;">Managing Director</p>
