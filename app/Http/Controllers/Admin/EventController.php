@@ -29,6 +29,7 @@ class EventController extends Controller
             'event_time'  => 'nullable',
             'venue'       => 'nullable|string|max:255',
             'category'    => 'nullable|string|max:100',
+            'highlights'  => 'nullable|string',
             'is_featured' => 'boolean',
             'is_active'   => 'boolean',
         ]);
@@ -61,6 +62,7 @@ class EventController extends Controller
             'event_time'  => 'nullable',
             'venue'       => 'nullable|string|max:255',
             'category'    => 'nullable|string|max:100',
+            'highlights'  => 'nullable|string',
             'is_featured' => 'boolean',
             'is_active'   => 'boolean',
         ]);
