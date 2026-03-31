@@ -219,25 +219,25 @@
             <div class="grid-2" style="gap:40px;">
                 <div class="message-card" style="background:white; padding:40px; border-radius:30px; box-shadow:0 15px 45px rgba(0,0,0,0.05); border-left:6px solid var(--primary);">
                     <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
-                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; display:grid; place-items:center; color:var(--primary); font-size:30px;"><i class="fas fa-user-graduate"></i></div>
+                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; overflow:hidden;"><img src="{{ asset('images/chairman.jpeg') }}" alt="Mr. G.K. Babu" style="width: 100%; height: 100%; object-fit: cover;"></div>
                         <div>
                             <h3 style="font-size:20px; color:var(--primary);">Mr. G.K. Babu</h3>
                             <p style="font-size:14px; color:var(--text-muted); font-weight:600;">Founder & Chairman</p>
                         </div>
                     </div>
-                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">“Education is unending life long process. It begins when one enters the stage of life until he/she has his exit. Formal education is given by educational institutions. The aims and objectives of any educational institution must be to instill in the students genuine human and spiritual values, a genuine concern for the welfare of others and commitment to truth and justice....”</p>
+                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">“It gives me immense pleasure to welcome you to JMPSSS. JMPSSS stands as a symbol of excellence, dedication, and holistic development. We believe that education is not just about academic achievement, but also about shaping character, building confidence....”</p>
                     <a href="{{ route('chairman-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <div class="message-card" style="background:white; padding:40px; border-radius:30px; box-shadow:0 15px 45px rgba(0,0,0,0.05); border-left:6px solid var(--accent);">
                     <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
-                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; display:grid; place-items:center; color:var(--primary); font-size:30px;"><i class="fas fa-user-graduate"></i></div>
+                        <div style="width:70px; height:70px; background:var(--accent); border-radius:20px; overflow:hidden;"><img src="{{ asset('images/manager.jpeg') }}" alt="Mrs. B.Komalavathi" style="width: 100%; height: 100%; object-fit: cover;"></div>
                         <div>
                             <h3 style="font-size:20px; color:var(--primary);">Mrs. B.Komalavathi</h3>
-                            <p style="font-size:14px; color:var(--text-muted); font-weight:600;">Director</p>
+                            <p style="font-size:14px; color:var(--text-muted); font-weight:600;">Managing Director</p>
                         </div>
                     </div>
-                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">"Our school is well respected in our community and our JMPSSS. Students are proud to wear our uniform and be a part of 'JMPSSS family'. I would like to thank all parents for sending their children to JMPSSS. I also thank them for putting their trust and confidence in our ability to provide a reliable 'all round' education which will enable their children to become multitalented citizens of modern India...."</p>
+                    <p style="font-style:italic; color:#444; line-height:1.7; margin-bottom:20px;">"Welcome to JMPSSS, where education is not just about learning from books, but about shaping character, values, and future leaders. At JMPSSS, we are committed to providing a safe, supportive, and stimulating environment where every child is encouraged to explore their potential..."</p>
                     <a href="{{ route('correspondent-desk') }}" style="color:var(--primary); font-weight:700; text-decoration:none; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Read Full Message <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>

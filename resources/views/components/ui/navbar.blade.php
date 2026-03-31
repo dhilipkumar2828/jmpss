@@ -62,8 +62,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('chairman-desk') }}"><i class="fa-solid fa-user-tie"></i> Chairman's Desk</a>
                             </li>
-                            <li><a href="{{ route('correspondent-desk') }}"><i class="fa-solid fa-briefcase"></i> Director & Correspondent's
-                                    Desk</a></li>
+                            <li><a href="{{ route('correspondent-desk') }}"><i class="fa-solid fa-briefcase"></i> Management Team</a></li>
                         </ul>
                     </li>
                     <li class="has-dropdown">

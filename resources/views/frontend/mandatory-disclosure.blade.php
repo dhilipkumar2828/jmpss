@@ -102,7 +102,7 @@
                     <tr>
                         <td>6</td>
                         <td>Principal Name</td>
-                        <td>To be updated</td>
+                        <td>Mrs. Ranjini Kumaran M.Sc., B.Ed.</td>
                     </tr>
                 </tbody>
             </table>

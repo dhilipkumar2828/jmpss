@@ -501,10 +501,11 @@
         <div class="container">
             <div class="chairman-layout">
                 <div class="chairman-card">
-                    <div class="chairman-photo"><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="chairman-photo"><img src="{{ asset('images/chairman.jpeg') }}" alt="Mr. G.K. Babu" style="width: 100%; height: 100%; object-fit: cover;"></div>
                     <h3>Mr. G.K. Babu</h3>
-                    <span class="designation">Founder & Chairman, JMPSSSS</span>
+                    <span class="designation">Founder & Chairman, JMPSSS</span>
                     <div class="chairman-details">
+                         <div class="pd-item"><i class="fa-solid fa-school"></i><span>Founder & Chairman,Jeeva Memorial Trust</span></div>
                         <div class="pd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
                                 School</span></div>
                         <div class="pd-item"><i class="fa-solid fa-certificate"></i><span>CBSE Affiliated — No:
@@ -513,19 +514,22 @@
                                 Kancheepuram Dist.</span></div>
                         <div class="pd-item"><i
                                 class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
+                        <div class="pd-item"><i
+                                class="fa-solid fa-phone"></i><span>+91-7373418852, +91-8939222122</span></div>
                     </div>
                     <div class="p-quote">"Education is not preparation for life; education is life itself."</div>
                 </div>
 
                 <div class="chairman-message">
                     <h2>A Message from the Chairman</h2>
-                    <p class="opening-line">Dear Students, Parents &amp; Visitors,</p>
+                    <p class="opening-line">It gives me immense pleasure to welcome you to JMPSSS.</p>
                     <div class="message-content-dynamic">
-                        <p>Education is unending life long process. It begins when one enters the stage of life until he/she has his exit. Formal education is given by educational institutions. The aims and objectives of any educational institution must be to instill in the students genuine human and spiritual values, a genuine concern for the welfare of others and commitment to truth and justice and last but not least academic excellence and all round development of one's personality to meet situation in life.</p>
-                        <p>The aim / vision of JMPSSS is to form integrated and responsible diligent person committed to peace and justice and ambitious for outstanding achievements.</p>
-                        <p>JMPSSS is trying its best to achieve this goal. To realize this we offer many co-curricular activities which help unfold hidden talents of the students. Writing stories, poems and short essays are one of the activities which help students to develop the thinking and look at the things happening in the world at different angles.</p>
+                        <p>JMPSSS stands as a symbol of excellence, dedication, and holistic development. We believe that education is not just about academic achievement, but also about shaping character, building confidence, and nurturing responsible citizens of tomorrow.</p>
+                        <p>In today’s rapidly changing world, it is essential to equip students with not only knowledge but also values, skills, and creativity. Our dedicated team of educators works tirelessly to create a positive and inspiring learning environment where every child is encouraged to explore their potential and achieve their dreams.</p>
+                        <p>We focus on providing a balanced education that combines academics, co-curricular activities, and moral values. Our aim is to empower students to face challenges with courage, think critically, and contribute meaningfully to society.</p>
+                        <p>I strongly believe that the combined efforts of students, teachers, and parents play a vital role in the success of any institution. Together, we can build a strong foundation for our children’s future.</p>
                     </div>
-                    <p>My sincere THANKS to all parents, well wishers, teachers and students for the support and cooperation.</p>
+                    <p>Thank you for your trust and support.</p>
                     <div class="chairman-signature">
                         <div class="sig-icon"><i class="fa-solid fa-feather-pointed"></i></div>
                         <div class="sig-text">

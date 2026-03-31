@@ -609,14 +609,14 @@
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
             <span class="page-label">About Us</span>
-            <h1>{{ $pageBanner->title ?? "Director & Correspondent's Desk" }}</h1>
+            <h1>{{ $pageBanner->title ?? "Management Team" }}</h1>
             @if($pageBanner && $pageBanner->subtitle)
                 <p style="font-size: 18px; opacity: 0.9; margin-top: -10px; color: white;">{{ $pageBanner->subtitle }}</p>
             @endif
             <nav class="breadcrumb-trail">
                 <a href="{{ route('home') }}">Home</a><span>›</span>
                 <a href="{{ route('about') }}">About Us</a><span>›</span>
-                Director & Correspondent's Desk
+                Management Team
             </nav>
         </div>
     </section>
@@ -627,41 +627,29 @@
             <div class="corr-layout">
                 <div class="corr-message">
                     <h2>A Message from the Managing Director</h2>
-                    <p class="opening-line">Dear Families, Students &amp; Well-Wishers,</p>
+                    <p class="opening-line">Welcome to JMPSSS, where education is not just about learning from books, but about shaping character, values, and future leaders.</p>
                     <div class="message-content-dynamic">
-                        <p>Our school is well respected in our community and our JMPSSS.
-                            Students are proud to wear our uniform and be a part of 'JMPSSS
-                            family'. I would like to thank all parents for sending their children
-                            to JMPSSS. I also thank them for putting their trust and confidence
-                            in our ability to provide a reliable 'all round' education which will
-                            enable their children to become multitalented citizens of
-                            modern India. JMPSSS has facilities, the resources, the Teachers
-                            and the management to ensure this is sustained for future years.
-                        </p>
-                        <p>I thank our JMPSSS staff to do an outstanding job and totally
-                            committed to the education of JMPSSS students. You work long
-                            hours, sometimes in difficult circumstances.
-                        </p>
-                        <p>I sincerely acknowledge the co-operation and support extended
-                            by all parents, public and well wishers.
-                        </p>
+                        <p>At JMPSSS, we are committed to providing a safe, supportive, and stimulating environment where every child is encouraged to explore their potential. We believe that each student is unique, and our goal is to nurture their talents while instilling confidence, discipline, and a lifelong love for learning.</p>
+                        <p>Our dedicated team of educators works tirelessly to maintain high academic standards along with co-curricular excellence. We focus on holistic development—intellectual, emotional, social, and physical—so that our students are well-prepared to face the challenges of the modern world.</p>
+                        <p>We also strongly believe in the partnership between parents, teachers, and the school community. Together, we can create a strong foundation for our children’s success and happiness.</p>
+                        <p>As the Managing Director, I take immense pride in the growth and achievements of our students and staff. We continue to strive for excellence and innovation in education, ensuring that our school remains a place where dreams are nurtured and futures are built.</p>
                     </div>
-                    <p>With best wishes & prayers.</p>
+                    <p>Thank you for being a part of our journey.</p>
                     <div class="corr-signature">
                         <div class="sig-icon-red"><i class="fa-solid fa-heart"></i></div>
                         <div class="sig-text">
                             <h4>Mrs. B.Komalavathi</h4>
-                            <span>Director, JMPSSS</span>
+                            <span>Managing Director, JMPSSS</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="corr-card">
-                    <div class="corr-photo"><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="corr-photo"><img src="{{ asset('images/manager.jpeg') }}" alt="Mrs. B.Komalavathi" style="width: 100%; height: 100%; object-fit: cover;"></div>
                     <h3>Mrs. B.Komalavathi</h3>
-                    <span class="corr-designation">Director</span>
+                    <span class="corr-designation">Managing Director</span>
                     <div class="corr-details">
-                        <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Director, Jeeva Memorial
+                        <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Managing Director, Jeeva Memorial
                                 Trust</span></div>
                         <div class="cd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary
                                 School</span></div>
@@ -669,7 +657,7 @@
                                 Kancheepuram Dist.</span></div>
                         <div class="cd-item"><i
                                 class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
-                        <div class="cd-item"><i class="fa-solid fa-phone"></i><span>+91-7373418852</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-phone"></i><span>+91-7373418852, +91-8939222122</span></div>
                     </div>
                     <div class="c-quote">"From love and loss came the greatest gift I could give — a school where thousands of children find their future."</div>
                 </div>
@@ -681,17 +669,13 @@
             <div class="corr-layout">
                 <div class="corr-message">
                     <h2>A Message from the Correspondent</h2>
-                    <p class="opening-line">Dear Families, Students &amp; Well-Wishers,</p>
+                    <p class="opening-line">Welcome to JMPSSS, where education is not just about academics but about shaping character, values, and a lifelong love for learning.</p>
                     <div class="message-content-dynamic">
-                        <p>The words of Oscar Wilde, " The aim of life is self development to realize one's nature perfectly". I have realized that if the fertile soil of the mind is enriched with the values of love, kindness and patience the saplings of good education and character will grow strong trees and bear good fruits.</p>
-                        <p>"The aim of education should be to teach the child to think, not what to think. "This has been the endeavour of JMPSSS! Along with touching the zenith of academic excellence our earnest endeavours at JMPSSS! is to help our children fill their life with the light of positivity.
-                        </p>
-                        <p>With combined efforts of our hardworking and dedicated faculty and support of staff, goodwill of our friends, blessings and guidance of our patrons. We are confident that JMPSSS will continue to evolve consistently.
-                        </p>
-                        <p>The school management has always taken keen interest, providing qualitative infrastructure, encouragement and unflinching support in growing and marching ahead in all avenues of the school's functioning.       
-                        </p>
-                        <p>We are indeed grateful to the parents for reposing year, such complete confidence and trusting their childrento us to mould them worthy citizens of the society.
-                        </p>
+                        <p>Our vision is to create a nurturing and inspiring environment where every child feels valued, confident, and motivated to achieve their fullest potential. We believe that each student is unique, and it is our responsibility to guide them with care, dedication, and a strong sense of purpose.</p>
+                        <p>At JMPSSS, we are committed to providing quality education supported by experienced and passionate teachers. Along with academic excellence, we focus on discipline, creativity, leadership, and moral values that prepare students to face the challenges of the future with confidence.</p>
+                        <p>We strongly believe that education is a partnership between the school and parents. Together, we can build a strong foundation for our children and help them grow into responsible and successful individuals.</p>
+                        <p>I extend my heartfelt gratitude to our dedicated staff, supportive parents, and enthusiastic students who contribute to making our school a place of excellence and growth.</p>
+                        <p>Let us continue to work together in shaping a bright and successful future for our children.</p>
                     </div>
                     <div class="corr-signature">
                         <div class="sig-icon-red"><i class="fa-solid fa-heart"></i></div>
@@ -703,7 +687,7 @@
                 </div>
 
                 <div class="corr-card">
-                    <div class="corr-photo"><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="corr-photo"><img src="{{ asset('images/corrspond.jpeg') }}" alt="Mrs. B.Mohana Lakshmi Srikanth" style="width: 100%; height: 100%; object-fit: cover;"></div>
                     <h3>Mrs. B.Mohana Lakshmi Srikanth, B.E.,</h3>
                     <span class="corr-designation">Correspondent</span>
                     <div class="corr-details">
@@ -715,9 +699,47 @@
                                 Kancheepuram Dist.</span></div>
                         <div class="cd-item"><i
                                 class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
-                        <div class="cd-item"><i class="fa-solid fa-phone"></i><span>+91-7373418852</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-phone"></i><span>+91-7373418852, +91-8939222122</span></div>
                     </div>
                     <div class="c-quote">"From love and loss came the greatest gift I could give — a school where thousands of children find their future."</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="corr-section" style="background: #fcfdfc; border-top: 1px solid #eee;">
+        <div class="container">
+            <div class="corr-layout">
+                <div class="corr-message">
+                    <h2>A Message from the Principal</h2>
+                    <p class="opening-line">Welcome to JMPSSS!</p>
+                    <div class="message-content-dynamic">
+                        <p>At JMPSSS, we believe that education is not just about academics, but about shaping character, building confidence, and preparing students for life. Our goal is to create a safe, supportive, and inspiring environment where every child can discover their potential and grow into a responsible individual.</p>
+                        <p>We are committed to providing quality education through experienced and dedicated teachers who guide students with care and encouragement. Along with academic excellence, we focus on discipline, values, creativity, and physical well-being.</p>
+                        <p>We encourage our students to think independently, act responsibly, and strive for excellence in everything they do. With the support of parents and the community, we aim to nurture young minds and prepare them to face future challenges with confidence.</p>
+                        <p>Let us work together to build a bright future for our children.</p>
+                    </div>
+                    <div class="corr-signature">
+                        <div class="sig-icon-red"><i class="fa-solid fa-heart"></i></div>
+                        <div class="sig-text">
+                            <h4>Mrs. Ranjini Kumaran M.Sc., B.Ed. Mathematics</h4>
+                            <span>Principal, JMPSSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="corr-card">
+                    <div class="corr-photo"><i class="fa-solid fa-user-graduate"></i></div>
+                    <h3>Mrs. Ranjini Kumaran M.Sc., B.Ed. Mathematics</h3>
+                    <span class="corr-designation">Principal</span>
+                    <div class="corr-details">
+                        <div class="cd-item"><i class="fa-solid fa-building-columns"></i><span>Principal, Jeeva Memorial
+                                Trust</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-school"></i><span>Jeeva Memorial Senior Secondary School</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-location-dot"></i><span>Thirukazhukundram, Kancheepuram Dist.</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-envelope"></i><span>jeevamemorialschool@gmail.com</span></div>
+                        <div class="cd-item"><i class="fa-solid fa-phone"></i><span>+91-7373418852, +91-8939222122</span></div>
+                        <div class="c-quote">"From love and loss came the greatest gift I could give — a school where thousands of children find their future."</div>
+                    </div>
                 </div>
             </div>
         </div>
