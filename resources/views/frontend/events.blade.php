@@ -51,6 +51,25 @@
             color: #e14c1e;
             margin-left: 3px;
         }
+
+        .highlights-text-wrapper {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 20px 25px;
+            border-radius: 0 12px 12px 0;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334155;
+            margin-top: 15px;
+        }
+
+        .highlights-text-wrapper p {
+            margin-bottom: 12px;
+        }
+
+        .highlights-text-wrapper p:last-child {
+            margin-bottom: 0;
+        }
     </style>
 @endpush
 
@@ -106,7 +125,9 @@
                                 data-title="{{ $event->title }}" data-date="{{ $event->event_date->format('d F Y') }}"
                                 data-venue="{{ $event->venue ?? 'School Campus' }}" data-desc="{{ $event->description }}"
                                 data-img="{{ $event->image ? asset($event->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}"
-                                data-cat="{{ $event->is_featured ? 'Featured Event' : 'School Event' }}">
+                                data-cat="{{ $event->category ?? 'School Event' }}"
+                                data-highlight-category="{{ $event->category ?? 'General' }}"
+                                data-highlights="{{ $event->highlights }}">
                             </div>
                         </div>
                     @empty
@@ -170,43 +191,33 @@
                         <div class="sidebar-widget recent-events-widget">
                             <h3>Recent Events</h3>
                             <div class="recent-event-list">
+                                @foreach($recentEvents as $re)
                                 <div class="recent-item">
-                                    <img src="{{ asset('assets/jmpsss/image/img02.jpg') }}" alt="Sports Day"
-                                        onclick="showEventDetails(event, 'sports')">
+                                    <img src="{{ $re->image ? asset($re->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $re->title }}"
+                                        onclick="showEventDetails(event, '{{ $re->id }}')">
                                     <div class="recent-info">
-                                        <a href="#" onclick="showEventDetails(event, 'sports')">Annual Sports Day
-                                            2024</a>
-                                        <span>Nov 25, 2024</span>
+                                        <a href="#" onclick="showEventDetails(event, '{{ $re->id }}')">{{ $re->title }}</a>
+                                        <span>{{ $re->event_date->format('M d, Y') }}</span>
+                                    </div>
+                                    <div class="event-full-data" style="display:none;" data-id="{{ $re->id }}"
+                                        data-title="{{ $re->title }}" data-date="{{ $re->event_date->format('d F Y') }}"
+                                        data-venue="{{ $re->venue ?? 'School Campus' }}" data-desc="{{ $re->description }}"
+                                        data-img="{{ $re->image ? asset($re->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}"
+                                        data-cat="{{ $re->category ?? 'School Event' }}"
+                                        data-highlight-category="{{ $re->category ?? 'General' }}"
+                                        data-highlights="{{ $re->highlights }}">
                                     </div>
                                 </div>
-                                <div class="recent-item">
-                                    <img src="{{ asset('assets/jmpsss/image/img03.jpg') }}" alt="Science Exhibition"
-                                        onclick="showEventDetails(event, 'science')">
-                                    <div class="recent-info">
-                                        <a href="#" onclick="showEventDetails(event, 'science')">Science
-                                            Exhibition</a>
-                                        <span>Dec 05, 2024</span>
-                                    </div>
-                                </div>
-                                <div class="recent-item">
-                                    <img src="{{ asset('assets/jmpsss/image/img04.jpg') }}" alt="Academic Award"
-                                        onclick="showEventDetails(event, 'academic')">
-                                    <div class="recent-info">
-                                        <a href="#" onclick="showEventDetails(event, 'academic')">Academic Toppers
-                                            2024</a>
-                                        <span>Jan 10, 2025</span>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
 
                         <div class="sidebar-widget category-widget">
                             <h3>Categories</h3>
                             <ul>
-                                <li><a href="#">Admissions <span>(12)</span></a></li>
-                                <li><a href="#">Sports <span>(08)</span></a></li>
-                                <li><a href="#">Academics <span>(24)</span></a></li>
-                                <li><a href="#">Cultural <span>(15)</span></a></li>
+                                @foreach($categories as $cat)
+                                <li><a href="#">{{ $cat->category }} <span>({{ $cat->count }})</span></a></li>
+                                @endforeach
                             </ul>
                         </div>
 
@@ -459,7 +470,7 @@
             if (e) e.preventDefault();
 
             // Find the data container in the clicked element or its parent
-            const card = e.currentTarget || document.querySelector(`.event-card-page[onclick*="'${eventId}'"]`);
+            const card = e.currentTarget || document.querySelector(`.event-card-page[onclick*="'${eventId}'"]`) || document.querySelector(`.recent-item[onclick*="'${eventId}'"]`);
             if (!card) return;
 
             const dataWrap = card.querySelector('.event-full-data');
@@ -482,8 +493,17 @@
                 `<p>${data.content.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p>`;
 
             const galleryGrid = document.getElementById('detail-gallery-grid');
+            const gallerySection = document.querySelector('.detail-gallery');
             if (galleryGrid) {
-                galleryGrid.innerHTML = ''; // Clear for now or handle dynamic highlights if added to DB
+                const highlights = dataWrap.getAttribute('data-highlights');
+                
+                if (highlights && highlights.trim() !== '') {
+                    galleryGrid.innerHTML = `<div class="highlights-text-wrapper">${highlights.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</div>`;
+                    gallerySection.style.display = 'block';
+                } else {
+                    galleryGrid.innerHTML = '';
+                    gallerySection.style.display = 'none';
+                }
             }
 
             document.getElementById('events-grid-view').style.display = 'none';

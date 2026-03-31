@@ -67,10 +67,17 @@
                         @endif
                         <div style="flex: 1;">
                             <input type="file" name="image" class="form-control @error('image') error-field @enderror" accept="image/*">
-                            <p class="form-text">Recommended size: 800x600px. Max: 2MB.</p>
+                            <p class="form-text">Primary image. Recommended size: 800x600px. Max: 2MB.</p>
                             @error('image') <div class="error-msg">{{ $message }}</div> @enderror
                         </div>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Highlights/Bullet Points</label>
+                    <textarea name="highlights" class="form-control" rows="5" placeholder="Enter key highlights or bullet points for the event detail page...">{{ old('highlights', $event->highlights ?? '') }}</textarea>
+                    <p class="form-text">These will be displayed in the "Event Highlights" section on the detail page.</p>
+                    @error('highlights') <div class="error-msg">{{ $message }}</div> @enderror
                 </div>
 
                 <div style="display:flex;gap:32px;margin-bottom:24px;">

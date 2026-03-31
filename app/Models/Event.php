@@ -15,6 +15,7 @@ class Event extends Model
         'event_time',
         'venue',
         'category',
+        'highlights',
         'is_featured',
         'is_active',
     ];
