@@ -70,13 +70,13 @@ class TestimonialController extends Controller
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial updated!');
     }
 
-    public function destroy(Testimonial $t) 
+    public function destroy(Testimonial $testimonial) 
     { 
-        if ($t->avatar && file_exists(public_path($t->avatar))) {
-            unlink(public_path($t->avatar));
+        if ($testimonial->avatar && file_exists(public_path($testimonial->avatar))) {
+            unlink(public_path($testimonial->avatar));
         }
-        $t->delete(); 
+        $testimonial->delete(); 
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted!'); 
     }
-    public function show(Testimonial $t)    { return redirect()->route('admin.testimonials.edit', $t); }
+    public function show(Testimonial $testimonial)    { return redirect()->route('admin.testimonials.edit', $testimonial); }
 }
