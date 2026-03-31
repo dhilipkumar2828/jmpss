@@ -101,9 +101,9 @@
                     <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>
             </nav>
-            <div class="sticky-logo">
+            {{-- <div class="sticky-logo">
                 <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo">
-            </div>
+            </div> --}}
         </div>
         <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     </header>

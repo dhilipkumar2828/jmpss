@@ -488,6 +488,27 @@ document.addEventListener('DOMContentLoaded', function() {
             slideTimer = setInterval(nextSlide, interval);
         });
     }
+
+    // Events Slider Logic (Mobile)
+    const eventContainer = document.querySelector('.slider-container');
+    const eventPrevBtn = document.querySelector('.slider-btn.prev');
+    const eventNextBtn = document.querySelector('.slider-btn.next');
+
+    if (eventContainer && eventPrevBtn && eventNextBtn) {
+        // Calculate dynamic width of one card + gap
+        const getCardWidth = () => {
+            const card = eventContainer.querySelector('.event-card');
+            return card ? card.offsetWidth + 15 : 300;
+        };
+
+        eventNextBtn.addEventListener('click', () => {
+            eventContainer.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+        });
+
+        eventPrevBtn.addEventListener('click', () => {
+            eventContainer.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+        });
+    }
 });
 </script>
 @endpush
