@@ -22,7 +22,7 @@
                 <div class="form-grid-2">
                     <div class="form-group">
                         <label class="form-label">Full Name <span class="required-asterisk">*</span></label>
-                        <input type="text" name="name" class="form-control @error('name') error-field @enderror" value="{{ old('name', $testimonial->name ?? '') }}" required>
+                        <input type="text" name="name" class="form-control @error('name') error-field @enderror" value="{{ old('name', $testimonial->name ?? '') }}" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
                         @error('name')<div class="error-msg">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">

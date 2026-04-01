@@ -18,7 +18,7 @@
         .page-hero-bg {
             position: absolute;
             inset: 0;
-        background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
+            background: url('{{ $pageBanner ? asset($pageBanner->image_path) : asset('assets/jmpsss/image/new/slider1.jpg') }}') center/cover no-repeat;
             z-index: 0;
         }
 
@@ -55,9 +55,7 @@
             font-family: 'Outfit', sans-serif;
         }
 
-
-
-        /* ── Category View ── */
+        /* ── Category View & Cards ── */
         .category-view {
             padding: 80px 0 100px;
             background: #fdfaf5;
@@ -68,144 +66,6 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 28px;
             margin-top: 50px;
-        }
-
-        .cat-card {
-            background: #fff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-            border: 1px solid #eee;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .cat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 18px 40px rgba(0, 72, 0, 0.12);
-        }
-
-        .cat-card-thumb {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .cat-card-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .cat-card:hover .cat-card-thumb img {
-            transform: scale(1.08);
-        }
-
-        .cat-card-thumb .cat-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 72, 0, 0.7) 0%, transparent 60%);
-            display: flex;
-            align-items: flex-end;
-            padding: 18px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .cat-card:hover .cat-overlay {
-            opacity: 1;
-        }
-
-        .cat-overlay i {
-            color: #fff;
-            font-size: 28px;
-        }
-
-        .cat-card-body {
-            padding: 20px 22px;
-        }
-
-        .cat-card-body h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #004800;
-            font-family: 'Outfit', sans-serif;
-            margin-bottom: 6px;
-        }
-
-        .cat-card-body p {
-            font-size: 13px;
-            color: #888;
-            margin: 0;
-        }
-
-        /* ── Gallery Detail View ── */
-        .gallery-view {
-            display: none;
-            padding: 60px 0 100px;
-            background: #fff;
-        }
-
-        .gallery-view.active {
-            display: block;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #004800;
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-bottom: 50px;
-            transition: 0.3s;
-        }
-
-        .back-btn:hover {
-            color: #e14c1e;
-            transform: translateX(-5px);
-        }
-
-        /* ── Year Section ── */
-        .year-section {
-            margin-bottom: 70px;
-        }
-
-        .year-heading {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            margin-bottom: 30px;
-        }
-
-        .year-heading::after {
-            content: '';
-            flex: 1;
-            height: 2px;
-            background: linear-gradient(to right, #004800, transparent);
-        }
-
-        .year-pill {
-            display: inline-block;
-            background: #e14c1e;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 4px 14px;
-            border-radius: 30px;
-        }
-
-        /* ── Video Grid ── */
-        .video-year-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
         }
 
         .video-item-card {
@@ -305,106 +165,283 @@
             color: #777;
             margin: 0;
             line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        /* ── Video Modal ── */
+        /* ── Improved Video Modal ── */
         .video-modal-v3 {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 99999;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(10px);
         }
 
         .video-modal-v3.active {
             display: flex;
+            opacity: 1;
         }
 
-        .video-modal-content {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .video-player-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            background: #000;
-            border-radius: 12px;
+        .video-modal-container {
+            width: 95%;
+            max-width: 1200px;
+            background: #111;
+            border-radius: 24px;
             overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: row;
+            height: 80vh;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .video-modal-v3.active .video-modal-container {
+            transform: scale(1);
+        }
+
+        /* Player Section */
+        .modal-main-player {
+            flex: 1;
+            background: #000;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-wrapper {
+            flex: 1;
+            position: relative;
         }
 
         #videoPlaceholder {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
         }
 
-        #videoPlaceholder iframe,
-        #videoPlaceholder video {
+        #videoPlaceholder iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        .close-video-modal {
-            position: absolute;
-            top: -50px;
-            right: 0;
+        .modal-player-footer {
+            padding: 20px 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             color: #fff;
-            font-size: 40px;
-            cursor: pointer;
-            transition: 0.3s;
-            line-height: 1;
         }
 
-        .close-video-modal:hover {
-            color: #e14c1e;
+        .modal-player-footer h2 {
+            font-size: 20px;
+            margin: 0 0 5px;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+        }
+
+        .modal-player-footer p {
+            font-size: 14px;
+            color: #aaa;
+            margin: 0;
+        }
+
+        /* Playlist Sidebar */
+        .modal-playlist-sidebar {
+            width: 350px;
+            background: #1a1a1a;
+            border-left: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .playlist-header {
+            padding: 25px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .playlist-header h4 {
+            font-size: 16px;
+            margin: 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .playlist-header span {
+            background: var(--logo-orange, #e14c1e);
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .playlist-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .playlist-items::-webkit-scrollbar { width: 4px; }
+        .playlist-items::-webkit-scrollbar-track { background: transparent; }
+        .playlist-items::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
+
+        .playlist-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 10px;
+            border: 2px solid transparent;
+        }
+
+        .playlist-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .playlist-item.active {
+            background: rgba(225, 76, 30, 0.15);
+            border-color: rgba(225, 76, 30, 0.4);
+        }
+
+        .pl-thumb {
+            width: 100px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .pl-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        .pl-thumb .playing-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(225, 76, 30, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .playlist-item.active .pl-thumb .playing-overlay {
+            display: flex;
+        }
+
+        .pl-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pl-info span {
+            font-size: 13px;
+            color: #fff;
+            font-weight: 600;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .close-modal-btn:hover {
+            background: var(--logo-orange, #e14c1e);
             transform: rotate(90deg);
         }
+
+        /* Navigation Arrows on Player */
+        .player-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-nav-btn:hover { background: var(--logo-orange, #e14c1e); }
+        .player-nav-prev { left: 20px; }
+        .player-nav-next { right: 20px; }
 
         @media (max-width: 991px) {
             .cat-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .video-year-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .video-modal-container {
+                flex-direction: column;
+                height: 90vh;
             }
+            .modal-playlist-sidebar {
+                width: 100%;
+                height: 250px;
+                border-left: none;
+                border-top: 1px solid #333;
+            }
+            .modal-player-footer { padding: 15px 20px; }
         }
 
         @media (max-width: 600px) {
             .cat-grid {
                 grid-template-columns: 1fr;
             }
-
-            .video-year-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .page-hero-content h1 {
-                font-size: 34px;
-            }
+            .video-modal-container { width: 100%; border-radius: 0; height: 100vh; }
+            .modal-playlist-sidebar { height: 35%; }
         }
 
-        /* fade animation */
+        /* ── Page Fade View ── */
         @keyframes viewFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         .fade-enter {
             animation: viewFadeIn 0.5s forwards;
         }
@@ -448,14 +485,17 @@
             <div class="cat-grid">
                 @forelse($albums as $album)
                 @php
-                    $videosList = $album->items->where('item_type', 'video');
-                    $firstVideo = $videosList->first();
+                    $videosList = $album->items->where('item_type', 'video')->values();
                     $videoData = $videosList->map(fn($v) => [
                         'src' => $v->video_url,
                         'title' => $album->title
                     ])->values();
                 @endphp
-                <div class="video-item-card" onclick="openAlbumVideos({{ json_encode($videoData) }}, '{{ $album->title }}')">
+                <div class="video-item-card" 
+                     data-videos='{!! json_encode($videoData) !!}' 
+                     data-title="{{ $album->title }}" 
+                     data-desc="{{ $album->description }}"
+                     onclick="initVideoAlbum(this)">
                     <div class="video-thumb">
                         <img src="{{ asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $album->title }}">
                         <div class="video-overlay-btn">
@@ -486,27 +526,34 @@
         </div>
     </section>
 
-    <!-- Video Modal -->
-    <div class="video-modal-v3" id="videoModal" onclick="closeVideoModal(event)">
-        <div class="video-modal-content" onclick="event.stopPropagation()">
-            <button class="close-video-modal" id="closeVideo" onclick="closeVideoModal()" type="button">&times;</button>
-            <div class="video-player-container">
-                <div id="videoPlaceholder"></div>
+    <!-- Refined Video Modal -->
+    <div class="video-modal-v3" id="videoModal">
+        <div class="video-modal-container">
+            <button class="close-modal-btn" onclick="closeVideoModal()">&times;</button>
+            
+            <!-- Main Player Column -->
+            <div class="modal-main-player">
+                <div class="video-wrapper">
+                    <div id="videoPlaceholder"></div>
+                    <button class="player-nav-btn player-nav-prev" onclick="changeVideo(-1)" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="player-nav-btn player-nav-next" onclick="changeVideo(1)" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="modal-player-footer">
+                    <h2 id="currentVideoTitle">Video Title</h2>
+                    <p id="currentVideoDesc">Description goes here...</p>
+                </div>
             </div>
 
-            <!-- Video Playlist / Counter -->
-            <div class="video-nav" id="videoNav" style="display:none; align-items:center; justify-content:space-between; margin-top:15px;">
-                <button class="btn btn-outline" onclick="changeVideo(-1); return false;" type="button" style="color:#fff; border-color:#fff; padding:8px 16px;">
-                    <i class="fas fa-chevron-left"></i> Prev
-                </button>
-                <div id="videoCounter" style="color:#fff; font-size:14px; font-weight:600; text-align:center;"></div>
-                <button class="btn btn-outline" onclick="changeVideo(1); return false;" type="button" style="color:#fff; border-color:#fff; padding:8px 16px;">
-                    Next <i class="fas fa-chevron-right"></i>
-                </button>
+            <!-- Playlist Column (Sidebar) -->
+            <div class="modal-playlist-sidebar" id="playlistSidebar">
+                <div class="playlist-header">
+                    <h4>Video Playlist</h4>
+                    <span id="videoCountBadge">0 Videos</span>
+                </div>
+                <div class="playlist-items" id="playlistItems">
+                    <!-- Dynamic Items -->
+                </div>
             </div>
-
-            <!-- Video Thumbnails List -->
-            <div id="videoThumbnails" style="display:none; margin-top:12px; gap:8px; flex-wrap:wrap; justify-content:center;"></div>
         </div>
     </div>
 @endsection
@@ -515,102 +562,110 @@
 <script>
     let currentAlbumVideos = [];
     let currentVideoIndex = 0;
+    let currentAlbumTitle = '';
+    let currentAlbumDesc = '';
 
-    function openAlbumVideos(videos, title) {
-        currentAlbumVideos = videos;
-        currentVideoIndex = 0;
+    function initVideoAlbum(element) {
+        try {
+            currentAlbumVideos = JSON.parse(element.getAttribute('data-videos'));
+            currentAlbumTitle = element.getAttribute('data-title');
+            currentAlbumDesc = element.getAttribute('data-desc');
+            currentVideoIndex = 0;
 
-        updateVideoModalContent();
-        buildVideoThumbnails();
+            renderPlaylist();
+            updatePlayer();
 
-        const modal = document.getElementById('videoModal');
-        modal.classList.add('active');
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+            const modal = document.getElementById('videoModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        } catch(e) {
+            console.error("Error initializing video album:", e);
+        }
     }
 
-    function updateVideoModalContent() {
-        if (currentAlbumVideos.length === 0) return;
+    function renderPlaylist() {
+        const container = document.getElementById('playlistItems');
+        const sidebar = document.getElementById('playlistSidebar');
+        const badge = document.getElementById('videoCountBadge');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        container.innerHTML = '';
+        badge.innerText = `${currentAlbumVideos.length} Videos`;
 
+        if (currentAlbumVideos.length <= 1) {
+            sidebar.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            return;
+        }
+
+        sidebar.style.display = 'flex';
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+
+        currentAlbumVideos.forEach((video, i) => {
+            const videoId = extractYoutubeId(video.src);
+            const item = document.createElement('div');
+            item.className = `playlist-item ${i === currentVideoIndex ? 'active' : ''}`;
+            item.onclick = () => { currentVideoIndex = i; updatePlayer(); };
+            
+            item.innerHTML = `
+                <div class="pl-thumb">
+                    <img src="https://img.youtube.com/vi/${videoId}/mqdefault.jpg" onerror="this.src='{{ asset('/assets/jmpsss/image/new/slider1.jpg') }}'">
+                    <div class="playing-overlay"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="pl-info">
+                    <span>${video.title} - Video ${i+1}</span>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    }
+
+    function updatePlayer() {
+        if (!currentAlbumVideos[currentVideoIndex]) return;
+        
         const video = currentAlbumVideos[currentVideoIndex];
         const placeholder = document.getElementById('videoPlaceholder');
         const videoId = extractYoutubeId(video.src);
 
-        placeholder.innerHTML = videoId
-            ? `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
-            : `<div style="color:#fff;text-align:center;padding:50px;">Invalid video URL</div>`;
+        placeholder.innerHTML = videoId 
+            ? `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+            : `<div style="color:#fff;display:flex;align-items:center;justify-content:center;height:100%;padding:40px;text-align:center;">
+                <div><i class="fas fa-exclamation-triangle" style="font-size:40px;color:#e14c1e;margin-bottom:15px;"></i><br>Invalid Video URL<br><span style="font-size:12px;opacity:0.6;">${video.src}</span></div>
+               </div>`;
 
-        const counter = document.getElementById('videoCounter');
-        counter.innerHTML = `<span style="opacity:0.7;">Playing</span> <strong>${currentVideoIndex + 1}</strong> <span style="opacity:0.7;">of</span> <strong>${currentAlbumVideos.length}</strong>`;
+        document.getElementById('currentVideoTitle').innerText = `${currentAlbumTitle} (Video ${currentVideoIndex + 1})`;
+        document.getElementById('currentVideoDesc').innerText = currentAlbumDesc || 'Student Activity / School Event Video Collection';
 
-        // Show/hide nav
-        const nav = document.getElementById('videoNav');
-        nav.style.display = currentAlbumVideos.length > 1 ? 'flex' : 'none';
-
-        // Update active thumbnail
-        document.querySelectorAll('.vid-thumb-item').forEach((el, i) => {
-            el.style.opacity = i === currentVideoIndex ? '1' : '0.5';
-            el.style.border = i === currentVideoIndex ? '2px solid #e14c1e' : '2px solid transparent';
+        // Update active class in playlist
+        document.querySelectorAll('.playlist-item').forEach((el, i) => {
+            el.classList.toggle('active', i === currentVideoIndex);
         });
-    }
-
-    function buildVideoThumbnails() {
-        const container = document.getElementById('videoThumbnails');
-        container.innerHTML = '';
-        if (currentAlbumVideos.length <= 1) { container.style.display = 'none'; return; }
-
-        currentAlbumVideos.forEach((video, i) => {
-            const videoId = extractYoutubeId(video.src);
-            const thumb = document.createElement('div');
-            thumb.className = 'vid-thumb-item';
-            thumb.title = `Video ${i + 1}`;
-            thumb.style.cssText = `
-                width:80px; height:55px; border-radius:6px; overflow:hidden; cursor:pointer;
-                border:2px solid ${i === 0 ? '#e14c1e' : 'transparent'};
-                opacity:${i === 0 ? '1' : '0.5'}; transition:all 0.2s;
-            `;
-            thumb.innerHTML = `<img src="https://img.youtube.com/vi/${videoId}/mqdefault.jpg"
-                style="width:100%;height:100%;object-fit:cover;" onerror="this.src='/assets/jmpsss/image/new/slider1.jpg'">`;
-            thumb.onclick = (e) => { e.stopPropagation(); currentVideoIndex = i; updateVideoModalContent(); };
-            container.appendChild(thumb);
-        });
-        container.style.display = 'flex';
+        
+        // Auto scroll playlist to active item
+        const activeItem = document.querySelector('.playlist-item.active');
+        if (activeItem) activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function changeVideo(step) {
         currentVideoIndex += step;
         if (currentVideoIndex < 0) currentVideoIndex = currentAlbumVideos.length - 1;
         if (currentVideoIndex >= currentAlbumVideos.length) currentVideoIndex = 0;
-        updateVideoModalContent();
+        updatePlayer();
     }
 
-    function closeVideoModal(event) {
-        // If triggered from backdrop click, event.target must be the modal itself
-        if (event && event.target !== document.getElementById('videoModal') && event.type === 'click') {
-            if (event.currentTarget === document.getElementById('videoModal') && event.target !== event.currentTarget) {
-                return; // clicked inside content, ignore
-            }
-        }
+    function closeVideoModal() {
         const modal = document.getElementById('videoModal');
         modal.classList.remove('active');
-        modal.style.display = 'none';
-        document.getElementById('videoPlaceholder').innerHTML = '';
-        document.body.style.overflow = 'auto';
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.getElementById('videoPlaceholder').innerHTML = '';
+            document.body.style.overflow = 'auto';
+        }, 400);
     }
-
-    // Wire up close button explicitly
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('closeVideo').addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            closeVideoModal();
-        });
-
-        // Backdrop click
-        document.getElementById('videoModal').addEventListener('click', function(e) {
-            if (e.target === this) closeVideoModal();
-        });
-    });
 
     function extractYoutubeId(url) {
         if (!url) return '';
@@ -620,13 +675,18 @@
         return (match && match[2].length === 11) ? match[2] : '';
     }
 
-    // Keyboard navigation
+    // Modal Background Click
+    document.getElementById('videoModal').addEventListener('click', function(e) {
+        if (e.target === this) closeVideoModal();
+    });
+
+    // Keyboard controls
     document.addEventListener('keydown', (e) => {
         const modal = document.getElementById('videoModal');
-        if (!modal.classList.contains('active') && modal.style.display !== 'flex') return;
-        if (e.key === 'ArrowLeft') { e.preventDefault(); changeVideo(-1); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); changeVideo(1); }
-        if (e.key === 'Escape') { e.preventDefault(); closeVideoModal(); }
+        if (!modal.classList.contains('active')) return;
+        if (e.key === 'ArrowLeft') changeVideo(-1);
+        if (e.key === 'ArrowRight') changeVideo(1);
+        if (e.key === 'Escape') closeVideoModal();
     });
 </script>
 @endpush
