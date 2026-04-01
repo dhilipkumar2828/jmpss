@@ -58,6 +58,7 @@
             padding: 20px 25px;
             border-radius: 0 12px 12px 0;
             font-size: 16px;
+            width: 700px;
             line-height: 1.6;
             color: #334155;
             margin-top: 15px;
@@ -69,6 +70,36 @@
 
         .highlights-text-wrapper p:last-child {
             margin-bottom: 0;
+        }
+
+        /* Sidebar Visibility and Layout */
+        .events-layout-wrapper {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .events-main-col {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .events-sidebar-col {
+            width: 360px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+        }
+
+        @media (max-width: 1024px) {
+            .events-layout-wrapper {
+                flex-direction: column;
+            }
+            .events-sidebar-col {
+                width: 100%;
+                position: static;
+                margin-top: 40px;
+            }
         }
     </style>
 @endpush
@@ -95,11 +126,24 @@
     <main id="events-container">
         <!-- Events Grid Section -->
         <section class="events-page-section" id="events-grid-view">
-            <div class="container" style="padding: 40px 0;">
+            <div class="container" style="padding: 40px 20px;">
                 <div class="text-center events-grid-heading">
                     <span class="section-subtitle">What's Happening</span>
                     <h2 class="section-title">EVENTS & ACHIEVEMENTS</h2>
                 </div>
+
+                @if(request('search') || request('category'))
+                <div class="mb-30" style="display: flex; align-items: center; gap: 15px; background: #f8fafc; padding: 15px 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <p style="margin: 0; color: #64748b;">Showing results for: 
+                        <strong style="color: #1e293b;">
+                            {{ request('search') ? 'Search: "'.request('search').'"' : '' }}
+                            {{ request('search') && request('category') ? ' in ' : '' }}
+                            {{ request('category') ? 'Category: "'.request('category').'"' : '' }}
+                        </strong>
+                    </p>
+                    <a href="{{ route('events') }}" class="btn-read-more" style="padding: 5px 15px; font-size: 13px; margin-left: auto;">Clear Filters</a>
+                </div>
+                @endif
 
                 <div class="events-page-grid">
                     @forelse($events as $event)
@@ -131,8 +175,10 @@
                             </div>
                         </div>
                     @empty
-                        <div style="grid-column: 1/-1; text-align: center; padding: 60px 0;">
-                            <p>No events found.</p>
+                        <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; background: #f8fafc; border-radius: 12px;">
+                            <i class="fa-solid fa-magnifying-glass" style="font-size: 48px; color: #cbd5e1; margin-bottom: 20px;"></i>
+                            <p style="font-size: 18px; color: #64748b;">No events found matching your criteria.</p>
+                            <a href="{{ route('events') }}" class="btn-read-more" style="margin-top: 15px;">View All Events</a>
                         </div>
                     @endforelse
                 </div>
@@ -141,6 +187,7 @@
                 <div class="pagination-wrapper mt-50" style="display:flex; justify-content:center;">
                     {{ $events->links() }}
                 </div>
+
             </div>
         </section>
 
@@ -180,50 +227,7 @@
 
                     <!-- Sidebar -->
                     <aside class="event-detail-sidebar">
-                        <div class="sidebar-widget search-widget">
-                            <h3>Search Events</h3>
-                            <div class="search-box">
-                                <input type="text" placeholder="keywords...">
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-widget recent-events-widget">
-                            <h3>Recent Events</h3>
-                            <div class="recent-event-list">
-                                @foreach($recentEvents as $re)
-                                <div class="recent-item">
-                                    <img src="{{ $re->image ? asset($re->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}" alt="{{ $re->title }}"
-                                        onclick="showEventDetails(event, '{{ $re->id }}')">
-                                    <div class="recent-info">
-                                        <a href="#" onclick="showEventDetails(event, '{{ $re->id }}')">{{ $re->title }}</a>
-                                        <span>{{ $re->event_date->format('M d, Y') }}</span>
-                                    </div>
-                                    <div class="event-full-data" style="display:none;" data-id="{{ $re->id }}"
-                                        data-title="{{ $re->title }}" data-date="{{ $re->event_date->format('d F Y') }}"
-                                        data-venue="{{ $re->venue ?? 'School Campus' }}" data-desc="{{ $re->description }}"
-                                        data-img="{{ $re->image ? asset($re->image) : asset('assets/jmpsss/image/new/slider1.jpg') }}"
-                                        data-cat="{{ $re->category ?? 'School Event' }}"
-                                        data-highlight-category="{{ $re->category ?? 'General' }}"
-                                        data-highlights="{{ $re->highlights }}">
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="sidebar-widget category-widget">
-                            <h3>Categories</h3>
-                            <ul>
-                                @foreach($categories as $cat)
-                                <li><a href="#">{{ $cat->category }} <span>({{ $cat->count }})</span></a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <a href="{{ route('admissions') }}" class="sidebar-simple-btn">Enroll Now In JMPSSS <i
-                                class="fa-solid fa-arrow-right"></i></a>
-
+                        @include('frontend.partials.events_sidebar')
                     </aside>
                 </div>
             </div>
