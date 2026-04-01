@@ -118,6 +118,36 @@
         background: var(--primary-color);
         border-color: var(--primary-color);
     }
+
+    @media (max-width: 767px) {
+        .hero-slider {
+            height: 70vh;
+            min-height: 450px;
+        }
+        .hero-content {
+            padding: 0 15px;
+        }
+        .hero-content h1 {
+            font-size: 32px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .banner-subtitle {
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .slider-controls {
+            bottom: 25px;
+            right: 50%;
+            transform: translateX(50%);
+            gap: 10px;
+        }
+        .slider-prev, .slider-next {
+            width: 40px;
+            height: 40px;
+        }
+    }
 </style>
 @endpush
 
@@ -276,6 +306,15 @@
                     <h3>80+ Online Courses</h3>
                     <p>Aliquam at elit vitae dui sagittis vita maximus Luctus. Curabitur nibh at justo imperdiet non.
                     </p>
+                </div>
+            </div>
+            <!-- Pagination Dots for Mobile -->
+            <div class="features-dots-wrapper mobile-only-dots">
+                <div class="features-dots">
+                    <span class="feature-dot active" onclick="scrollToFeature(0)"></span>
+                    <span class="feature-dot" onclick="scrollToFeature(1)"></span>
+                    <span class="feature-dot" onclick="scrollToFeature(2)"></span>
+                    <span class="feature-dot" onclick="scrollToFeature(3)"></span>
                 </div>
             </div>
         </div>
@@ -507,6 +546,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
         eventPrevBtn.addEventListener('click', () => {
             eventContainer.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+        });
+    }
+
+    // Features Slider Logic (Mobile)
+    const featuresGrid = document.querySelector('.features-grid');
+    const featureDots = document.querySelectorAll('.feature-dot');
+
+    if (featuresGrid && featureDots.length > 0) {
+        window.scrollToFeature = (index) => {
+            const card = featuresGrid.querySelector('.feature-card');
+            if(!card) return;
+            const cardWidth = card.offsetWidth;
+            featuresGrid.scrollTo({
+                left: index * cardWidth,
+                behavior: 'smooth'
+            });
+        };
+
+        featuresGrid.addEventListener('scroll', () => {
+            const card = featuresGrid.querySelector('.feature-card');
+            if(!card) return;
+            const cardWidth = card.offsetWidth;
+            const scrollLeft = featuresGrid.scrollLeft;
+            const index = Math.round(scrollLeft / cardWidth);
+
+            featureDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }, { passive: true });
+
+        // Auto slide for Why Choose Us (Mobile)
+        let featureInterval;
+        function startFeatureAuto() {
+            if(window.innerWidth <= 480) {
+                featureInterval = setInterval(() => {
+                    const card = featuresGrid.querySelector('.feature-card');
+                    if(!card) return;
+                    const cardWidth = card.offsetWidth;
+                    const scrollLeft = featuresGrid.scrollLeft;
+                    const totalWidth = featuresGrid.scrollWidth;
+                    
+                    if (scrollLeft + cardWidth >= totalWidth - 5) {
+                        featuresGrid.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        featuresGrid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                    }
+                }, 5000);
+            }
+        }
+        startFeatureAuto();
+        
+        // Pause on touch
+        featuresGrid.addEventListener('touchstart', () => clearInterval(featureInterval));
+        featuresGrid.addEventListener('touchend', () => {
+            clearInterval(featureInterval);
+            startFeatureAuto();
         });
     }
 });

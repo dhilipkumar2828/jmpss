@@ -90,7 +90,7 @@ iframe {
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 14px;
+        padding: 0 20px;
     }
 
     .top-header {
@@ -383,7 +383,7 @@ iframe {
     .gallery-grid,
     .video-year-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 15px !important;
+        gap: 20px 18px !important;
     }
 
     .cat-card-thumb, .photo-thumb, .video-thumb {
@@ -444,7 +444,7 @@ iframe {
 
     .events-page-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
+        gap: 20px 18px !important;
     }
 
     .event-card-page {
@@ -498,29 +498,29 @@ iframe {
         grid-template-columns: 1fr;
         gap: 45px !important;
         padding: 0 15px;
-        text-align: center;
+        text-align: left;
     }
 
     .footer-info, .footer-links, .footer-events {
-        text-align: center;
+        text-align: left;
         margin-bottom: 0 !important;
     }
 
     .footer-links h3, .footer-events h3 {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         padding-bottom: 12px;
     }
 
     .footer-links h3::after, .footer-events h3::after {
-        left: 50% !important;
-        transform: translateX(-50%);
+        left: 0 !important;
+        transform: none;
     }
 
     .footer-logo {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         margin-bottom: 25px;
     }
 
@@ -529,21 +529,21 @@ iframe {
     }
 
     .footer-links ul {
-        display: inline-block;
+        display: block;
         text-align: left;
     }
 
-    /* Centering address items with icons */
+    /* Left-aligning address items with icons */
     .footer-info p, .footer-links p {
         display: flex !important;
-        justify-content: flex-start !important; /* Left aligned with icon */
+        justify-content: flex-start !important;
         align-items: flex-start !important;
         text-align: left !important;
         margin-bottom: 20px !important;
         gap: 15px !important;
-        max-width: 320px !important; /* Fixed width to center the block */
-        margin-left: auto !important;
-        margin-right: auto !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 
     .footer-links p i {
@@ -555,19 +555,19 @@ iframe {
     }
 
     .footer-info p {
-        max-width: 450px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
 
-    /* Centering recent event items */
+    /* Left-aligning recent event items */
     .footer-event-item {
-        justify-content: center;
-        text-align: left; /* Keep text left aligned but item centered */
+        justify-content: flex-start;
+        text-align: left;
     }
 
     .social-icons {
-        justify-content: center !important;
+        justify-content: flex-start !important;
         margin-top: 30px !important;
         gap: 15px !important;
     }
@@ -596,7 +596,8 @@ iframe {
     .footer-bottom .flex-row-between {
         flex-direction: column !important;
         gap: 12px;
-        text-align: center;
+        text-align: left;
+        align-items: flex-start;
     }
 
     .footer-bottom-links {
@@ -679,9 +680,9 @@ iframe {
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         scroll-snap-type: x mandatory !important;
-        scroll-padding: 0 10px !important;
-        gap: 15px !important;
-        padding: 20px 15px 30px !important;
+        scroll-padding: 0 !important;
+        gap: 0 !important;
+        padding: 20px 24px 30px !important;
         scrollbar-width: none !important;
         -ms-overflow-style: none !important;
         margin: 0 !important;
@@ -694,20 +695,47 @@ iframe {
     }
 
     .feature-card {
-        flex: 0 0 88% !important;
-        width: 88% !important;
-        min-width: 88% !important;
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        min-width: 100% !important;
         scroll-snap-align: center !important;
         margin: 0 !important;
         transform: none !important;
-        padding: 30px 24px !important;
+        padding: 35px 25px !important;
         border-radius: 20px !important;
         background: #fff !important;
         box-shadow: 0 10px 25px rgba(0,0,0,0.06) !important;
+        border: 1px solid rgba(0,72,0,0.05);
     }
 
     .features-grid.zig-zag .feature-card:nth-child(even) {
         transform: none !important;
+    }
+
+    /* Features Slider Dots */
+    .features-dots-wrapper.mobile-only-dots {
+        display: block !important;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .features-dots {
+        display: inline-flex;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+    }
+    .feature-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(0, 72, 0, 0.15);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .feature-dot.active {
+        background: var(--primary-color) !important;
+        width: 24px;
+        border-radius: 4px;
     }
 
     /* Academic Overview & Leadership Premium Touch */
@@ -905,7 +933,7 @@ iframe {
         overflow-x: auto !important;
         scroll-snap-type: x mandatory !important;
         gap: 15px !important;
-        padding: 10px 10px 30px !important;
+        padding: 10px 24px 30px !important;
         scrollbar-width: none !important;
         -ms-overflow-style: none !important;
         -webkit-overflow-scrolling: touch !important;
@@ -1503,7 +1531,8 @@ iframe {
     }
 
     .sc-stats-wrapper {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 24px 20px !important;
     }
 
     .mv-panel-tag {
