@@ -299,7 +299,6 @@
                                                 <option value="12 PM">Midday (12 PM)</option>
                                                 <option value="2 PM">Afternoon (2 PM)</option>
                                             </select>
-                                            <i class="fa-solid fa-chevron-down select-arrow"></i>
                                         </div>
                                     </div>
                                 </div>

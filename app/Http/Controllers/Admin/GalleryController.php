@@ -36,7 +36,7 @@ class GalleryController extends Controller
                 'category'    => $groupData['category'] ?? null,
                 'description' => $groupData['description'] ?? null,
                 'type'        => 'photo',
-                'is_active'   => true,
+                'is_active'   => isset($groupData['is_active']) ? (bool) $groupData['is_active'] : true,
                 'sort_order'  => 0,
             ]);
 
@@ -90,7 +90,7 @@ class GalleryController extends Controller
             'title'       => $request->title,
             'category'    => $request->category,
             'description' => $request->description,
-            'is_active'   => $request->boolean('is_active', true),
+            'is_active'   => $request->boolean('is_active'),
         ]);
 
         // Add new photos

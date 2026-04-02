@@ -573,7 +573,7 @@
                         </div>
 
                         <div class="form-field">
-                            <label>Upload CV (PDF / DOC) <span class="required-asterisk">*</span></label>
+                            <label>Upload CV (PDF / DOC) (Max 2MB) <span class="required-asterisk">*</span></label>
                             <div class="file-upload-wrapper">
                                 <input type="file" name="resume" id="resume" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
                                 <div class="file-upload-label">
@@ -623,9 +623,9 @@
                 return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
             }, "Please enter only alphabets.");
 
-            $.validator.addMethod("exactlength", function(value, element, param) {
-                return this.optional(element) || value.length == param;
-            }, $.validator.format("Please enter exactly {0} characters."));
+            $.validator.addMethod("filesize", function (value, element, param) {
+                return this.optional(element) || (element.files[0].size <= param);
+            }, "File size must be less than {0}");
 
             // Initialize jQuery Validation
             $('#careerForm').validate({
@@ -638,7 +638,8 @@
                     mobile: {
                         required: true,
                         digits: true,
-                        exactlength: 10
+                        minlength: 10,
+                        maxlength: 10
                     },
                     email: {
                         required: true,
@@ -650,7 +651,7 @@
                     resume: {
                         required: true,
                         extension: "pdf|doc|docx",
-                        accept: "application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        filesize: 2097152 // 2MB
                     }
                 },
                 messages: {
@@ -661,7 +662,8 @@
                     mobile: {
                         required: "Please enter your mobile number",
                         digits: "Please enter only numbers",
-                        exactlength: "Mobile Number must be exactly 10 digits"
+                        minlength: "Mobile Number must be exactly 10 digits",
+                        maxlength: "Mobile Number must be exactly 10 digits"
                     },
                     email: {
                         required: "Please enter a valid email address",
@@ -673,7 +675,7 @@
                     resume: {
                         required: "Please upload your CV",
                         extension: "Only PDF, DOC, or DOCX files are allowed",
-                        accept: "Only PDF, DOC, or DOCX files are allowed"
+                        filesize: "File Size Should be less than 2MB"
                     }
                 },
                 errorElement: 'span',
