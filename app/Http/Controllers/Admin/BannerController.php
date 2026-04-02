@@ -15,6 +15,24 @@ class BannerController extends Controller
         return view('admin.banners.index', compact('banners'));
     }
 
+    public function checkAvailability(Request $request)
+    {
+        $page = $request->query('page');
+        $excludeId = $request->query('id');
+
+        if ($page === 'home') {
+            return response()->json(['exists' => false]);
+        }
+
+        $query = Banner::where('page', $page);
+        if ($excludeId) {
+            $query->where('id', '!=', $excludeId);
+        }
+
+        $exists = $query->exists();
+        return response()->json(['exists' => $exists]);
+    }
+
     public function create()
     {
         return view('admin.banners.form');
@@ -25,11 +43,17 @@ class BannerController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
             'page' => 'required|string',
-            // 'banner_type' => 'required|string',
             'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'sort_order' => 'integer|min:0',
         ]);
+
+        if ($request->page !== 'home') {
+            $exists = Banner::where('page', $request->page)->exists();
+            if ($exists) {
+                return back()->withErrors(['page' => 'This page already has a banner. Only the Home page can have multiple banners.'])->withInput();
+            }
+        }
 
         $data = $request->all();
         
@@ -42,13 +66,11 @@ class BannerController extends Controller
 
         $data['is_active'] = $request->has('is_active');
         
-        // Default banner type if not provided
         if (!isset($data['banner_type'])) {
             $data['banner_type'] = ($data['page'] === 'home') ? 'slider' : 'page_header';
         }
 
         Banner::create($data);
-
         return redirect()->route('admin.banners.index')->with('success', 'Banner created successfully.');
     }
 
@@ -62,11 +84,17 @@ class BannerController extends Controller
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'page' => 'required|string',
-            // 'banner_type' => 'required|string',
             'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'sort_order' => 'integer|min:0',
         ]);
+
+        if ($request->page !== 'home') {
+            $exists = Banner::where('page', $request->page)->where('id', '!=', $banner->id)->exists();
+            if ($exists) {
+                return back()->withErrors(['page' => 'This page already has another banner. Only the Home page can have multiple banners.'])->withInput();
+            }
+        }
 
         $data = $request->all();
 
@@ -82,13 +110,11 @@ class BannerController extends Controller
 
         $data['is_active'] = $request->has('is_active');
 
-        // Default banner type if not provided
         if (!isset($data['banner_type'])) {
             $data['banner_type'] = ($data['page'] === 'home') ? 'slider' : 'page_header';
         }
 
         $banner->update($data);
-
         return redirect()->route('admin.banners.index')->with('success', 'Banner updated successfully.');
     }
 
