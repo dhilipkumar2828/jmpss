@@ -430,7 +430,8 @@
                     grade_applying: { required: true },
                     parent_name: { required: true, lettersonly: true, minlength: 2 },
                     email: { required: true, email: true },
-                    mobile: { required: true, digits: true, exactlength: 10 }
+                    mobile: { required: true, digits: true, minlength: 10, maxlength: 10 },
+                    whatsapp: { digits: true, minlength: 10, maxlength: 10 }
                 },
                 messages: {
                     student_name: { required: "Please enter child's name", minlength: "Name must be at least 2 characters" },
@@ -438,7 +439,17 @@
                     grade_applying: { required: "Please select a grade" },
                     parent_name: { required: "Please enter parent's name", minlength: "Name must be at least 2 characters" },
                     email: { required: "Please enter a valid email address" },
-                    mobile: { required: "Please enter a phone number", digits: "Please enter only numbers", exactlength: "Phone Number must be exactly 10 digits" }
+                    mobile: { 
+                        required: "Please enter a phone number", 
+                        digits: "Please enter only numbers", 
+                        minlength: "Mobile Number must be exactly 10 digits",
+                        maxlength: "Mobile Number must be exactly 10 digits"
+                    },
+                    whatsapp: {
+                        digits: "Please enter only numbers",
+                        minlength: "WhatsApp Number must be exactly 10 digits",
+                        maxlength: "WhatsApp Number must be exactly 10 digits"
+                    }
                 },
                 errorElement: 'span',
                 errorPlacement: function (error, element) {

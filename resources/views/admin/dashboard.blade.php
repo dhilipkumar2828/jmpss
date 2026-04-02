@@ -86,7 +86,7 @@
 </div>
 
 <!-- Recent Data Grid -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+<div style="display:grid;grid-template-columns:1fr;gap:24px;">
 
     <!-- Recent Admissions -->
     <div class="card">
@@ -99,58 +99,39 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Student</th>
-                            <th>Parent</th>
-                            <th>Grade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($recent_admissions as $adm)
-                        <tr>
-                            <td>
-                                <div style="font-weight:600;font-size:13px;">{{ $adm->student_name }}</div>
-                                <div style="font-size:12px;color:var(--text-muted);">{{ $adm->created_at->diffForHumans() }}</div>
-                            </td>
-                            <td style="font-size:13px;">{{ $adm->parent_name }}</td>
-                            <td><span class="badge badge-info">{{ strtoupper($adm->grade_applying) }}</span></td>
-                        </tr>
-                        @empty
-                        <tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:32px;">No inquiries yet</td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Recent Contact Messages -->
-    <div class="card">
-        <div class="card-header">
-            <h3><i class="fas fa-envelope-open-text" style="color:#6b21a8;margin-right:8px;"></i>Recent Messages</h3>
-            <a href="{{ route('admin.contact-messages.index') }}" class="btn btn-primary btn-sm">View All</a>
-        </div>
-        <div class="card-body" style="padding:0;">
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sender</th>
-                            <th>Subject</th>
+                            <th>S.No</th>
                             <th>Date</th>
+                            <th>Student Name</th>
+                            <th>Parent Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Grade</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($recent_contacts as $msg)
+                        @forelse($recent_admissions as $index => $adm)
                         <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $adm->created_at->format('d-m-Y') }}</td>
+                            <td style="font-weight:600;">{{ $adm->student_name }}</td>
+                            <td>{{ $adm->parent_name }}</td>
+                            <td>{{ $adm->email }}</td>
+                            <td>{{ $adm->mobile }}</td>
+                            <td><span class="badge badge-info">{{ strtoupper($adm->grade_applying) }}</span></td>
                             <td>
-                                <div style="font-weight:600;font-size:13px;">{{ $msg->name }}</div>
-                                <div style="font-size:12px;color:var(--text-muted);">{{ $msg->mobile }}</div>
+                                <div style="display:flex;gap:5px;">
+                                    <a href="{{ route('admin.admissions.show', $adm->id) }}" class="btn btn-sm btn-outline"><i class="fas fa-eye"></i></a>
+                                    <form action="{{ route('admin.admissions.destroy', $adm->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline text-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
                             </td>
-                            <td style="font-size:13px;">{{ Str::limit($msg->subject, 20) }}</td>
-                            <td style="font-size:12px;color:var(--text-muted);">{{ $msg->created_at->format('d M') }}</td>
                         </tr>
                         @empty
-                        <tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:32px;">No messages yet</td></tr>
+                        <tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:32px;">No inquiries yet</td></tr>
                         @endforelse
                     </tbody>
                 </table>

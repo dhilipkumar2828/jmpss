@@ -274,7 +274,7 @@
                 @if($g->is_active)
                     <span class="badge badge-success gallery-status-badge">Active</span>
                 @else
-                    <span class="badge badge-warning gallery-status-badge">Draft</span>
+                    <span class="badge badge-danger gallery-status-badge">Inactive</span>
                 @endif
                 
                 @php 

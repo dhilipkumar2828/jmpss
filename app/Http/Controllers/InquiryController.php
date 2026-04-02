@@ -13,11 +13,13 @@ class InquiryController extends Controller
     public function admission(Request $request)
     {
         $request->validate([
-            'student_name' => 'required|string|max:255',
+            'student_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+            'dob' => 'required|date',
             'grade_applying' => 'required|string',
-            'parent_name' => 'required|string|max:255',
+            'parent_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
             'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:15',
+            'mobile' => 'required|numeric|digits:10',
+            'whatsapp' => 'nullable|numeric|digits:10',
             'address' => 'nullable|string',
         ]);
 
@@ -29,12 +31,12 @@ class InquiryController extends Controller
     public function career(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'mobile' => 'required|string|max:15',
+            'name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+            'mobile' => 'required|numeric|digits:10',
             'email' => 'required|email|max:255',
             'position_applied' => 'required|string',
-            'experience' => 'nullable|integer',
-            'resume' => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+            'experience' => 'nullable|numeric',
+            'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
         $data = $request->all();
@@ -54,9 +56,9 @@ class InquiryController extends Controller
     public function visit(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
             'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:15',
+            'mobile' => 'required|numeric|digits:10',
             'visit_date' => 'required|date',
             'visit_time' => 'nullable|string',
             'purpose' => 'nullable|string',
@@ -70,9 +72,9 @@ class InquiryController extends Controller
     public function contact(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
             'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:15',
+            'mobile' => 'required|numeric|digits:10',
             'subject' => 'nullable|string|max:255',
             'message' => 'required|string',
         ]);

@@ -14,7 +14,7 @@ class TestimonialController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'         => 'required|string|max:255',
+            'name'         => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
             'designation'  => 'nullable|string|max:255',
             'avatar'       => 'nullable|image|max:5120',
             'content'      => 'required|string',
@@ -43,7 +43,7 @@ class TestimonialController extends Controller
     public function update(Request $request, Testimonial $testimonial)
     {
         $data = $request->validate([
-            'name'         => 'required|string|max:255',
+            'name'         => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
             'designation'  => 'nullable|string|max:255',
             'avatar'       => 'nullable|image|max:5120',
             'content'      => 'required|string',

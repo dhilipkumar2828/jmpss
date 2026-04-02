@@ -487,7 +487,10 @@
                         <div class="photo-details">
                             <h3 style="color: {{ $primaryColor }}">{{ $album->title }}</h3>
                             @if($album->category)
-                                <p style="font-size: 12px; color: #888;">{{ $album->category }}</p>
+                                <p style="font-size: 12px; color: #888; margin-bottom: 5px;">{{ $album->category }}</p>
+                            @endif
+                            @if($album->description)
+                                <p style="font-size: 13px; color: #555; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $album->description }}</p>
                             @endif
                         </div>
                     </div>

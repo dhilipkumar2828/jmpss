@@ -298,25 +298,30 @@
                             <h3><i class="fas fa-pen-nib me-2"></i> Edit Album: {{ $gallery->title }}</h3>
                         </div>
                         <div class="d-flex gap-2">
-                             <div class="form-check form-switch bg-white bg-opacity-10 px-3 py-1 rounded-pill d-flex align-items-center gap-2">
-                                <label class="form-check-label text-white small mb-0" for="is_active">Active</label>
-                                <input class="form-check-input mt-0" type="checkbox" name="is_active" id="is_active" value="1" {{ $gallery->is_active ? 'checked' : '' }}>
-                            </div>
                         </div>
                     </div>
                     <div class="card-body-premium">
                         <div class="form-section-title"><i class="fas fa-info-circle"></i> Album Information</div>
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Album Title <span class="required-asterisk">*</span></label>
                                     <input type="text" name="title" class="form-control" value="{{ old('title', $gallery->title) }}" placeholder="e.g. Annual Sports Day 2025" required>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Category</label>
                                     <input type="text" name="category" class="form-control" value="{{ old('category', $gallery->category) }}" placeholder="e.g. Sports, Cultural, Academic">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select name="is_active" class="form-control" required>
+                                        <option value="1" {{ $gallery->is_active ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ !$gallery->is_active ? 'selected' : '' }}>Inactive</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -384,23 +389,34 @@
                 <div class="premium-card function-group" data-index="0">
                     <div class="card-header-gradient">
                         <h3><i class="fas fa-folder-plus me-2"></i> New Album Details</h3>
-                        <button type="button" class="btn btn-danger btn-sm rounded-pill px-3 border-0 bg-white bg-opacity-20 remove-group-btn" style="display:none;" onclick="removeGroup(0)">
-                            <i class="fas fa-times me-1"></i> Remove
-                        </button>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-danger btn-sm rounded-pill px-3 border-0 bg-white bg-opacity-20 remove-group-btn" style="display:none;" onclick="removeGroup(0)">
+                                <i class="fas fa-times me-1"></i> Remove
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body-premium">
                         <div class="form-section-title"><i class="fas fa-info-circle"></i> Album Information</div>
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Album Title <span class="required-asterisk">*</span></label>
                                     <input type="text" name="groups[0][title]" class="form-control" placeholder="e.g. Diwali Function 2024" required>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Category</label>
                                     <input type="text" name="groups[0][category]" class="form-control" placeholder="e.g. Festivals, Sports">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select name="groups[0][is_active]" class="form-control">
+                                        <option value="1" selected>Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -478,7 +494,9 @@
         
         newGroup.innerHTML = `
             <div class="card-header-gradient" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);">
-                <h3 style="color: var(--primary)"><i class="fas fa-folder-plus me-2"></i> Additional Album Group</h3>
+                <div class="d-flex align-items-center gap-3">
+                    <h3 style="color: var(--primary); margin: 0;"><i class="fas fa-folder-plus me-2"></i> Additional Album</h3>
+                </div>
                 <button type="button" class="btn btn-danger btn-sm rounded-pill px-3 border-0 bg-white bg-opacity-50" onclick="removeGroup(${idx})">
                     <i class="fas fa-times me-1"></i> Remove
                 </button>
@@ -486,16 +504,25 @@
             <div class="card-body-premium">
                 <div class="form-section-title"><i class="fas fa-info-circle"></i> Album Information</div>
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-5">
                         <div class="form-group mb-3">
                             <label class="form-label">Album Title <span class="required-asterisk">*</span></label>
                             <input type="text" name="groups[${idx}][title]" class="form-control" placeholder="Enter title" required>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group mb-3">
                             <label class="form-label">Category</label>
                             <input type="text" name="groups[${idx}][category]" class="form-control" placeholder="Enter category">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="groups[${idx}][is_active]" class="form-control">
+                                <option value="1" selected>Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-12">

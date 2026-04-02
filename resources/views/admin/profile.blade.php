@@ -37,7 +37,7 @@
                         <div class="form-grid-2">
                             <div class="form-group">
                                 <label class="form-label">Full Name</label>
-                                <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" required>
+                                <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
                                 @error('name')<span class="error-msg">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">

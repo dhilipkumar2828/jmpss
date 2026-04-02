@@ -21,7 +21,7 @@ class ProfileController extends Controller
         $user = Auth::guard('admin')->user();
         
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
             'email' => 'required|email|unique:admins,email,' . $user->id,
             'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'current_password' => 'nullable|required_with:new_password',

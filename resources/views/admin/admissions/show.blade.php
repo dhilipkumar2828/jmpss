@@ -18,8 +18,14 @@
                 <p style="font-size: 16px; font-weight: 600; color: var(--text);">{{ $admission->student_name }}</p>
             </div>
             <div class="detail-group">
+                <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Date of Birth</label>
+                <p style="font-size: 16px; font-weight: 600; color: var(--text);">{{ $admission->dob ? \Carbon\Carbon::parse($admission->dob)->format('d-m-Y') : 'Not provided' }}</p>
+            </div>
+            <div class="detail-group">
                 <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Grade Applying For</label>
-                <div class="badge badge-primary">{{ $admission->grade_applying }}</div>
+                <div style="display:inline-block; background: var(--primary); color: white; padding: 6px 16px; border-radius: 50px; font-weight: 800; font-size: 14px; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    {{ $admission->grade_applying }}
+                </div>
             </div>
             <div class="detail-group">
                 <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Parent/Guardian Name</label>
@@ -32,6 +38,10 @@
             <div class="detail-group">
                 <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Mobile Number</label>
                 <p style="font-size: 16px; color: var(--text);">{{ $admission->mobile }}</p>
+            </div>
+            <div class="detail-group">
+                <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Whatsapp Number</label>
+                <p style="font-size: 16px; color: var(--text);">{{ $admission->whatsapp ?? 'Not provided' }}</p>
             </div>
             <div class="detail-group">
                 <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Submission Date</label>

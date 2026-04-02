@@ -31,7 +31,7 @@
                 <div class="form-grid-2">
                     <div class="form-group">
                         <label class="form-label">Recipient Name</label>
-                        <input type="text" name="recipient_name" class="form-control" value="{{ old('recipient_name', $award->recipient_name ?? '') }}" placeholder="Student/School name">
+                        <input type="text" name="recipient_name" class="form-control" value="{{ old('recipient_name', $award->recipient_name ?? '') }}" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" placeholder="Student/School name">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Class / Grade</label>
