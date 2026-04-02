@@ -752,7 +752,7 @@ h2 {
 }
 
 .footer-links a:hover {
-  color: var(--primary);
+  color: rgb(225, 76, 30);
 }
 
 .newsletter-input-box {

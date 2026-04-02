@@ -32,6 +32,7 @@
         .page-hero-content {
             position: relative;
             z-index: 1;
+            padding: 0 10px;
         }
 
         .page-hero-content .page-label {
@@ -86,7 +87,7 @@
 
         /* ── Careers Main Section ── */
         .careers-intro-section {
-            padding: 80px 0 50px;
+            padding: 50px 0 50px;
             background: #fdfaf5;
         }
 
@@ -168,7 +169,7 @@
 
         /* ── Application Form Section ── */
         .apply-section {
-            padding: 80px 0 100px;
+            padding: 80px 0 50px;
             background: #f7faf7;
         }
 

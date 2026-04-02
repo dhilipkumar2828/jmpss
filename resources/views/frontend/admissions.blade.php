@@ -186,6 +186,14 @@
             color: #e14c1e;
             margin-left: 3px;
         }
+        @media (max-width: 780px) {
+             .story-classic-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 20px;
+            align-items: center;
+        }
+        }
 </style>
 @endpush
 
@@ -241,7 +249,7 @@
             <div class="grid-2 admissions-grid mt-50">
                 <div class="admission-steps">
 
-                    <h3>How to Apply</h3>
+                    <h3 style="position: relative; bottom: 25px;">How to Apply</h3>
                     <div class="step-card">
                         <div class="step-num">1</div>
                         <div class="step-info">
@@ -275,14 +283,18 @@
                                 <label style="display:none;">Student Name <span class="required-asterisk">*</span></label>
                                 <input type="text" name="student_name" placeholder="Child's Name *" required>
                             </div>
-                            <div class="form-group grid-2" style="gap: 15px;">
-                                <div>
+                            <div class="form-group row-flex-mobile" style="gap: 15px;">
+                                <div style="flex: 1; width: 100%;">
                                     <label style="display:none;">Date of Birth <span class="required-asterisk">*</span></label>
-                                    <input type="text" name="dob" placeholder="Date of Birth (DD/MM/YYYY) *" onfocus="(this.type='date')" required>
+                                    <input type="text" name="dob" placeholder="Date of Birth (DD/MM/YYYY) *" 
+                                        onfocus="(this.type='date')" 
+                                        onblur="if(!this.value)this.type='text'"
+                                        style="width: 100% !important; min-width: 100% !important;"
+                                        required>
                                 </div>
-                                <div>
+                                <div style="flex: 1; width: 100%;">
                                     <label style="display:none;">Grade Applying For <span class="required-asterisk">*</span></label>
-                                    <select name="grade_applying" required>
+                                    <select name="grade_applying" required style="width: 100% !important;">
                                         <option value="" disabled selected>Applying For *</option>
                                         <option value="kg">Kindergarten (KG)</option>
                                         <option value="primary">Primary (1-5)</option>
@@ -467,6 +479,26 @@
                     $(element).removeClass('is-invalid');
                 }
             });
+
+            // Why Choose Us Slider Javascript
+            const whySlider = document.querySelector('.why-slider');
+            const whyPrevBtn = document.querySelector('.why-slider-btn.prev');
+            const whyNextBtn = document.querySelector('.why-slider-btn.next');
+
+            if (whySlider && whyPrevBtn && whyNextBtn) {
+                const getScrollAmount = () => {
+                    const card = whySlider.querySelector('.why-slide-card');
+                    return card ? card.offsetWidth + 30 : 300; // 30 is the gap
+                };
+
+                whyNextBtn.addEventListener('click', () => {
+                    whySlider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                });
+
+                whyPrevBtn.addEventListener('click', () => {
+                    whySlider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                });
+            }
         });
     </script>
 @endpush

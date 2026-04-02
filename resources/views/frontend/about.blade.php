@@ -200,7 +200,7 @@
 
         /* ── Combined Purpose & Values ── */
         .pvv-section {
-            padding: 50px 0 0;
+            padding: 30px 0 0;
             background: #fff;
         }
 
