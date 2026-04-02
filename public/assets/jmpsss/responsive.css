@@ -28,11 +28,12 @@ body {
   Desktop View (min-width: 992px)
 ================================================*/
 @media (min-width: 992px) {
+
     /* Ensure main nav is displayed properly on desktop */
     .main-nav {
         display: block !important;
     }
-    
+
     .nav-links {
         display: flex;
         align-items: center;
@@ -43,82 +44,139 @@ body {
   Mobile & Tablet View (max-width: 991px)
 ================================================*/
 @media (max-width: 991px) {
-    /* Optionally hide or style the mobile nav here if not styled in style.css */
-    /* Example basic hiding - adjust according to your JS toggle */
-    .bottom-header {
-        position: relative; 
+
+    /* HEADER & NAVIGATION REBUILD (Original HEAD Version) */
+    .top-header {
+        padding: 15px 0;
+        background: #fff;
     }
-    .nav-links {
-        display: flex !important; 
+
+    .top-header-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+
+    .top-header-left {
+        order: 2;
+        display: flex !important;
+        justify-content: flex-start !important;
+        flex: 1 !important;
+        gap: 10px;
+    }
+
+    .top-header-center {
+        order: 1;
+        width: 100% !important;
+        margin: 5px 0 12px !important;
+        text-align: center !important;
+    }
+
+    .top-header-right {
+        order: 3;
+        display: flex !important;
+        justify-content: flex-end !important;
+        flex: 1 !important;
+    }
+
+    /* Keep socials and admission on one line below logo */
+    .top-header-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 0 !important;
+        padding: 10px 15px !important;
+    }
+
+    .top-header-center .logo {
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    .top-header-center .logo img {
+        height: auto !important;
+        max-height: 38px !important;
+        /* Smaller logo as requested */
+        max-width: 90% !important;
+        object-fit: contain;
+    }
+
+    .social-icons-top a {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fcfdfc;
+        color: #004800;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .top-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    /* Bottom Header / Mobile Nav */
+    .bottom-header {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+        background: var(--primary-color) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .bottom-header.scrolled {
+        background: #fff !important;
+        border-bottom: 1px solid #edf2f0 !important;
+    }
+
+    .header-content {
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .mobile-menu-toggle {
+        display: flex !important;
+        border: none !important;
+        background: transparent !important;
+        color: #fff !important;
+        font-size: 24px !important;
+        cursor: pointer !important;
+        padding: 10px !important;
+        margin-left: auto !important;
+    }
+
+    .bottom-header.scrolled .mobile-menu-toggle {
+        color: var(--primary-color) !important;
+    }
+
+    /* Off-canvas Navigation */
+    .main-nav {
         position: fixed !important;
         top: 0 !important;
-        right: 0 !important;
-        left: auto !important;
-        width: 75% !important;
-        min-width: 230px !important; /* Ensure usability on 250px screens */
+        right: -100% !important;
+        width: 300px !important;
         height: 100vh !important;
-        background-color: #fff !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important; /* Always start from the top edge */
-        box-shadow: -5px 0 25px rgba(0,0,0,0.1) !important;
-        z-index: 10001 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        transform: translateX(105%);
-        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-        overflow-y: auto !important;
-    }
-    .nav-links.active, .mobile-open .nav-links {
-        transform: translateX(0) !important;
-    }
-    .nav-links li {
-        width: 100% !important;
-        list-style: none !important;
-        border-bottom: 1px solid #f8f8f8 !important;
-    }
-    .nav-links a {
-        display: flex !important;
-        align-items: center !important;
-        padding: 18px 25px !important;
-        color: #333 !important;
-        font-weight: 600 !important;
-        text-decoration: none !important;
-        text-align: left !important;
-        font-size: 15px !important;
-    }
-    
-    .mobile-nav-header {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding: 0 20px 10px !important; /* Zero top padding */
         background: #fff !important;
-        border-bottom: 2px solid #eee !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        margin: 0 !important;
+        z-index: 1100 !important;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        display: block !important;
+        padding: 20px !important;
+        overflow-y: auto !important;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1) !important;
     }
-    .mobile-logo-link img {
-        height: 38px !important;
-        width: auto !important;
-        object-fit: contain !important;
-        margin: 0 !important;
+
+    .main-nav.active {
+        right: 0 !important;
     }
-    .mobile-close-btn {
-        background: #f8f8f8 !important;
-        border: none !important;
-        width: 34px !important;
-        height: 34px !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        color: #e14c1e !important;
-        cursor: pointer !important;
-        font-size: 18px !important;
-        transition: all 0.2s ease !important;
-    }
-    .mobile-close-btn:active { transform: scale(0.9); background: #eee !important; }
 
     .mobile-menu-overlay {
         display: block !important;
@@ -126,200 +184,337 @@ body {
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        height: 100vh !important;
-        background: rgba(0, 0, 0, 0.6) !important;
-        backdrop-filter: blur(4px) !important;
-        z-index: 10000 !important;
+        height: 100% !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        z-index: 1050 !important;
         opacity: 0 !important;
         visibility: hidden !important;
-        transition: all 0.3s ease !important;
+        transition: 0.3s !important;
     }
-    
-    .mobile-menu-overlay.active, .mobile-open .mobile-menu-overlay {
+
+    .mobile-menu-overlay.active {
         opacity: 1 !important;
         visibility: visible !important;
     }
 
-    .mobile-menu-toggle {
-        display: block !important;
-        background: none !important;
-        border: none !important;
-        font-size: 26px !important;
-        cursor: pointer !important;
-        color: #008000 !important;
-        padding: 5px !important;
-        z-index: 10002 !important;
-    }
-    .mobile-open .mobile-menu-toggle {
-        display: none !important;
-    }
-        .nav-links {
-        position: fixed !important;
-        top: 0 !important;
+    /* JS adds 'mobile-open' to .bottom-header — wire it to the nav + overlay */
+    .bottom-header.mobile-open .main-nav {
         right: 0 !important;
-        width: 75% !important;
-        height: 100vh !important;
-        background: #fff !important; /* White Background as requested */
-        flex-direction: column !important;
-        transform: translateX(105%) !important;
-        transition: transform 0.3s ease-in-out !important;
-        z-index: 10001 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1) !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important; /* No horizontal scroll */
-        display: flex !important;
-    }
-    .nav-links.active, .mobile-open .nav-links {
-        transform: translateX(0) !important;
     }
 
-    /* Standardized Mobile Dropdown List (No Div Boxes) */
-    .has-dropdown {
-        position: relative !important;
-        margin: 0 !important; /* No spaces between items */
-        border-bottom: 1px solid #f0f0f0 !important;
-    }
-    .mobile-submenu-open {
-        background: #fafafa !important; /* Subtle highlight for open section */
-    }
-    .has-dropdown > a {
-        color: #000 !important;
-        padding: 15px 20px !important;
-        width: 100% !important;
+    .bottom-header.mobile-open~.mobile-menu-overlay,
+    .bottom-header.mobile-open .mobile-menu-overlay {
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
-    .nav-links .dropdown-menu {
-        display: none !important;
-        position: static !important;
-        width: 100% !important;
-        background: #fff !important;
-        padding: 0 !important;
-        border: none !important;
-    }
-    .mobile-submenu-open .dropdown-menu {
+    /* Submenu: JS uses .mobile-submenu-open, CSS had .has-dropdown.active */
+    .has-dropdown.mobile-submenu-open>.dropdown-menu {
         display: block !important;
     }
-    
-    .nav-links .dropdown-menu li a {
-        /* Deep Indentation to start in the "middle" of parent text */
-        padding: 12px 20px 12px 55px !important; 
-        font-size: 14px !important;
-        font-weight: 500 !important;
-        color: #333 !important;
-        white-space: normal !important;
-        line-height: 1.4 !important;
+
+    .has-dropdown.mobile-submenu-open>.mobile-submenu-toggle i {
+        transform: rotate(180deg) !important;
     }
-    .nav-links .dropdown-menu li a:hover {
-        color: #000 !important;
-        background: #f5f5f5 !important;
-    }
-    .nav-links .dropdown-menu li a:hover {
-        color: #000 !important;
-        background: #f8f8f8 !important;
-    }
-    
-    .mobile-submenu-toggle {
+
+    /* Ensure top-header right (admission button) always shows */
+    .top-header-right {
         display: flex !important;
         align-items: center !important;
-        justify-content: center !important;
+    }
+
+    .top-header-right .top-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+
+    .nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .nav-links li {
+        width: 100% !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        list-style: none !important;
+    }
+
+    .nav-links li a {
+        display: flex !important;
+        padding: 15px 15px !important;
+        color: #333 !important;
+        font-weight: 500 !important;
+        justify-content: flex-start !important;
+        /* Left align content */
+        align-items: center !important;
+        text-decoration: none !important;
+        text-align: left !important;
+    }
+
+    .mobile-nav-logo-item {
+        display: flex !important;
+        justify-content: flex-start !important;
+        /* Left align logo in menu */
+        padding: 0 15px 20px !important;
+        border-bottom: 2px solid #eee !important;
+        margin-bottom: 15px !important;
+    }
+
+    .mobile-nav-logo-item a {
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    .mobile-nav-logo-item img {
+        height: 50px !important;
+        width: auto !important;
+    }
+
+    /* Dropdown inside Mobile Menu */
+    .nav-links .dropdown-menu {
+        position: static !important;
+        display: none !important;
+        background: #f9f9f9 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        box-shadow: none !important;
+        padding-left: 20px !important;
+        width: 100% !important;
+        border: none !important;
+    }
+
+    .has-dropdown.active .dropdown-menu {
+        display: block !important;
+    }
+
+    .has-dropdown {
+        position: relative !important;
+    }
+
+    .mobile-submenu-toggle {
+        display: flex !important;
         position: absolute !important;
         right: 0 !important;
         top: 0 !important;
-        background: transparent !important;
+        width: 50px !important;
+        height: 50px !important;
         border: none !important;
-        width: 60px !important;  /* Large hit area */
-        height: 55px !important; /* Matches parent height */
-        color: #999 !important;
-        z-index: 10 !important;
-        transition: transform 0.3s ease !important;
+        background: transparent !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        color: var(--primary-color) !important;
+        z-index: 2 !important;
     }
-    .mobile-submenu-open .mobile-submenu-toggle {
+
+    .mobile-submenu-toggle i {
+        transition: 0.3s !important;
+    }
+
+    .has-dropdown.active .mobile-submenu-toggle i {
         transform: rotate(180deg) !important;
-        color: #004800 !important;
     }
-    /* Ensure the link doesn't overlap the toggle hit area too much */
-    .has-dropdown > a {
-        padding-right: 60px !important;
+
+    .nav-arrow {
+        display: none !important;
     }
-    .nav-arrow { display: none !important; } /* Hide desktop arrows */
 
     /* Typography adjustments for tablets and smaller */
-    .hero h1 { font-size: 42px; }
-    .about .section-title-alt, .section-title { font-size: 32px; }
-    .exp-num { font-size: 26px; }
-    .edu-column h4 { font-size: 24px; }
-    
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .about .section-title-alt,
+    .section-title {
+        font-size: 32px;
+    }
+
+    .exp-num {
+        font-size: 26px;
+    }
+
+    .edu-column h4 {
+        font-size: 24px;
+    }
+
     /* Events Slider Tablet Overrides */
     .event-card {
-        flex: 0 0 calc(50% - 15px) !important; /* Show 2 cards */
+        flex: 0 0 calc(50% - 15px) !important;
+        /* Show 2 cards */
     }
+
     .slider-btn {
         width: 40px;
         height: 40px;
         font-size: 14px;
     }
-    .slider-btn.prev { left: -10px; }
-    .slider-btn.next { right: -10px; }
+
+    .slider-btn.prev {
+        left: -10px;
+    }
+
+    .slider-btn.next {
+        right: -10px;
+    }
 }
 
 /*================================================
   Mobile Phones (max-width: 767px)
 ================================================*/
 @media (max-width: 767px) {
+
     /* Smaller typography for mobile phones according to screen size */
-    .hero h1 { font-size: 32px; letter-spacing: 1px; margin-bottom: 10px; }
-    .about .section-title-alt, .section-title { font-size: 26px; }
-    .section-subtitle { font-size: 14px; }
-    .about .about-text p, .feature-card p, p { font-size: 14px !important; }
-    .feature-card h3 { font-size: 16px !important; }
-    .exp-num { font-size: 20px !important; }
-    .edu-column h4 { font-size: 20px; }
-    .btn-primary { padding: 12px 25px; font-size: 14px; }
-    
+    .hero h1 {
+        font-size: 32px;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
+
+    .about .section-title-alt,
+    .section-title {
+        font-size: 26px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    .about .about-text p,
+    .feature-card p,
+    p {
+        font-size: 14px !important;
+    }
+
+    .feature-card h3 {
+        font-size: 16px !important;
+    }
+
+    .exp-num {
+        font-size: 20px !important;
+    }
+
+    .edu-column h4 {
+        font-size: 20px;
+    }
+
+    .btn-primary {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
     /* Helpful layout adjustments for the smaller text */
-    .hero { height: auto; min-height: 450px; padding: 60px 0; }
-    .section-padding { padding: 50px 0; }
-    .grid-2 { grid-template-columns: 1fr; gap: 30px; }
-    .features-grid { grid-template-columns: 1fr !important; gap: 20px; }
+    .hero {
+        height: auto;
+        min-height: 450px;
+        padding: 60px 0;
+    }
+
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+
     .feature-card {
         padding: 30px 20px !important;
         text-align: center !important;
     }
-    
+
     /* Reset zig-zag for mobile as it overlaps vertically */
-    .features-grid.zig-zag .feature-card:nth-child(even) { transform: none; }
-    .features-grid.zig-zag .feature-card:nth-child(even):hover { transform: translateY(-5px); }
-    
+    .features-grid.zig-zag .feature-card:nth-child(even) {
+        transform: none;
+    }
+
+    .features-grid.zig-zag .feature-card:nth-child(even):hover {
+        transform: translateY(-5px);
+    }
+
     /* About image overlapping (Desktop style requested for mobile) */
-    .about-images-wrapper { height: 350px; display: block; }
-    .about-img-1 { position: absolute; width: 70%; height: 80%; top: 0; left: 0; border-radius: 15px; }
-    .about-img-2 { position: absolute; width: 60%; height: 60%; bottom: 0; right: 0; margin-top: 0; z-index: 2; border: 5px solid #fff; border-radius: 15px; }
-    .experience-badge { top: 40%; font-size: 13px; padding: 12px 18px; left: 50%; transform: translate(-50%, -50%); animation: floating 3s ease-in-out infinite; }
+    .about-images-wrapper {
+        height: 350px;
+        display: block;
+    }
+
+    .about-img-1 {
+        position: absolute;
+        width: 70%;
+        height: 80%;
+        top: 0;
+        left: 0;
+        border-radius: 15px;
+    }
+
+    .about-img-2 {
+        position: absolute;
+        width: 60%;
+        height: 60%;
+        bottom: 0;
+        right: 0;
+        margin-top: 0;
+        z-index: 2;
+        border: 5px solid #fff;
+        border-radius: 15px;
+    }
+
+    .experience-badge {
+        top: 40%;
+        font-size: 13px;
+        padding: 12px 18px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: floating 3s ease-in-out infinite;
+    }
 
     /* Events Slider Mobile Overrides */
     .events-slider {
         width: 100%;
-        overflow: hidden; /* Hide any overflowing components laterally */
+        overflow: hidden;
+        /* Hide any overflowing components laterally */
     }
+
     .event-card {
-        flex: 0 0 100% !important; /* Exactly 1 card centered */
+        flex: 0 0 100% !important;
+        /* Exactly 1 card centered */
         max-width: 100% !important;
-        scroll-snap-align: start; /* Standard for full width */
+        scroll-snap-align: start;
+        /* Standard for full width */
     }
+
     .slider-container {
-        padding: 0; 
-        gap: 20px; /* Added gap to separate cards horizontally */
+        padding: 0;
+        gap: 20px;
+        /* Added gap to separate cards horizontally */
     }
-    .slider-btn.prev { left: 4px; z-index: 20; }
-    .slider-btn.next { right: 4px; z-index: 20; }
-    
+
+    .slider-btn.prev {
+        left: 4px;
+        z-index: 20;
+    }
+
+    .slider-btn.next {
+        right: 4px;
+        z-index: 20;
+    }
+
     /* Reduce Date Tag Size on Mobile */
     .event-date {
         font-size: 15px;
         padding: 5px 12px;
     }
+
     .event-date span {
         font-size: 10px;
         margin-top: 1px;
@@ -327,26 +522,58 @@ body {
 
     /* Testimonial Mobile Overrides */
     .testimonial-content-area {
-        width: calc(100% - 10px) !important;
-        margin: 0 5px !important;
-        padding-left: 10px;
-        padding-right: 10px;
+        width: 55% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
     }
-    
-    .testimonial-main-content {
-        padding: 0 5px;
-        width: 100%;
-        overflow: visible; /* Prevent dots from hiding */
+
+    .testimonial-slider-track {
+        display: flex !important;
+        gap: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
-    
+
+    .testimonial-item {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        scroll-snap-align: center !important;
+    }
+
+    .testimonial-quote {
+        font-size: 15.5px !important;
+        line-height: 1.8 !important;
+        color: #555 !important;
+        margin-top: 15px !important;
+    }
+
+    .testimonial-author {
+        font-size: 18px !important;
+    }
+
+    .testimonial-role {
+        font-size: 13px !important;
+    }
+
     .testimonial-dots-wrapper {
         display: flex !important;
         justify-content: center;
         width: 100%;
         margin-top: 25px;
-        padding-bottom: 15px; 
+        padding-bottom: 15px;
         position: relative;
-        z-index: 50; /* Ensure it stays fully visible above everything */
+        z-index: 50;
+        /* Ensure it stays fully visible above everything */
     }
 
     /* ── Robust Mobile Header Action Row (250px - 750px) ── */
@@ -359,11 +586,13 @@ body {
         box-sizing: border-box !important;
         background: #fff !important;
     }
+
     .mobile-social-icons {
         display: flex !important;
         gap: 10px !important;
         align-items: center !important;
     }
+
     .mobile-social-icons a {
         display: flex !important;
         align-items: center !important;
@@ -375,43 +604,134 @@ body {
         border-radius: 50% !important;
         font-size: 14px !important;
         text-decoration: none !important;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
     }
+
     .mobile-admission-btn .admission-btn {
-        white-space: nowrap !important; /* Prevent button text wrap */
+        white-space: nowrap !important;
+        /* Prevent button text wrap */
         padding: 8px 16px !important;
         font-size: 13px !important;
     }
 
-    /* Hide desktop partitions on mobile action row view */
-    .top-header-left, .top-header-right {
-        display: none !important;
+
+    /* Show all top-header partitions on mobile (original navbar restoration) */
+    .top-header-left,
+    .top-header-center,
+    .top-header-right {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
+
+    .top-header-left,
+    .top-header-right {
+        flex: 1 1 50% !important;
+        /* Share width equally on second line */
+        padding: 5px 0 !important;
+        box-sizing: border-box !important;
+    }
+
     .top-header-wrapper {
-        padding-bottom: 0 !important;
-    }
-    .top-header-center {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 0 !important;
+        padding: 5px 15px !important;
+        padding-bottom: 5px !important;
         width: 100% !important;
-        margin: 15px 0 5px !important;
-        text-align: left !important; /* Left aligned as requested */
-        padding-left: 15px !important;
+        box-sizing: border-box !important;
     }
-    .top-header-center img {
-        max-height: 48px !important;
+
+    .top-header-center {
+        order: 1 !important;
+        flex: 0 0 100% !important;
+        /* Take full first row, do not shrink */
+        width: 100% !important;
+        text-align: center !important;
+        padding: 5px 0 !important;
+        margin: 0 0 12px 0 !important;
+        /* Added space below logo row */
+    }
+
+    .top-header-left {
+        order: 2 !important;
+    }
+
+    .top-header-right {
+        order: 3 !important;
+    }
+
+    .top-header-center .logo {
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    .top-header-center .logo img {
+        height: auto !important;
+        max-height: 54px !important;
+        /* Slightly larger logo as requested */
         width: auto !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    /* ── Mobile Alignment Refinements (About, Academics, Admissions, Awards) ── */
+    .sc-content {
+        text-align: left !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .sc-text,
+    .sc-text.lead {
+        text-align: justify !important;
+        /* Professional reading for 'Our Story' & 'Our Approach' */
+        line-height: 1.8 !important;
+    }
+
+    .sc-title {
+        text-align: left !important;
+        /* Left alight headings as requested */
+        font-size: 32px !important;
+        /* Scale down heading size for small screens */
+        hyphens: auto;
+    }
+
+    .sc-eyebrow {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+
+    .sc-eyebrow::before {
+        display: none !important;
+        /* Remove decorative line if it forces centering/offset */
     }
 
     /* Gallery & Video Grid Stacking */
-    .cat-grid, .gallery-grid, .video-year-grid, .video-grid {
-        grid-template-columns: 1fr !important; /* Stack to single column on small mobile */
+    .cat-grid,
+    .gallery-grid,
+    .video-year-grid,
+    .video-grid {
+        grid-template-columns: 1fr !important;
+        /* Stack to single column on small mobile */
         gap: 20px !important;
     }
-    .cat-card-thumb, .photo-thumb, .video-thumb {
+
+    .cat-card-thumb,
+    .photo-thumb,
+    .video-thumb {
         height: 180px !important;
         width: 100% !important;
         overflow: hidden !important;
     }
-    .cat-card-thumb img, .photo-thumb img, .video-thumb img {
+
+    .cat-card-thumb img,
+    .photo-thumb img,
+    .video-thumb img {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
@@ -420,7 +740,9 @@ body {
 
     /* Target 480px and up for 2-column gallery if preferred, but for now 1-col is safer */
     @media (min-width: 480px) {
-        .gallery-grid, .video-year-grid {
+
+        .gallery-grid,
+        .video-year-grid {
             grid-template-columns: repeat(2, 1fr) !important;
         }
     }
@@ -429,281 +751,358 @@ body {
     .contact-hero {
         height: 300px !important;
     }
+
     .contact-cards-grid {
         grid-template-columns: 1fr !important;
         gap: 20px !important;
     }
+
     .contact-grid {
         grid-template-columns: 1fr !important;
         gap: 30px !important;
     }
+
     .contact-map-wrapper {
         height: 300px !important;
         margin-top: 20px;
     }
+
     .contact-form-wrapper {
         padding: 20px !important;
     }
 
-    /* Why Choose Us & Other Sliders */
-    .why-slider, .gallery-grid.slider-mode {
+    /* Warum Choose Us & Other Sliders */
+    .why-slider,
+    .gallery-grid.slider-mode {
         display: flex !important;
-        overflow-x: auto !important;
-        scroll-snap-type: x mandatory !important;
-        gap: 15px !important;
-        padding: 10px 5px 30px !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
-    .why-slide-card, .gallery-item.slider-mode {
-        flex: 0 0 calc(100% - 20px) !important;
-        scroll-snap-align: start !important;
     }
 
-    /* Desk Pages (Chairman, Respondent, Correspondent, Principal) */
-    .chairman-layout, .corr-layout, .obj-split-layout {
-        grid-template-columns: 1fr !important;
-        gap: 40px !important;
+    /* ── Gallery & Videos: Remove Button Underlines ── */
+    .filter-wrap .btn,
+    .filter-wrap a.btn-primary,
+    .filter-wrap a.btn-outline {
+        text-decoration: none !important;
+        box-shadow: none !important;
     }
-    .chairman-card, .corr-card {
-        position: relative !important;
-        top: 0 !important;
-        width: 100% !important;
-        max-width: 400px;
-        margin: 0 auto 30px;
-    }
-    
-    /* Media Gallery Filters (Photos & Videos) */
-    .filter-wrap {
+
+    /* ── Footer: Left Align Social Links ── */
+    .footer-links .social-icons {
         display: flex !important;
-        gap: 8px !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        padding: 0 10px !important;
-    }
-    .filter-wrap .btn {
-        padding: 8px 16px !important;
-        font-size: 13px !important;
-        border-radius: 30px !important;
-        white-space: nowrap !important;
-        min-width: 70px !important;
-        text-align: center !important;
-        border: 1px solid transparent !important;
-    }
-    .filter-wrap .btn-outline {
-        border-color: #004800 !important; /* Green Border */
-        color: #004800 !important;
-        background: transparent !important;
-    }
-    .filter-wrap .btn-primary {
-        background: #e14c1e !important; /* Orange Primary */
-        color: #fff !important;
-        border-color: #e14c1e !important;
-    }
-    .filter-wrap .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    
-    .obj-left-title {
-        text-align: center;
-    }
-    .obj-left-title .section-title, .obj-left-title p {
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .obj-visual-accent {
-        margin: 0 auto 30px;
-    }
-    .obj-list-item {
-        padding: 20px !important;
-        gap: 15px !important;
-    }
-    .obj-list-item:hover {
-        transform: none !important; /* Disable hover translate on mobile */
+        justify-content: flex-start !important;
+        margin-top: 15px !important;
     }
 
-    /* Information Pages & Tables */
-    .grid {
-        grid-template-columns: 1fr !important; /* Force single column if auto-fit/minmax was used */
-    }
-    .info-card {
-        padding: 20px !important;
-    }
-    .table-container, .table-responsive {
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        margin-bottom: 20px;
-    }
-    table {
-        min-width: 600px !important; /* Ensure table doesn't squish too much */
+    .footer-links p {
+        text-align: left !important;
     }
 
-    /* ── Non-Home Page Mobile Section Refinements ── */
-    body:not(.home-page) .container {
-        padding-left: 15px !important;
-        padding-right: 15px !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    body:not(.home-page) .section-padding, 
-    body:not(.home-page) .content-section, 
-    body:not(.home-page) .corr-section,
-    body:not(.home-page) .story-classic,
-    body:not(.home-page) .init-section {
-        padding: 40px 0 !important;
-    }
-    body:not(.home-page) .page-hero {
-        margin-bottom: 20px !important;
-    }
-    body:not(.home-page) .section-title {
-        margin-bottom: 25px !important;
-    }
-    body:not(.home-page) p {
-        line-height: 1.6 !important;
-        margin-bottom: 15px !important;
+    .footer-grid {
+        text-align: left !important;
     }
 
-    /* Eliminate horizontal bottom scroll */
-    html, body {
-        overflow-x: hidden !important;
-        width: 100%;
-        position: relative;
-    }
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 15px !important;
+    padding: 10px 5px 30px !important;
+    -webkit-overflow-scrolling: touch !important;
+}
 
-    .admission-btn {
-        margin: 0 !important;
-        width: auto !important;
-        max-width: 100% !important;
-        padding: 5px 12px !important;
-        font-size: 11px !important;
-        white-space: nowrap !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        border-radius: 30px !important;
-    }
+.why-slide-card,
+.gallery-item.slider-mode {
+    flex: 0 0 calc(100% - 20px) !important;
+    scroll-snap-align: start !important;
+}
 
-    .admission-btn i {
-        font-size: 12px !important;
-        margin-right: 5px !important;
-    }
+/* Desk Pages (Chairman, Respondent, Correspondent, Principal) */
+.chairman-layout,
+.corr-layout,
+.obj-split-layout {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+}
 
-    
-    /* Toggle Button Right Alignment & Green Color */
-    .header-content {
-        display: flex;
-        justify-content: flex-end; /* Align right */
-        width: 100%;
-    }
-    .mobile-menu-toggle {
-        color: #008000 !important; /* Force Green */
-        margin-left: auto;
-    }
+.chairman-card,
+.corr-card {
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
 
-    /* Footer Copyright Stack & Size fixes */
-    .footer-bottom .flex-row-between {
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 10px !important;
-        padding-bottom: 20px !important;
-    }
-    
-    .footer-bottom p {
-        font-size: 11px !important;
-        margin: 0 !important;
-        text-align: center !important;
-        white-space: nowrap !important; /* Ensure it stays in a single line */
-        line-height: 1 !important;
-    }
+/* Media Gallery Filters (Photos & Videos) */
+.filter-wrap {
+    display: flex !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    padding: 0 10px !important;
+}
 
-    /* Logo size reduction for mobile */
-    .top-header-center img {
-        height: auto !important;
-        max-height: 50px !important;
-        max-width: 90% !important;
-        object-fit: contain;
-    }
+.filter-wrap .btn {
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    border-radius: 30px !important;
+    white-space: nowrap !important;
+    min-width: 70px !important;
+    text-align: center !important;
+    border: 1px solid transparent !important;
+}
 
-    /* Reduce Leadership Section and Message Cards size */
-    .leadership-section {
-        padding: 30px 0 !important;
-    }
-    .message-card {
-        padding: 20px !important;
-        margin-bottom: 20px !important;
-    }
-    .message-card p {
-        font-size: 13px !important;
-        margin-bottom: 10px !important;
-    }
-    .message-card h3 {
-        font-size: 17px !important;
-    }
+.filter-wrap .btn-outline {
+    border-color: #004800 !important;
+    /* Green Border */
+    color: #004800 !important;
+    background: transparent !important;
+}
 
-    /* Global Page Hero Scaling */
-    .page-hero {
-        height: 250px !important;
-        padding-top: 60px !important;
-    }
-    .page-hero-content h1 {
-        font-size: 28px !important;
-        margin-bottom: 10px !important;
-    }
-    .page-hero-content .page-label {
-        padding: 4px 15px !important;
-        font-size: 11px !important;
-        margin-bottom: 12px !important;
-    }
+.filter-wrap .btn-primary {
+    background: #e14c1e !important;
+    /* Orange Primary */
+    color: #fff !important;
+    border-color: #e14c1e !important;
+}
 
-    /* Global Story Grid Stacking */
-    .story-classic-grid {
-        grid-template-columns: 1fr !important;
-        gap: 35px !important;
-    }
-    .sc-content {
-        padding-right: 0 !important;
-        text-align: center !important;
-    }
-    .sc-eyebrow {
-        justify-content: center !important;
-    }
-    .sc-title {
-        font-size: 32px !important;
-        margin-bottom: 20px !important;
-    }
-    .sc-visual {
-        padding-right: 0 !important;
-        padding-bottom: 0 !important;
-    }
-    .sc-visual::before {
-        display: none !important; /* Hide background shape on mobile to save space */
-    }
+.filter-wrap .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    /* Generic Grid Stacking */
-    .grid-2, .grid-3 {
-        grid-template-columns: 1fr !important;
-        gap: 25px !important;
-    }
+.obj-left-title {
+    text-align: center;
+}
 
-    /* Form Layouts (Admissions/Contact) */
-    .form-group.grid-2 {
-        grid-template-columns: 1fr !important;
-        gap: 15px !important;
-    }
+.obj-left-title .section-title,
+.obj-left-title p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    /* Table Responsiveness */
-    .table-responsive {
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        margin-bottom: 20px !important;
-    }
-    table {
-        min-width: 600px !important; /* Ensure table doesn't squish too much */
-    }
+.obj-visual-accent {
+    margin: 0 auto 30px;
+}
+
+.obj-list-item {
+    padding: 20px !important;
+    gap: 15px !important;
+}
+
+.obj-list-item:hover {
+    transform: none !important;
+    /* Disable hover translate on mobile */
+}
+
+/* Information Pages & Tables */
+.grid {
+    grid-template-columns: 1fr !important;
+    /* Force single column if auto-fit/minmax was used */
+}
+
+.info-card {
+    padding: 20px !important;
+}
+
+.table-container,
+.table-responsive {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-bottom: 20px;
+}
+
+table {
+    min-width: 600px !important;
+    /* Ensure table doesn't squish too much */
+}
+
+/* ── Non-Home Page Mobile Section Refinements ── */
+body:not(.home-page) .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+body:not(.home-page) .section-padding,
+body:not(.home-page) .content-section,
+body:not(.home-page) .corr-section,
+body:not(.home-page) .story-classic,
+body:not(.home-page) .init-section {
+    padding: 40px 0 !important;
+}
+
+body:not(.home-page) .page-hero {
+    margin-bottom: 20px !important;
+}
+
+body:not(.home-page) .section-title {
+    margin-bottom: 25px !important;
+}
+
+body:not(.home-page) p {
+    line-height: 1.6 !important;
+    margin-bottom: 15px !important;
+}
+
+/* Eliminate horizontal bottom scroll */
+html,
+body {
+    overflow-x: hidden !important;
+    width: 100%;
+    position: relative;
+}
+
+.admission-btn {
+    margin: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+    padding: 5px 12px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 30px !important;
+}
+
+.admission-btn i {
+    font-size: 12px !important;
+    margin-right: 5px !important;
+}
+
+
+/* Toggle Button Right Alignment & Green Color */
+.header-content {
+    display: flex;
+    justify-content: flex-end;
+    /* Align right */
+    width: 100%;
+}
+
+.mobile-menu-toggle {
+    color: #008000 !important;
+    /* Force Green */
+    margin-left: auto;
+}
+
+/* Footer Copyright Stack & Size fixes */
+.footer-bottom .flex-row-between {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding-bottom: 20px !important;
+}
+
+.footer-bottom p {
+    font-size: 11px !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    /* Ensure it stays in a single line */
+    line-height: 1 !important;
+}
+
+/* Logo size reduction for mobile */
+.top-header-center img {
+    height: auto !important;
+    max-height: 50px !important;
+    max-width: 90% !important;
+    object-fit: contain;
+}
+
+/* Reduce Leadership Section and Message Cards size */
+.leadership-section {
+    padding: 30px 0 !important;
+}
+
+.message-card {
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.message-card p {
+    font-size: 13px !important;
+    margin-bottom: 10px !important;
+}
+
+.message-card h3 {
+    font-size: 17px !important;
+}
+
+/* Global Page Hero Scaling */
+.page-hero {
+    height: 250px !important;
+    padding-top: 60px !important;
+}
+
+.page-hero-content h1 {
+    font-size: 28px !important;
+    margin-bottom: 10px !important;
+}
+
+.page-hero-content .page-label {
+    padding: 4px 15px !important;
+    font-size: 11px !important;
+    margin-bottom: 12px !important;
+}
+
+/* Global Story Grid Stacking */
+.story-classic-grid {
+    grid-template-columns: 1fr !important;
+    gap: 35px !important;
+}
+
+.sc-content {
+    padding-right: 0 !important;
+    text-align: left !important;
+}
+
+.sc-eyebrow {
+    justify-content: flex-start !important;
+}
+
+.sc-title {
+    font-size: 32px !important;
+    margin-bottom: 20px !important;
+}
+
+.sc-visual {
+    padding-right: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.sc-visual::before {
+    display: none !important;
+    /* Hide background shape on mobile to save space */
+}
+
+/* Generic Grid Stacking */
+.grid-2,
+.grid-3 {
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+}
+
+/* Form Layouts (Admissions/Contact) */
+.form-group.grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+}
+
+/* Table Responsiveness */
+.table-responsive {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-bottom: 20px !important;
+}
+
+table {
+    min-width: 600px !important;
+    /* Ensure table doesn't squish too much */
+}
 }
 
 /* ==========================================================================

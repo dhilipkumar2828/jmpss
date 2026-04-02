@@ -181,6 +181,7 @@
                 });
             }
 
+            // Global Testimonial Scroller (Desktop/Fade version)
             const testimonials = document.querySelectorAll('.testimonial-item');
             const dots = document.querySelectorAll('.dot');
             let currentTestimonial = 0;
@@ -202,7 +203,9 @@
                 showTestimonial(currentTestimonial);
             }
 
-            if (testimonials.length > 0 && dots.length > 0) {
+            // Only run this basic scroller if we are on desktop or if the specialized scroller isn't present
+            const isHomePage = document.querySelector('.testimonial-slider-track');
+            if (testimonials.length > 0 && dots.length > 0 && (!isHomePage || window.innerWidth > 991)) {
                 setInterval(nextTestimonial, 7000);
 
                 dots.forEach((dot, index) => {
@@ -285,8 +288,7 @@
                 if (!mobileMenuToggle) return;
                 const icon = mobileMenuToggle.querySelector('i');
                 if (!icon) return;
-                // Keep it as bars even when open to avoid duplicate close icons
-                icon.className = 'fa-solid fa-bars';
+                icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
             }
 
             function closeMobileMenu() {
@@ -322,45 +324,27 @@
                 });
             }
 
-            const mobileMenuCloseBtn = document.getElementById('mobileMenuClose');
-            if (mobileMenuCloseBtn) {
-                mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
-            }
-
             if (mobileMenuOverlay) {
                 mobileMenuOverlay.addEventListener('click', closeMobileMenu);
             }
 
-            // Toggle Submenus (Chevron Buttons)
             mobileSubmenuToggles.forEach(function(button) {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    toggleSubmenu(button.closest('.has-dropdown'));
+
+                    const parent = button.closest('.has-dropdown');
+                    if (!parent) return;
+
+                    const willOpen = !parent.classList.contains('mobile-submenu-open');
+                    document.querySelectorAll('.has-dropdown.mobile-submenu-open').forEach(function(item) {
+                        if (item !== parent) {
+                            item.classList.remove('mobile-submenu-open');
+                        }
+                    });
+                    parent.classList.toggle('mobile-submenu-open', willOpen);
                 });
             });
-
-            // Smart Row Toggle: Toggle if link is exactly "#"
-            document.querySelectorAll('.has-dropdown > a').forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 991 && link.getAttribute('href') === '#') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        toggleSubmenu(link.closest('.has-dropdown'));
-                    }
-                });
-            });
-
-            function toggleSubmenu(parent) {
-                if (!parent) return;
-                const willOpen = !parent.classList.contains('mobile-submenu-open');
-                document.querySelectorAll('.has-dropdown.mobile-submenu-open').forEach(function(item) {
-                    if (item !== parent) {
-                        item.classList.remove('mobile-submenu-open');
-                    }
-                });
-                parent.classList.toggle('mobile-submenu-open', willOpen);
-            }
 
             document.querySelectorAll('.main-nav a').forEach(function(link) {
                 link.addEventListener('click', function() {
