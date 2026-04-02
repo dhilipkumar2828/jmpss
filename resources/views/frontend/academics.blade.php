@@ -33,6 +33,11 @@
             position: relative;
             z-index: 1;
         }
+        .page-hero-content p{
+            position: relative;
+            z-index: 1;
+            padding-top: 20px;
+        }
 
         .page-hero-content .page-label {
             display: inline-block;
@@ -311,6 +316,14 @@
             .activities-grid {
                 grid-template-columns: 1fr;
             }
+        }
+        @media (max-width: 780px) {
+             .story-classic-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 20px;
+            align-items: center;
+        }
         }
 </style>
 @endpush
