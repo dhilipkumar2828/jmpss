@@ -285,7 +285,8 @@
                 if (!mobileMenuToggle) return;
                 const icon = mobileMenuToggle.querySelector('i');
                 if (!icon) return;
-                icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+                // Keep it as bars even when open to avoid duplicate close icons
+                icon.className = 'fa-solid fa-bars';
             }
 
             function closeMobileMenu() {
@@ -321,27 +322,45 @@
                 });
             }
 
+            const mobileMenuCloseBtn = document.getElementById('mobileMenuClose');
+            if (mobileMenuCloseBtn) {
+                mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
+            }
+
             if (mobileMenuOverlay) {
                 mobileMenuOverlay.addEventListener('click', closeMobileMenu);
             }
 
+            // Toggle Submenus (Chevron Buttons)
             mobileSubmenuToggles.forEach(function(button) {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-
-                    const parent = button.closest('.has-dropdown');
-                    if (!parent) return;
-
-                    const willOpen = !parent.classList.contains('mobile-submenu-open');
-                    document.querySelectorAll('.has-dropdown.mobile-submenu-open').forEach(function(item) {
-                        if (item !== parent) {
-                            item.classList.remove('mobile-submenu-open');
-                        }
-                    });
-                    parent.classList.toggle('mobile-submenu-open', willOpen);
+                    toggleSubmenu(button.closest('.has-dropdown'));
                 });
             });
+
+            // Smart Row Toggle: Toggle if link is exactly "#"
+            document.querySelectorAll('.has-dropdown > a').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 991 && link.getAttribute('href') === '#') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleSubmenu(link.closest('.has-dropdown'));
+                    }
+                });
+            });
+
+            function toggleSubmenu(parent) {
+                if (!parent) return;
+                const willOpen = !parent.classList.contains('mobile-submenu-open');
+                document.querySelectorAll('.has-dropdown.mobile-submenu-open').forEach(function(item) {
+                    if (item !== parent) {
+                        item.classList.remove('mobile-submenu-open');
+                    }
+                });
+                parent.classList.toggle('mobile-submenu-open', willOpen);
+            }
 
             document.querySelectorAll('.main-nav a').forEach(function(link) {
                 link.addEventListener('click', function() {

@@ -1021,6 +1021,87 @@
             color: rgba(255, 255, 255, 0.5);
             line-height: 1.5;
         }
+
+        /* ── Responsive Overrides ── */
+        @media (max-width: 991px) {
+            .story-classic-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .sc-content {
+                padding-right: 0;
+            }
+            .mv-banner {
+                flex-direction: column;
+            }
+            .mv-panel.mv-mission {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
+            .mv-center-badge {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin: -38px auto; /* Flawless horizontal overlap */
+                z-index: 10;
+            }
+            .trust-3col {
+                grid-template-columns: 1fr;
+            }
+            .trust-watermark {
+                display: none; /* Hide huge vertical decorative watermark */
+            }
+            .trust-main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .sc-title {
+                font-size: 34px;
+            }
+            .sc-stats-wrapper {
+                display: grid !important;
+                grid-template-columns: repeat(2, 115px) !important;
+                gap: 20px 10px !important;
+                justify-content: center !important;
+            }
+            .sc-stat-item {
+                text-align: center !important;
+            }
+            .sc-stat-item strong {
+                font-size: 24px !important;
+            }
+            .sc-stat-item span {
+                font-size: 12px !important;
+            }
+            .mv-panel {
+                padding: 40px 30px;
+            }
+            .trust-top {
+                clip-path: none; /* Standard rectangular container for mobile */
+                padding: 50px 0;
+            }
+            .trust-fact-cards {
+                grid-template-columns: 1fr;
+            }
+            .trust-fact-card {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            .trust-fact-card:last-child {
+                border-bottom: none;
+            }
+            .founder-monogram {
+                width: 80px;
+                height: 80px;
+                font-size: 24px;
+            }
+            .founder-monogram::before {
+                inset: -10px;
+            }
+        }
 </style>
 @endpush
 

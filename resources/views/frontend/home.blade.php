@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'JMPSSS | Jaypee Model Senior Secondary School')
+@section('body_class', 'home-page')
 
 @push('styles')
 <style>
@@ -117,6 +118,70 @@
     .slider-prev:hover, .slider-next:hover {
         background: var(--primary-color);
         border-color: var(--primary-color);
+    }
+
+    /* Why Choose Us Centering */
+    .feature-card {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        transition: all 0.3s ease;
+    }
+    .icon-circle {
+        margin: 0 auto 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Testimonial Swipe Scroller */
+    .testimonial-slider-track {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        scroll-behavior: smooth !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important; /* Firefox */
+        -ms-overflow-style: none !important;  /* IE/Edge */
+        gap: 0 !important;
+        padding-bottom: 10px !important;
+    }
+    .testimonial-slider-track::-webkit-scrollbar {
+        display: none !important; /* Chrome/Safari */
+    }
+    .testimonial-item {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        scroll-snap-align: center !important;
+        scroll-snap-stop: always !important; /* Force snapping to each card */
+        opacity: 1 !important; /* Always visible in track */
+        visibility: visible !important;
+        position: relative !important;
+        transition: transform 0.3s ease !important;
+    }
+    .testimonial-content-area {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+    .testimonial-dots {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        margin-top: 20px !important;
+    }
+    .testimonial-dots .dot {
+        width: 10px !important;
+        height: 10px !important;
+        border-radius: 50% !important;
+        background: #ddd !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+    }
+    .testimonial-dots .dot.active {
+        background: var(--primary-color) !important;
+        width: 25px !important;
+        border-radius: 5px !important;
     }
 
     @media (max-width: 767px) {
@@ -599,6 +664,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Testimonial Scroller Sync
+    const testimonialTrack = document.querySelector('.testimonial-slider-track');
+    const testimonialDots = document.querySelectorAll('.testimonial-dots .dot');
+
+    if (testimonialTrack && testimonialDots.length > 0) {
+        // Dot Click Navigation
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const width = testimonialTrack.offsetWidth;
+                testimonialTrack.scrollTo({
+                    left: index * width,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll Sync
+        testimonialTrack.addEventListener('scroll', () => {
+            const width = testimonialTrack.offsetWidth;
+            const scrollLeft = testimonialTrack.scrollLeft;
+            const index = Math.round(scrollLeft / width);
+
+            testimonialDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }, { passive: true });
+
+        // Auto slide for Testimonials
+        let testimonialInterval = setInterval(() => {
+            const width = testimonialTrack.offsetWidth;
+            const scrollLeft = testimonialTrack.scrollLeft;
+            const maxScroll = testimonialTrack.scrollWidth - width;
+
+            if (scrollLeft + 10 >= maxScroll) {
+                testimonialTrack.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                testimonialTrack.scrollBy({ left: width, behavior: 'smooth' });
+            }
+        }, 8000);
+
+        testimonialTrack.addEventListener('touchstart', () => clearInterval(testimonialInterval));
+    }
+
     // Events Slider Logic (Mobile)
     const eventContainer = document.querySelector('.slider-container');
     const eventPrevBtn = document.querySelector('.slider-btn.prev');
@@ -679,5 +787,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 @endpush
 @endsection
-
-
