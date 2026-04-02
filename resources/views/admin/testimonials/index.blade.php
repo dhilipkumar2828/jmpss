@@ -18,15 +18,7 @@
                         <td style="color:var(--text-muted);font-size:13px;">{{ ($testimonials->currentPage() - 1) * $testimonials->perPage() + $loop->iteration }}</td>
                         <td>
                             <div style="display:flex;align-items:center;gap:12px;">
-                                @if($t->avatar)
-                                    <div style="width:36px;height:36px;border-radius:50%;overflow:hidden;background:#f8fafc;flex-shrink:0;border:1px solid var(--border);">
-                                        <img src="{{ asset($t->avatar) }}" style="width:100%;height:100%;object-fit:cover;">
-                                    </div>
-                                @else
-                                    <div style="width:36px;height:36px;border-radius:50%;background:#f1f5f9;display:grid;place-items:center;color:#94a3b8;flex-shrink:0;">
-                                        <i class="fas fa-user" style="font-size:14px;"></i>
-                                    </div>
-                                @endif
+
                                 <div>
                                     <div style="font-weight:700;font-size:14px;">{{ $t->name }}</div>
                                     <div style="font-size:12px;color:var(--text-muted);">{{ $t->designation }}</div>

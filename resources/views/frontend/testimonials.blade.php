@@ -115,13 +115,9 @@
                         {{ $testimonial->content }}
                     </div>
                     <div class="testimonial-user">
-                        @if($testimonial->avatar)
-                            <img src="{{ asset($testimonial->avatar) }}" alt="{{ $testimonial->name }}">
-                        @else
-                            <div style="width:50px; height:50px; border-radius:50%; background:#f0f0f0; display:grid; place-items:center; color:{{ $primaryColor }}; font-weight:bold;">
-                                {{ substr($testimonial->name, 0, 1) }}
-                            </div>
-                        @endif
+                        <div style="width:50px; height:50px; border-radius:50%; background:#f0f0f0; display:grid; place-items:center; color:{{ $primaryColor }}; font-weight:bold; font-size:18px;">
+                            {{ substr($testimonial->name, 0, 1) }}
+                        </div>
                         <div>
                             <h4>{{ $testimonial->name }}</h4>
                             <p>{{ $testimonial->designation ?? $testimonial->type }}</p>

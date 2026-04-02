@@ -16,7 +16,6 @@ class TestimonialController extends Controller
         $data = $request->validate([
             'name'         => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
             'designation'  => 'nullable|string|max:255',
-            'avatar'       => 'nullable|image|max:5120',
             'content'      => 'required|string',
             'rating'       => 'required|integer|min:1|max:5',
             'type'         => 'required|in:student,parent,alumni,staff',
@@ -24,13 +23,6 @@ class TestimonialController extends Controller
             'is_featured'  => 'boolean',
             'is_active'    => 'boolean',
         ]);
-
-        if ($request->hasFile('avatar')) {
-            $file = $request->file('avatar');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/testimonials'), $filename);
-            $data['avatar'] = 'uploads/testimonials/' . $filename;
-        }
 
         $data['is_featured'] = $request->boolean('is_featured');
         $data['is_active']   = $request->boolean('is_active', true);
@@ -45,7 +37,6 @@ class TestimonialController extends Controller
         $data = $request->validate([
             'name'         => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
             'designation'  => 'nullable|string|max:255',
-            'avatar'       => 'nullable|image|max:5120',
             'content'      => 'required|string',
             'rating'       => 'required|integer|min:1|max:5',
             'type'         => 'required|in:student,parent,alumni,staff',
@@ -53,16 +44,6 @@ class TestimonialController extends Controller
             'is_featured'  => 'boolean',
             'is_active'    => 'boolean',
         ]);
-
-        if ($request->hasFile('avatar')) {
-            if ($testimonial->avatar && file_exists(public_path($testimonial->avatar))) {
-                unlink(public_path($testimonial->avatar));
-            }
-            $file = $request->file('avatar');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/testimonials'), $filename);
-            $data['avatar'] = 'uploads/testimonials/' . $filename;
-        }
 
         $data['is_featured'] = $request->boolean('is_featured');
         $data['is_active']   = $request->boolean('is_active');
@@ -72,9 +53,6 @@ class TestimonialController extends Controller
 
     public function destroy(Testimonial $testimonial) 
     { 
-        if ($testimonial->avatar && file_exists(public_path($testimonial->avatar))) {
-            unlink(public_path($testimonial->avatar));
-        }
         $testimonial->delete(); 
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted!'); 
     }
