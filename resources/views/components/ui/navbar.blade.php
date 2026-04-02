@@ -36,10 +36,22 @@
                         class="fa-solid fa-graduation-cap"></i> Admission</a>
             </div>
         </div>
+
+        <!-- NEW: Dedicated Mobile Header Action Row (Direct Siblings) -->
+        <div class="mobile-header-actions">
+            <div class="mobile-social-icons">
+                <a href="https://www.facebook.com/p/Jeeva-Memorial-Public-School-100065720670012/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/jeevamemorialpublicschool/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCEe4LgSQuNMCqHu8TvQssGA" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <div class="mobile-admission-btn">
+                <a href="{{ route('admissions') }}" class="top-btn admission-btn"><i class="fa-solid fa-graduation-cap"></i> Admission</a>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Header Nav -->
-    <header class="bottom-header">
+    <header class="bottom-header" id="bottomHeader">
         <div class="container header-content">
             <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu"
                 aria-controls="mainNav" aria-expanded="false">
@@ -48,10 +60,13 @@
 
             <nav class="main-nav" id="mainNav">
                 <ul class="nav-links">
-                    <li class="mobile-nav-logo-item">
-                        <a href="{{ route('home') }}" aria-label="JMPSSS Home">
+                    <li class="mobile-nav-header">
+                        <a href="{{ route('home') }}" class="mobile-logo-link">
                             <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo">
                         </a>
+                        <button type="button" class="mobile-close-btn" id="mobileMenuClose" aria-label="Close menu">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
                     </li>
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li class="has-dropdown">
@@ -107,4 +122,3 @@
         </div>
         <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     </header>
-
