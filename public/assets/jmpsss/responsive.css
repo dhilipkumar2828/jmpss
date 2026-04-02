@@ -1349,7 +1349,7 @@ html {
     @media (max-width: 600px) {
         .row-flex-mobile {
             flex-direction: column !important;
-            gap: 20px !important;
+            gap: 0px !important;
         }
     }
 

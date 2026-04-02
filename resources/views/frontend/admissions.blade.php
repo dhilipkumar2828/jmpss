@@ -194,6 +194,24 @@
             align-items: center;
         }
         }
+
+        .row-flex-mobile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        @media (max-width: 600px) {
+            .row-flex-mobile {
+                flex-direction: column;
+                gap: 0;
+            }
+            .row-flex-mobile > div {
+                margin-bottom: 20px;
+            }
+            .row-flex-mobile > div:last-child {
+                margin-bottom: 0;
+            }
+        }
 </style>
 @endpush
 
@@ -283,7 +301,7 @@
                                 <label style="display:none;">Student Name <span class="required-asterisk">*</span></label>
                                 <input type="text" name="student_name" placeholder="Child's Name *" required>
                             </div>
-                            <div class="form-group row-flex-mobile" style="gap: 15px;">
+                            <div class="form-group row-flex-mobile">
                                 <div style="flex: 1; width: 100%;">
                                     <label style="display:none;">Date of Birth <span class="required-asterisk">*</span></label>
                                     <input type="text" name="dob" placeholder="Date of Birth (DD/MM/YYYY) *" 
