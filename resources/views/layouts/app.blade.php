@@ -181,6 +181,7 @@
                 });
             }
 
+            // Global Testimonial Scroller (Desktop/Fade version)
             const testimonials = document.querySelectorAll('.testimonial-item');
             const dots = document.querySelectorAll('.dot');
             let currentTestimonial = 0;
@@ -202,7 +203,9 @@
                 showTestimonial(currentTestimonial);
             }
 
-            if (testimonials.length > 0 && dots.length > 0) {
+            // Only run this basic scroller if we are on desktop or if the specialized scroller isn't present
+            const isHomePage = document.querySelector('.testimonial-slider-track');
+            if (testimonials.length > 0 && dots.length > 0 && (!isHomePage || window.innerWidth > 991)) {
                 setInterval(nextTestimonial, 7000);
 
                 dots.forEach((dot, index) => {

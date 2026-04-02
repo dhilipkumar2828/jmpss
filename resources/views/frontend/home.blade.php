@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'JMPSSS | Jaypee Model Senior Secondary School')
+@section('body_class', 'home-page')
 
 @push('styles')
 <style>
@@ -117,6 +118,88 @@
     .slider-prev:hover, .slider-next:hover {
         background: var(--primary-color);
         border-color: var(--primary-color);
+    }
+
+    /* Why Choose Us Centering */
+    .feature-card {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        transition: all 0.3s ease;
+    }
+    .icon-circle {
+        margin: 0 auto 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Testimonial Swipe Scroller */
+    .testimonial-slider-track {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        scroll-behavior: smooth !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important; /* Firefox */
+        -ms-overflow-style: none !important;  /* IE/Edge */
+        gap: 0 !important;
+        padding-bottom: 10px !important;
+    }
+    .testimonial-slider-track::-webkit-scrollbar {
+        display: none !important; /* Chrome/Safari */
+    }
+    .testimonial-slider-track {
+        cursor: grab;
+        user-select: none;
+    }
+    .testimonial-slider-track:active {
+        cursor: grabbing;
+    }
+    .testimonial-item {
+        flex: 0 0 100% !important;
+        display: block !important;   /* override the desktop display:none */
+        width: 100% !important;
+        scroll-snap-align: center !important;
+        scroll-snap-stop: always !important;
+        opacity: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    /* Also fix the parent overflow so scroll track isn't clipped */
+    .testimonial-main-content {
+        overflow: visible !important;
+    }
+    .testimonial-content-area {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important; 
+        overflow-wrap: break-word !important;
+        padding-left: 20px !important; /* Adjusted for better fit */
+        padding-right: 20px !important; /* Adjusted for better fit */
+    }
+    .testimonial-dots {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        margin-top: 20px !important;
+    }
+    .testimonial-dots .dot {
+        width: 10px !important;
+        height: 10px !important;
+        border-radius: 50% !important;
+        background: #ddd !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+    }
+    .testimonial-dots .dot.active {
+        background: var(--primary-color) !important;
+        width: 25px !important;
+        border-radius: 5px !important;
     }
 
     @media (max-width: 767px) {
@@ -528,6 +611,155 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Testimonial Scroller — Full Swipe Support
+    const testimonialTrack = document.querySelector('.testimonial-slider-track');
+    const testimonialDots = document.querySelectorAll('.testimonial-dots .dot');
+
+    if (testimonialTrack && testimonialDots.length > 0) {
+        let testimonialInterval = null;
+        let swipeResumeTimer = null;
+
+        // ── Helper: get current index ──
+        function getTestimonialIndex() {
+            const width = testimonialTrack.offsetWidth;
+            return Math.round(testimonialTrack.scrollLeft / width);
+        }
+
+        // ── Helper: scroll to index ──
+        function scrollToTestimonial(index) {
+            const total = testimonialDots.length;
+            index = Math.max(0, Math.min(index, total - 1));
+            testimonialTrack.scrollTo({
+                left: index * testimonialTrack.offsetWidth,
+                behavior: 'smooth'
+            });
+        }
+
+        // ── Dot Click Navigation ──
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                scrollToTestimonial(index);
+                resetAutoSlide();
+            });
+        });
+
+        // ── Scroll → Dot Sync ──
+        testimonialTrack.addEventListener('scroll', () => {
+            const index = getTestimonialIndex();
+            testimonialDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }, { passive: true });
+
+        // ── Auto Slide ──
+        function startAutoSlide() {
+            clearInterval(testimonialInterval);
+            testimonialInterval = setInterval(() => {
+                const width = testimonialTrack.offsetWidth;
+                const maxScroll = testimonialTrack.scrollWidth - width;
+                if (testimonialTrack.scrollLeft + 10 >= maxScroll) {
+                    testimonialTrack.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    testimonialTrack.scrollBy({ left: width, behavior: 'smooth' });
+                }
+            }, 8000);
+        }
+
+        function pauseAutoSlide() {
+            clearInterval(testimonialInterval);
+            clearTimeout(swipeResumeTimer);
+        }
+
+        function resetAutoSlide() {
+            pauseAutoSlide();
+            swipeResumeTimer = setTimeout(startAutoSlide, 3000);
+        }
+
+        startAutoSlide();
+
+        // ── Touch Swipe Support ──
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isDragging = false;
+
+        testimonialTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            isDragging = true;
+            pauseAutoSlide();
+        }, { passive: true });
+
+        testimonialTrack.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const dx = Math.abs(e.touches[0].clientX - touchStartX);
+            const dy = Math.abs(e.touches[0].clientY - touchStartY);
+            // If horizontal swipe is dominant, prevent page scroll
+            if (dx > dy && dx > 8) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        testimonialTrack.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const touchEndX = e.changedTouches[0].clientX;
+            const deltaX = touchStartX - touchEndX;
+            const threshold = 50; // min px to count as a swipe
+
+            if (Math.abs(deltaX) >= threshold) {
+                const currentIndex = getTestimonialIndex();
+                if (deltaX > 0) {
+                    scrollToTestimonial(currentIndex + 1); // swipe left → next
+                } else {
+                    scrollToTestimonial(currentIndex - 1); // swipe right → prev
+                }
+            }
+            resetAutoSlide();
+        }, { passive: true });
+
+        // ── Mouse Drag Support (Desktop) ──
+        let mouseStartX = 0;
+        let isMouseDragging = false;
+
+        testimonialTrack.addEventListener('mousedown', (e) => {
+            mouseStartX = e.clientX;
+            isMouseDragging = true;
+            pauseAutoSlide();
+            testimonialTrack.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isMouseDragging) return;
+            isMouseDragging = false;
+            testimonialTrack.style.cursor = '';
+
+            const deltaX = mouseStartX - e.clientX;
+            const threshold = 50;
+
+            if (Math.abs(deltaX) >= threshold) {
+                const currentIndex = getTestimonialIndex();
+                if (deltaX > 0) {
+                    scrollToTestimonial(currentIndex + 1);
+                } else {
+                    scrollToTestimonial(currentIndex - 1);
+                }
+            }
+            resetAutoSlide();
+        });
+
+        // ── Keyboard Arrow Key Support ──
+        testimonialTrack.setAttribute('tabindex', '0');
+        testimonialTrack.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') { scrollToTestimonial(getTestimonialIndex() + 1); resetAutoSlide(); }
+            if (e.key === 'ArrowLeft')  { scrollToTestimonial(getTestimonialIndex() - 1); resetAutoSlide(); }
+        });
+
+        // ── Pause on hover (desktop) ──
+        testimonialTrack.addEventListener('mouseenter', pauseAutoSlide);
+        testimonialTrack.addEventListener('mouseleave', resetAutoSlide);
+    }
+
     // Events Slider Logic (Mobile)
     const eventContainer = document.querySelector('.slider-container');
     const eventPrevBtn = document.querySelector('.slider-btn.prev');
@@ -608,5 +840,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 @endpush
 @endsection
-
-
