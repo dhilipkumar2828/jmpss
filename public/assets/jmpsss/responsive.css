@@ -2,9 +2,26 @@
 .mobile-menu-toggle,
 .mobile-nav-header,
 .mobile-submenu-toggle,
+.mobile-nav-logo-item,
 .mobile-menu-overlay,
 .mobile-header-actions {
     display: none !important;
+}
+
+/* Global Responsive Resets */
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden !important;
+    width: 100vw;
 }
 
 /*================================================
@@ -383,7 +400,7 @@
         max-height: 48px !important;
         width: auto !important;
     }
-    
+
     /* Gallery & Video Grid Stacking */
     .cat-grid, .gallery-grid, .video-year-grid, .video-grid {
         grid-template-columns: 1fr !important; /* Stack to single column on small mobile */
@@ -686,5 +703,37 @@
     }
     table {
         min-width: 600px !important; /* Ensure table doesn't squish too much */
+    }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 240px (Ultra-Narrow / Jio Phone)
+   ========================================================================== */
+@media (max-width: 240px) {
+
+    html,
+    body {
+        font-size: 13px !important;
+    }
+
+    .container {
+        padding: 0 10px !important;
+    }
+
+    .section-title {
+        font-size: 18px !important;
+    }
+
+    .hero h1 {
+        font-size: 22px !important;
+    }
+
+    .top-header-center .logo img {
+        height: 45px !important;
+    }
+
+    .top-btn {
+        padding: 6px 12px !important;
+        font-size: 11px !important;
     }
 }
