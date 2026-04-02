@@ -435,7 +435,7 @@ h4,
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100% !important;
     object-fit: cover;
     z-index: -1;
 }
@@ -455,6 +455,12 @@ h4,
     z-index: 1;
 }
 
+.hero-content p {
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+}
+
 .hero h1 {
     font-size: 56px;
     font-weight: 700;
@@ -462,7 +468,8 @@ h4,
     letter-spacing: 2px;
 }
 
-.breadcrumbs, .breadcrumb-trail {
+.breadcrumbs,
+.breadcrumb-trail {
     font-size: 15px;
     opacity: 0.95;
     display: flex;
@@ -472,23 +479,31 @@ h4,
     flex-wrap: wrap;
 }
 
-.breadcrumbs a, .breadcrumb-trail a {
+.breadcrumbs a,
+.breadcrumb-trail a {
     color: #fff;
     text-decoration: none;
     transition: var(--transition);
     opacity: 0.8;
 }
 
-.breadcrumbs a:hover, .breadcrumb-trail a:hover {
+.breadcrumbs a:hover,
+.breadcrumb-trail a:hover {
     color: var(--secondary-color);
     opacity: 1;
 }
 
-.breadcrumbs span, .breadcrumb-trail span, .breadcrumbs i, .breadcrumb-trail i {
+.breadcrumbs span,
+.breadcrumb-trail span,
+.breadcrumbs i,
+.breadcrumb-trail i {
     color: #fff;
 }
 
-.breadcrumbs a.active, .breadcrumbs span.active, .breadcrumb-trail span.active, .breadcrumb-trail span:last-child {
+.breadcrumbs a.active,
+.breadcrumbs span.active,
+.breadcrumb-trail span.active,
+.breadcrumb-trail span:last-child {
     font-weight: 700;
     color: #fff !important;
     opacity: 1;
@@ -613,6 +628,7 @@ h4,
     letter-spacing: 1.5px;
     display: block;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .about .section-title-alt {
@@ -987,7 +1003,7 @@ h4,
     justify-content: space-between;
     align-items: center;
     gap: 50px;
-    padding: 60px 0;
+    padding: 40px 0px 0px 0px;
 }
 
 .testimonial-left {
@@ -1024,6 +1040,7 @@ h4,
     flex: 1;
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .testimonial-slider-track {
@@ -1110,6 +1127,8 @@ h4,
 .testimonial-dots {
     display: flex;
     gap: 10px;
+    position: relative;
+    bottom: 5px;
 }
 
 .dot {
@@ -1561,7 +1580,7 @@ h4,
 
 .footer-event-item a:hover {
     opacity: 1;
-    color: var(--secondary-color);
+    color: rgb(225, 76, 30);
 }
 
 .footer-links ul {
@@ -1610,7 +1629,7 @@ h4,
 
 .footer-links a:hover {
     opacity: 1;
-    color: var(--secondary-color);
+    color: rgb(225, 76, 30);
 }
 
 .footer-bottom {
@@ -1628,7 +1647,7 @@ h4,
 }
 
 .footer-bottom-links a:hover {
-    color: var(--secondary-color);
+    color: rgb(225, 76, 30);
 }
 
 .footer-bottom-links span {
@@ -1659,6 +1678,7 @@ h4,
     .testimonial-right {
         flex-direction: column;
         text-align: center;
+        width: 100%;
     }
 
     .cta-card {
@@ -1678,6 +1698,11 @@ h4,
 }
 
 @media (max-width: 768px) {
+
+    .testimonial-left {
+        max-width: 100%;
+        margin-top: 20px;
+    }
 
     .grid-2,
     .footer-grid,
@@ -1723,7 +1748,7 @@ h4,
     .about .about-text {
         max-width: 100%;
         padding-right: 0;
-        margin-top: 40px;
+        margin-top: 10px;
     }
 
     .about-images-wrapper {

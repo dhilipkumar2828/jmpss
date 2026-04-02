@@ -403,6 +403,183 @@
         .lightbox-caption p {
             font-size: 13px;
             color: rgba(255, 255, 255, 0.65);
+            text-align: center;
+        }
+
+        /* ── Gallery Tabs ── */
+        .filter-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .filter-wrap {
+            display: inline-flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: #fff;
+            padding: 8px;
+            border-radius: 50px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+        }
+
+        .gallery-tab {
+            text-decoration: none !important;
+            padding: 10px 26px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid transparent;
+        }
+
+        .gallery-tab:hover {
+            color: #e14c1e;
+            background: rgba(225, 76, 30, 0.05);
+        }
+
+        .gallery-tab.active {
+            background: #004800;
+            color: #fff !important;
+            box-shadow: 0 8px 20px rgba(0, 72, 0, 0.2);
+        }
+
+        @media (max-width: 991px) {
+            .filter-container {
+                overflow: visible !important;
+            }
+            .desktop-tablet-filter {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                justify-content: flex-start !important;
+                padding: 14px 20px !important;
+                border-radius: 0 !important;
+                border: none !important;
+                width: 100vw !important;
+                margin: 0 calc(-50vw + 50%) !important;
+                scrollbar-width: none !important;
+                -webkit-overflow-scrolling: touch !important;
+                gap: 12px !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+
+            .desktop-tablet-filter::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .gallery-tab {
+                flex: 0 0 auto !important;
+                padding: 10px 22px !important;
+                background: #fff !important;
+                border: 1px solid #eee !important;
+                color: #555 !important;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.04) !important;
+            }
+            .gallery-tab.active {
+                background: #004800 !important;
+                color: #fff !important;
+                border-color: #004800 !important;
+            }
+        }
+
+        /* ── Mobile Dropdown Filter (320px - 600px) ── */
+        .mobile-filter-wrapper {
+            display: none;
+            position: relative;
+            text-align: left;
+            margin-bottom: 35px;
+            max-width: 100%;
+            overflow: visible !important;
+        }
+
+        @media (max-width: 600px) {
+            .desktop-tablet-filter { display: none !important; }
+            .mobile-filter-wrapper { display: block; }
+            
+            .mobile-filter-trigger {
+                background: #fff;
+                padding: 16px 20px;
+                border-radius: 12px;
+                border: 1px solid #eee;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                cursor: pointer;
+                font-weight: 700;
+                color: #004800;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                font-size: 15px;
+            }
+
+            .mobile-filter-list {
+                display: none;
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                right: 0;
+                background: #fff;
+                z-index: 150;
+                border-radius: 12px;
+                box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+                padding: 10px 0;
+                border: 1px solid #eee;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+                pointer-events: none;
+            }
+
+            .mobile-filter-wrapper.open .mobile-filter-list {
+                display: block;
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .mobile-filter-wrapper.open .mobile-filter-trigger {
+                border-color: #e14c1e;
+                box-shadow: 0 4px 15px rgba(225, 76, 30, 0.1);
+            }
+
+            .mobile-filter-wrapper.open .mobile-filter-trigger i:last-child {
+                transform: rotate(180deg);
+                opacity: 1;
+            }
+
+            .mobile-filter-list a {
+                display: block;
+                padding: 14px 20px;
+                color: #555;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+                border-bottom: 1px solid #f8f8f8;
+                transition: 0.2s;
+            }
+
+            .mobile-filter-list a:last-child { border-bottom: none; }
+            
+            .mobile-filter-list a.active {
+                color: #e14c1e;
+                background: rgba(225, 76, 30, 0.04);
+            }
+
+            .mobile-filter-list a:hover:not(.active) {
+                background: #f9f9f9;
+                color: #004800;
+            }
+
+            .mobile-filter-trigger i:first-child {
+                font-size: 18px;
+                color: #e14c1e;
+            }
         }
 
         /* ── Section Fade Animation ── */
@@ -451,15 +628,34 @@
     <section class="gallery-view active" style="display: block;">
         <div class="container">
 
-            <div class="filter-wrap"
-                style="margin-bottom: 40px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-                <a href="{{ route('gallery') }}" class="btn {{ !request('category') ? 'btn-primary' : 'btn-outline' }}"
-                    style="border-radius: 30px; padding: 8px 25px; {{ !request('category') ? 'background:' . $primaryColor : '' }}">All</a>
-                @foreach($categories as $cat)
-                    <a href="{{ route('gallery', ['category' => $cat]) }}"
-                        class="btn {{ request('category') == $cat ? 'btn-primary' : 'btn-outline' }}"
-                        style="border-radius: 30px; padding: 8px 25px; {{ request('category') == $cat ? 'background:' . $primaryColor : '' }}">{{ $cat }}</a>
-                @endforeach
+            <div class="filter-container">
+                {{-- Desktop/Tablet Horizontal Tabs --}}
+                <div class="filter-wrap desktop-tablet-filter">
+                    <a href="{{ route('gallery') }}" 
+                        class="gallery-tab {{ !request('category') ? 'active' : '' }}"
+                        style="{{ !request('category') ? 'background:' . $primaryColor : '' }}">All</a>
+                    @foreach($categories as $cat)
+                        <a href="{{ route('gallery', ['category' => $cat]) }}"
+                            class="gallery-tab {{ request('category') == $cat ? 'active' : '' }}"
+                            style="{{ request('category') == $cat ? 'background:' . $primaryColor : '' }}">{{ $cat }}</a>
+                    @endforeach
+                </div>
+
+                {{-- Mobile Dropdown Filter --}}
+                <div class="mobile-filter-wrapper" id="mobileFilterWrapper">
+                    <div class="mobile-filter-trigger" id="mobileFilterTrigger">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                        <span>{{ request('category') ?? 'Show All Collections' }}</span>
+                        <i class="fa-solid fa-chevron-down ms-auto" style="font-size: 13px; opacity: 0.5; transition: 0.3s;"></i>
+                    </div>
+                    <div class="mobile-filter-list" id="mobileFilterList">
+                        <a href="{{ route('gallery') }}" class="{{ !request('category') ? 'active' : '' }}">All</a>
+                        @foreach($categories as $cat)
+                            <a href="{{ route('gallery', ['category' => $cat]) }}"
+                                class="{{ request('category') == $cat ? 'active' : '' }}">{{ $cat }}</a>
+                        @endforeach
+                    </div>
+                </div>
             </div>
 
             <div class="gallery-grid">
@@ -581,6 +777,23 @@
             if (e.key === 'ArrowLeft') changePhoto(-1);
             if (e.key === 'ArrowRight') changePhoto(1);
             if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Mobile Filter Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.getElementById('mobileFilterWrapper');
+            const trigger = document.getElementById('mobileFilterTrigger');
+            
+            if(trigger && wrapper) {
+                trigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    wrapper.classList.toggle('open');
+                });
+
+                document.addEventListener('click', () => {
+                    wrapper.classList.remove('open');
+                });
+            }
         });
     </script>
 @endpush

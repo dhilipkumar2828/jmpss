@@ -128,6 +128,11 @@
         <x-ui.footer :settings="$siteSettings" />
     @endunless
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top" title="Scroll to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
@@ -181,36 +186,74 @@
                 });
             }
 
+            const testimonialTrack = document.querySelector('.testimonial-slider-track');
             const testimonials = document.querySelectorAll('.testimonial-item');
             const dots = document.querySelectorAll('.dot');
             let currentTestimonial = 0;
+            let isAutoPlaying = true;
 
             function showTestimonial(index) {
-                testimonials.forEach(item => item.classList.remove('active'));
+                if (window.innerWidth <= 991) {
+                    // Mobile/Tablet: Use scroll
+                    testimonialTrack.scrollTo({
+                        left: testimonialTrack.clientWidth * index,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // Desktop: Use active class (fade)
+                    testimonials.forEach(item => item.classList.remove('active'));
+                    testimonials[index]?.classList.add('active');
+                }
+                
                 dots.forEach(dot => dot.classList.remove('active'));
-
-                if (testimonials[index]) {
-                    testimonials[index].classList.add('active');
-                }
-                if (dots[index]) {
-                    dots[index].classList.add('active');
-                }
+                dots[index]?.classList.add('active');
+                currentTestimonial = index;
             }
 
             function nextTestimonial() {
+                if (!isAutoPlaying) return;
                 currentTestimonial = (currentTestimonial + 1) % testimonials.length;
                 showTestimonial(currentTestimonial);
             }
 
             if (testimonials.length > 0 && dots.length > 0) {
-                setInterval(nextTestimonial, 7000);
+                let interval = setInterval(nextTestimonial, 5000);
 
+                // Dot clicks
                 dots.forEach((dot, index) => {
                     dot.addEventListener('click', () => {
-                        currentTestimonial = index;
-                        showTestimonial(currentTestimonial);
+                        isAutoPlaying = false;
+                        showTestimonial(index);
+                        clearInterval(interval);
+                        interval = setInterval(nextTestimonial, 5000);
+                        setTimeout(() => isAutoPlaying = true, 5000);
                     });
                 });
+
+                // Sync dots on scroll (touch-swipe)
+                if (testimonialTrack) {
+                    testimonialTrack.addEventListener('scroll', () => {
+                        if (window.innerWidth <= 991) {
+                            const scrollLeft = testimonialTrack.scrollLeft;
+                            const width = testimonialTrack.clientWidth;
+                            const index = Math.round(scrollLeft / width);
+                            
+                            if (index !== currentTestimonial && index < dots.length) {
+                                currentTestimonial = index;
+                                dots.forEach(dot => dot.classList.remove('active'));
+                                dots[index]?.classList.add('active');
+                            }
+                        }
+                    }, { passive: true });
+
+                    // Pause auto-play on touch
+                    testimonialTrack.addEventListener('touchstart', () => {
+                        isAutoPlaying = false;
+                    });
+                    testimonialTrack.addEventListener('touchend', () => {
+                        setTimeout(() => isAutoPlaying = true, 5000);
+                    });
+                }
             }
 
             const popup = document.getElementById('admissionPopup');
@@ -372,6 +415,25 @@
                     flashWrap.remove();
                 }, 320);
             }, 3500);
+
+            // Scroll to Top Logic
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (scrollBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 400) {
+                        scrollBtn.classList.add('visible');
+                    } else {
+                        scrollBtn.classList.remove('visible');
+                    }
+                });
+
+                scrollBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
         });
     </script>
 

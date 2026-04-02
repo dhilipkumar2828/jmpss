@@ -149,6 +149,14 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             display: block;
         }
+        @media (max-width: 780px) {
+             .story-classic-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 20px;
+            align-items: center;
+        }
+        } 
 </style>
 @endpush
 

@@ -79,6 +79,7 @@
             grid-template-columns: 1fr 320px;
             gap: 60px;
             align-items: start;
+            margin-top: 30px;
         }
 
         .corr-message h2 {
@@ -183,6 +184,11 @@
         .corr-photo i {
             font-size: 75px;
             color: rgba(255, 255, 255, 0.45);
+        }
+        .corr-photo img {
+            width: 100%;
+            height: 100% !important;
+            object-fit: cover;
         }
 
         .corr-card h3 {
@@ -574,7 +580,7 @@
         @media (max-width: 991px) {
             .story-classic-grid {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                gap: 10px;
             }
 
             .sc-content {

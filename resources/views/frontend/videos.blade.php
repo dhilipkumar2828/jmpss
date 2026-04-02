@@ -228,6 +228,9 @@
             inset: 0;
             width: 100%;
             height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #videoPlaceholder iframe {
@@ -366,8 +369,8 @@
 
         .close-modal-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 5px;
+            right: 0px;
             width: 40px;
             height: 40px;
             background: rgba(255,255,255,0.1);
@@ -413,28 +416,140 @@
         .player-nav-next { right: 20px; }
 
         @media (max-width: 991px) {
-            .cat-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .category-view {
+                padding: 40px 0 80px;
             }
-            .video-modal-container {
-                flex-direction: column;
-                height: 90vh;
+            .desktop-tablet-filter {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                justify-content: flex-start !important;
+                padding: 14px 20px !important;
+                border-radius: 0 !important;
+                border: none !important;
+                width: 100vw !important;
+                margin: 0 calc(-50vw + 50%) !important;
+                scrollbar-width: none !important;
+                -webkit-overflow-scrolling: touch !important;
+                gap: 12px !important;
+                background: transparent !important;
+                box-shadow: none !important;
             }
-            .modal-playlist-sidebar {
-                width: 100%;
-                height: 250px;
-                border-left: none;
-                border-top: 1px solid #333;
+
+            .desktop-tablet-filter::-webkit-scrollbar {
+                display: none !important;
             }
-            .modal-player-footer { padding: 15px 20px; }
+
+            .gallery-tab {
+                flex: 0 0 auto !important;
+                padding: 10px 22px !important;
+                background: #fff !important;
+                border: 1px solid #eee !important;
+                color: #555 !important;
+                border-radius: 40px !important;
+                text-decoration: none !important;
+                font-size: 14px !important;
+                font-weight: 600 !important;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.04) !important;
+            }
+            .gallery-tab.active {
+                background: #004800 !important;
+                color: #fff !important;
+                border-color: #004800 !important;
+            }
+        }
+
+        /* ── Mobile Dropdown Filter (320px - 600px) ── */
+        .mobile-filter-wrapper {
+            display: none;
+            position: relative;
+            text-align: left;
+            margin-bottom: 35px;
+            max-width: 100%;
+            overflow: visible !important;
         }
 
         @media (max-width: 600px) {
-            .cat-grid {
-                grid-template-columns: 1fr;
+            .desktop-tablet-filter { display: none !important; }
+            .mobile-filter-wrapper { display: block; }
+            
+            .mobile-filter-trigger {
+                background: #fff;
+                padding: 16px 20px;
+                border-radius: 12px;
+                border: 1px solid #eee;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                cursor: pointer;
+                font-weight: 700;
+                color: #004800;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                font-size: 15px;
             }
-            .video-modal-container { width: 100%; border-radius: 0; height: 100vh; }
-            .modal-playlist-sidebar { height: 35%; }
+
+            .mobile-filter-list {
+                display: none;
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                right: 0;
+                background: #fff;
+                z-index: 1500;
+                border-radius: 12px;
+                box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+                padding: 10px 0;
+                border: 1px solid #eee;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+                pointer-events: none;
+            }
+
+            .mobile-filter-wrapper.open .mobile-filter-list {
+                display: block;
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .mobile-filter-wrapper.open .mobile-filter-trigger {
+                border-color: #e14c1e;
+                box-shadow: 0 4px 15px rgba(225, 76, 30, 0.1);
+            }
+
+            .mobile-filter-wrapper.open .mobile-filter-trigger i:last-child {
+                transform: rotate(180deg);
+                opacity: 1;
+            }
+
+            .mobile-filter-list a {
+                display: block;
+                padding: 14px 20px;
+                color: #555;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+                border-bottom: 1px solid #f8f8f8;
+                transition: 0.2s;
+            }
+
+            .mobile-filter-list a:last-child { border-bottom: none; }
+            
+            .mobile-filter-list a.active {
+                color: #e14c1e;
+                background: rgba(225, 76, 30, 0.04);
+            }
+
+            .mobile-filter-list a:hover:not(.active) {
+                background: #f9f9f9;
+                color: #004800;
+            }
+
+            .mobile-filter-trigger i:first-child {
+                font-size: 18px;
+                color: #e14c1e;
+            }
         }
 
         /* ── Page Fade View ── */
@@ -472,14 +587,37 @@
     </section>
 
     <!-- ── Video Gallery View ── -->
-    <section class="category-view" style="display: block; background: #fff; padding-top: 60px;">
+    <section class="category-view1" style="display: block; background: #fff; padding-top: 60px;">
         <div class="container">
             
-            <div class="filter-wrap" style="margin-bottom: 40px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-                <a href="{{ route('videos') }}" class="btn {{ !request('category') ? 'btn-primary' : 'btn-outline' }}" style="border-radius: 30px; padding: 8px 25px; {{ !request('category') ? 'background:'.$primaryColor : '' }}">All</a>
-                @foreach($categories as $cat)
-                    <a href="{{ route('videos', ['category' => $cat]) }}" class="btn {{ request('category') == $cat ? 'btn-primary' : 'btn-outline' }}" style="border-radius: 30px; padding: 8px 25px; {{ request('category') == $cat ? 'background:'.$primaryColor : '' }}">{{ $cat }}</a>
-                @endforeach
+            <div class="filter-container" style="text-align: center; margin-bottom: 50px; overflow: visible !important;">
+                {{-- Desktop/Tablet Horizontal Tabs --}}
+                <div class="filter-wrap desktop-tablet-filter">
+                    <a href="{{ route('videos') }}" 
+                        class="gallery-tab {{ !request('category') ? 'active' : '' }}"
+                        style="{{ !request('category') ? 'background:' . $primaryColor : '' }}">All</a>
+                    @foreach($categories as $cat)
+                        <a href="{{ route('videos', ['category' => $cat]) }}"
+                            class="gallery-tab {{ request('category') == $cat ? 'active' : '' }}"
+                            style="{{ request('category') == $cat ? 'background:' . $primaryColor : '' }}">{{ $cat }}</a>
+                    @endforeach
+                </div>
+
+                {{-- Mobile Dropdown Filter --}}
+                <div class="mobile-filter-wrapper" id="mobileFilterWrapper">
+                    <div class="mobile-filter-trigger" id="mobileFilterTrigger">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                        <span>{{ request('category') ?? 'Show All Collections' }}</span>
+                        <i class="fa-solid fa-chevron-down ms-auto" style="font-size: 13px; opacity: 0.5; transition: 0.3s;"></i>
+                    </div>
+                    <div class="mobile-filter-list" id="mobileFilterList">
+                        <a href="{{ route('videos') }}" class="{{ !request('category') ? 'active' : '' }}">All</a>
+                        @foreach($categories as $cat)
+                            <a href="{{ route('videos', ['category' => $cat]) }}"
+                                class="{{ request('category') == $cat ? 'active' : '' }}">{{ $cat }}</a>
+                        @endforeach
+                    </div>
+                </div>
             </div>
 
             <div class="cat-grid">
@@ -687,6 +825,23 @@
         if (e.key === 'ArrowLeft') changeVideo(-1);
         if (e.key === 'ArrowRight') changeVideo(1);
         if (e.key === 'Escape') closeVideoModal();
+    });
+
+    // Mobile Filter Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const wrapper = document.getElementById('mobileFilterWrapper');
+        const trigger = document.getElementById('mobileFilterTrigger');
+        
+        if(trigger && wrapper) {
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                wrapper.classList.toggle('open');
+            });
+
+            document.addEventListener('click', () => {
+                wrapper.classList.remove('open');
+            });
+        }
     });
 </script>
 @endpush

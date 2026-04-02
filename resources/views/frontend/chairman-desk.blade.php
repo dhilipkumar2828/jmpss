@@ -109,6 +109,12 @@
             color: rgba(255, 255, 255, 0.45);
         }
 
+        .chairman-photo img {
+            width: 100%;
+            height: 100% !important;
+            object-fit: cover;
+        }
+
         .chairman-card h3 {
             font-size: 21px;
             font-weight: 700;
