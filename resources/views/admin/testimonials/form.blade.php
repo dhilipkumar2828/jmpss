@@ -31,21 +31,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Avatar / Photo</label>
-                    <div style="display: flex; gap: 20px; align-items: start;">
-                        @if(isset($testimonial) && $testimonial->avatar)
-                            <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 1px solid var(--border);">
-                                <img src="{{ asset($testimonial->avatar) }}" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                        @endif
-                        <div style="flex: 1;">
-                            <input type="file" name="avatar" class="form-control @error('avatar') error-field @enderror" accept="image/*">
-                            <p class="form-text">Optional. Profile photo. Max: 2MB.</p>
-                            @error('avatar') <div class="error-msg">{{ $message }}</div> @enderror
-                        </div>
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label class="form-label">Testimonial Content <span class="required-asterisk">*</span></label>
                     <textarea name="content" class="form-control @error('content') error-field @enderror" rows="5" placeholder="What they said about JMPSSSS..." required>{{ old('content', $testimonial->content ?? '') }}</textarea>
