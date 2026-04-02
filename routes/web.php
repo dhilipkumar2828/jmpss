@@ -71,6 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('testimonials', AdminTestimonialController::class);
 
         // Banners
+        Route::get('banners/check-availability', [App\Http\Controllers\Admin\BannerController::class, 'checkAvailability'])->name('banners.check-availability');
         Route::resource('banners', App\Http\Controllers\Admin\BannerController::class);
 
         // Profile

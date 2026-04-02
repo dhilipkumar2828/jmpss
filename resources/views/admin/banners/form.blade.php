@@ -37,6 +37,9 @@
                         <option value="careers" {{ old('page', $banner->page ?? '') == 'careers' ? 'selected' : '' }}>Careers</option>
                         <option value="contact" {{ old('page', $banner->page ?? '') == 'contact' ? 'selected' : '' }}>Contact Us</option>
                     </select>
+                    <p class="form-text" style="font-size: 12px; color: var(--text-muted); margin-top: 5px;">
+                        <i class="fas fa-info-circle"></i> Only the <strong>Home Page</strong> can have multiple banners (slider). All other pages only support <strong>one</strong> banner.
+                    </p>
                     @error('page')
                         <div class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ $message }}</div>
                     @enderror
@@ -139,6 +142,30 @@ function previewFile(input) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script>
 $(document).ready(function() {
+    // Check banner availability on page selection
+    $('select[name="page"]').on('change', function() {
+        const page = $(this).val();
+        const bannerId = "{{ $banner->id ?? '' }}";
+        
+        if (page && page !== 'home') {
+            $.get("{{ route('admin.banners.check-availability') }}", { page: page, id: bannerId }, function(response) {
+                if (response.exists) {
+                    toastr.error('This page already has an active banner. Only one banner is allowed per page (except Home).', 'Duplicate Banner');
+                    $('select[name="page"]').addClass('error-field');
+                    if ($('#duplicate-msg').length === 0) {
+                        $('select[name="page"]').after('<div id="duplicate-msg" class="error-msg"><i class="fas fa-exclamation-triangle"></i> This page already has a banner image!</div>');
+                    }
+                } else {
+                    $('select[name="page"]').removeClass('error-field');
+                    $('#duplicate-msg').remove();
+                }
+            });
+        } else {
+            $('select[name="page"]').removeClass('error-field');
+            $('#duplicate-msg').remove();
+        }
+    });
+
     $('#banner-form').validate({
         rules: {
             page: { required: true },
