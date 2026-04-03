@@ -1442,7 +1442,7 @@ h4,
 }
 
 .footer-logo img {
-    height: 100px;
+    height: 100px !important;
     border-radius: 50px;
 }
 
