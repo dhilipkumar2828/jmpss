@@ -415,7 +415,28 @@
         .player-nav-prev { left: 20px; }
         .player-nav-next { right: 20px; }
 
-        @media (max-width: 991px) {
+         .desktop-tablet-filter {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                justify-content: center !important;
+                padding: 14px 20px !important;
+                border-radius: 0 !important;
+                border: none !important;
+                width: 100vw !important;
+                margin: 0 calc(-50vw + 50%) !important;
+                scrollbar-width: none !important;
+                -webkit-overflow-scrolling: touch !important;
+                gap: 12px !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+
+            .desktop-tablet-filter::-webkit-scrollbar {
+                display: block !important;
+            }
+
+        @media (max-width: 1800px) {
             .category-view {
                 padding: 40px 0 80px;
             }
@@ -423,7 +444,7 @@
                 display: flex !important;
                 flex-wrap: nowrap !important;
                 overflow-x: auto !important;
-                justify-content: flex-start !important;
+                justify-content: center !important;
                 padding: 14px 20px !important;
                 border-radius: 0 !important;
                 border: none !important;
