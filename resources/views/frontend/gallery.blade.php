@@ -340,7 +340,7 @@
 
         .lightbox-content img {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 50vh;
             border-radius: 8px;
             box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
         }
@@ -403,7 +403,7 @@
         .lightbox-caption p {
             font-size: 13px;
             color: rgba(255, 255, 255, 0.65);
-            text-align: center;
+            text-align: center !important;
         }
 
         /* ── Gallery Tabs ── */
@@ -457,7 +457,7 @@
                 display: flex !important;
                 flex-wrap: nowrap !important;
                 overflow-x: auto !important;
-                justify-content: flex-start !important;
+                justify-content: center !important;
                 padding: 14px 20px !important;
                 border-radius: 0 !important;
                 border: none !important;
@@ -719,8 +719,8 @@
 
             <div class="lightbox-caption">
                 <h4 id="lightboxTitle"></h4>
-                <p id="lightboxCategory"></p>
-                <div id="photoCounter" style="font-size: 11px; margin-top: 5px; opacity: 0.7;"></div>
+                <p id="lightboxCategory" class="para-text"></p>
+                <div id="photoCounter"  style="font-size: 11px; margin-top: 5px; opacity: 0.7;"></div>
             </div>
         </div>
     </div>
