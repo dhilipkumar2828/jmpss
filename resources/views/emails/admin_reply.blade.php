@@ -21,7 +21,7 @@
         <div class="content">
             <h2>Response to your {{ $type }} Inquiry</h2>
             <p>Hi <strong>{{ $name }}</strong>,</p>
-            <p>Thank you for contacting **Jeeva Memorial Public Senior Secondary School (JMPSS)**. Our administration team has reviewed your inquiry and has provided the following response:</p>
+            <p>Thank you for contacting **Jeeva Memorial Public Senior Secondary School (JMPSSS)**. Our administration team has reviewed your inquiry and has provided the following response:</p>
             
             <div class="message-box">
                 {!! nl2br(e($replyMessage)) !!}
@@ -29,11 +29,11 @@
             
             <p>If you have any further questions, please feel free to reply to this email or visit our campus.</p>
             
-            <p>Regards,<br><strong>JMPSS Admin Team</strong></p>
+            <p>Regards,<br><strong>JMPSSS Admin Team</strong></p>
         </div>
         <div class="footer">
-            <p>Jeeva Memorial Public Senior Secondary School (JMPSS)</p>
-            <p>&copy; {{ date('Y') }} JMPSS. All rights reserved.</p>
+            <p>Jeeva Memorial Public Senior Secondary School (JMPSSS)</p>
+            <p>&copy; {{ date('Y') }} JMPSSS. All rights reserved.</p>
         </div>
     </div>
 </body>

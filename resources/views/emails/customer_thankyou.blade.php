@@ -30,9 +30,8 @@
             <a href="{{ url('/') }}" class="button">Visit Our Campus Website</a>
         </div>
         <div class="footer">
-            <p><strong>Jeeva Memorial Public Senior Secondary School (JMPSS)</strong></p>
-            <p>Mudichur, Chennai, Tamil Nadu</p>
-            <p>&copy; {{ date('Y') }} JMPSS. All rights reserved.</p>
+            <p><strong>Jeeva Memorial Public Senior Secondary School (JMPSSS)</strong></p>
+            <p>&copy; {{ date('Y') }} JMPSSS. All rights reserved.</p>
         </div>
     </div>
 </body>
