@@ -121,7 +121,7 @@
                 </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 20px;">
+            {{-- <div class="form-group" style="margin-bottom: 20px;">
                 <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
                     Select Events
                     <span id="event-count" class="badge badge-info shadow-sm" style="font-size: 11px; padding: 4px 10px;">0 selected</span>
@@ -146,7 +146,7 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
+            </div> --}}
             
             <input type="hidden" name="subject" value="">
             
