@@ -45,10 +45,13 @@
                         </td>
                         <td>
                             <div style="display: flex; gap: 8px;">
+                                <a href="{{ route('admin.careers.show', $app->id) }}" class="btn btn-primary btn-sm" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                                 <form action="{{ route('admin.careers.destroy', $app->id) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>

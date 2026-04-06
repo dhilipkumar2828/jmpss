@@ -7,6 +7,9 @@ use App\Models\CareerApplication;
 use App\Models\VisitRequest;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminInquiryMail;
+use App\Mail\CustomerInquiryMail;
 
 class InquiryController extends Controller
 {
@@ -23,7 +26,15 @@ class InquiryController extends Controller
             'address' => 'nullable|string',
         ]);
 
-        Admission::create($request->all());
+        $admission = Admission::create($request->all());
+
+        // Send Emails
+        try {
+            Mail::to(config('mail.from.address'))->send(new AdminInquiryMail('Admission', $request->all()));
+            Mail::to($request->email)->send(new CustomerInquiryMail('Admission', $request->all()));
+        } catch (\Exception $e) {
+            // Log error or handle silently
+        }
 
         return back()->with('success', 'Admission enquiry submitted successfully!');
     }
@@ -48,7 +59,15 @@ class InquiryController extends Controller
             $data['resume_path'] = 'uploads/resumes/' . $filename;
         }
 
-        CareerApplication::create($data);
+        $application = CareerApplication::create($data);
+
+        // Send Emails
+        try {
+            Mail::to(config('mail.from.address'))->send(new AdminInquiryMail('Career', $data));
+            Mail::to($request->email)->send(new CustomerInquiryMail('Career', $data));
+        } catch (\Exception $e) {
+            // Log error or handle silently
+        }
 
         return back()->with('success', 'Application submitted successfully!');
     }
@@ -64,7 +83,15 @@ class InquiryController extends Controller
             'purpose' => 'nullable|string',
         ]);
 
-        VisitRequest::create($request->all());
+        $visit = VisitRequest::create($request->all());
+
+        // Send Emails
+        try {
+            Mail::to(config('mail.from.address'))->send(new AdminInquiryMail('Campus Visit', $request->all()));
+            Mail::to($request->email)->send(new CustomerInquiryMail('Campus Visit', $request->all()));
+        } catch (\Exception $e) {
+            // Log error or handle silently
+        }
 
         return back()->with('success', 'Campus visit scheduled successfully!');
     }
@@ -79,7 +106,15 @@ class InquiryController extends Controller
             'message' => 'required|string',
         ]);
 
-        ContactMessage::create($request->all());
+        $contact = ContactMessage::create($request->all());
+
+        // Send Emails
+        try {
+            Mail::to(config('mail.from.address'))->send(new AdminInquiryMail('Contact', $request->all()));
+            Mail::to($request->email)->send(new CustomerInquiryMail('Contact', $request->all()));
+        } catch (\Exception $e) {
+            // Log error or handle silently
+        }
 
         return back()->with('success', 'Your message has been sent successfully!');
     }

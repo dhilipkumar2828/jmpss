@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CareerApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminReplyMail;
 
 class CareerApplicationController extends Controller
 {
@@ -30,5 +32,17 @@ class CareerApplicationController extends Controller
 
         $application->delete();
         return back()->with('success', 'Career application deleted successfully.');
+    }
+
+    public function reply(Request $request, $id)
+    {
+        $request->validate(['message' => 'required|string']);
+        $application = CareerApplication::findOrFail($id);
+        try {
+            Mail::to($application->email)->send(new AdminReplyMail('Career application', $application->name, $request->message));
+            return back()->with('success', 'Reply sent successfully to ' . $application->email);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to send email: ' . $e->getMessage());
+        }
     }
 }

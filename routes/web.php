@@ -81,18 +81,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // New Inquiry Management
         Route::get('admissions', [App\Http\Controllers\Admin\AdmissionController::class, 'index'])->name('admissions.index');
         Route::get('admissions/{id}', [App\Http\Controllers\Admin\AdmissionController::class, 'show'])->name('admissions.show');
+        Route::post('admissions/{id}/reply', [App\Http\Controllers\Admin\AdmissionController::class, 'reply'])->name('admissions.reply');
         Route::delete('admissions/{id}', [App\Http\Controllers\Admin\AdmissionController::class, 'destroy'])->name('admissions.destroy');
 
         Route::get('careers', [App\Http\Controllers\Admin\CareerApplicationController::class, 'index'])->name('careers.index');
         Route::get('careers/{id}', [App\Http\Controllers\Admin\CareerApplicationController::class, 'show'])->name('careers.show');
+        Route::post('careers/{id}/reply', [App\Http\Controllers\Admin\CareerApplicationController::class, 'reply'])->name('careers.reply');
         Route::delete('careers/{id}', [App\Http\Controllers\Admin\CareerApplicationController::class, 'destroy'])->name('careers.destroy');
 
         Route::get('visit-requests', [App\Http\Controllers\Admin\VisitRequestController::class, 'index'])->name('visit-requests.index');
         Route::get('visit-requests/{id}', [App\Http\Controllers\Admin\VisitRequestController::class, 'show'])->name('visit-requests.show');
+        Route::post('visit-requests/{id}/reply', [App\Http\Controllers\Admin\VisitRequestController::class, 'reply'])->name('visit-requests.reply');
         Route::delete('visit-requests/{id}', [App\Http\Controllers\Admin\VisitRequestController::class, 'destroy'])->name('visit-requests.destroy');
 
         Route::get('contact-messages', [App\Http\Controllers\Admin\ContactMessageController::class, 'index'])->name('contact-messages.index');
         Route::get('contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show'])->name('contact-messages.show');
+        Route::post('contact-messages/{id}/reply', [App\Http\Controllers\Admin\ContactMessageController::class, 'reply'])->name('contact-messages.reply');
         Route::delete('contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
 
         // User Management
