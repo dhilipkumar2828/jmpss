@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Child Name</label>
-                        <input type="text" name="child_name" id="child_name" class="form-control" placeholder="Full name of student">
+                        <input type="text" name="child_name" id="child_name" class="form-control alphabets-only" placeholder="Full name of student">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -50,21 +50,21 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Father / Guardian Name</label>
-                        <input type="text" name="father_name" class="form-control">
+                        <input type="text" name="father_name" class="form-control alphabets-only">
                     </div>
                     <div class="form-group">
                         <label>Father Mobile Number</label>
-                        <input type="text" name="father_mobile" class="form-control">
+                        <input type="text" name="father_mobile" class="form-control numbers-only" maxlength="10">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Mother Name</label>
-                        <input type="text" name="mother_name" class="form-control">
+                        <input type="text" name="mother_name" class="form-control alphabets-only">
                     </div>
                     <div class="form-group">
                         <label>Mother Mobile Number</label>
-                        <input type="text" name="mother_mobile" class="form-control">
+                        <input type="text" name="mother_mobile" class="form-control numbers-only" maxlength="10">
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>WhatsApp Number</label>
-                        <input type="text" name="whatsapp_number" class="form-control">
+                        <input type="text" name="whatsapp_number" class="form-control numbers-only" maxlength="10">
                     </div>
                 </div>
             </div>
@@ -103,6 +103,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
 <script>
     $(document).ready(function() {
+        // Real-time Input Sanitization
+        $(document).on('input', '.numbers-only', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        $(document).on('input', '.alphabets-only', function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
         // Dependent Dropdown for Sections
         $('#standard-select').on('change', function() {
             let standard = $(this).val();
