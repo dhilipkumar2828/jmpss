@@ -44,13 +44,29 @@
             <p style="font-size: 16px; color: var(--text); line-height: 1.6;">{{ $visit->purpose ?? 'No purpose mentioned' }}</p>
         </div>
 
-        <div style="margin-top: 40px; display: flex; gap: 15px;">
-            <form action="{{ route('admin.visit-requests.destroy', $visit->id) }}" method="POST" id="delete-form">
+        <div style="margin-top: 40px; border-top: 1px solid var(--border); padding-top: 40px;">
+            <h4 style="color: var(--primary); margin-bottom: 20px; font-weight: 700;">
+                <i class="fas fa-reply"></i> Send Response to Visitor
+            </h4>
+            <form action="{{ route('admin.visit-requests.reply', $visit->id) }}" method="POST">
+                @csrf
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; text-transform: uppercase;">Message Body</label>
+                    <textarea name="message" rows="5" class="form-control" style="width: 100%; border-radius: 12px; border: 1px solid var(--border); padding: 15px; font-size: 15px;" placeholder="Type your response here..." required></textarea>
+                </div>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <button type="submit" class="btn btn-primary" style="background: var(--primary); color: white; padding: 12px 30px; border-radius: 30px; border: none; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 72, 0, 0.2);">
+                        <i class="fas fa-paper-plane"></i> Send Reply
+                    </button>
+                    
+                    <button type="button" class="btn btn-outline-danger" onclick="confirmDelete()" style="border-radius: 30px; padding: 12px 25px;">
+                        <i class="fas fa-trash"></i> Delete Request
+                    </button>
+                </div>
+            </form>
+            <form action="{{ route('admin.visit-requests.destroy', $visit->id) }}" method="POST" id="delete-form" style="display: none;">
                 @csrf
                 @method('DELETE')
-                <button type="button" class="btn btn-danger" onclick="confirmDelete()">
-                    <i class="fas fa-trash"></i> Delete Request
-                </button>
             </form>
         </div>
     </div>

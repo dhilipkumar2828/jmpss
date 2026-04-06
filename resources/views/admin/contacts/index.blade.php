@@ -33,10 +33,13 @@
                         <td title="{{ $message->message }}">{{ Str::limit($message->message, 50) }}</td>
                         <td>
                             <div style="display: flex; gap: 8px;">
+                                <a href="{{ route('admin.contact-messages.show', $message->id) }}" class="btn btn-primary btn-sm" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                                 <form action="{{ route('admin.contact-messages.destroy', $message->id) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
