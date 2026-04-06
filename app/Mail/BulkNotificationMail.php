@@ -29,7 +29,8 @@ class BulkNotificationMail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->subject)
+        $finalSubject = !empty($this->subject) ? $this->subject : 'Events Update';
+        return $this->subject($finalSubject)
                     ->view('emails.bulk_manual')
                     ->with([
                         'name' => $this->name,
