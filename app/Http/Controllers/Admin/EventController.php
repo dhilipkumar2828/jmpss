@@ -147,11 +147,12 @@ class EventController extends Controller
         if (!empty($all_event_ids)) {
             $events = Event::whereIn('id', $all_event_ids)->get();
             if(count($events) > 0) {
-                // Determine subject if it wasn't manually provided or if we're switching logic
-                $subject = $request->subject;
-                if (!empty($dropdown_event_ids) && count($dropdown_event_ids) > 0) {
-                    if (count($dropdown_event_ids) == 1) {
-                        $subject = $events->where('id', $dropdown_event_ids[0])->first()->title;
+                // Determine subject if it wasn't manually provided
+                $subject = !empty($request->subject) ? $request->subject : 'Events Update';
+                
+                if (count($all_event_ids) > 0) {
+                    if (count($all_event_ids) == 1) {
+                        $subject = $events->where('id', $all_event_ids[0])->first()->title;
                     } else {
                         $subject = "School Events Update";
                     }
@@ -165,7 +166,7 @@ class EventController extends Controller
                 $eventDetails .= "</ul>";
             }
         } else {
-            $subject = $request->subject ?? 'School Update';
+            $subject = !empty($request->subject) ? $request->subject : 'Events Update';
         }
         
         $finalMessage = $request->message . $eventDetails;
