@@ -13,6 +13,7 @@
         $brandGold = '#c5a059';
     @endphp
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -288,6 +289,20 @@
         </li> --}}
     </ul>
 
+    <span class="sidebar-section-label">Student Management</span>
+    <ul class="sidebar-nav">
+        <li>
+            <a href="{{ route('admin.categories.index') }}" class="{{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
+                <i class="fas fa-tags"></i> Category
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.students.index') }}" class="{{ request()->routeIs('admin.students.*') ? 'active' : '' }}">
+                <i class="fas fa-users-viewfinder"></i> Student Registrations
+            </a>
+        </li>
+    </ul>
+
     <span class="sidebar-section-label">Content</span>
     <ul class="sidebar-nav">
 
@@ -413,6 +428,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
 // Toastr Setup

@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="footer">
-            <p>&copy; {{ date('Y') }} Jeeva Memorial Public Senior Secondary School (JMPSS). All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} Jeeva Memorial Public Senior Secondary School (JMPSSS). All rights reserved.</p>
         </div>
     </div>
 </body>

@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\AwardController as AdminAwardController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +65,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Events
         Route::resource('events', AdminEventController::class);
+        Route::post('events/send-bulk-mail', [AdminEventController::class, 'sendBulkMail'])->name('events.send-bulk-mail');
 
         // Awards
         Route::resource('awards', AdminAwardController::class);
@@ -98,6 +101,27 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show'])->name('contact-messages.show');
         Route::post('contact-messages/{id}/reply', [App\Http\Controllers\Admin\ContactMessageController::class, 'reply'])->name('contact-messages.reply');
         Route::delete('contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
+
+        // Student Management
+        Route::resource('categories', CategoryController::class)->names([
+            'index' => 'categories.index',
+            'create' => 'categories.create',
+            'store' => 'categories.store',
+            'show' => 'categories.show',
+            'edit' => 'categories.edit',
+            'update' => 'categories.update',
+            'destroy' => 'categories.destroy',
+        ]);
+        Route::resource('students', StudentController::class)->names([
+            'index' => 'students.index',
+            'create' => 'students.create',
+            'store' => 'students.store',
+            'show' => 'students.show',
+            'edit' => 'students.edit',
+            'update' => 'students.update',
+            'destroy' => 'students.destroy',
+        ]);
+        Route::get('get-sections/{standard}', [StudentController::class, 'getSections'])->name('get-sections');
 
         // User Management
         Route::get('users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
