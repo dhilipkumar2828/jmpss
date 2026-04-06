@@ -105,6 +105,14 @@ class StudentController extends Controller
     public function getSections($standard)
     {
         $standards = explode(',', $standard);
+        
+        // If it's a single standard, return IDs for the student registration form
+        if (count($standards) === 1) {
+            $categories = Category::where('standard', $standards[0])->get(['id', 'section']);
+            return response()->json($categories);
+        }
+
+        // If multiple standards, return distinct section names for the bulk mail filter
         $sections = Category::whereIn('standard', $standards)
             ->select('section')
             ->distinct()
