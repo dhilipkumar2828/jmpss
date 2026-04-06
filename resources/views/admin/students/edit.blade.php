@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Child Name</label>
-                        <input type="text" name="child_name" class="form-control" value="{{ $student->child_name }}">
+                        <input type="text" name="child_name" class="form-control alphabets-only" value="{{ $student->child_name }}">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -54,21 +54,21 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Father / Guardian Name</label>
-                        <input type="text" name="father_name" class="form-control" value="{{ $student->father_name }}">
+                        <input type="text" name="father_name" class="form-control alphabets-only" value="{{ $student->father_name }}">
                     </div>
                     <div class="form-group">
                         <label>Father Mobile Number</label>
-                        <input type="text" name="father_mobile" class="form-control" value="{{ $student->father_mobile }}">
+                        <input type="text" name="father_mobile" class="form-control numbers-only" value="{{ $student->father_mobile }}" maxlength="10">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Mother Name</label>
-                        <input type="text" name="mother_name" class="form-control" value="{{ $student->mother_name }}">
+                        <input type="text" name="mother_name" class="form-control alphabets-only" value="{{ $student->mother_name }}">
                     </div>
                     <div class="form-group">
                         <label>Mother Mobile Number</label>
-                        <input type="text" name="mother_mobile" class="form-control" value="{{ $student->mother_mobile }}">
+                        <input type="text" name="mother_mobile" class="form-control numbers-only" value="{{ $student->mother_mobile }}" maxlength="10">
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>WhatsApp Number</label>
-                        <input type="text" name="whatsapp_number" class="form-control" value="{{ $student->whatsapp_number }}">
+                        <input type="text" name="whatsapp_number" class="form-control numbers-only" value="{{ $student->whatsapp_number }}" maxlength="10">
                     </div>
                 </div>
             </div>
@@ -107,6 +107,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
 <script>
     $(document).ready(function() {
+        // Real-time Input Sanitization
+        $(document).on('input', '.numbers-only', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        $(document).on('input', '.alphabets-only', function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
         // Custom method for alphabets only
         $.validator.addMethod("lettersonly", function(value, element) {
             return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
