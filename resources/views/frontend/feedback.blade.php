@@ -220,6 +220,23 @@
                 height: 30px;
             }
         }
+
+        /* Error Text Styling */
+        .text-danger {
+            color: #ef4444 !important;
+            font-weight: 500;
+        }
+
+        /* Invalid Input Styling */
+        .form-control-prime.is-invalid {
+            border-color: #ef4444 !important;
+            background-color: #fffafb !important;
+        }
+
+        /* Valid Input Styling (Optional) */
+        .form-control-prime.is-valid {
+            border-color: #10b981 !important;
+        }
     </style>
 @endpush
 
@@ -232,7 +249,7 @@
                     <p>Help us elevate our educational excellence.</p>
                 </div>
                 <div class="card-body-prime">
-                    <form action="{{ route('feedback.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="feedbackForm" action="{{ route('feedback.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-grid">
                             <!-- Name Field -->
@@ -240,11 +257,11 @@
                                 <label for="name">Full Name <span style="color:red">*</span></label>
                                 <div class="input-wrapper">
                                     <input type="text" class="form-control-prime" id="name" name="name"
-                                        placeholder="Enter the name" pattern="^[A-Za-z\s]+$" 
-                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                                        title="Please enter a valid name (letters and spaces only, no numbers)" required>
+                                        placeholder="Enter the name" value="{{ old('name') }}" 
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" required>
                                     <i class="fa-solid fa-user-graduate"></i>
                                 </div>
+                                @error('name') <span class="text-danger small">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Email Field -->
@@ -252,9 +269,10 @@
                                 <label for="email">Email Address <span style="color:red">*</span></label>
                                 <div class="input-wrapper">
                                     <input type="email" class="form-control-prime" id="email" name="email"
-                                        placeholder="Enter the Email id" required>
+                                        placeholder="Enter the Email id" value="{{ old('email') }}" required>
                                     <i class="fa-solid fa-envelope-open-text"></i>
                                 </div>
+                                @error('email') <span class="text-danger small">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Mobile Field -->
@@ -262,10 +280,11 @@
                                 <label for="mobile">Mobile Number <span style="color:red">*</span></label>
                                 <div class="input-wrapper">
                                     <input type="tel" class="form-control-prime" id="mobile" name="mobile"
-                                        placeholder="Enter mobile Number" pattern="[0-9]{10}" maxlength="10" minlength="10" 
-                                        title="Please enter a valid 10-digit mobile number" required>
+                                        placeholder="Enter mobile Number" value="{{ old('mobile') }}" 
+                                        maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                     <i class="fa-solid fa-phone-volume"></i>
                                 </div>
+                                @error('mobile') <span class="text-danger small">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Profile Field - NOT MANDATORY -->
@@ -276,30 +295,33 @@
                                         accept="image/*" style="padding-left: 50px; padding-top: 10px;">
                                     <i class="fa-solid fa-camera-retro"></i>
                                 </div>
+                                @error('profile_photo') <span class="text-danger small">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Rating Field -->
                             <div class="form-group-prime">
                                 <label>Overall Experience Rating <span style="color:red">*</span></label>
                                 <div class="rating-container" style="justify-content: flex-end; flex-direction: row-reverse; margin-left: -5px;">
-                                    <input type="radio" id="star5" name="rating" value="5" required/><label for="star5"
+                                    <input type="radio" id="star5" name="rating" value="5" {{ old('rating') == 5 ? 'checked' : '' }} required/><label for="star5"
                                         title="5 stars"></label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4"
+                                    <input type="radio" id="star4" name="rating" value="4" {{ old('rating') == 4 ? 'checked' : '' }} /><label for="star4"
                                         title="4 stars"></label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3"
+                                    <input type="radio" id="star3" name="rating" value="3" {{ old('rating') == 3 ? 'checked' : '' }} /><label for="star3"
                                         title="3 stars"></label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2"
+                                    <input type="radio" id="star2" name="rating" value="2" {{ old('rating') == 2 ? 'checked' : '' }} /><label for="star2"
                                         title="2 stars"></label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1"
+                                    <input type="radio" id="star1" name="rating" value="1" {{ old('rating') == 1 ? 'checked' : '' }} /><label for="star1"
                                         title="1 star"></label>
                                 </div>
+                                @error('rating') <span class="text-danger small">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Message Field -->
-                            <div class="form-group-prime">
+                            <div class="form-group-prime full-width">
                                 <label for="feedback">Detailed Message <span style="color:red">*</span></label>
                                 <textarea class="form-control-prime textarea-prime" id="feedback" name="feedback" rows="4"
-                                    placeholder="Enter your message..." minlength="20" required></textarea>
+                                    placeholder="Enter your message..." minlength="20" required>{{ old('feedback') }}</textarea>
+                                @error('feedback') <span class="text-danger small">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
@@ -313,3 +335,99 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#feedbackForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 3,
+                    pattern: /^[A-Za-z\s]+$/
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                mobile: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
+                rating: {
+                    required: true
+                },
+                feedback: {
+                    required: true,
+                    minlength: 20
+                },
+                profile_photo: {
+                    extension: "jpg|jpeg|png|gif|webp",
+                    filesize: 2097152 // 2MB
+                }
+            },
+            messages: {
+                name: {
+                    required: "Please enter your full name",
+                    pattern: "Name can only contain letters and spaces"
+                },
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address"
+                },
+                mobile: {
+                    required: "Please enter your mobile number",
+                    digits: "Please enter only numbers",
+                    minlength: "Mobile number must be 10 digits",
+                    maxlength: "Mobile number must be 10 digits"
+                },
+                rating: {
+                    required: "Please select a rating"
+                },
+                feedback: {
+                    required: "Please enter your feedback message",
+                    minlength: "Your feedback must be at least 20 characters"
+                },
+                profile_photo: {
+                    extension: "Only image files (JPG, PNG, GIF, WEBP) are allowed",
+                    filesize: "File size must be less than 2MB"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('text-danger small d-block mt-1');
+                if (element.attr("name") == "rating") {
+                    error.appendTo(element.closest(".form-group-prime"));
+                } else if (element.parent('.input-wrapper').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+        // Custom methods
+        $.validator.addMethod("pattern", function(value, element, param) {
+            return this.optional(element) || param.test(value);
+        }, "Invalid format.");
+
+        $.validator.addMethod("extension", function(value, element, param) {
+            param = typeof param === "string" ? param.replace(/,/g, "|") : "png|jpe?g|gif";
+            return this.optional(element) || value.match(new RegExp("\\.(" + param + ")$", "i"));
+        }, "Please enter a value with a valid extension.");
+
+        $.validator.addMethod('filesize', function (value, element, param) {
+            return this.optional(element) || (element.files[0].size <= param)
+        }, 'File size must be less than {0}');
+    });
+</script>
+@endpush

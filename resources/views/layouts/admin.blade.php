@@ -355,6 +355,11 @@
                 <i class="fas fa-envelope-open-text"></i> Messages
             </a>
         </li>
+        <li>
+            <a href="{{ route('admin.feedback.index') }}" class="{{ request()->routeIs('admin.feedback.*') ? 'active' : '' }}">
+                <i class="fas fa-star"></i> Feedback
+            </a>
+        </li>
     </ul>
 
     <div class="sidebar-footer">

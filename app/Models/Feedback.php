@@ -15,6 +15,12 @@ class Feedback extends Model
         'rating',
         'message',
         'photo_path',
-        'is_read'
+        'is_read',
+        'admin_response',
+        'responded_at'
+    ];
+
+    protected $casts = [
+        'responded_at' => 'datetime',
     ];
 }

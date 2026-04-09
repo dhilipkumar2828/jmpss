@@ -7,6 +7,9 @@ use App\Models\Testimonial;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FeedbackAcknowledgment;
+use App\Mail\AdminFeedbackNotification;
 use Throwable;
 
 class HomeController extends Controller
@@ -76,7 +79,7 @@ class HomeController extends Controller
             $photoPath = $request->file('profile_photo')->store('feedback_photos', 'public');
         }
 
-        Feedback::create([
+        $feedback = Feedback::create([
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
@@ -84,6 +87,13 @@ class HomeController extends Controller
             'message' => $request->feedback,
             'photo_path' => $photoPath,
         ]);
+
+        try {
+            Mail::to($feedback->email)->send(new FeedbackAcknowledgment($feedback));
+            Mail::to(config('mail.from.address'))->send(new AdminFeedbackNotification($feedback));
+        } catch (Throwable $e) {
+            report($e);
+        }
 
         return redirect()->back()->with('success', 'Thank you for your valuable feedback!');
     }

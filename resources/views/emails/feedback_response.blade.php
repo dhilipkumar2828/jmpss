@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response to Your Feedback</title>
+    <style>
+        body { font-family: 'Outfit', 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f8faf9; margin: 0; padding: 0; color: #1e293b; }
+        .wrapper { width: 100%; table-layout: fixed; background-color: #f8faf9; padding: 20px 0 40px 0; }
+        .main { background-color: #ffffff; margin: 0 auto; width: 600px; border-spacing: 0; color: #1e293b; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .header { background-color: #002800; padding: 40px 20px; text-align: center; border-radius: 16px 16px 0 0; }
+        .logo { width: 220px; height: auto; display: inline-block; }
+        .content { padding: 40px; text-align: left; }
+        .title { font-size: 26px; font-weight: 800; color: #004800; margin-top: 0; margin-bottom: 20px; text-align: center; }
+        .subtitle { font-size: 16px; line-height: 1.6; color: #475569; margin-bottom: 30px; text-align: center; }
+        .message-box { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 25px; border-radius: 10px; margin-bottom: 30px; }
+        .response-box { background-color: #fdfcf8; border: 1px solid #c5a059; border-radius: 12px; padding: 30px; margin-bottom: 30px; position: relative; }
+        .response-box::before { content: 'Official Response'; position: absolute; top: -12px; left: 20px; background: #c5a059; color: white; padding: 2px 12px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .label { font-weight: 700; color: #002800; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 8px; }
+        .value { font-size: 16px; color: #1e293b; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; font-size: 13px; color: #64748b; }
+        .footer-logo { font-weight: 800; color: #002800; margin-bottom: 8px; display: block; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <table class="main" align="center" width="600" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="header">
+                    <img src="{{ $message->embed(public_path('assets/jmpsss/image/logo.png')) }}" alt="JMPSS School Logo" class="logo">
+                </td>
+            </tr>
+            <tr>
+                <td class="content">
+                    <h1 class="title">Response to Your Feedback</h1>
+                    <p class="subtitle">Dear {{ $feedback->name }},<br><br>We truly appreciate you sharing your thoughts with us. Our team has reviewed your feedback and here is our response:</p>
+                    
+                    <div class="message-box">
+                        <span class="label">Your Feedback</span>
+                        <p class="value" style="font-style: italic; color: #475569;">"{{ $feedback->message }}"</p>
+                    </div>
+
+                    <div class="response-box">
+                        <p class="value">{{ $replyMessage }}</p>
+                    </div>
+
+                    <p class="subtitle" style="margin-bottom: 0;">Thank you for being a part of our community. If you have any further questions, feel free to reach out to us.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="footer">
+                    <span class="footer-logo">JEEVA MEMORIAL PUBLIC SCHOOL</span>
+                    <p>© {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
