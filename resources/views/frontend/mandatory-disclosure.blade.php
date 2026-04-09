@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Mandatory Public Disclosure - Jeeva Memorial Senior Secondary School')
+@section('title', 'Mandatory Public Disclosure - JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
 
 @section('content')
 <main class="page-shell" id="mandatory-disclosure">

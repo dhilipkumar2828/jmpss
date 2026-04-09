@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Academic Performance – JMPSSSS')
+@section('title', 'Academic Performance – JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
 
 @section('content')
     <!-- Page Header -->
