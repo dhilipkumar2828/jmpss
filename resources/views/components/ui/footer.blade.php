@@ -19,20 +19,13 @@
                 </ul>
             </div>
             <div class="footer-events">
-                <h3>Recent Events</h3>
-                @forelse($recentEvents ?? [] as $event)
-                <div class="footer-event-item">
-                    <div class="event-thumb">
-                        <img src="{{ Str::startsWith($event->image, 'assets/') ? asset($event->image) : asset($event->image) }}" alt="{{ $event->title }}">
+                <h3>Your Feedback Matters</h3>
+                <div class="feedback-qr-wrapper">
+                    <div class="feedback-qr-img">
+                        <img src="{{ asset('assets/jmpsss/image/feedback-qr.png') }}" alt="Feedback QR Code">
                     </div>
-                    <div class="event-info-footer">
-                        <a href="{{ route('events') }}">{{ $event->title }}</a>
-                        <small style="display: block; color: #ccc;">{{ $event->event_date->format('d M Y') }}</small>
-                    </div>
+                    <p>Scan the QR code to provide your valuable feedback.</p>
                 </div>
-                @empty
-                <p style="color: #ccc; font-size: 14px;">No recent events.</p>
-                @endforelse
             </div>
             <div class="footer-links">
                 <h3>Address</h3>
