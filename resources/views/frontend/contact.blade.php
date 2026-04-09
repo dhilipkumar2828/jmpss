@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Contact Us | JMPSSS | Jaypee Model Senior Secondary School')
+@section('title', 'Contact Us | JMPSSS')
 
 @section('content')
     <!-- Hero Section -->

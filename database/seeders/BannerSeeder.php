@@ -42,7 +42,7 @@ class BannerSeeder extends Seeder
                 'page' => 'gallery',
                 'banner_type' => 'page_header',
                 'title' => 'VIBRANT MOMENTS',
-                'subtitle' => 'A glimpse into the diverse life at Jaypee Model Senior Secondary School.',
+                'subtitle' => 'A glimpse into the diverse life at JMPSSS.',
                 'image_path' => 'uploads/banners/header_default.png',
                 'sort_order' => 1,
                 'is_active' => true,

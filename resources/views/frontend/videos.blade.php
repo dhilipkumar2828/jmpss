@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Video Gallery | JMPSSS - Jaypee Model Senior Secondary School')
+@section('title', 'Video Gallery')
 
 @push('styles')
 <style>
