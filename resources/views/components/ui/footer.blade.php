@@ -12,9 +12,10 @@
                 <ul>
                     <li><a href="{{ route('home') }}"><i class="fa-solid fa-angle-right"></i> Home</a></li>
                     <li><a href="{{ route('about') }}"><i class="fa-solid fa-angle-right"></i> About</a></li>
-                    <li><a href="{{ route('academics') }}"><i class="fa-solid fa-angle-right"></i> Academics</a></li>
+                    <li><a href="{{ route('curriculum') }}"><i class="fa-solid fa-angle-right"></i> Academics</a></li>
                     <li><a href="{{ route('admissions') }}"><i class="fa-solid fa-angle-right"></i> Admissions</a></li>
                     <li><a href="{{ route('events') }}"><i class="fa-solid fa-angle-right"></i> Events</a></li>
+                    <li><a href="{{ route('campus-visit') }}"><i class="fa-solid fa-angle-right"></i> Campus Visit</a></li>
                 </ul>
             </div>
             <div class="footer-events">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login – JMPSSSS School</title>
+    <title>Admin Login – JMPSSS School</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -376,9 +376,9 @@
         <!-- <a href="{{ route('home') }}" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Website</a> -->
         <div class="brand">
             <div class="brand-icon">
-                <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSSS Logo">
+                <img src="{{ asset('assets/jmpsss/logo.png') }}" alt="JMPSSS Logo">
             </div>
-            <h1>JMPSSSS</h1>
+            <h1>JMPSSS</h1>
             <p>School Management Admin Panel</p>
             <ul class="features">
                 <li><i class="fas fa-home"></i> Manage Home Page Content</li>
@@ -394,7 +394,7 @@
     <div class="login-right">
         <div class="login-header">
             <h2>Welcome Back 👋</h2>
-            <p>Sign in to access the JMPSSSS admin panel</p>
+            <p>Sign in to access the JMPSSS admin panel</p>
         </div>
 
         @if(session('success'))

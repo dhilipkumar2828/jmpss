@@ -633,11 +633,11 @@
             <div class="filter-container">
                 {{-- Desktop/Tablet Horizontal Tabs --}}
                 <div class="filter-wrap desktop-tablet-filter">
-                    <a href="{{ route('gallery') }}" 
+                    <a href="{{ route('photos') }}" 
                         class="gallery-tab {{ !request('category') ? 'active' : '' }}"
                         style="{{ !request('category') ? 'background:' . $primaryColor : '' }}">All</a>
                     @foreach($categories as $cat)
-                        <a href="{{ route('gallery', ['category' => $cat]) }}"
+                        <a href="{{ route('photos', ['category' => $cat]) }}"
                             class="gallery-tab {{ request('category') == $cat ? 'active' : '' }}"
                             style="{{ request('category') == $cat ? 'background:' . $primaryColor : '' }}">{{ $cat }}</a>
                     @endforeach
@@ -651,9 +651,9 @@
                         <i class="fa-solid fa-chevron-down ms-auto" style="font-size: 13px; opacity: 0.5; transition: 0.3s;"></i>
                     </div>
                     <div class="mobile-filter-list" id="mobileFilterList">
-                        <a href="{{ route('gallery') }}" class="{{ !request('category') ? 'active' : '' }}">All</a>
+                        <a href="{{ route('photos') }}" class="{{ !request('category') ? 'active' : '' }}">All</a>
                         @foreach($categories as $cat)
-                            <a href="{{ route('gallery', ['category' => $cat]) }}"
+                            <a href="{{ route('photos', ['category' => $cat]) }}"
                                 class="{{ request('category') == $cat ? 'active' : '' }}">{{ $cat }}</a>
                         @endforeach
                     </div>
