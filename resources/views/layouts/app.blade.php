@@ -7,6 +7,8 @@
     <meta name="description"
         content="Jeeva Memorial Senior Secondary School - CBSE curriculum, holistic learning and student development.">
     <title>@yield('title', 'Jeeva Memorial Senior Secondary School')</title>
+    <meta name="keywords" content="@yield('meta_keywords', 'Jeeva Memorial Public School, CBSE School Thirukazhukundram')">
+    <meta name="description" content="@yield('meta_description', 'Jeeva Memorial Public School is a leading CBSE school in Thirukazhukundram.')">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

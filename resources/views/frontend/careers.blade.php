@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Careers | JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
+@section('title', 'CBSE affiliated school in Thirukazhukundram | JMPSS')
+@section('meta_keywords', 'CBSE affiliated school in Thirukazhukundram, CBSE school listing in Thirukazhukundram')
+@section('meta_description', 'Looking for a CBSE affiliated school in Thirukazhukundram? JMPSS offers quality education, experienced faculty, and modern facilities for complete student development.')
 
 @push('styles')
     <style>

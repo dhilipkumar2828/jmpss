@@ -1,5 +1,13 @@
 @extends('layouts.app')
-@section('title', 'Events & Achievements | JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
+@if(request('view') == 'visit')
+    @section('title', 'School campus with nice environment | JMPSS')
+    @section('meta_keywords', 'Jeeva Memorial Public School campus environment, school with playground facilities Thirukazhukundram')
+    @section('meta_description', 'JMPSS features a beautiful school campus with nice environment, creative spaces, and modern playground facilities in Thirukazhukundram for physical and mental development.')
+@else
+    @section('title', 'Best CBSE School in Thirukazhukundram – Admissions Open 2026 | JMPSS')
+    @section('meta_keywords', 'Best CBSE School in Thirukazhukundram – Admissions Open 2026, No.1 CBSE school in Thirukazhukundram')
+    @section('meta_description', 'Admissions open for 2026 at a top CBSE school in Thirukazhukundram with smart classrooms, safe campus, and holistic student development.')
+@endif
 
 @push('styles')
     <style>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Admissions - JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
+@section('title', 'School admission open Thirukazhukundram | JMPSS')
+@section('meta_keywords', 'School admission open Thirukazhukundram, Best school admission in Thirukazhukundram')
+@section('meta_description', 'Looking for school admission open in Thirukazhukundram? Jeeva Memorial Public School offers quality education, experienced faculty, and admissions open for the upcoming academic year.')
 
 @push('styles')
 <style>

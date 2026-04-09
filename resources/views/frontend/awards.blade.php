@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Awards - JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
+@section('title', 'School with transport facility Thirukazhukundram | JMPSS')
+@section('meta_keywords', 'School with transport facility Thirukazhukundram, CBSE school with transport Thirukazhukundram')
+@section('meta_description', 'JMPSS offers dependable school transport facility in Thirukazhukundram with well-maintained buses, ensuring comfort and safety for every student.')
 
 @push('styles')
 <style>
