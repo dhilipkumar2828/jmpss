@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Login | JMPSSS - Jaypee Model Senior Secondary School')
+@section('title', 'Login | JMPSSS')
 
 @php
     $hasRegisterErrors = $errors->hasBag('register') && $errors->getBag('register')->any();
