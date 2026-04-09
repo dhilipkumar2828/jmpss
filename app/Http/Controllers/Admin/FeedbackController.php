@@ -50,7 +50,7 @@ class FeedbackController extends Controller
             // Send response email to customer
             Mail::to($feedback->email)->send(new FeedbackResponseMail($feedback, $request->message));
             
-            return back()->with('success', 'Reply sent successfully to ' . $feedback->email);
+            return redirect()->route('admin.feedback.index')->with('success', 'Reply sent successfully to ' . $feedback->email);
         } catch (\Exception $e) {
             return back()->with('error', 'Failed to send email: ' . $e->getMessage());
         }
