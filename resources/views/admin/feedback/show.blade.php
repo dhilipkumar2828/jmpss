@@ -40,7 +40,7 @@
             @if($feedback->photo_path)
             <div class="detail-group">
                 <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Profile Photo</label>
-                <img src="{{ asset('storage/' . $feedback->photo_path) }}" alt="Profile Photo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border);">
+                <img src="{{ Str::startsWith($feedback->photo_path, 'uploads/') ? asset($feedback->photo_path) : asset('storage/' . $feedback->photo_path) }}" alt="Profile Photo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border);">
             </div>
             @endif
         </div>

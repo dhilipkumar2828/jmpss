@@ -351,8 +351,10 @@
 
         function updateEventsUrl(nextView = null, nextEvent = null, nextHash = '') {
             const url = new URL(window.location.href);
+            const isVisitPath = url.pathname.includes('campus-visit');
 
-            if (nextView) {
+            // Skip view parameter if we're on the dedicated campus-visit path
+            if (nextView && !isVisitPath) {
                 url.searchParams.set('view', nextView);
             } else {
                 url.searchParams.delete('view');
@@ -364,7 +366,9 @@
                 url.searchParams.delete('event');
             }
 
-            url.hash = nextHash || '';
+            // Skip hash if we're on the dedicated campus-visit path
+            url.hash = (nextHash && !isVisitPath) ? nextHash : '';
+            
             window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
         }
 
@@ -576,8 +580,9 @@
             const view = params.get('view');
             const eventId = params.get('event');
             const hash = window.location.hash.replace('#', '');
+            const path = window.location.pathname;
 
-            if (view === 'visit' || hash === 'visit' || hash === 'campus-visit') {
+            if (view === 'visit' || hash === 'visit' || hash === 'campus-visit' || path.includes('campus-visit')) {
                 showCampusVisit();
                 return;
             }

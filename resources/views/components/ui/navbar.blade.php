@@ -81,7 +81,7 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('academics') }}"><i class="fa-solid fa-book-open"></i> Curriculum</a></li>
+                            <li><a href="{{ route('curriculum') }}"><i class="fa-solid fa-book-open"></i> Curriculum</a></li>
                             <li><a href="{{ route('admissions') }}"><i class="fa-solid fa-graduation-cap"></i>
                                     Admissions</a></li>
                             <li><a href="{{ route('awards') }}"><i class="fa-solid fa-trophy"></i> Awards</a></li>
@@ -93,7 +93,7 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('gallery') }}"><i class="fa-solid fa-images"></i> Photos</a></li>
+                            <li><a href="{{ route('photos') }}"><i class="fa-solid fa-images"></i> Photos</a></li>
                             <li><a href="{{ route('videos') }}"><i class="fa-solid fa-video"></i> Videos</a></li>
                         </ul>
                     </li>
@@ -104,7 +104,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('events') }}"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
-                            <li><a href="{{ route('events', ['view' => 'visit']) }}"><i
+                            <li><a href="{{ route('campus-visit') }}"><i
                                         class="fa-solid fa-map-location-dot"></i> Campus Visit</a>
                             </li>
                         </ul>

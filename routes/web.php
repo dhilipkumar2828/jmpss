@@ -30,7 +30,7 @@ Route::post('/login', [PortalAuthController::class, 'login'])->name('login.post'
 Route::post('/register', [PortalAuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [PortalAuthController::class, 'logout'])->name('logout');
 Route::view('/about', 'frontend.about')->name('about');
-Route::view('/academics', 'frontend.academics')->name('academics');
+Route::view('/curriculum', 'frontend.academics')->name('curriculum');
 Route::view('/admissions', 'frontend.admissions')->name('admissions');
 Route::view('/facilities', 'frontend.facilities')->name('facilities');
 Route::view('/mandatory-disclosure', 'frontend.mandatory-disclosure')->name('mandatory-disclosure');
@@ -40,8 +40,9 @@ Route::get('/chairman-desk', [App\Http\Controllers\PageController::class, 'chair
 Route::redirect('/principal-desk', '/chairman-desk');
 Route::get('/correspondent-desk', [App\Http\Controllers\PageController::class, 'correspondentDesk'])->name('correspondent-desk');
 Route::get('/videos', [GalleryController::class, 'videos'])->name('videos');
-Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/photos', [GalleryController::class, 'index'])->name('photos');
 Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/campus-visit', [EventController::class, 'campusVisit'])->name('campus-visit');
 Route::get('/awards', [AwardController::class, 'index'])->name('awards');
 Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials');
 

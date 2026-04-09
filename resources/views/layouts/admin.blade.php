@@ -269,7 +269,7 @@
         <a href="{{ route('admin.dashboard') }}" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
             <img src="{{ asset('assets/jmpsss/image/logo.png') }}" style="width:220px; height:50px; object-fit:contain;" alt="Logo">
             {{-- <div class="sidebar-brand-text">
-                <strong>JMPSSSS Admin</strong>
+                <strong>JMPSSS Admin</strong>
                 <span>School Management</span>
             </div> --}}
         </a>
@@ -390,7 +390,7 @@
             </button>
             <div>
                 <h1>@yield('page-title', 'Dashboard')</h1>
-                <div class="topbar-breadcrumb">@yield('breadcrumb', 'JMPSSSS Admin')</div>
+                <div class="topbar-breadcrumb">@yield('breadcrumb', 'JMPSSS Admin')</div>
             </div>
         </div>
         <div class="topbar-right">

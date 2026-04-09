@@ -33,8 +33,7 @@ class EventController extends Controller
 
             $events = $query->latest('event_date')->paginate(8)->withQueryString();
             
-            // Recent Events for Sidebar (Always latest regardless of search, or reflecting current filters?) 
-            // Usually Sidebar shows absolute latest.
+            // Recent Events for Sidebar
             $recentEvents = Event::active()->latest('event_date')->take(3)->get();
             
             // Categories for Sidebar
@@ -44,8 +43,14 @@ class EventController extends Controller
                 ->groupBy('category')
                 ->get();
 
-            // Page Banner
-            $pageBanner = Banner::where('page', 'events')->where('is_active', true)->first();
+            // Page Banner (Check specific visit banner if on campus-visit)
+            $isVisit = $request->routeIs('campus-visit') || $request->view == 'visit' || $request->hash == 'visit' || $request->hash == 'campus-visit';
+            $bannerSlug = $isVisit ? 'campus-visit' : 'events';
+            $pageBanner = Banner::where('page', $bannerSlug)->where('is_active', true)->first();
+            
+            if (!$pageBanner && $isVisit) {
+                $pageBanner = Banner::where('page', 'events')->where('is_active', true)->first();
+            }
 
         } catch (Throwable $e) {
             report($e);
@@ -62,6 +67,11 @@ class EventController extends Controller
         }
 
         return view('frontend.events', compact('events', 'recentEvents', 'categories', 'pageBanner'));
+    }
+
+    public function campusVisit(Request $request)
+    {
+        return $this->index($request->merge(['view' => 'visit']));
     }
 
 }

@@ -30,7 +30,7 @@
                         <td>{{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->iteration }}</td>
                         <td>
                             @if($feedback->photo_path)
-                                <img src="{{ asset('storage/' . $feedback->photo_path) }}" alt="Photo" style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 1px solid #ddd;">
+                                <img src="{{ Str::startsWith($feedback->photo_path, 'uploads/') ? asset($feedback->photo_path) : asset('storage/' . $feedback->photo_path) }}" alt="Photo" style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 1px solid #ddd;">
                             @else
                                 <div style="width: 40px; height: 40px; border-radius: 8px; background: #f1f5f9; display: grid; place-items: center; font-size: 18px; color: #cbd5e1; border: 1px solid #ddd;">
                                     <i class="fas fa-user"></i>

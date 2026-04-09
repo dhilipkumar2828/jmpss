@@ -67,7 +67,7 @@ class HomeController extends Controller
             'email' => 'required|email|max:255',
             'mobile' => 'required|string|size:10',
             'rating' => 'required|integer|min:1|max:5',
-            'feedback' => 'required|string|min:20',
+            'feedback' => 'required|string|min:10',
             'profile_photo' => 'nullable|image|max:2048',
         ], [
             'name.regex' => 'The name may only contain letters and spaces.',
@@ -76,7 +76,10 @@ class HomeController extends Controller
 
         $photoPath = null;
         if ($request->hasFile('profile_photo')) {
-            $photoPath = $request->file('profile_photo')->store('feedback_photos', 'public');
+            $file = $request->file('profile_photo');
+            $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/feedback_photos'), $fileName);
+            $photoPath = 'uploads/feedback_photos/' . $fileName;
         }
 
         $feedback = Feedback::create([

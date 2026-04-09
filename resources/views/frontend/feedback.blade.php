@@ -51,6 +51,8 @@
             font-weight: 300;
             margin-bottom: 0;
             font-size: 1.1rem;
+            text-align: center;
+            word-spacing: normal;
         }
 
         .card-body-prime {
@@ -59,8 +61,14 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         .form-group-prime {
@@ -69,7 +77,7 @@
         }
 
         .full-width {
-            grid-column: span 2;
+            grid-column: 1 / -1;
         }
 
         .form-group-prime label {
@@ -120,7 +128,7 @@
         .rating-container {
             display: flex;
             flex-direction: row-reverse;
-            justify-content: flex-end;
+            justify-content: flex-start;
             gap: 5px;
             margin-top: 5px;
         }
@@ -191,15 +199,15 @@
             .card-header-prime h2 {
                 font-size: 1.8rem;
             }
+            .card-header-prime p {
+                font-size: 0.9rem;
+                text-align: center !important;
+            }
         }
 
         @media (max-width: 768px) {
             .feedback-section {
                 padding: 30px 15px;
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
             }
             .premium-card {
                 border-radius: 20px;
@@ -207,6 +215,9 @@
             }
             .card-header-prime {
                 padding: 25px 20px;
+            }
+            .card-header-prime h2 {
+                font-size: 1.5rem;
             }
             .card-body-prime {
                 padding: 25px 20px;
@@ -220,7 +231,17 @@
                 height: 30px;
             }
         }
-
+        @media (min-width: 480px) and (max-width: 350px){
+            .card-header-prime p {
+                font-size: 0.9rem !important;
+            }
+        }
+        @media (min-width: 350px) and (max-width:300px) {
+            .card-header-prime p {
+                font-size: 0.8rem !important;
+            }
+        }
+    
         /* Error Text Styling */
         .text-danger {
             color: #ef4444 !important;
@@ -233,9 +254,29 @@
             background-color: #fffafb !important;
         }
 
-        /* Valid Input Styling (Optional) */
-        .form-control-prime.is-valid {
-            border-color: #10b981 !important;
+        /* Custom File Input Styling */
+        .form-control-prime[type="file"] {
+            color: transparent;
+            padding-top: 10px !important;
+            cursor: pointer;
+        }
+
+        .form-control-prime[type="file"]::file-selector-button {
+            border: 1px solid #ddd;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            color: var(--logo-green-900);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .form-control-prime[type="file"]::file-selector-button:hover {
+            background-color: #edf2f7;
+            border-color: #cbd5e1;
         }
     </style>
 @endpush
@@ -246,7 +287,7 @@
             <div class="premium-card">
                 <div class="card-header-prime">
                     <h2>Feedback Portal</h2>
-                    <p>Help us elevate our educational excellence.</p>
+                    <p>Elevate Our Educational Excellence.</p>
                 </div>
                 <div class="card-body-prime">
                     <form id="feedbackForm" action="{{ route('feedback.store') }}" method="POST" enctype="multipart/form-data">
@@ -292,8 +333,9 @@
                                 <label for="profile_photo">Profile Photo <span style="color:#777; font-weight:400; font-size:0.8rem">(Optional)</span></label>
                                 <div class="input-wrapper">
                                     <input type="file" class="form-control-prime" id="profile_photo" name="profile_photo"
-                                        accept="image/*" style="padding-left: 50px; padding-top: 10px;">
+                                        accept="image/*" onchange="updateFileName(this)">
                                     <i class="fa-solid fa-camera-retro"></i>
+                                    <span id="file-name-display" style="position: absolute; left: 160px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; color: #64748b; pointer-events: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;"></span>
                                 </div>
                                 @error('profile_photo') <span class="text-danger small">{{ $message }}</span> @enderror
                             </div>
@@ -339,6 +381,11 @@
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script>
+    function updateFileName(input) {
+        const fileName = input.files[0] ? input.files[0].name : '';
+        document.getElementById('file-name-display').innerText = fileName;
+    }
+
     $(document).ready(function() {
         $("#feedbackForm").validate({
             rules: {
@@ -362,7 +409,7 @@
                 },
                 feedback: {
                     required: true,
-                    minlength: 20
+                    minlength: 10
                 },
                 profile_photo: {
                     extension: "jpg|jpeg|png|gif|webp",
@@ -389,7 +436,7 @@
                 },
                 feedback: {
                     required: "Please enter your feedback message",
-                    minlength: "Your feedback must be at least 20 characters"
+                    minlength: "Your feedback must be at least 10 characters"
                 },
                 profile_photo: {
                     extension: "Only image files (JPG, PNG, GIF, WEBP) are allowed",
