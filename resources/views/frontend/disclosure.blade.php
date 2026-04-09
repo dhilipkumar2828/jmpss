@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'CBSE Mandatory Disclosure – JMPSSSS')
+@section('title', 'CBSE Mandatory Disclosure – JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
 
 @section('content')
     <!-- Page Header -->

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Contact Us | JMPSSS')
+@section('title', 'Contact Us | JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
 
 @section('content')
     <!-- Hero Section -->

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Careers | JMPSSS')
+@section('title', 'Careers | JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
 
 @push('styles')
     <style>
@@ -7,7 +7,7 @@
         .page-hero {
             position: relative;
             height: 380px;
-            display: flex;
+            display: flex;  
             align-items: center;
             justify-content: center;
             text-align: center;

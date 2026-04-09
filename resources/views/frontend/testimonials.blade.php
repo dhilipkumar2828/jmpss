@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Testimonials | JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
 @php
     $siteSettings = \App\Models\Setting::pluck('value', 'key')->toArray();
     $primaryColor = $siteSettings['logo_green_900'] ?? '#004800';

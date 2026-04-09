@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Events & Achievements | JMPSSS')
+@section('title', 'Events & Achievements | JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
 
 @push('styles')
     <style>
