@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\StudentController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/feedback', [HomeController::class, 'feedback'])->name('feedback');
+Route::post('/feedback', [HomeController::class, 'storeFeedback'])->name('feedback.store');
 Route::get('/login', [PortalAuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [PortalAuthController::class, 'login'])->name('login.post');
 Route::post('/register', [PortalAuthController::class, 'register'])->name('register.post');
@@ -126,6 +128,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // User Management
         Route::get('users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
         Route::delete('users/{id}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
+
+        // Feedback Management
+        Route::get('feedback', [App\Http\Controllers\Admin\FeedbackController::class, 'index'])->name('feedback.index');
+        Route::get('feedback/{id}', [App\Http\Controllers\Admin\FeedbackController::class, 'show'])->name('feedback.show');
+        Route::post('feedback/{id}/reply', [App\Http\Controllers\Admin\FeedbackController::class, 'reply'])->name('feedback.reply');
+        Route::delete('feedback/{id}', [App\Http\Controllers\Admin\FeedbackController::class, 'destroy'])->name('feedback.destroy');
 
 
     });

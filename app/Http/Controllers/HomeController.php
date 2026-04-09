@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Testimonial;
+use App\Models\Feedback;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FeedbackAcknowledgment;
+use App\Mail\AdminFeedbackNotification;
 use Throwable;
 
 class HomeController extends Controller
@@ -48,5 +53,48 @@ class HomeController extends Controller
         }
 
         return view('frontend.home', compact('events', 'testimonials', 'sections', 'banners'));
+    }
+
+    public function feedback()
+    {
+        return view('frontend.feedback');
+    }
+
+    public function storeFeedback(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
+            'email' => 'required|email|max:255',
+            'mobile' => 'required|string|size:10',
+            'rating' => 'required|integer|min:1|max:5',
+            'feedback' => 'required|string|min:20',
+            'profile_photo' => 'nullable|image|max:2048',
+        ], [
+            'name.regex' => 'The name may only contain letters and spaces.',
+            'mobile.size' => 'The mobile number must be exactly 10 digits.',
+        ]);
+
+        $photoPath = null;
+        if ($request->hasFile('profile_photo')) {
+            $photoPath = $request->file('profile_photo')->store('feedback_photos', 'public');
+        }
+
+        $feedback = Feedback::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'rating' => $request->rating,
+            'message' => $request->feedback,
+            'photo_path' => $photoPath,
+        ]);
+
+        try {
+            Mail::to($feedback->email)->send(new FeedbackAcknowledgment($feedback));
+            Mail::to(config('mail.from.address'))->send(new AdminFeedbackNotification($feedback));
+        } catch (Throwable $e) {
+            report($e);
+        }
+
+        return redirect()->back()->with('success', 'Thank you for your valuable feedback!');
     }
 }
