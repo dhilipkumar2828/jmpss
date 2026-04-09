@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Chairman\'s Desk | JMPSSS | JEEVA MEMORIAL PUBLIC SCHOOL')
+@section('title', 'Best school in Thirukazhukundram | JMPSS')
+@section('meta_keywords', 'Best school in Thirukazhukundram, Leading School in Thirukazhukundram')
+@section('meta_description', 'Best school in Thirukazhukundram – JMPSS provides quality CBSE education, smart classrooms, and admissions open for the upcoming academic year.')
 
 @push('styles')
 <style>
