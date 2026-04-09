@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\StudentController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/feedback', [HomeController::class, 'feedback'])->name('feedback');
+Route::post('/feedback', [HomeController::class, 'storeFeedback'])->name('feedback.store');
 Route::get('/login', [PortalAuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [PortalAuthController::class, 'login'])->name('login.post');
 Route::post('/register', [PortalAuthController::class, 'register'])->name('register.post');
