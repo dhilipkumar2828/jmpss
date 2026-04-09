@@ -90,6 +90,8 @@
 
         .input-wrapper {
             position: relative;
+            overflow: hidden;
+            border-radius: 14px;
         }
 
         .input-wrapper i {
@@ -231,12 +233,12 @@
                 height: 30px;
             }
         }
-        @media (min-width: 480px) and (max-width: 350px){
+        @media (max-width: 480px) {
             .card-header-prime p {
                 font-size: 0.9rem !important;
             }
         }
-        @media (min-width: 350px) and (max-width:300px) {
+        @media (max-width: 350px) {
             .card-header-prime p {
                 font-size: 0.8rem !important;
             }
@@ -246,6 +248,8 @@
         .text-danger {
             color: #ef4444 !important;
             font-weight: 500;
+            font-size: 0.75rem !important;
+            word-break: break-word;
         }
 
         /* Invalid Input Styling */
@@ -335,7 +339,7 @@
                                     <input type="file" class="form-control-prime" id="profile_photo" name="profile_photo"
                                         accept="image/*" onchange="updateFileName(this)">
                                     <i class="fa-solid fa-camera-retro"></i>
-                                    <span id="file-name-display" style="position: absolute; left: 160px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; color: #64748b; pointer-events: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;"></span>
+                                    <span id="file-name-display" style="position: absolute; left: 165px; right: 15px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; color: #64748b; pointer-events: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
                                 </div>
                                 @error('profile_photo') <span class="text-danger small">{{ $message }}</span> @enderror
                             </div>
