@@ -42,6 +42,7 @@ Route::get('/correspondent-desk', [App\Http\Controllers\PageController::class, '
 Route::get('/videos', [GalleryController::class, 'videos'])->name('videos');
 Route::get('/photos', [GalleryController::class, 'index'])->name('photos');
 Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/event-details/{id}', [EventController::class, 'showDetail'])->name('events.details');
 Route::get('/campus-visit', [EventController::class, 'campusVisit'])->name('campus-visit');
 Route::get('/awards', [AwardController::class, 'index'])->name('awards');
 Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials');

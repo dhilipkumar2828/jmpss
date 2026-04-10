@@ -352,24 +352,24 @@
         function updateEventsUrl(nextView = null, nextEvent = null, nextHash = '') {
             const url = new URL(window.location.href);
             const isVisitPath = url.pathname.includes('campus-visit');
+            let newPath = url.pathname;
 
-            // Skip view parameter if we're on the dedicated campus-visit path
-            if (nextView && !isVisitPath) {
-                url.searchParams.set('view', nextView);
-            } else {
-                url.searchParams.delete('view');
-            }
-
+            // Handle event details path
             if (nextEvent) {
-                url.searchParams.set('event', nextEvent);
-            } else {
+                newPath = `{{ url('event-details') }}/${nextEvent}`;
                 url.searchParams.delete('event');
+                url.hash = ''; // Clear hash if we're using the clean URL
+            } else if (nextView === 'visit' && !isVisitPath) {
+                url.searchParams.set('view', 'visit');
+            } else if (!isVisitPath) {
+                // If going back to grid, use the main events URL
+                newPath = `{{ route('events') }}`;
+                url.searchParams.delete('event');
+                url.searchParams.delete('view');
+                url.hash = '';
             }
 
-            // Skip hash if we're on the dedicated campus-visit path
-            url.hash = (nextHash && !isVisitPath) ? nextHash : '';
-            
-            window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+            window.history.replaceState({}, '', `${newPath}${url.search}${url.hash}`);
         }
 
         const eventData = {
@@ -578,21 +578,33 @@
         document.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams(window.location.search);
             const view = params.get('view');
-            const eventId = params.get('event');
+            const eventIdParam = params.get('event');
             const hash = window.location.hash.replace('#', '');
             const path = window.location.pathname;
+
+            // Extract ID from /event-details/{id}
+            let eventIdFromPath = null;
+            if (path.includes('event-details')) {
+                const parts = path.split('/');
+                eventIdFromPath = parts[parts.length - 1];
+            }
+
+            const activeEventId = eventIdFromPath || eventIdParam;
 
             if (view === 'visit' || hash === 'visit' || hash === 'campus-visit' || path.includes('campus-visit')) {
                 showCampusVisit();
                 return;
             }
 
-            if (eventId && eventData[eventId]) {
-                showEventDetails(null, eventId);
-                return;
+            if (activeEventId) {
+                // Check if it's a numeric ID (SQL) or a named slug (eventData)
+                if (eventData[activeEventId] || !isNaN(activeEventId)) {
+                    showEventDetails(null, activeEventId);
+                    return;
+                }
             }
 
-            if (hash && eventData[hash]) {
+            if (hash && (eventData[hash] || !isNaN(hash))) {
                 showEventDetails(null, hash);
                 return;
             }
