@@ -13,15 +13,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Standard (e.g., 10th)</label>
-                        <input type="text" name="standard" class="form-control" value="{{ $category->standard }}" required list="standards-list">
-                        <datalist id="standards-list">
-                            <option value="Pre KG">
-                            <option value="LKG">
-                            <option value="UKG">
-                            @for($i=1; $i<=12; $i++)
-                                <option value="{{ $i }}th">
-                            @endfor
-                        </datalist>
+                        <input type="text" name="standard" class="form-control" value="{{ $category->standard }}" placeholder="Enter Standard (e.g., 10th)" required>
                     </div>
                 </div>
                 <div class="col-md-6">
