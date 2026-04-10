@@ -74,4 +74,8 @@ class EventController extends Controller
         return $this->index($request->merge(['view' => 'visit']));
     }
 
+    public function showDetail(Request $request, $id)
+    {
+        return $this->index($request->merge(['event' => $id]));
+    }
 }
