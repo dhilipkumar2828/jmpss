@@ -576,7 +576,7 @@
                 </div>
             {{-- </div> --}}
 
-            <div class="curriculum-extra-banner mt-50">
+            {{-- <div class="curriculum-extra-banner mt-50">
                 <div class="banner-content">
                     <h3>Beyond The Classroom</h3>
                     <p>Integrative learning approach combining academics with physical education, visual arts,
@@ -586,7 +586,7 @@
                     <a href="#" class="btn-primary btn-outline-white"><i class="fa-solid fa-download"></i> Syllabus
                         PDF</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 @endsection
